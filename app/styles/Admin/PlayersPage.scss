@@ -1,0 +1,412 @@
+@import "../Variables/Variables.scss";
+
+#players-page,
+#teams-page {
+  margin-top: $base-padding2X;
+
+  header {
+    @include flex-col($base-padding);
+    align-items: center;
+    text-align: center;
+    margin-bottom: $base-padding2X;
+
+    p {
+      font-size: $base-font-size;
+    }
+
+    @include breakpoint-md {
+      @include flex-row;
+      text-align: left;
+      justify-content: space-between;
+
+      p {
+        font-size: $base-font-size;
+      }
+    }
+
+    //NEW PARTICIPANT (PLAYER OR TEAM) BTN
+
+    .create-participant {
+      @include flex-row(0.5rem);
+      @include pillStyleSolid($font-size-sm);
+      padding-right: $base-padding;
+      padding-left: $base-padding;
+      box-shadow: $base-box-shadow;
+    }
+
+    @include breakpoint-md {
+      .create-participant {
+        @include flex-row(0.5rem);
+        @include pillStyleSolid;
+        padding: $base-padding $base-padding;
+      }
+    }
+  }
+
+  .database-list {
+    .filter-bar {
+      margin: 0 auto 0;
+      padding: $base-padding2X 0;
+      @include flex-row(0.5rem);
+      justify-content: flex-start;
+
+      label {
+        color: $color-darkgrey;
+        @include flex-row;
+      }
+
+      input {
+        border-radius: $base-border-radius-md;
+        height: $font-size-xxl;
+        font-size: $font-size-sm;
+        padding: 0 $base-padding;
+        width: 100%;
+
+        @include breakpoint-md {
+          min-width: 400px;
+          font-size: $base-font-size;
+          padding: 0 $base-padding2X;
+        }
+      }
+    }
+
+    .header {
+      font-weight: 600;
+      padding: 0.25 0;
+      border-top: $base-border-thickness solid $color-olive;
+      border-bottom: $base-border-thickness solid $color-olive;
+      margin-bottom: $base-margin;
+
+      .individual-entry {
+        @include flex-row(0.35rem);
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        @include breakpoint-md {
+          display: grid;
+          grid-template-columns: 3fr 2fr 2fr 1fr;
+          justify-items: left;
+        }
+      }
+      li:hover {
+        background-color: transparent;
+      }
+    }
+
+    .all-participants,
+    .filtered-participants {
+      li {
+        padding: 0.25rem;
+      }
+      .even-row {
+        background-color: #f2f2f2;
+      }
+
+      .odd-row {
+        background-color: #ffffff;
+      }
+
+      li:hover {
+        background-color: $color-highlight-yellow;
+      }
+
+      @include breakpoint-md {
+        p {
+          font-size: $base-font-size;
+        }
+      }
+
+      .individual-entry {
+        @include flex-row(0.35rem);
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+        @include breakpoint-md {
+          display: grid;
+          grid-template-columns: 3fr 2fr 2fr 1fr;
+          justify-items: left;
+        }
+
+        .bold {
+          font-weight: 600;
+          flex-basis: 100%;
+          flex-grow: 2;
+        }
+
+        button {
+          &.blue {
+            color: $color-lightblue;
+            text-decoration: underline solid $base-border-thickness;
+          }
+
+          @include breakpoint-md {
+            margin-left: 1rem;
+          }
+        }
+      }
+
+      .edit {
+        background-color: $color-modalgrey;
+        padding: $base-padding 0;
+        grid-template-columns: 5fr 1fr;
+      }
+    }
+  }
+}
+
+#players-modal {
+  border-radius: $base-border-radius;
+  padding: $base-padding2X;
+  background-color: $color-modalgrey;
+  border: solid 1px $color-blue;
+  @include flex-col($base-padding);
+
+  .control {
+    @include flex-row;
+    justify-content: space-between;
+
+    h3 {
+      font-size: $base-font-size;
+    }
+  }
+
+  form {
+    @include flex-col($base-padding);
+    justify-content: flex-start;
+    align-items: center;
+
+    @include breakpoint-md {
+      @include flex-row($base-padding);
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .input {
+      @include flex-col(0);
+
+      label {
+        font-weight: 600;
+      }
+
+      input {
+        padding: $base-padding $base-padding2X;
+        border-radius: $base-border-radius2D;
+      }
+    }
+
+    button {
+      @include pillStyleSolid;
+
+      @include breakpoint-md {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  button {
+    @include flex-row(0.25rem);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.delete {
+      color: $color-error;
+      opacity: 45%;
+
+      &:hover {
+        opacity: 100%;
+      }
+    }
+
+    &.exit {
+      color: $color-olive;
+    }
+  }
+}
+
+#teams-modal {
+  h4,
+  h5 {
+    font-weight: 600;
+  }
+  .new-team {
+    border: solid 1px $color-blue;
+    margin-top: $base-padding2X;
+    border-radius: $base-border-radius;
+    background-color: $color-modalgrey;
+    padding: 1rem;
+    @include flex-col(0);
+    justify-content: left;
+
+    .header {
+      @include flex-row;
+      justify-content: space-between;
+      margin: $base-padding 1rem;
+
+      h4 {
+        font-size: $base-font-size;
+      }
+
+      button {
+        @include flex-row(0);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .team-creation {
+      @include flex-col(0.5rem);
+      margin: $base-padding 0.75rem $base-padding2X;
+      padding: 0.75rem;
+      background-color: whitesmoke;
+      border-top: solid $color-darkgrey $base-border-thickness;
+      border-bottom: solid $color-darkgrey $base-border-thickness;
+
+      ul {
+        li {
+          font-size: $base-font-size;
+          @include flex-row(0.25rem);
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .remove {
+            cursor: pointer;
+            opacity: 80%;
+            font-size: $font-size-sm;
+            color: $color-error;
+            text-decoration: underline solid $base-border-thickness;
+
+            @include breakpoint-md {
+              margin-left: 1rem;
+            }
+          }
+
+          @include breakpoint-md {
+            column-gap: $base-padding2X;
+          }
+        }
+      }
+
+      .error {
+        text-align: left;
+      }
+
+      button {
+        @include pillStyleSolid;
+        align-self: flex-start;
+      }
+    }
+
+    form {
+      @include flex-col(0.25rem);
+      align-items: center;
+
+      @include breakpoint-md {
+        @include flex-row(0.3rem);
+        justify-content: left;
+      }
+
+      input {
+        border-radius: $base-border-radius-md;
+        height: $font-size-xxl;
+        font-size: $font-size-sm;
+        padding: 0 $base-padding;
+
+        @include breakpoint-md {
+          min-width: 400px;
+          font-size: $base-font-size;
+          padding: 0 $base-padding2X;
+        }
+      }
+
+      .clear-search {
+        button {
+          margin-left: $base-padding;
+          border-radius: 50%;
+          padding: 0.3rem;
+          border-color: $color-darkgrey;
+          color: $color-darkgrey;
+        }
+      }
+
+      button {
+        @include editButton($color-lightblue);
+        @include flex-row(0.25rem);
+        justify-content: left;
+        font-size: $base-font-size;
+      }
+    }
+
+    .search-results {
+      padding: $base-padding;
+
+      ul {
+        gap: 0;
+        li {
+          font-size: $base-font-size;
+          @include flex-row(0);
+          column-gap: 0.25rem;
+          align-items: center;
+
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          padding: 0.25rem;
+
+          @include breakpoint-md {
+            column-gap: 0.5rem;
+          }
+        }
+        .even-row {
+          //background-color: #ffffff;
+          //padding: $base-padding 0;
+        }
+
+        .odd-row {
+          background-color: #f1f1f1;
+        }
+      }
+
+      button {
+        font-size: $font-size-sm;
+        color: $color-lightblue;
+        text-decoration: underline solid $base-border-thickness;
+
+        @include breakpoint-md {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+  .delete-team {
+    @include flex-row;
+    justify-content: space-between;
+    padding: $base-border-radius2D 0;
+    padding-right: $base-border-radius2D;
+
+    button {
+      border: 0;
+      @include flex-row(0.25rem);
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.delete {
+        color: $color-error;
+        opacity: 25%;
+
+        &:hover {
+          opacity: 100%;
+        }
+      }
+
+      &.exit {
+        color: $color-olive;
+      }
+    }
+  }
+}

@@ -1,0 +1,279 @@
+@import "../Variables/Variables.scss";
+
+.new-challenge {
+  border: solid 1px $color-blue;
+  border-radius: $base-border-radius;
+  background-color: $color-modalgrey;
+  padding: 1.5rem;
+  @include flex-col(0);
+  justify-content: left;
+
+  .header {
+    @include flex-row;
+    justify-content: space-between;
+    border-bottom: solid $base-border-thickness $color-olive;
+
+    h4 {
+      font-size: $font-size-sm;
+      font-weight: 600;
+    }
+
+    button {
+      @include flex-row(0);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .participants-selection {
+    .match-selection {
+      @include flex-col(0.5rem);
+      margin: $base-padding 0.75rem $base-padding2X;
+      padding: 0.75rem;
+      background-color: whitesmoke;
+      border-top: solid $color-darkgrey $base-border-thickness;
+      border-bottom: solid $color-darkgrey $base-border-thickness;
+
+      ul {
+        li {
+          font-size: $base-font-size;
+          @include flex-row(0.25rem);
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .remove {
+            cursor: pointer;
+            opacity: 80%;
+            font-size: $font-size-sm;
+            color: $color-error;
+            text-decoration: underline solid $base-border-thickness;
+
+            @include breakpoint-md {
+              margin-left: 1rem;
+            }
+          }
+
+          @include breakpoint-md {
+            column-gap: $base-padding2X;
+          }
+        }
+      }
+
+      .error {
+        text-align: left;
+      }
+
+      button {
+        @include pillStyleSolid;
+        align-self: flex-start;
+      }
+    }
+
+    .participant-search {
+      form {
+        @include flex-col(0.25rem);
+        align-items: center;
+        padding-top: $base-padding2X;
+
+        @include breakpoint-md {
+          @include flex-row(0.3rem);
+          justify-content: left;
+        }
+
+        input {
+          border-radius: $base-border-radius-md;
+          height: $font-size-xxl;
+          font-size: $font-size-sm;
+          padding: 0 $base-padding;
+
+          @include breakpoint-md {
+            min-width: 400px;
+            font-size: $base-font-size;
+            padding: 0 $base-padding2X;
+          }
+        }
+
+        .clear-search {
+          button {
+            margin-left: $base-padding;
+            border-radius: 50%;
+            padding: 0.3rem;
+            border-color: $color-darkgrey;
+            color: $color-darkgrey;
+          }
+        }
+
+        & button {
+          @include editButton($color-lightblue);
+          @include flex-row(0.25rem);
+          justify-content: left;
+          font-size: $base-font-size;
+        }
+      }
+
+      .search-results {
+        padding: $base-padding;
+
+        ul {
+          gap: 0;
+          li {
+            font-size: $base-font-size;
+            @include flex-row(0);
+            column-gap: 0.25rem;
+            align-items: center;
+
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            padding: 0.25rem;
+
+            @include breakpoint-md {
+              column-gap: 0.5rem;
+            }
+          }
+          .even-row {
+            //background-color: #ffffff;
+            //padding: $base-padding 0;
+          }
+
+          .odd-row {
+            background-color: #f1f1f1;
+          }
+        }
+
+        button {
+          font-size: $font-size-sm;
+          color: $color-lightblue;
+          text-decoration: underline solid $base-border-thickness;
+
+          @include breakpoint-md {
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .match-report {
+    form {
+      @include flex-col($base-padding2X);
+      justify-content: flex-start;
+
+      @include breakpoint-md {
+        align-items: flex-start;
+      }
+
+      .all-inputs {
+        @include flex-col($base-padding);
+
+        .grouped-inputs {
+          @include flex-col($base-padding);
+          justify-content: flex-start;
+
+          .players {
+            padding: $base-padding 0;
+
+            h6 {
+              font-size: 1.25rem;
+            }
+          }
+        }
+
+        @include breakpoint-md {
+          .grouped-inputs {
+            @include flex-row($base-padding);
+            justify-content: flex-start;
+          }
+        }
+
+        .participants {
+          font-size: $base-font-size;
+          @include flex-col(0);
+          align-items: flex-start;
+          margin: $base-padding 0;
+        }
+
+        .input {
+          @include flex-col(0);
+
+          label {
+            font-weight: 600;
+          }
+
+          input,
+          select {
+            border: solid $base-border-thickness $color-grey;
+            padding: $base-padding $base-padding;
+            border-radius: $base-border-radius2D;
+            width: 100%;
+          }
+        }
+
+        .checkbox {
+          @include flex-col(0.5rem);
+          align-items: flex-start;
+
+          input[type="checkbox"] {
+            width: 2rem;
+            height: 2rem;
+            align-self: flex-start;
+          }
+        }
+      }
+
+      .clear-search {
+        button {
+          margin-left: $base-padding;
+          border-radius: 50%;
+          padding: 0.3rem;
+          border-color: $color-darkgrey;
+          color: $color-darkgrey;
+        }
+      }
+
+      > button {
+        @include pillStyleSolid;
+        align-self: flex-start;
+        margin-top: $base-padding;
+      }
+    }
+  }
+}
+
+#challengers-reports-table {
+  li {
+    @include flex-col(0);
+    grid-template-columns: 3fr 3fr 2fr 1fr 2fr 2fr 2fr 2fr;
+    column-gap: $base-padding;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    button {
+      margin: 0.25rem;
+      @include editUnderline($color-olive);
+    }
+  }
+
+  @include breakpoint-md {
+    li {
+      display: grid;
+      grid-template-columns: 3fr 3fr 2fr 1fr 2fr 2fr 2fr 2fr;
+      column-gap: $base-padding;
+      align-items: center;
+    }
+  }
+
+  li:hover {
+    background-color: $color-highlight-yellow;
+  }
+
+  .even-row {
+    background-color: #f2f2f2;
+  }
+
+  .odd-row {
+    background-color: #ffffff;
+  }
+}

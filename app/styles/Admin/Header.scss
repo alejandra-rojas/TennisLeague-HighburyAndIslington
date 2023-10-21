@@ -1,0 +1,37 @@
+@import "../Variables/Variables.scss";
+
+#primary-navigation {
+  background-color: $color-green;
+
+  h1 {
+    font-size: $base-font-size;
+  }
+
+  @include breakpoint-md {
+    h1 {
+      font-size: $font-size-lg;
+    }
+  }
+
+  ul {
+    @include flex-row(0);
+    flex-wrap: wrap;
+    li {
+      font-size: $base-font-size;
+    }
+  }
+  @include breakpoint-md {
+    ul {
+      @include flex-row;
+      li {
+        font-size: 1.875rem;
+      }
+    }
+  }
+
+  //ACTIVE MENU
+  .active {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}

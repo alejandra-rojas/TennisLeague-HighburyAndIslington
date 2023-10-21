@@ -1,0 +1,210 @@
+//FONTS
+$titleFont: Arial, Helvetica, sans-serif;
+$bodyFont: "Times New Romas", Times, serif;
+
+$base-font-size: 1.25rem;
+$font-size-sm: $base-font-size * 0.85;
+$font-size-lg: $base-font-size * 1.5;
+$font-size-xl: $base-font-size * 2;
+$font-size-xxl: $base-font-size * 3;
+
+//COLORS
+$color-black: rgb(24, 24, 24);
+$color-olive: #1f271b;
+$color-grey: #e5e4e2;
+$color-darkgrey: #7a8190;
+$color-modalgrey: #e5e7eb;
+$color-lightblue: #1d4ed8;
+$color-blue: #002fa7;
+$color-lightgreen: #c6f6d5;
+$color-green: #4cb944;
+$color-darkgreen: #367030;
+$color-error: #ff0800;
+$color-highlight-green: #d4ff32;
+$color-highlight-yellow: #e9ff32;
+
+//BREAKPOINTS
+$breakpoints: (
+  "sm": 480px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1280px,
+);
+//Generic
+@mixin breakpoint($bp: 0) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+@mixin breakpoint-sm {
+  @media (min-width: map-get($breakpoints, "sm")) {
+    @content;
+  }
+}
+@mixin breakpoint-md {
+  @media (min-width: map-get($breakpoints, "md")) {
+    @content;
+  }
+}
+@mixin breakpoint-lg {
+  @media (min-width: map-get($breakpoints, "lg")) {
+    @content;
+  }
+}
+@mixin breakpoint-xl {
+  @media (min-width: map-get($breakpoints, "xl")) {
+    @content;
+  }
+}
+
+//SPACING
+$base-padding: 0.75rem;
+$base-padding2X: 1.5rem;
+$base-margin: 0.75rem;
+
+//BORDER
+$base-border-radius2D: 9px;
+$base-border-radius: 20px;
+$base-border-radius-md: 30px;
+$base-border-thickness: 1px;
+
+@mixin input {
+  margin: 0.25rem 0;
+  padding: 0.75rem 0 0.65rem;
+  border-bottom: solid $base-border-thickness $color-grey;
+}
+
+//SHADOW
+$base-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.25);
+
+//MIX INS
+@mixin h2 {
+  font-size: $font-size-lg;
+  font-weight: 600;
+}
+
+@mixin h3 {
+  font-size: $base-font-size;
+  font-weight: 600;
+
+  @include breakpoint-md {
+    font-size: $font-size-lg;
+  }
+}
+
+@mixin h5 {
+  font-size: $base-font-size;
+  font-weight: 600;
+}
+
+@mixin flex-row($gapSize: 2rem) {
+  display: flex;
+  flex-direction: row;
+  gap: $gapSize;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-col($gapSize: 2rem) {
+  display: flex;
+  flex-direction: column;
+  gap: $gapSize;
+  justify-content: center;
+}
+
+@mixin cardStyle($borderRadius: $base-padding2X) {
+  box-shadow: $base-box-shadow;
+  border-radius: $borderRadius;
+  border: 1px solid #e2e8f0;
+}
+
+@mixin editUnderline($monocrome: $color-darkgrey) {
+  color: $monocrome;
+  font-size: $font-size-sm;
+  text-decoration: underline solid $base-border-thickness;
+
+  &:hover {
+    cursor: pointer;
+    color: $color-lightblue;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+@mixin editButton($monocrome: $color-darkgrey) {
+  color: $monocrome;
+  font-size: $font-size-sm;
+
+  padding: 0.2rem $base-padding;
+  border-radius: $base-border-radius2D;
+  border: solid 0.75px $monocrome;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $monocrome;
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+@mixin pillStyle($fontSize: 1.2rem, $pillColor: $color-blue) {
+  font-size: $fontSize;
+  color: $pillColor;
+  background-color: transparent;
+  font-weight: 600;
+  border-radius: 25px;
+  border: 1px solid $pillColor;
+  padding: 0.5rem 0.5rem;
+  align-self: center;
+  transition: all 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $pillColor;
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.25;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+@mixin pillStyleSolid($fontSize: 1.2rem, $pillColor: $color-blue) {
+  @include flex-row(0.4rem);
+  font-size: $fontSize;
+  background-color: $pillColor;
+  border: 1px solid $pillColor;
+  color: white;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 0.5rem 0.75rem;
+  align-self: center;
+  transition: all 0.3s;
+  box-shadow: $base-box-shadow;
+
+  &:hover {
+    border: 1px solid $pillColor;
+    cursor: pointer;
+    color: $pillColor;
+    background-color: cyan;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.25;
+    cursor: default;
+    pointer-events: none;
+    box-shadow: none;
+  }
+}

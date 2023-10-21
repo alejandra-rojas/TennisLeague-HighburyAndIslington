@@ -1,0 +1,67 @@
+@import "../Variables/Variables.scss";
+
+//AUTH JS
+#auth {
+  min-height: calc(100vh - 7rem);
+  display: flex;
+  background-color: whitesmoke;
+  @include breakpoint-md {
+    background-color: whitesmoke;
+  }
+
+  .login-form {
+    @include flex-col;
+    @include cardStyle;
+    background-color: white;
+    margin-top: 5vh;
+    height: max-content;
+    width: 95vh;
+    padding: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include breakpoint-md {
+      width: 32rem;
+      padding: 3rem;
+    }
+
+    .title-container {
+      display: flex;
+      justify-content: center;
+
+      h2 {
+        align-self: center;
+      }
+    }
+
+    form {
+      @include flex-col;
+
+      .form-input {
+        @include flex-col(1);
+
+        label {
+          font-size: $font-size-sm;
+        }
+
+        input {
+          @include input;
+        }
+      }
+
+      > button {
+        @include pillStyle;
+        width: 100%;
+        max-width: 10rem;
+      }
+    }
+  }
+
+  .change-auth {
+    @include flex-row;
+    justify-content: flex-end;
+    > button {
+      @include editUnderline();
+    }
+  }
+}
