@@ -6,6 +6,26 @@ import PlayerList from "./PlayerList";
 import Loading from "../loading";
 
 export default function PlayersAdmin() {
+  return (
+    <main>
+      <header>
+        <div>
+          <h2>Players Database</h2>
+          <p>Manage your players database and access individual player pages</p>
+        </div>
+      </header>
+
+      <CreatePlayer />
+
+      <p>List of players</p>
+      <Suspense fallback={<Loading />}>
+        <PlayerList />
+      </Suspense>
+    </main>
+  );
+}
+
+/* export default function PlayersAdmin() {
   /* const [todos, setTodos] = useState();
   const supabase = createClientComponentClient();
 
@@ -16,8 +36,8 @@ export default function PlayersAdmin() {
     };
 
     getData();
-  }, []); */
-
+  }, []);
+ 
   return (
     <main>
       <header>
@@ -26,20 +46,17 @@ export default function PlayersAdmin() {
           <p>Manage your players database and access individual player pages</p>
         </div>
       </header>
-      {/* <NewPlayer /> */}
-      {/* <div>
+      <NewPlayer />
+      <Suspense fallback={<Loading />}>
+        <PlayerList />
+      </Suspense>
+         <div>
         {todos ? (
           <pre>{JSON.stringify(todos, null, 2)}</pre>
         ) : (
           <p>Loading todos...</p>
         )}
-      </div> */}
-      <CreatePlayer />
-
-      <p>List of players</p>
-      <Suspense fallback={<Loading />}>
-        <PlayerList />
-      </Suspense>
+      </div> 
     </main>
   );
-}
+} */
