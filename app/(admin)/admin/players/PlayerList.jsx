@@ -1,5 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import DeleteButton from "./DeleteButton";
 
 async function getPlayers() {
   const supabase = createServerComponentClient({ cookies });
@@ -25,6 +26,7 @@ export default async function PlayerList() {
             {player.player_firstname}
             {player.player_lastname}
           </p>
+          <DeleteButton id={player.player_id} />
         </div>
       ))}
       {players.length === 0 && <p>There are no players!</p>}
