@@ -71,6 +71,9 @@ $base-border-thickness: 1px;
 @mixin input {
   margin: 0.25rem 0;
   padding: 0.75rem 0 0.65rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   border-bottom: solid $base-border-thickness $color-grey;
 }
 

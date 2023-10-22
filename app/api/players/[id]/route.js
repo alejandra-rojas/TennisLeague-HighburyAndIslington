@@ -9,7 +9,7 @@ export async function DELETE(_, { params }) {
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
   //insert data
-  const { error } = await supabase.from("players").delete().eq("player_id", id);
+  const { error } = await supabase.from("players").delete().eq("id", id);
 
   return NextResponse.json({ error });
 }

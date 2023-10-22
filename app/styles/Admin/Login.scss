@@ -1,0 +1,56 @@
+@import "../Variables/Variables.scss";
+
+//AUTH JS
+#auth {
+  display: flex;
+  background-color: whitesmoke;
+  @include breakpoint-md {
+    background-color: whitesmoke;
+  }
+
+  .login-form {
+    @include flex-col;
+    @include cardStyle;
+    background-color: white;
+    margin-top: 5vh;
+    height: max-content;
+    width: 90vw;
+    padding: 3rem 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include breakpoint-md {
+      width: 50vw;
+      max-width: 30rem;
+    }
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-self: center;
+    }
+
+    form {
+      @include flex-col;
+
+      .form-input {
+        @include flex-col(1);
+
+        label {
+          font-size: $font-size-sm;
+        }
+
+        input {
+          @include input;
+          font-size: $base-font-size;
+        }
+      }
+
+      > button {
+        @include pillStyle;
+        width: 100%;
+        max-width: 10rem;
+      }
+    }
+  }
+}

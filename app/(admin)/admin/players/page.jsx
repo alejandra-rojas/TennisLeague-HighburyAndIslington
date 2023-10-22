@@ -1,23 +1,24 @@
+import "../../../styles/Admin/PlayersPage.scss";
+
 //Components
 import { Suspense } from "react";
 import CreatePlayer from "./CreatePlayer";
 import NewPlayer from "./NewPlayer";
 import PlayerList from "./PlayerList";
 import Loading from "../loading";
+import AddPlayerButton from "./AddPlayerButton";
 
 export default function PlayersAdmin() {
   return (
-    <main>
+    <main id="players-page">
       <header>
         <div>
           <h2>Players Database</h2>
-          <p>Manage your players database and access individual player pages</p>
+          <p>Manage the players database</p>
         </div>
+        <AddPlayerButton />
       </header>
 
-      <CreatePlayer />
-
-      <p>List of players</p>
       <Suspense fallback={<Loading />}>
         <PlayerList />
       </Suspense>

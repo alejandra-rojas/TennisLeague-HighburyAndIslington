@@ -3,15 +3,17 @@
 // Client Navbar component
 #primary-navigation {
   background-color: $color-green;
-  display: flex;
+
   color: white;
   justify-content: space-between;
   align-items: center;
-  height: 7rem;
+
   padding: 2rem 0 1rem;
 
   @include breakpoint-xl {
     justify-content: space-between;
+    max-height: 7rem;
+    display: flex;
     margin: 0 auto;
   }
 

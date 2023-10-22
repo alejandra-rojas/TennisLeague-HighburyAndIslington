@@ -39,7 +39,7 @@ export default function DeleteButton({ id }) {
       {!isLoading && (
         <>
           <TiDelete />
-          Delete Ticket
+          Delete player
         </>
       )}
     </button>

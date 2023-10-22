@@ -5,25 +5,30 @@ export default function AuthForm({ handleSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <form onSubmit={(e) => handleSubmit(e, email, password)}>
-      <label>
-        <span>Email:</span>
+    <form
+      id="admin-login-form"
+      onSubmit={(e) => handleSubmit(e, email, password)}
+    >
+      <div className="form-input">
+        <label>Email address</label>
         <input
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           required
         />
-      </label>
-      <label>
-        <span>Password:</span>
+      </div>
+
+      <div className="form-input">
+        <label>Password</label>
         <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           required
         />
-      </label>
+      </div>
+
       <button>Submit</button>
     </form>
   );

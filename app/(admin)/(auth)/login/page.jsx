@@ -1,4 +1,5 @@
 "use client";
+import "../../../styles/Admin/Login.scss";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
@@ -28,10 +29,12 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <h2>Log in</h2>
-      <AuthForm handleSubmit={handleSubmit} />
-      {error && <div className="error">{error}</div>}
+    <main id="auth">
+      <div className="login-form">
+        <h2>Admin log in</h2>
+        <AuthForm handleSubmit={handleSubmit} />
+        {error && <div className="error">{error}</div>}
+      </div>
     </main>
   );
 }

@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -62,4 +68,10 @@ a:focus {
   @include breakpoint-md {
     display: inline;
   }
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }

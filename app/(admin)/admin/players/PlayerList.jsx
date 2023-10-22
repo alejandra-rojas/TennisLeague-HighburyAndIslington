@@ -1,6 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 async function getPlayers() {
   const supabase = createServerComponentClient({ cookies });
@@ -18,18 +19,22 @@ export default async function PlayerList() {
   console.log(players);
 
   return (
-    <>
-      <div>hello</div>
-      {players.map((player) => (
-        <div key={player.player_id}>
+    <ul className="players-list">
+      {players.map((player, index) => (
+        <li
+          key={player.id}
+          className={`${index % 2 === 0 ? "even-row" : "odd-row"}`}
+        >
           <p>
-            {player.player_firstname}
-            {player.player_lastname}
+            {player.firstname}
+            &#160;
+            {player.lastname}
           </p>
-          <DeleteButton id={player.player_id} />
-        </div>
+          <EditButton player={player} id={player.id} />
+          {/* <DeleteButton id={player.id} /> */}
+        </li>
       ))}
       {players.length === 0 && <p>There are no players!</p>}
-    </>
+    </ul>
   );
 }

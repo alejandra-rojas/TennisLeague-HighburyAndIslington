@@ -17,10 +17,6 @@ export default async function AuthLayout({ children }) {
   return (
     <>
       <ClientNavbar />
-      <nav>
-        <Link href="/signup">Sign up</Link>
-        <Link href="/login">Login</Link>
-      </nav>
       {children}
     </>
   );
