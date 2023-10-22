@@ -4,8 +4,9 @@
 
 "use server";
 import { redirect } from "next/navigation";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export async function createPlayer(formData) {
   //console.log("formData", formData);
@@ -14,7 +15,7 @@ export async function createPlayer(formData) {
   const lastName = formData.get("last-name");
   //console.log("player:", firstName, lastName);
 
-  const supabase = createServerComponentClient({ cookies, headers });
+  const supabase = createServerActionClient({ cookies, headers });
 
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
@@ -28,9 +29,27 @@ export async function createPlayer(formData) {
 
   console.log(data);
 
+  if (error) {
+    throw new Error("Could not create player");
+  }
   if (!error) {
+    revalidatePath("/players");
     redirect("/admin");
   }
 }
 
-export async function getPlayers() {}
+export async function deletePlayer(id) {
+  const supabase = createServerActionClient({ cookies, headers });
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError) return;
+
+  const { error } = await supabase.from("players").delete().eq("player_id", id);
+
+  if (error) {
+    throw new Error("Could not delete player");
+  }
+  if (!error) {
+    revalidatePath("/players");
+    redirect("/admin");
+  }
+}
