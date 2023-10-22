@@ -1,10 +1,7 @@
-"use client";
-import React, { useState } from "react";
+import SubmitButton from "@/app/components/SubmitButton";
 import { createPlayer } from "./actions";
 
 function NewPlayer() {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
     <form action={createPlayer} className="w-1/2">
       <label>
@@ -15,10 +12,7 @@ function NewPlayer() {
         <span>Last name:</span>
         <input required type="text" name="last-name" />
       </label>
-      <button type="submit" className="btn-primary" disabled={isLoading}>
-        {isLoading && <span>Adding...</span>}
-        {!isLoading && <span>Add Player</span>}
-      </button>
+      <SubmitButton />
     </form>
   );
 }
