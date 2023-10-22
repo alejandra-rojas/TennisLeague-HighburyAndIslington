@@ -5,9 +5,11 @@ export default function ClientNavbar() {
   return (
     <>
       <div id="primary-navigation">
-        <Link href="/" aria-label="Go to the Home page">
-          <h1>Highbury Fields Doubles Leagues </h1>
-        </Link>
+        <div>
+          <Link href="/" aria-label="Go to the Home page">
+            <h1>Highbury Fields Doubles Leagues </h1>
+          </Link>
+        </div>
         <div>
           <nav role="navigation" aria-labelledby="primary-navigation">
             <h2 id="primary-site-navigation" className="sr-only">

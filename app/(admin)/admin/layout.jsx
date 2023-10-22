@@ -17,9 +17,11 @@ export default async function AdminLayout({ children }) {
 
   return (
     <>
-      <LoginNavbar user={data.session.user} />
-      <ClientNavbar />
-      <AdminNavbar />
+      <header id="web-header">
+        <LoginNavbar user={data.session.user} />
+        <ClientNavbar />
+        <AdminNavbar />
+      </header>
       {children}
     </>
   );

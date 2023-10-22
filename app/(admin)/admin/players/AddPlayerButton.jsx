@@ -15,7 +15,7 @@ export default function AddPlayerButton() {
           className="add-player-button"
         >
           <UserPlusIcon width={30} />
-          Register Player
+          New Player
         </button>
       )}
 

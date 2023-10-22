@@ -1,106 +1,114 @@
 @import "./Variables/Variables.scss";
 
 // Client Navbar component
-#primary-navigation {
+
+#web-header {
   background-color: $color-green;
 
-  color: white;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 2rem 0 1rem;
-
-  @include breakpoint-xl {
-    justify-content: space-between;
-    max-height: 7rem;
+  // Admin Navbar components
+  .logout-banner-admin {
     display: flex;
-    margin: 0 auto;
-  }
-
-  ul {
-    display: flex;
-    gap: 3rem;
-    li {
-      list-style: none;
-    }
-  }
-}
-
-// Admin Navbar components
-.logout-banner-admin {
-  display: flex;
-  gap: 1rem;
-  font-size: $font-size-sm;
-  color: white;
-  font-weight: bold;
-  background-color: $color-olive;
-  padding: $base-padding 1rem;
-
-  @include breakpoint-md {
+    gap: 1rem;
     font-size: $font-size-sm;
-    justify-content: end;
-  }
+    color: white;
+    font-weight: bold;
+    background-color: $color-olive;
+    padding: $base-padding 1rem;
+    justify-content: center;
 
-  span {
-    font-size: $font-size-sm;
-    font-weight: 400;
-  }
-
-  button {
-    @include pillStyle($font-size-sm, white);
-    @include flex-row(0.5rem);
-    padding: 0 $base-padding;
-
-    &:hover {
-      color: $color-olive;
+    @include breakpoint-md {
+      font-size: $font-size-sm;
+      justify-content: end;
     }
-  }
-}
 
-//ADMIN NAVIGATION
-#admin-primary-navigation {
-  background-color: $color-green;
-  display: flex;
-  justify-content: center;
+    span {
+      font-size: $font-size-sm;
+      font-weight: 400;
+    }
 
-  @include breakpoint-md {
-    font-size: $base-font-size;
-    padding: 0 $base-padding2X;
-    justify-content: flex-end;
-  }
+    button {
+      @include pillStyle($font-size-sm, white);
+      @include flex-row(0.5rem);
+      padding: 0 $base-padding;
 
-  ul {
-    @include flex-row($base-padding);
-
-    li {
-      font-size: $base-font-size;
-      color: white;
-      padding: 0.4rem 0.8rem;
-      border-top-left-radius: $base-font-size;
-      border-top-right-radius: $base-font-size;
-
-      @include breakpoint-md {
-        font-size: 1.5rem;
-        padding: 0.5rem 1.65rem 0.25rem;
-      }
       &:hover {
-        background-color: $color-darkgreen;
+        color: $color-olive;
       }
-    }
-
-    /* Styles for the li when its child a NavLink has the "active" class */
-    li:has(a.active) {
-      font-weight: 600;
-      background-color: whitesmoke;
-      color: $color-olive;
-      text-decoration: underline;
-      text-decoration-thickness: 0.15rem;
     }
   }
 
-  @include breakpoint-xl {
-    // width: 80rem; /* 1280px */
-    margin: 0 auto;
+  #primary-navigation {
+    @include flex-row();
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0 1rem;
+
+    @include breakpoint-xl {
+      // max-height: 7rem;
+      width: 75rem;
+      margin: 0 auto;
+    }
+
+    ul {
+      display: flex;
+      gap: 3rem;
+
+      li {
+        list-style: none;
+      }
+    }
+  }
+
+  //ADMIN NAVIGATION
+  #admin-primary-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: $base-padding 1rem 0;
+
+    @include breakpoint-md {
+      font-size: $base-font-size;
+      padding: 0;
+      gap: 1rem;
+      justify-content: flex-end;
+      width: 75rem;
+      margin: 0 auto;
+    }
+
+    ul {
+      @include flex-row($base-padding);
+
+      li {
+        font-size: $base-font-size;
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-top-left-radius: $base-font-size;
+        border-top-right-radius: $base-font-size;
+
+        @include breakpoint-md {
+          font-size: 1.5rem;
+          padding: 0.5rem 1.65rem 0.25rem;
+        }
+        &:hover {
+          background-color: $color-darkgreen;
+        }
+      }
+
+      /* Styles for the li when its child a NavLink has the "active" class */
+      li:has(a.active) {
+        font-weight: 600;
+        background-color: whitesmoke;
+        color: $color-olive;
+        text-decoration: underline;
+        text-decoration-thickness: 0.15rem;
+      }
+    }
+
+    @include breakpoint-xl {
+      // width: 80rem; /* 1280px */
+      margin: 0 auto;
+    }
   }
 }
 
@@ -109,8 +117,14 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 80rem; /* 1280px */
+  max-width: 75rem; /* 1280px */
   margin: 0 auto;
+  padding: 0 1rem;
+
+  @include breakpoint-lg {
+    // width: 80rem; /* 1280px */
+    padding: 0;
+  }
 }
 
 h2 {

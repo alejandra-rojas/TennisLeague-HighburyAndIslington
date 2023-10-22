@@ -6,9 +6,15 @@ export default function AdminNavbar() {
   return (
     <nav id="admin-primary-navigation">
       <ul>
-        <Link href={"/admin"}>Leagues</Link>
-        <Link href={"/admin/players"}>Players</Link>
-        <Link href={"/admin/teams"}>Teams</Link>
+        <li>
+          <Link href={"/admin"}>Leagues</Link>
+        </li>
+        <li>
+          <Link href={"/admin/players"}>Players</Link>
+        </li>
+        <li>
+          <Link href={"/admin/teams"}>Teams</Link>
+        </li>
       </ul>
     </nav>
   );
