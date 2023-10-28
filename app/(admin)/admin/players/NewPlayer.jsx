@@ -3,7 +3,7 @@ import { createPlayer } from "./actions";
 
 function NewPlayer() {
   return (
-    <form action={createPlayer} className="w-1/2">
+    <form action={createPlayer}>
       <label>
         <span>First name:</span>
         <input required type="text" name="first-name" />

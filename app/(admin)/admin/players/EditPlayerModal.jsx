@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { TrashIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import DeleteButton from "./DeleteButton";
 
 function EditPlayerModal({ player, id, setShowPlayerModal }) {
@@ -28,41 +28,45 @@ function EditPlayerModal({ player, id, setShowPlayerModal }) {
   };
   return (
     <>
-      <form id="edit-player-form">
-        <div className="input">
-          <input
-            id="firstName"
-            required
-            maxLength={30}
-            placeholder="John"
-            name="firstname"
-            aria-labelledby="modalTitle"
-            value={player.firstname}
-          />
-        </div>
+      <div id="edit-player-modal">
+        <form className="edit-form">
+          <div className="input">
+            <input
+              id="firstName"
+              required
+              maxLength={30}
+              placeholder="John"
+              name="firstname"
+              aria-labelledby="modalTitle"
+              value={player.firstname}
+            />
+          </div>
 
-        <div className="input">
-          <input
-            id="lastName"
-            required
-            maxLength={30}
-            placeholder="Doe"
-            name="lastname"
-            value={player.lastname}
-          />
-        </div>
+          <div className="input">
+            <input
+              id="lastName"
+              required
+              maxLength={30}
+              placeholder="Doe"
+              name="lastname"
+              value={player.lastname}
+            />
+          </div>
 
-        <button type="submit">Edit</button>
-      </form>
+          <button type="submit">Edit</button>
+        </form>
 
-      <DeleteButton id={id} />
-      <button
-        onClick={() => {
-          setShowPlayerModal(false);
-        }}
-      >
-        Exit edit
-      </button>
+        <DeleteButton id={id} />
+        <button
+          className="exit"
+          onClick={() => {
+            setShowPlayerModal(false);
+          }}
+        >
+          <XMarkIcon width={25} />
+          <span>exit edit</span>
+        </button>
+      </div>
     </>
   );
 }

@@ -53,25 +53,8 @@
           font-size: $base-font-size;
         }
 
-        button {
+        > button {
           @include flex-row(0.25rem);
-
-          &:hover {
-            text-decoration: underline;
-          }
-
-          &.delete {
-            color: $color-error;
-            opacity: 45%;
-
-            &:hover {
-              opacity: 100%;
-            }
-          }
-
-          &.exit {
-            color: $color-olive;
-          }
         }
       }
 
@@ -112,14 +95,45 @@
 
   .players-list {
     li {
-      @include flex-row($base-padding);
-      justify-content: flex-start;
+      display: grid;
+      grid-template-columns: [first-column] 75% [second-column] 25%;
+      grid-template-rows: [row1-start] 25% [row1-end] [row2-start] 25% [row2-end];
 
-      flex-wrap: wrap;
-      padding: 0.25rem;
+      #edit-player-modal {
+        grid-column-start: first-column;
+        grid-column-end: end;
+        grid-row-start: row2-start;
+        grid-row-end: row2-end;
+        padding: 0.25rem 0.25rem 1rem 0;
 
-      #edit-player-form {
-        @include flex-row;
+        @include flex-row($base-padding);
+        justify-content: space-between;
+
+        .edit-form {
+          @include flex-row($base-padding);
+          align-items: space-between;
+        }
+
+        button {
+          @include flex-row(0.25rem);
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &.delete {
+            color: $color-error;
+            opacity: 45%;
+
+            &:hover {
+              opacity: 100%;
+            }
+          }
+
+          &.exit {
+            color: $color-olive;
+          }
+        }
       }
     }
     .even-row {
@@ -135,11 +149,6 @@
     }
 
     @include breakpoint-md {
-      li {
-        flex-wrap: nowrap;
-        justify-content: space-between;
-      }
-
       p {
         font-size: $base-font-size;
       }

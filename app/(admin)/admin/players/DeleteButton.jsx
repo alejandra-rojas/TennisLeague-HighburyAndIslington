@@ -29,7 +29,7 @@ export default function DeleteButton({ id }) {
   };
 
   return (
-    <button onClick={handleClick} disabled={isLoading}>
+    <button onClick={handleClick} disabled={isLoading} className="delete">
       {isLoading && (
         <>
           <TiDelete />
@@ -38,8 +38,8 @@ export default function DeleteButton({ id }) {
       )}
       {!isLoading && (
         <>
-          <TiDelete />
-          Delete player
+          <TrashIcon width={20} />
+          <span>Delete</span>
         </>
       )}
     </button>
