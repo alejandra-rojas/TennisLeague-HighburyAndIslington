@@ -134,3 +134,8 @@ h2 {
 h3 {
   @include h3;
 }
+
+.blue-underline {
+  color: $color-lightblue;
+  text-decoration: underline solid $base-border-thickness;
+}
