@@ -1,0 +1,144 @@
+@import "../Variables/Variables.scss";
+
+#teams-page {
+  margin-top: $base-padding2X;
+
+  header {
+    display: grid;
+    grid-template-columns: [first-column] 75% [second-column] 25%;
+    grid-template-rows: [row1-start] 25% [row1-end] [row2-start] 25% [row2-end];
+    margin-bottom: $base-padding2X;
+
+    p {
+      font-size: $base-font-size;
+    }
+
+    .create-team-button {
+      grid-column-start: second-column;
+
+      @include flex-row(0.5rem);
+      @include pillStyleSolid($font-size-sm);
+      padding-right: $base-padding;
+      padding-left: $base-padding;
+      box-shadow: $base-box-shadow;
+    }
+
+    @include breakpoint-md {
+      .create-team-button {
+        justify-self: end;
+        max-width: fit-content;
+        @include flex-row(0.5rem);
+        @include pillStyleSolid;
+        padding: $base-padding $base-padding;
+      }
+    }
+
+    .new-team-modal {
+      margin: 2rem 0;
+      grid-column-start: first-column;
+      grid-column-end: end;
+      grid-row-start: row2-start;
+      grid-row-end: row2-end;
+      border-radius: $base-border-radius;
+      padding: $base-padding2X;
+      background-color: $color-modalgrey;
+      border: solid 1px $color-blue;
+      @include flex-col($base-padding);
+
+      .controls {
+        @include flex-row;
+        justify-content: space-between;
+
+        h3 {
+          font-size: $base-font-size;
+        }
+      }
+
+      form {
+        @include flex-col($base-padding);
+        justify-content: flex-start;
+        align-items: center;
+
+        @include breakpoint-md {
+          @include flex-row($base-padding);
+          justify-content: flex-start;
+          align-items: center;
+        }
+
+        .input {
+          @include flex-col(0);
+
+          label {
+            font-weight: 600;
+          }
+
+          input {
+            padding: $base-padding $base-padding2X;
+            border-radius: $base-border-radius2D;
+          }
+        }
+
+        button {
+          @include pillStyleSolid;
+
+          @include breakpoint-md {
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+  }
+
+  .teams-list {
+    li {
+      @include flex-row($base-padding);
+      justify-content: flex-start;
+
+      flex-wrap: wrap;
+      padding: 0.25rem;
+
+      button {
+        @include flex-row(0.25rem);
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &.delete {
+          color: $color-error;
+          opacity: 45%;
+
+          &:hover {
+            opacity: 100%;
+          }
+        }
+
+        &.exit {
+          color: $color-olive;
+        }
+      }
+    }
+    .even-row {
+      background-color: #f2f2f2;
+    }
+
+    .odd-row {
+      background-color: #ffffff;
+    }
+
+    li:hover {
+      background-color: $color-highlight-yellow;
+    }
+
+    @include breakpoint-md {
+      li {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+      }
+
+      p {
+        font-size: $base-font-size;
+      }
+    }
+  }
+}
