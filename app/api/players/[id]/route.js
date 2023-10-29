@@ -8,8 +8,23 @@ export async function DELETE(_, { params }) {
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
-  //insert data
+  //delete data
   const { error } = await supabase.from("players").delete().eq("id", id);
 
   return NextResponse.json({ error });
+}
+
+export async function PUT(req, { params }) {
+  const player = await req.json();
+  const id = params.id;
+
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+
+  const { data, error } = await supabase
+    .from("players")
+    .update({ firstname: player.firstname, lastname: player.lastname })
+    .eq("id", id);
+
+  return NextResponse.json({ data, error });
 }

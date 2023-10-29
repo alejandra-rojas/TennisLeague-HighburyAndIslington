@@ -1,44 +1,72 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import DeleteButton from "./DeleteButton";
 
 function EditPlayerModal({ player, id, setShowPlayerModal }) {
-  const editPlayer = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/players/${player.id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-      if (response.status === 200) {
-        console.log("edited");
-        getPlayersData();
-        setShowPlayerModal(false);
-        toast.success(`Player has been modified succesfully`);
-      }
-    } catch (error) {
-      console.error(error);
+  const [data, setData] = useState({
+    firstname: player.firstname,
+    lastname: player.lastname,
+  });
+
+  const handleChange = (e) => {
+    //console.log("changing", e);
+    const { name, value } = e.target;
+
+    setData((data) => ({
+      ...data,
+      [name]: value,
+    }));
+
+    //console.log(data);
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const player = {
+      firstname: data.firstname,
+      lastname: data.lastname,
+    };
+
+    const res = await fetch(`http://localhost:3000/api/players/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(player),
+    });
+    const json = await res.json();
+
+    if (json.error) {
+      console.log(json.error);
+      setIsLoading(false);
+    }
+    if (!json.error) {
+      setShowPlayerModal(false);
+      setIsLoading(false);
+      router.refresh();
     }
   };
+
   return (
     <>
       <div id="edit-player-modal">
-        <form className="edit-form">
+        <form className="edit-form" onSubmit={handleClick}>
           <div className="input">
             <input
               id="firstName"
               required
               maxLength={30}
-              placeholder="John"
+              placeholder="firstname"
               name="firstname"
               aria-labelledby="modalTitle"
-              value={player.firstname}
+              value={data.firstname}
+              onChange={handleChange}
             />
           </div>
 
@@ -47,13 +75,21 @@ function EditPlayerModal({ player, id, setShowPlayerModal }) {
               id="lastName"
               required
               maxLength={30}
-              placeholder="Doe"
+              placeholder="lastname"
               name="lastname"
-              value={player.lastname}
+              value={data.lastname}
+              onChange={handleChange}
             />
           </div>
 
-          <button type="submit">Edit</button>
+          <button disabled={isLoading}>
+            {isLoading && <>Editing...</>}
+            {!isLoading && (
+              <>
+                <span>EDIT</span>
+              </>
+            )}
+          </button>
         </form>
 
         <DeleteButton id={id} />
@@ -64,7 +100,7 @@ function EditPlayerModal({ player, id, setShowPlayerModal }) {
           }}
         >
           <XMarkIcon width={25} />
-          <span>exit edit</span>
+          <span>exit edit mode</span>
         </button>
       </div>
     </>
