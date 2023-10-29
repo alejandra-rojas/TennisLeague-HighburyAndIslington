@@ -147,7 +147,7 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
   };
 
   return (
-    <div>
+    <div className="create-component">
       {selectedPlayers.length !== 0 && (
         <div className="team-creation">
           <h5>You are creating a team with players:</h5>
@@ -189,11 +189,11 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
 
       {selectedPlayers.length < 2 && (
         <>
-          <form onSubmit={onSubmitForm}>
+          <form onSubmit={onSubmitForm} className="form-new-team">
             <input
               type="text"
               name="name"
-              placeholder="Search by players name"
+              placeholder="Enter players name"
               value={searchString}
               onChange={(e) => setSearchString(e.target.value)}
               aria-label="Search for players by name"
@@ -218,12 +218,14 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
             </div>
           </form>
 
-          <div className="search-results">
-            {searchPerformed && filteredPlayers.length === 0 && (
-              <p>No player found</p>
-            )}
+          {searchPerformed && filteredPlayers.length === 0 && (
+            <div className="search-results">
+              <p>No player found. Register a new player in the players page.</p>
+            </div>
+          )}
 
-            {searchPerformed && filteredPlayers.length > 0 && (
+          {searchPerformed && filteredPlayers.length > 0 && (
+            <div className="search-results">
               <ul>
                 {filteredPlayers.map((player, index) => (
                   <li
@@ -235,6 +237,7 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
                     </span>
                     <span>
                       <button
+                        className="blue-underline"
                         onClick={() => addPlayer(player)}
                         aria-label={`Add ${player.firstname} ${player.lastname} to team`}
                       >
@@ -244,8 +247,8 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
                   </li>
                 ))}
               </ul>
-            )}
-          </div>
+            </div>
+          )}
         </>
       )}
     </div>

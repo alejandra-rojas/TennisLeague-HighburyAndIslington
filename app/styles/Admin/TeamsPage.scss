@@ -50,37 +50,126 @@
         h3 {
           font-size: $base-font-size;
         }
-      }
 
-      form {
-        @include flex-col($base-padding);
-        justify-content: flex-start;
-        align-items: center;
-
-        @include breakpoint-md {
-          @include flex-row($base-padding);
-          justify-content: flex-start;
+        .button {
+          display: flex;
           align-items: center;
         }
+      }
 
-        .input {
-          @include flex-col(0);
+      .create-component {
+        .team-creation {
+          @include flex-col(0.5rem);
+          margin: $base-padding 0.75rem $base-padding2X;
+          padding: 0.75rem;
+          background-color: whitesmoke;
+          border-top: solid $color-darkgrey $base-border-thickness;
+          border-bottom: solid $color-darkgrey $base-border-thickness;
 
-          label {
-            font-weight: 600;
+          ul {
+            margin: $base-padding 0;
+            li {
+              font-size: $base-font-size;
+              @include flex-row(0.25rem);
+              justify-content: flex-start;
+              align-items: center;
+              flex-wrap: wrap;
+
+              .remove {
+                cursor: pointer;
+                opacity: 80%;
+                font-size: $font-size-sm;
+                color: $color-error;
+                text-decoration: underline solid $base-border-thickness;
+
+                @include breakpoint-md {
+                  margin-left: 1rem;
+                }
+              }
+
+              @include breakpoint-md {
+                column-gap: $base-padding2X;
+              }
+            }
+          }
+
+          .error {
+            text-align: left;
+            font-size: $font-size-sm;
+          }
+
+          button {
+            @include pillStyleSolid;
+            align-self: flex-start;
+          }
+        }
+
+        .form-new-team {
+          @include flex-col($base-padding);
+          justify-content: flex-start;
+          align-items: center;
+
+          @include breakpoint-md {
+            @include flex-row($base-padding);
+            justify-content: flex-start;
           }
 
           input {
-            padding: $base-padding $base-padding2X;
             border-radius: $base-border-radius2D;
+            @include input;
+            font-size: $base-font-size;
+            width: fit-content;
+            padding-left: $base-padding;
+
+            label {
+              font-weight: 600;
+            }
+          }
+
+          button {
+            @include editButton($color-lightblue);
+            @include flex-row(0.25rem);
+            justify-content: left;
+            font-size: $base-font-size;
+            padding: 0.45rem;
+          }
+
+          .clear-search {
+            button {
+              margin-left: $base-padding;
+              border-radius: 50%;
+              padding: 0.3rem;
+              border-color: $color-darkgrey;
+              color: $color-darkgrey;
+            }
+
+            button:hover {
+              background-color: $color-darkgrey;
+              color: #ffffff;
+            }
           }
         }
 
-        button {
-          @include pillStyleSolid;
+        .search-results {
+          padding-top: $base-padding2X;
+          ul {
+            li {
+              display: flex;
+              padding-bottom: 0.25rem;
+              gap: $base-padding2X;
+            }
 
-          @include breakpoint-md {
-            align-self: flex-end;
+            .even-row {
+              //background-color: #f2f2f2;
+            }
+
+            .odd-row {
+              background-color: #ffffff;
+            }
+
+            li:hover {
+              background-color: $color-green;
+            }
           }
         }
       }

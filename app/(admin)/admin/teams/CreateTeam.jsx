@@ -21,6 +21,7 @@ export default function CreateTeam({ setShowCreateTeamModal }) {
       <div className="controls">
         <h3>Create new team</h3>
         <button
+          className="button"
           aria-label={`Close create team modal`}
           onClick={() => {
             setShowCreateTeamModal(false);
