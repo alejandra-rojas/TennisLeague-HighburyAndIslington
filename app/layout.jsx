@@ -1,8 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import "./globals.scss";
-import ClientNavbar from "./components/ClientNavbar";
-import LoginNavbar from "./components/LoginNavbar";
 
 export const dynamic = "force-dynamic";
 

@@ -17,6 +17,7 @@ export default async function AuthLayout({ children }) {
   return (
     <>
       <ClientNavbar />
+
       {children}
     </>
   );
