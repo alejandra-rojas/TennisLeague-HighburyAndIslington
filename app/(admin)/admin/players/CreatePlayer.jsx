@@ -19,7 +19,7 @@ export default function CreatePlayer({ setShowPlayerModal }) {
       lastname: lastName,
     };
 
-    const res = await fetch(`${baseUrl}/api/players`, {
+    const res = await fetch(`/api/players`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(player),
