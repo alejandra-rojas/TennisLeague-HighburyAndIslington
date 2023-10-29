@@ -6,6 +6,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function SearchComponent({ setShowCreateTeamModal }) {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
   const [players, setPlayers] = useState([]);
   const [filteredPlayers, setFilteredPlayers] = useState([]);
@@ -115,7 +116,7 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
     const player1_id = selectedPlayers[0].id;
     const player2_id = selectedPlayers[1].id;
 
-    const res = await fetch("http://localhost:3000/api/teams", {
+    const res = await fetch(`${baseUrl}/api/teams`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

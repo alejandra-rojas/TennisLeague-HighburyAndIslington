@@ -6,6 +6,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import DeleteButton from "./DeleteButton";
 
 function EditPlayerModal({ player, id, setShowPlayerModal }) {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +36,7 @@ function EditPlayerModal({ player, id, setShowPlayerModal }) {
       lastname: data.lastname,
     };
 
-    const res = await fetch(`http://localhost:3000/api/players/${id}`, {
+    const res = await fetch(`${baseUrl}/api/players/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(player),

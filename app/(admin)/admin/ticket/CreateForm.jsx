@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function CreateForm() {
   const router = useRouter();
-
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [priority, setPriority] = useState("low");
@@ -22,7 +22,7 @@ export default function CreateForm() {
       user_email: "mario@netninja.dev",
     };
 
-    const res = await fetch("http://localhost:3000/api/tickets", {
+    const res = await fetch(`${baseUrl}/api/tickets`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTicket),
