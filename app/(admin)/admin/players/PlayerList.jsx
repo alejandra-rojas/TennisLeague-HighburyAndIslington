@@ -15,7 +15,7 @@ async function getPlayers() {
 
 export default async function PlayerList() {
   const players = await getPlayers();
-  console.log(players);
+  //console.log(players);
 
   return (
     <ul className="players-list">
