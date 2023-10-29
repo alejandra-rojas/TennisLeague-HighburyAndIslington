@@ -38,7 +38,7 @@
   }
 
   #primary-navigation {
-    @include flex-row();
+    @include flex-col();
     color: white;
     justify-content: space-between;
     align-items: center;
@@ -46,6 +46,7 @@
 
     @include breakpoint-xl {
       // max-height: 7rem;
+      @include flex-row();
       width: 75rem;
       margin: 0 auto;
     }
@@ -119,12 +120,16 @@ main {
   justify-content: center;
   max-width: 75rem; /* 1280px */
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 1.5rem 1rem;
 
   @include breakpoint-lg {
     // width: 80rem; /* 1280px */
-    padding: 0;
+    padding: 1.5rem $base-padding2X;
   }
+}
+
+.loading {
+  text-align: center;
 }
 
 h2 {

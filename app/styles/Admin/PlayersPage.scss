@@ -1,13 +1,11 @@
 @import "../Variables/Variables.scss";
 
 #players-page {
-  margin-top: $base-padding2X;
-
   header {
     display: grid;
     grid-template-columns: [first-column] 75% [second-column] 25%;
     grid-template-rows: [row1-start] 25% [row1-end] [row2-start] 25% [row2-end];
-    margin-bottom: $base-padding2X;
+    margin-bottom: 2rem;
 
     p {
       font-size: $base-font-size;
@@ -34,7 +32,7 @@
     }
 
     .new-player-modal {
-      margin: 2rem 0;
+      margin: $base-padding2X 0;
       grid-column-start: first-column;
       grid-column-end: end;
       grid-row-start: row2-start;

@@ -1,9 +1,6 @@
 import "../../../styles/Admin/PlayersPage.scss";
-
 //Components
 import { Suspense } from "react";
-import CreatePlayer from "./CreatePlayer";
-import NewPlayer from "./NewPlayer";
 import PlayerList from "./PlayerList";
 import Loading from "../loading";
 import AddPlayerButton from "./AddPlayerButton";
