@@ -1,4 +1,5 @@
 "use client";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -14,8 +15,8 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  //Getting players list
-  useEffect(() => {
+  //Getting players list -- Have created a GET endpoint in api/players
+  /*   useEffect(() => {
     const fetchPlayers = async () => {
       const response = await fetch("/api/players", {
         method: "GET",
@@ -33,8 +34,20 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
     };
 
     fetchPlayers();
+  }, []); */
+
+  //Get request using createClientComponentClient
+  const supabase = createClientComponentClient();
+  console.log(players);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase.from("players").select();
+      setPlayers(data);
+    };
+
+    getData();
   }, []);
-  //console.log(players);
 
   // Search for players form
   const onSubmitForm = (e) => {
