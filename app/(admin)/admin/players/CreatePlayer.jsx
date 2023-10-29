@@ -4,6 +4,7 @@ import { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function CreatePlayer({ setShowPlayerModal }) {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,7 +19,7 @@ export default function CreatePlayer({ setShowPlayerModal }) {
       lastname: lastName,
     };
 
-    const res = await fetch("http://localhost:3000/api/players", {
+    const res = await fetch(`${baseUrl}/api/players`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(player),
