@@ -1,5 +1,51 @@
 @import "../Variables/Variables.scss";
 
+#leagues-layout-header {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: $base-padding;
+  justify-content: space-between;
+  padding: $base-padding2X 0;
+
+  @include breakpoint-md {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    padding: 0 0 2.75rem;
+    //border-bottom: 0.1rem solid black;
+  }
+
+  h2 {
+    margin: 0 auto;
+  }
+
+  nav {
+    @include flex-row($base-font-size);
+    flex-direction: row-reverse;
+    font-size: $font-size-sm;
+    ul {
+      @include flex-row($base-padding);
+      li:not(:last-child) {
+        @include pillStyle($base-font-size, $color-green);
+
+        @include breakpoint-md {
+          font-size: 1.5rem;
+        }
+      }
+      /* Styles for the li when its child a NavLink has the "active" class */
+      li:has(a.active) {
+        background-color: $color-green;
+        color: white;
+      }
+    }
+
+    @include breakpoint-md {
+      @include flex-row($base-font-size);
+      font-size: 1.5rem;
+    }
+  }
+}
+
 // NEW LEAGUE BTN
 .create-league {
   /* position: fixed;
