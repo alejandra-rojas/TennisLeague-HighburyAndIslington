@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
-import Leagues from "./leagues/Leagues";
 import "../../styles/Admin/Leagues.scss";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { useState, Suspense } from "react";
+import Loading from "./loading";
+import Leagues from "./leagues/Leagues";
 import LeagueModal from "./leagues/LeagueModal";
 
 export default function Admin() {
@@ -47,13 +48,7 @@ export default function Admin() {
         </section>
       </section>
 
-      {showModal && (
-        <LeagueModal
-          mode={"create"}
-          setShowModal={setShowModal}
-          // getData={getData}
-        />
-      )}
+      {showModal && <LeagueModal mode={"create"} setShowModal={setShowModal} />}
 
       <section id="current-leagues">
         <header id="league-section-header" className="sr-only">
@@ -65,8 +60,10 @@ export default function Admin() {
         </header>
 
         <section id="current-leagues-data">
-          <h2>Current leagues are displayed here</h2>
-          <Leagues />
+          <Suspense fallback={<Loading />}>
+            <Leagues />
+          </Suspense>
+
           {/* <ul>
             {unfinishedLeagues?.map((league) => (
               <LeagueEntry key={league.id} league={league} getData={getData} />
