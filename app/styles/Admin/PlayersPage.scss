@@ -96,6 +96,7 @@
       display: grid;
       grid-template-columns: [first-column] 75% [second-column] 25%;
       grid-template-rows: [row1-start] 25% [row1-end] [row2-start] 25% [row2-end];
+      padding-bottom: 0.25rem;
 
       #edit-player-modal {
         grid-column-start: first-column;

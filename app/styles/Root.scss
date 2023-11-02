@@ -39,14 +39,15 @@
 
   #primary-navigation {
     @include flex-col();
+    gap: 1rem;
     color: white;
-    justify-content: space-between;
     align-items: center;
     padding: 2rem 1rem 1rem;
 
     @include breakpoint-xl {
       // max-height: 7rem;
       @include flex-row();
+      justify-content: space-between;
       width: 75rem;
       margin: 0 auto;
     }
@@ -94,15 +95,6 @@
         &:hover {
           background-color: $color-darkgreen;
         }
-      }
-
-      /* Styles for the li when its child a NavLink has the "active" class */
-      li:has(a.active) {
-        font-weight: 600;
-        background-color: whitesmoke;
-        color: $color-olive;
-        text-decoration: underline;
-        text-decoration-thickness: 0.15rem;
       }
     }
 

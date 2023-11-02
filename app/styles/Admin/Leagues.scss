@@ -46,6 +46,103 @@
   }
 }
 
+#league-modal {
+  border-radius: $base-border-radius;
+  padding: $base-padding2X;
+  margin-bottom: $base-padding2X;
+  background-color: $color-modalgrey;
+  border: solid 1px $color-blue;
+
+  .edit-container {
+    @include flex-col($base-padding);
+
+    .control {
+      @include flex-row;
+      justify-content: space-between;
+
+      h3 {
+        font-size: $base-font-size;
+      }
+
+      > button {
+        @include flex-row(0.25rem);
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &.delete {
+          color: $color-error;
+          opacity: 45%;
+
+          &:hover {
+            opacity: 100%;
+          }
+        }
+
+        &.exit {
+          color: $color-olive;
+        }
+      }
+    }
+
+    form {
+      @include flex-col($base-padding);
+      align-items: center;
+
+      @include breakpoint-md {
+        @include flex-row(0.5rem);
+        justify-content: left;
+      }
+
+      .input {
+        @include flex-col(0);
+
+        label {
+          font-weight: 600;
+        }
+
+        input {
+          padding: $base-padding $base-padding;
+          border-radius: $base-border-radius2D;
+        }
+      }
+
+      .checkbox {
+        @include flex-row(0.5rem);
+        font-size: $base-font-size;
+        margin-right: 2rem;
+
+        input[type="checkbox"] {
+          width: 1.5em;
+          height: 1.5em;
+        }
+      }
+
+      > button {
+        @include pillStyleSolid;
+
+        @include breakpoint-md {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+
+  > button {
+    margin-top: $base-margin;
+    @include flex-row(0);
+    color: $color-error;
+    opacity: 45%;
+    justify-content: flex-start;
+    flex-basis: 0;
+
+    &:hover {
+      opacity: 100%;
+    }
+  }
+}
+
 // NEW LEAGUE BTN
 .create-league {
   /* position: fixed;
