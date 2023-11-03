@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
@@ -38,12 +37,10 @@ function EventModal({
       await axios.post(`/api/leagues/${leagueID}/events`, { event: data }),
 
     onSuccess: () => {
-      //toast.success(`Event created succesfully`);
       setShowEventModal(false);
       queryClient.invalidateQueries(["events", leagueID]);
     },
     onError: (error) => {
-      //toast.error("something went wrong");
       console.log(error);
     },
   });
@@ -54,12 +51,10 @@ function EventModal({
       await axios.put(`/api/events/${event_id}`, { event: data }),
 
     onSuccess: () => {
-      //toast.success(`Event updated succesfully`);
-      setShowModal(false);
+      setShowEventModal(false);
       queryClient.invalidateQueries(["events", leagueID]);
     },
     onError: (error) => {
-      //toast.error("something went wrong");
       console.log(error);
     },
   });
@@ -69,15 +64,27 @@ function EventModal({
     mutationFn: async () => await axios.delete(`/api/events/${event_id}`),
 
     onSuccess: () => {
-      //toast.success(`Event deleted succesfully`);
-      setShowModal(false);
+      setShowEventModal(false);
       queryClient.invalidateQueries(["events", leagueID]);
     },
     onError: (error) => {
-      //toast.error("something went wrong");
       console.log(error);
     },
   });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editEvent) {
+      updateEvent();
+    } else {
+      submitEvent();
+    }
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    deleteEvent();
+  };
 
   return (
     <section id="event-modal" className={mode === "edit" ? "edit" : "new"}>
@@ -134,7 +141,7 @@ function EventModal({
 
             <button
               type="submit"
-              onClick={editEvent ? updateEvent : submitEvent}
+              onClick={handleSubmit}
               aria-label={editEvent ? "Edit event" : "Create new event"}
             >
               {!isLoading &&
@@ -148,7 +155,7 @@ function EventModal({
 
           {mode === "edit" && (
             <button
-              onClick={() => deleteEvent()}
+              onClick={handleDelete}
               aria-label="Delete event from this league"
             >
               <TrashIcon width={20} />
