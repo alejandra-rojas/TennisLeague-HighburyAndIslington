@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
 
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import { PlusIcon } from "@heroicons/react/24/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import LeagueModal from "./LeagueModal";
+import Events from "../events/Events";
 
 const LeagueCard = ({
   id,
@@ -119,60 +118,7 @@ const LeagueCard = ({
           isfinished={isfinished}
         />
       )}
-      {/* <section id="events-section">
-        {leagueEvents && (
-          <div className="event-container">
-            <ul>
-              {leagueEvents.map((gevent) => (
-                <li key={gevent.event_id}>
-                  <EventEntry
-                    league={league}
-                    gevent={gevent}
-                    getEventsData={getEventsData}
-                    getChallengersData={getChallengersData}
-                    challengerMatchesData={challengerMatchesData}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {!showChallengerModal && hasStarted && (
-          <button
-            onClick={() => setShowChallengerModal(true)}
-            className="add-challenger"
-          >
-            <PlusIcon width={25} />
-            <h6>Add a challenger match</h6>
-          </button>
-        )}
-        {showChallengerModal && (
-          <ChallengerMatchModal
-            league={league}
-            setShowChallengerModal={setShowChallengerModal}
-            getChallengersData={getChallengersData}
-          />
-        )}
-        {showEventModal && (
-          <EventModal
-            mode={"new"}
-            setShowEventModal={setShowEventModal}
-            league={league}
-            getEventsData={getEventsData}
-            leagueEvents={leagueEvents}
-          />
-        )}
-        {!hasStarted && (
-          <button
-            onClick={() => setShowEventModal(true)}
-            aria-label="Opel Modal to add an event to this league"
-            className="add-event"
-          >
-            <PlusCircleIcon width={30} />
-            Add event to {lowercaseTitle}
-          </button>
-        )}
-      </section> */}
+      <Events leagueID={id} league_name={league_name} hasStarted={hasStarted} />
     </li>
   );
 };

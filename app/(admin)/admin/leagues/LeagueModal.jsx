@@ -18,7 +18,7 @@ function LeagueModal({
   isfinished,
 }) {
   const queryClient = useQueryClient();
-  //CREATE ACTION
+  //CREATE LEAGUE
   const { mutate: submitLeague, isLoading } = useMutation({
     mutationFn: async () => await axios.post("/api/leagues", { league: data }),
 
@@ -33,7 +33,7 @@ function LeagueModal({
     },
   });
 
-  //UPDATE ACTION
+  //UPDATE LEAGUE
   const { mutate: updateLeague, isLoading: updateLoading } = useMutation({
     mutationFn: async () =>
       await axios.put(`/api/leagues/${id}`, { league: data }),
@@ -49,7 +49,7 @@ function LeagueModal({
     },
   });
 
-  //DELETE ACTION
+  //DELETE LEAGUE
   const { mutate: deleteLeague, isLoading: deleteLoading } = useMutation({
     mutationFn: async () => await axios.delete(`/api/leagues/${id}`),
 
