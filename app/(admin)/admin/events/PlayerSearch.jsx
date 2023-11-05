@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useStore } from "../../../store/createStore";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
@@ -9,6 +10,9 @@ function PlayerSearch() {
   const [searchString, setSearchString] = useState("");
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [filteredTeams, setFilteredTeams] = useState([]);
+  const drawParticipants = useStore();
+
+  console.log(drawParticipants);
 
   //GET TEAMS DATA ONCE TO BE USED IN SEARCH
   const {
@@ -60,7 +64,6 @@ function PlayerSearch() {
 
     // Update the filteredTeams state with the search results
     setFilteredTeams(results);
-    console.log(filteredTeams);
   };
 
   const clearSearchResults = () => {
@@ -68,6 +71,8 @@ function PlayerSearch() {
     setSearchPerformed(false);
     setFilteredTeams([]); // Clear the filtered results
   };
+
+  //ADD TEAM TO ZUDSTAND STATE
 
   return (
     <>
