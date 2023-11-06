@@ -10,7 +10,7 @@ function PlayerSearch() {
   const [searchString, setSearchString] = useState("");
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [filteredTeams, setFilteredTeams] = useState([]);
-  const drawParticipants = useStore();
+  const { drawParticipants, addTeam } = useStore();
 
   console.log(drawParticipants);
 
@@ -74,6 +74,18 @@ function PlayerSearch() {
 
   //ADD TEAM TO ZUDSTAND STATE
 
+  const handleAddTeam = (team) => {
+    const addingTeam = {
+      team_id: team.team_id,
+      player1name: team.player1_firstname,
+      player1lastname: team.player1_lastname,
+      player2name: team.player2_firstname,
+      player2lastname: team.player2_lastname,
+    };
+
+    addTeam(addingTeam);
+  };
+
   return (
     <>
       {isLoading && <div>Fetching database data</div>}
@@ -129,7 +141,7 @@ function PlayerSearch() {
                     </span>
 
                     <button
-                      onClick={() => addTeam(team.team_id)}
+                      onClick={() => handleAddTeam(team)}
                       aria-label={`Add team ${team.player1_firstname} ${team.player1_lastname} & ${team.player2_firstname} ${team.player2_lastname} to event`}
                     >
                       Add team to event

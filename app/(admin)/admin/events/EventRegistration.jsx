@@ -1,15 +1,19 @@
+"use client";
 import React from "react";
 import ParticipantList from "./ParticipantList";
 import PlayerSearch from "./PlayerSearch";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+import { useStore } from "../../../store/createStore";
 
 function EventRegistration({ matchesData, teamsData }) {
+  const { drawParticipants } = useStore();
+
   return (
     <div id="event-details">
       {matchesData.length === 0 && (
         <section id="create-event-table">
           <div className="participants">
-            {teamsData.length === 0 ? (
+            {drawParticipants.length === 0 ? (
               <p className="text-highlight">
                 There are no participants on this event yet. To add a
                 participant to an event, search for them using the search field
@@ -19,7 +23,7 @@ function EventRegistration({ matchesData, teamsData }) {
               <ParticipantList />
             )}
 
-            {teamsData.length >= 4 && (
+            {drawParticipants.length >= 4 && (
               <button
                 //onClick={handleGenerateMatches}
                 aria-label={`Create matches table`}
