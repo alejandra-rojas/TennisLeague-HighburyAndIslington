@@ -6,29 +6,16 @@ import PlayerSearch from "./PlayerSearch";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import { useStore } from "../../../store/createStore";
 
-function EventRegistration({ event }) {
+function EventRegistration({ event, registeredTeams }) {
   // const { drawParticipants } = useStore();
-
   const queryClient = useQueryClient();
-  //GET EVENT PARTICIPANT TEAMS DATA
-  const {
-    data: registeredTeams,
-    isLoading: teamsLoading,
-    isError: teamsError,
-  } = useQuery({
-    queryKey: ["event-participants", event],
-    queryFn: async () => {
-      const { data } = await axios.get(`/api/events/${event}/teams`);
-      return data.data;
-    },
-  });
 
   //CREATE DRAW
   const { mutate: createDraw, isLoading } = useMutation({
-    mutationFn: (data) => axios.post(`/api/matches`, { data }),
+    mutationFn: (matches) => axios.post(`/api/matches`, matches),
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["event-matches", event.event_id]);
+      queryClient.invalidateQueries(["event-draw", event.event_id]);
     },
     onError: (error) => {
       console.log(error);
@@ -39,12 +26,12 @@ function EventRegistration({ event }) {
   const handleGenerateDraw = () => {
     const matchCombinations = [];
 
-    for (let i = 0; i < drawParticipants.length; i++) {
-      for (let j = i + 1; j < drawParticipants.length; j++) {
+    for (let i = 0; i < registeredTeams.length; i++) {
+      for (let j = i + 1; j < registeredTeams.length; j++) {
         matchCombinations.push({
           event_id: event,
-          team1_id: drawParticipants[i].team_id,
-          team2_id: drawParticipants[j].team_id,
+          team1_id: registeredTeams[i].team_id,
+          team2_id: registeredTeams[j].team_id,
         });
       }
     }
@@ -53,33 +40,31 @@ function EventRegistration({ event }) {
   };
 
   return (
-    <div id="event-details">
-      <section id="create-event-table">
-        <div className="participants">
-          {!registeredTeams ? (
-            <p className="text-highlight">
-              There are no participants on this event yet. To add a participant
-              to an event, search for them using the search field below.
-            </p>
-          ) : (
-            <ParticipantList registeredTeams={registeredTeams} event={event} />
-          )}
+    <section id="create-event-table">
+      <div className="participants">
+        {registeredTeams.length === 0 ? (
+          <p className="text-highlight">
+            There are no participants on this event yet. To add a participant to
+            an event, search for them using the search field below.
+          </p>
+        ) : (
+          <ParticipantList registeredTeams={registeredTeams} event={event} />
+        )}
 
-          {registeredTeams && registeredTeams.length >= 4 && (
-            <button
-              onClick={handleGenerateDraw}
-              aria-label={`Create matches table`}
-              className="create-table"
-            >
-              <SparklesIcon width={20} />
-              Create standings table
-            </button>
-          )}
-        </div>
+        {registeredTeams.length >= 4 && (
+          <button
+            onClick={handleGenerateDraw}
+            aria-label={`Create matches table`}
+            className="create-table"
+          >
+            <SparklesIcon width={20} />
+            Create standings table
+          </button>
+        )}
+      </div>
 
-        <PlayerSearch registeredTeams={registeredTeams} event={event} />
-      </section>
-    </div>
+      <PlayerSearch registeredTeams={registeredTeams} event={event} />
+    </section>
   );
 }
 

@@ -9,11 +9,34 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import EventModal from "./EventModal";
 import EventRegistration from "./EventRegistration";
+import StandingsTable from "./StandingsTable";
 
 function EventEntry({ event, leagueID }) {
   const queryClient = useQueryClient();
   const [showEventModal, setShowEventModal] = useState(false);
   const [expandEvent, setExpandEvent] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
+  };
+
+  //GET EVENT PARTICIPANT TEAMS DATA
+  const {
+    data: registeredTeams,
+    isLoading: teamsLoading,
+    isError: teamsError,
+  } = useQuery({
+    queryKey: ["event-participants", event.event_id],
+    queryFn: async () => {
+      const { data } = await axios.get(`/api/events/${event.event_id}/teams`);
+      return data.data;
+    },
+  });
 
   //GET EVENT MATCHES DATA - FOR STADISTICS TABLE
   const {
@@ -94,16 +117,27 @@ function EventEntry({ event, leagueID }) {
                   )}
                 </div>
                 <p>
-                  Complete {event.midway_matches} matches before the midpoint to
-                  get bonus points
+                  {event.midway_matches} matches to be completed before the
+                  midpoint to get bonus points
                 </p>
               </div>
             )}
             <div className="line"></div>
 
-            {matchesData.length === 0 && (
-              <EventRegistration event={event.event_id} />
-            )}
+            <div id="event-details">
+              {matchesData.length === 0 && (
+                <EventRegistration
+                  event={event.event_id}
+                  registeredTeams={registeredTeams}
+                />
+              )}
+              {matchesData.length !== 0 && (
+                <StandingsTable
+                  matchesData={matchesData}
+                  registeredTeams={registeredTeams}
+                />
+              )}
+            </div>
           </>
         )}
       </section>
