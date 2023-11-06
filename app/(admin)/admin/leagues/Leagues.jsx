@@ -9,7 +9,7 @@ const Leagues = () => {
     queryKey: ["leagues"],
     queryFn: async () => {
       const { data } = await axios.get("/api/leagues");
-      console.log(data);
+      //console.log(data);
 
       return data.data;
     },

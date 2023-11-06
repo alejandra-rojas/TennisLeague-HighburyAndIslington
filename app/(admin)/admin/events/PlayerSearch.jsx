@@ -1,25 +1,25 @@
 "use client";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-import { useStore } from "../../../store/createStore";
+//import { useStore } from "../../../store/createStore";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-function PlayerSearch() {
+function PlayerSearch({ registeredTeams, event }) {
+  const queryClient = useQueryClient();
   const [searchString, setSearchString] = useState("");
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [filteredTeams, setFilteredTeams] = useState([]);
-  const { drawParticipants, addTeam } = useStore();
-
-  console.log(drawParticipants);
+  const [error, setError] = useState("");
+  //   const { drawParticipants, addTeam } = useStore();
+  //   console.log(drawParticipants);
 
   //GET TEAMS DATA ONCE TO BE USED IN SEARCH
   const {
-    data: teamsData,
+    data: allTeamsData,
     isLoading,
     isError,
-    error,
   } = useQuery(
     "all-teams",
     async () => {
@@ -38,6 +38,9 @@ function PlayerSearch() {
     } */
   );
 
+  //   console.log(registeredTeams);
+  //   console.log(allTeamsData);
+
   const onSubmitSearchForm = (e) => {
     e.preventDefault();
     setSearchPerformed(true);
@@ -46,13 +49,13 @@ function PlayerSearch() {
 
   const handleSearch = () => {
     // Ensure that teams data is available
-    if (isLoading || !teamsData) {
+    if (isLoading || !allTeamsData) {
       console.log("Data is loading or not available");
       return;
     }
 
     // Filter the teams data based on the search string
-    const results = teamsData.filter((team) => {
+    const results = allTeamsData.filter((team) => {
       const searchLower = searchString.toLowerCase();
       return (
         team.player1_firstname.toLowerCase().includes(searchLower) ||
@@ -72,9 +75,41 @@ function PlayerSearch() {
     setFilteredTeams([]); // Clear the filtered results
   };
 
-  //ADD TEAM TO ZUDSTAND STATE
+  //ADD TEAM TO EVENT
+  const { mutate: addTeam, isLoading: addingTeam } = useMutation({
+    mutationFn: async (team) =>
+      await axios.post(`/api/events/${event}/teams`, {
+        team,
+      }),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries(["event-participants", event]);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleAddTeam = (team) => {
+    const isTeamAlreadyAdded = registeredTeams.some(
+      (existingTeam) => existingTeam.team_id === team
+    );
+
+    if (isTeamAlreadyAdded) {
+      //console.log(`Team has already been added to the event.`);
+      setError(`Selected team has already been added to the event.`);
+
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else {
+      setError("");
+      addTeam(team);
+    }
+  };
+
+  //ADD TEAM TO ZUDSTAND STATE
+  /*   const handleAddTeam = (team) => {
     const addingTeam = {
       team_id: team.team_id,
       player1name: team.player1_firstname,
@@ -84,7 +119,7 @@ function PlayerSearch() {
     };
 
     addTeam(addingTeam);
-  };
+  }; */
 
   return (
     <>
@@ -141,7 +176,8 @@ function PlayerSearch() {
                     </span>
 
                     <button
-                      onClick={() => handleAddTeam(team)}
+                      onClick={() => handleAddTeam(team.team_id)}
+                      //onClick={() => handleAddTeam(team)}
                       aria-label={`Add team ${team.player1_firstname} ${team.player1_lastname} & ${team.player2_firstname} ${team.player2_lastname} to event`}
                     >
                       Add team to event

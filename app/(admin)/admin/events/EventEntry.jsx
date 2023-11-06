@@ -5,34 +5,15 @@ import axios from "axios";
 import { ArrowsPointingInIcon } from "@heroicons/react/24/outline";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
 
-import { SparklesIcon } from "@heroicons/react/24/solid";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import EventModal from "./EventModal";
-import PlayerSearch from "./PlayerSearch";
-import ParticipantList from "./ParticipantList";
 import EventRegistration from "./EventRegistration";
 
 function EventEntry({ event, leagueID }) {
   const queryClient = useQueryClient();
   const [showEventModal, setShowEventModal] = useState(false);
-  const [showTeams, setShowTeams] = useState(false);
-  const [eventTeams, setEventTeams] = useState(null);
-  const [eventMatchesData, setEventMatchesData] = useState(null);
-
-  //GET EVENT TEAMS DATA
-  const {
-    data: teamsData,
-    isLoading: teamsLoading,
-    isError: teamsError,
-  } = useQuery({
-    queryKey: ["event-teams", event.event_id],
-    queryFn: async () => {
-      const { data } = await axios.get(`/api/events/${event.event_id}/teams`);
-      console.log(data);
-      return data.data;
-    },
-  });
+  const [expandEvent, setExpandEvent] = useState(false);
 
   //GET EVENT MATCHES DATA - FOR STADISTICS TABLE
   const {
@@ -40,19 +21,19 @@ function EventEntry({ event, leagueID }) {
     isLoading: matchesLoading,
     isError: matchesError,
   } = useQuery({
-    queryKey: ["event-matches", event.event_id],
+    queryKey: ["event-draw", event.event_id],
     queryFn: async () => {
       const { data } = await axios.get(`/api/events/${event.event_id}/matches`);
-      console.log(data);
+      //console.log(data);
       return data.data;
     },
   });
 
-  if (teamsLoading || matchesLoading) {
+  if (matchesLoading) {
     return <div>Loading...</div>;
   }
 
-  if (teamsError || matchesError) {
+  if (matchesError) {
     return <div>There was an error, try again.</div>;
   }
 
@@ -71,12 +52,12 @@ function EventEntry({ event, leagueID }) {
               </button>
             </div>
             <button
-              onClick={() => setShowTeams((prevState) => !prevState)}
-              aria-expanded={showTeams}
+              onClick={() => setExpandEvent((prevState) => !prevState)}
+              aria-expanded={expandEvent}
               aria-controls="eventDetailsSection"
-              aria-label={showTeams ? "Collapse Teams" : "Expand Teams"}
+              aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
             >
-              {showTeams ? (
+              {expandEvent ? (
                 <ArrowsPointingInIcon width={25} />
               ) : (
                 <ArrowsPointingOutIcon width={25} />
@@ -94,38 +75,35 @@ function EventEntry({ event, leagueID }) {
           />
         )}
 
-        {showTeams && (
+        {expandEvent && (
           <>
-            {/* <div>
-              {eventMatchesData.length !== 0 && (
-                <div className="event-info">
-                  <div
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    style={{ position: "relative", display: "inline-block" }}
-                  >
-                    <InformationCircleIcon width={25} />
-                    {showTooltip && (
-                      <div className="tooltip">
-                        Once the standings table for an event has been
-                        published, the participating teams cannot be altered
-                        anymore, unless the team is withdrawing from the event.
-                      </div>
-                    )}
-                  </div>
-                  <p>
-                    Complete {gevent.midway_matches} matches before the midpoint
-                    to get bonus points
-                  </p>
+            {matchesData.length !== 0 && (
+              <div className="event-info">
+                <div
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ position: "relative", display: "inline-block" }}
+                >
+                  <InformationCircleIcon width={25} />
+                  {showTooltip && (
+                    <div className="tooltip">
+                      Once the standings table for an event has been published,
+                      the participating teams cannot be altered anymore, unless
+                      the team is withdrawing from the event.
+                    </div>
+                  )}
                 </div>
-              )}
-              <div className="line"></div>
-            </div> */}
+                <p>
+                  Complete {event.midway_matches} matches before the midpoint to
+                  get bonus points
+                </p>
+              </div>
+            )}
+            <div className="line"></div>
 
-            <EventRegistration
-              matchesData={matchesData}
-              teamsData={teamsData}
-            />
+            {matchesData.length === 0 && (
+              <EventRegistration event={event.event_id} />
+            )}
           </>
         )}
       </section>

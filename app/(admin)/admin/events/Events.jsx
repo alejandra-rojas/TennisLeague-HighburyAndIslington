@@ -17,7 +17,7 @@ function Events({ leagueID, hasStarted, league_name }) {
     queryKey: ["events", leagueID],
     queryFn: async () => {
       const { data } = await axios.get(`/api/leagues/${leagueID}/events`);
-      console.log(data);
+      //console.log(data);
 
       return data.data;
     },
