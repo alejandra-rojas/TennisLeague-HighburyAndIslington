@@ -1,9 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import axios from "axios";
 
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import LeagueModal from "./LeagueModal";
 import Events from "../events/Events";
+import ChallengerLeagueLevel from "../challengers/ChallengerLeagueLevel";
 
 const LeagueCard = ({
   id,
@@ -13,6 +16,8 @@ const LeagueCard = ({
   end_date,
   isfinished,
 }) => {
+  const queryClient = useQueryClient();
+
   const [showModal, setShowModal] = useState(false);
   const isFinished = isfinished;
   const startDate = new Date(starting_date);
@@ -59,6 +64,39 @@ const LeagueCard = ({
     message =
       "Once all the results are entered, set the league to finished via the edit league modal.";
   }
+
+  //GET ALL TEAMS PARTICIPATING IN THIS LEAGUE
+  /*   console.log("Participant team objects:", registeredTeams);
+
+  const teamIds = registeredTeams
+    ? registeredTeams.map((team) => team.team_id)
+    : [];
+  console.log("Participant team ids:", teamIds); */
+
+  const {
+    data: leagueParticipants,
+    isLoading: loadingParticipants,
+    isError: participantsError,
+  } = useQuery({
+    queryKey: ["league-participantTeams", id],
+    queryFn: async () => {
+      const { data } = await axios.get(`/api/leagues/${id}/teams`);
+      return data.data;
+    },
+  });
+
+  //GET ALL CHALLENGER MATCHES FOR THIS LEAGUE
+  const {
+    data: challengerMatches,
+    isLoading: loadingChallengers,
+    isError: challengersError,
+  } = useQuery({
+    queryKey: ["league-challengers", id],
+    queryFn: async () => {
+      const { data } = await axios.get(`/api/leagues/${id}/challengers`);
+      return data.data;
+    },
+  });
 
   return (
     <li className="league-single-entry">
@@ -119,6 +157,16 @@ const LeagueCard = ({
         />
       )}
       <Events leagueID={id} league_name={league_name} hasStarted={hasStarted} />
+
+      {loadingParticipants ? (
+        "Loading challengers data..."
+      ) : (
+        <ChallengerLeagueLevel
+          hasStarted={hasStarted}
+          leagueID={id}
+          leagueParticipants={leagueParticipants}
+        />
+      )}
     </li>
   );
 };

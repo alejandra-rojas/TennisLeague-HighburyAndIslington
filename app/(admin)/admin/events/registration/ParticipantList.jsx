@@ -1,5 +1,5 @@
 "use client";
-import { useStore } from "../../../store/createStore";
+import { useStore } from "../../../../store/createStore";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import React, { useEffect } from "react";

@@ -8,8 +8,8 @@ import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import EventModal from "./EventModal";
-import EventRegistration from "./EventRegistration";
-import StandingsTable from "./StandingsTable";
+import EventRegistration from "./registration/EventRegistration";
+import StandingsTable from "./draw/StandingsTable";
 
 function EventEntry({ event, leagueID }) {
   const queryClient = useQueryClient();

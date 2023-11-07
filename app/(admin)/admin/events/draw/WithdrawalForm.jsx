@@ -58,7 +58,7 @@ function WithdrawalForm({ registeredTeams }) {
               aria-label="Report Withdrawal"
               disabled={!selectedTeamId}
             >
-              Complete withdrawal
+              {isWithdrawing ? "Withdrawing..." : "Complete withdrawal"}
             </button>{" "}
             <div className="undone">
               <ExclamationTriangleIcon width={25} />

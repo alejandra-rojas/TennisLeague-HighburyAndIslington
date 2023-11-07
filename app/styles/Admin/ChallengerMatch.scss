@@ -1,5 +1,25 @@
 @import "../Variables/Variables.scss";
 
+#league-challengers {
+  padding-top: 2rem;
+
+  /*   > button {
+    @include pillStyleSolid($font-size-sm, #336dff);
+    align-self: flex-start;
+
+    flex-basis: 0;
+  } */
+
+  button {
+    &.add-challenger {
+      @include pillStyle;
+      @include flex-row(0.25rem);
+      font-size: $font-size-sm * 1.5;
+      align-self: flex-start;
+    }
+  }
+}
+
 .new-challenge {
   border: solid 1px $color-blue;
   border-radius: $base-border-radius;

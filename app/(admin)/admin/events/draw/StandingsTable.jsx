@@ -1,7 +1,7 @@
 import React from "react";
 import MatchesReports from "./MatchesReports";
 import WithdrawalForm from "./WithdrawalForm";
-import ChallengerMatches from "./ChallengerMatches";
+import ChallengerMatchesReports from "../../challengers/ChallengerMatchesReports";
 
 function StandingsTable({ registeredTeams, matchesData }) {
   console.log(registeredTeams);
@@ -108,7 +108,7 @@ function StandingsTable({ registeredTeams, matchesData }) {
       </div>
 
       <MatchesReports matchesData={matchesData} />
-      {/* <ChallengerMatches />*/}
+      <ChallengerMatchesReports registeredTeams={registeredTeams} />
       <WithdrawalForm registeredTeams={registeredTeams} />
     </section>
   );

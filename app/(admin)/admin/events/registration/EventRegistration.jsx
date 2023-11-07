@@ -4,7 +4,7 @@ import axios from "axios";
 import ParticipantList from "./ParticipantList";
 import PlayerSearch from "./PlayerSearch";
 import { SparklesIcon } from "@heroicons/react/24/solid";
-import { useStore } from "../../../store/createStore";
+import { useStore } from "../../../../store/createStore";
 
 function EventRegistration({ event, registeredTeams }) {
   // const { drawParticipants } = useStore();

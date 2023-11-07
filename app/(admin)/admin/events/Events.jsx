@@ -60,25 +60,6 @@ function Events({ leagueID, hasStarted, league_name }) {
           </button>
         )}
       </section>
-      {/*      
-        {!showChallengerModal && hasStarted && (
-          <button
-            onClick={() => setShowChallengerModal(true)}
-            className="add-challenger"
-          >
-            <PlusIcon width={25} />
-            <h6>Add a challenger match</h6>
-          </button>
-        )}
-        {showChallengerModal && (
-          <ChallengerMatchModal
-            league={league}
-            setShowChallengerModal={setShowChallengerModal}
-            getChallengersData={getChallengersData}
-          />
-        )}
-        
-      </section> */}
     </>
   );
 }

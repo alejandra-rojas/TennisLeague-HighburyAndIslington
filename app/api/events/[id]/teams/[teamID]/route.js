@@ -19,8 +19,7 @@ export async function DELETE(_, { params }) {
 export async function PUT(req, { params }) {
   const eventID = params.id;
   const teamID = params.teamID;
-  /* const { match } = await req.json();
-  ; */
+
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
@@ -93,30 +92,6 @@ app.put("/events/:id/teams/:tid", async (req, res) => {
       }
     }
 
-    // Update matches for withdrawn team in the specific event
-    await pool.query(
-      "UPDATE matches m " +
-        "SET team1_sets = 0, team2_sets = 0, withdrawal = true " +
-        "FROM event_teams et " +
-        "WHERE m.event_id = $1 " +
-        "AND (m.team1_id = et.team_id OR m.team2_id = et.team_id) " +
-        "AND et.event_id = $1 " + // Add this condition to filter by event_id
-        "AND et.team_id = $2",
-      [id, tid]
-    );
-
-    // Update event_teams table to mark team as withdrawn for the specific event
-    await pool.query(
-      "UPDATE event_teams " +
-        "SET team_withdrawn = true " +
-        "WHERE event_id = $1 AND team_id = $2",
-      [id, tid]
-    );
-
-    res.json({ message: "Team withdrawn from event" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
+    
 });
  */

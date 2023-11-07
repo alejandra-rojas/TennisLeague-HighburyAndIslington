@@ -1,8 +1,34 @@
 import React from "react";
+import ChallengerReportEntry from "./ChallengerReportEntry";
 
-function ChallengerMatches() {
-  return {
-    /* {filteredChallengerMatches.length > 0 && (
+function ChallengerMatchesReports({ registeredTeams }) {
+  console.log("Participant team objects:", registeredTeams);
+
+  const teamIds = registeredTeams
+    ? registeredTeams.map((team) => team.team_id)
+    : [];
+  console.log("Participant team ids:", teamIds);
+
+  /*   console.log("Challenger matches:", challengerMatchesData);
+  //getting this from the league level
+
+  let filteredChallengerMatches = [];
+
+  if (
+    Array.isArray(challengerMatchesData) &&
+    challengerMatchesData.length > 0
+  ) {
+    filteredChallengerMatches = challengerMatchesData.filter((match) => {
+      // Check if either team1_id or team2_id is included in teamIds
+      return (
+        teamIds.includes(match.team1_id) || teamIds.includes(match.team2_id)
+      );
+    });
+  } */
+
+  return (
+    <>
+      {/*  {filteredChallengerMatches.length > 0 && (
         <div id="challenger-matches">
           <div className="standings-report">
             <h6>Challenger matches</h6>
@@ -32,8 +58,9 @@ function ChallengerMatches() {
             </section>
           </div>
         </div>
-      )} */
-  };
+      )} */}
+    </>
+  );
 }
 
-export default ChallengerMatches;
+export default ChallengerMatchesReports;

@@ -115,13 +115,6 @@
 
     flex-basis: 0;
   }
-
-  button {
-    &.add-challenger {
-      @include pillStyle;
-      align-self: flex-start;
-    }
-  }
 }
 
 #event-entry {
