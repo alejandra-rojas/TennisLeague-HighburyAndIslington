@@ -85,6 +85,8 @@ const LeagueCard = ({
     },
   });
 
+  //console.log(leagueParticipants);
+
   //GET ALL CHALLENGER MATCHES FOR THIS LEAGUE
   const {
     data: challengerMatches,

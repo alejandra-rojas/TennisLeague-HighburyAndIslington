@@ -3,16 +3,19 @@ import { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import NewChallengerModal from "./NewChallengerModal";
 
-function AddChallengerModal({ leagueID, leagueParticipants }) {
+function AddChallengerModal({
+  leagueID,
+  leagueParticipants,
+  setShowChallengerModal,
+}) {
   const [searchString, setSearchString] = useState("");
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [filteredTeams, setFilteredTeams] = useState([]);
-
   const [selectedTeams, setSelectedTeams] = useState([]);
   const [teamSelection, setTeamSelection] = useState(true);
   const [newMatchModal, setNewMatchModal] = useState(false);
-
   const [error, setError] = useState(null);
 
   //Search for teams that are participating in the league
@@ -80,64 +83,6 @@ function AddChallengerModal({ leagueID, leagueParticipants }) {
   const createChallengerMatch = () => {
     setTeamSelection(false);
     setNewMatchModal(true);
-  };
-
-  const [data, setData] = useState({
-    team1_id: "",
-    team2_id: "",
-    isfinished: "",
-    match_date: "",
-    winner_id: "",
-    winner_score: "",
-    team1_bonus: "",
-    team2_bonus: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setData((data) => ({
-      ...data,
-      [name]: value,
-    }));
-  };
-
-  //console.log(data);
-
-  const postChallengerData = async (e) => {
-    e.preventDefault();
-
-    const team1_id = selectedPlayers[0].team_id;
-    const team2_id = selectedPlayers[1].team_id;
-
-    // Log the values before making the request
-    console.log("team1_id:", team1_id);
-    console.log("team2_id:", team2_id);
-
-    const requestData = {
-      ...data,
-      team1_id,
-      team2_id,
-    };
-
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/leagues/${leagueID}/challengers`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestData),
-        }
-      );
-      if (response.status === 200) {
-        console.log("Created new challenger match succesfully!");
-        setShowChallengerModal(false);
-        getChallengersData();
-        toast.success(`Challenger Match created `);
-      }
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -263,117 +208,13 @@ function AddChallengerModal({ leagueID, leagueParticipants }) {
           </div>
         )}
 
-        {/* {newMatchModal && (
-          <div className="match-report">
-            <form>
-              <div className="all-inputs">
-                <div className="grouped-inputs participants">
-                  {selectedPlayers.map((player, index) => (
-                    <h6 className="input" key={index}>
-                      P{index + 1}: {player[`player1_firstname`]} &{" "}
-                      {player[`player2_firstname`]}
-                    </h6>
-                  ))}
-                </div>
-
-                <div className="grouped-inputs">
-                  <div className="input">
-                    <label htmlFor="matchDate">Date of the match:</label>
-                    <input
-                      id="matchDate"
-                      required
-                      type="date"
-                      name="match_date"
-                      value={data.match_date === null ? "" : data.match_date}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="input checkbox">
-                    <label htmlFor="isFinished">Match completed?</label>
-                    <input
-                      id="isFinished"
-                      type="checkbox"
-                      name="isfinished"
-                      checked={data.isfinished}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  {data.isfinished && (
-                    <>
-                      <div className="input">
-                        <label htmlFor="winner">Who won:</label>
-                        <select
-                          id="winner"
-                          name="winner_id"
-                          value={data.winner_id !== null ? data.winner_id : ""}
-                          onChange={handleChange}
-                        >
-                          <option value="">Select a winner</option>
-                          {selectedPlayers.map((player, index) => (
-                            <option key={index} value={player.team_id}>
-                              {player.player1_firstname}{" "}
-                              {player.player1_lastname} &amp;{" "}
-                              {player.player2_firstname}{" "}
-                              {player.player2_lastname}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </>
-                  )}
-                </div>
-                <div className="grouped-inputs">
-                  <div className="input">
-                    <label htmlFor="finalscore">Winner score:</label>
-                    <input
-                      id="finalscore"
-                      maxLength={15}
-                      placeholder="ex: '7/5 2/6 6/1"
-                      name="winner_score"
-                      value={
-                        data.winner_score === 0 ? "missing" : data.winner_score
-                      }
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="input">
-                    <label htmlFor="t1bonus">P1 bonus points:</label>
-                    <input
-                      id="t1bonus"
-                      maxLength={1}
-                      placeholder="ex: 0"
-                      name="team1_bonus"
-                      value={data.team1_bonus}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="input">
-                    <label htmlFor="t2sets">P2 bonus points:</label>
-                    <input
-                      id="t2sets"
-                      maxLength={1}
-                      placeholder="ex: 2"
-                      name="team2_bonus"
-                      value={data.team2_bonus}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-              <button
-                type="submit"
-                onClick={postChallengerData}
-                aria-label="Update Match data"
-              >
-                Submit challenger match
-              </button>
-            </form>
-          </div>
-        )} */}
+        {newMatchModal && (
+          <NewChallengerModal
+            selectedTeams={selectedTeams}
+            leagueID={leagueID}
+            setShowChallengerModal={setShowChallengerModal}
+          />
+        )}
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import MatchesReports from "./MatchesReports";
 import WithdrawalForm from "./WithdrawalForm";
-import ChallengerMatchesReports from "../../challengers/ChallengerMatchesReports";
+import ChallengerMatchesReports from "../../challengers/event_entries/ChallengerMatchesReports";
 
 function StandingsTable({ registeredTeams, matchesData }) {
   console.log(registeredTeams);

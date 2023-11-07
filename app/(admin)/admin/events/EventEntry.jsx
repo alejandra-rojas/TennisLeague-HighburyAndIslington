@@ -69,7 +69,7 @@ function EventEntry({ event, leagueID }) {
               <h4>{event.event_name}</h4>
               <button
                 onClick={() => setShowEventModal(true)}
-                aria-label="Opel modal to edit this event"
+                aria-label="Open modal to edit this event"
               >
                 Edit event
               </button>

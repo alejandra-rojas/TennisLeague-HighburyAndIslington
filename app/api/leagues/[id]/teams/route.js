@@ -25,7 +25,9 @@ export async function GET(_, { params }) {
     .from("events")
     .select(
       `
+      
     event_teams!inner(
+      event_id,
       team_id,
       team:teams!inner(
         player1:players!player1_id(firstname, lastname),
@@ -57,6 +59,7 @@ export async function GET(_, { params }) {
       })
       .map((team) => ({
         team_id: team.team_id,
+        event_id: team.event_id,
         player1_firstname: team.team.player1.firstname,
         player1_lastname: team.team.player1.lastname,
         player2_firstname: team.team.player2.firstname,
