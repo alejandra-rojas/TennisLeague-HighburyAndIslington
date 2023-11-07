@@ -15,7 +15,7 @@ function EventRegistration({ event, registeredTeams }) {
     mutationFn: (matches) => axios.post(`/api/matches`, matches),
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["event-draw", event.event_id]);
+      queryClient.invalidateQueries(["event-draw", event]);
     },
     onError: (error) => {
       console.log(error);

@@ -108,8 +108,8 @@ function StandingsTable({ registeredTeams, matchesData }) {
       </div>
 
       <MatchesReports matchesData={matchesData} />
-      {/* <ChallengerMatches />
-      <WithdrawalForm /> */}
+      {/* <ChallengerMatches />*/}
+      <WithdrawalForm registeredTeams={registeredTeams} />
     </section>
   );
 }
