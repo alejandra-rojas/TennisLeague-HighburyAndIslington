@@ -22,7 +22,21 @@ export async function GET(_, { params }) {
 
   const { data, error } = await supabase
     .from("matches")
-    .select("*")
+    .select(
+      `
+      *,
+      team1:team1_id (
+        *,
+        player1:player1_id (firstname, lastname),
+        player2:player2_id (firstname, lastname)
+      ),
+      team2:team2_id (
+        *,
+        player1:player1_id (firstname, lastname),
+        player2:player2_id (firstname, lastname)
+      )
+    `
+    )
     .eq("event_id", id);
 
   // Return the data or error

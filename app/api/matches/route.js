@@ -4,16 +4,12 @@ import { cookies } from "next/headers";
 
 export async function POST(request) {
   try {
-    const body = await request.json();
-    const matches = body.matches;
+    const { matches } = await request.json();
     console.log("Received matches:", matches);
-
-    // Get Supabase client for the authenticated user
     const cookieStore = cookies(request);
     const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
     // Iterate over the matches data and insert them into the database
-    // This assumes you want to insert multiple records
     const { data, error } = await supabase.from("matches").insert(matches);
 
     if (error) {

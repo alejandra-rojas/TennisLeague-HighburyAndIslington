@@ -1,8 +1,11 @@
 import React from "react";
+import MatchesReports from "./MatchesReports";
+import WithdrawalForm from "./WithdrawalForm";
+import ChallengerMatches from "./ChallengerMatches";
 
 function StandingsTable({ registeredTeams, matchesData }) {
-  //   console.log(registeredTeams);
-  //   console.log(matchesData);
+  console.log(registeredTeams);
+  console.log(matchesData);
 
   let teamStats = [];
 
@@ -28,25 +31,29 @@ function StandingsTable({ registeredTeams, matchesData }) {
 
   // Iterate over the matches to count matches played and sets won
   matchesData.forEach((match) => {
+    // Find the statistics for both teams involved in the match
     let team1Stat = findTeamStatById(match.team1_id);
     let team2Stat = findTeamStatById(match.team2_id);
 
-    // Increment the played matches count for both teams
-    team1Stat.played++;
-    team2Stat.played++;
+    // Only consider the match as played if it's finished
+    if (match.isfinished) {
+      // Increment the played matches count for both teams
+      team1Stat.matches_played++;
+      team2Stat.matches_played++;
+
+      // If there is no withdrawal, increment the win count for the winner
+      if (!match.withdrawal && match.winner_id != null) {
+        let winnerStat = findTeamStatById(match.winner_id);
+        winnerStat.matches_won++;
+      }
+    }
 
     // Accumulate sets won for each team
     team1Stat.sets_won += match.team1_sets;
     team2Stat.sets_won += match.team2_sets;
-
-    // If the match is finished, increment the win count for the winner
-    if (match.isfinished && !match.withdrawal && match.winner_id != null) {
-      let winnerStat = findTeamStatById(match.winner_id);
-      winnerStat.won++;
-    }
   });
 
-  console.log(teamStats);
+  //console.log(teamStats);
 
   function calculateCombinations(n) {
     return n - 1;
@@ -100,84 +107,9 @@ function StandingsTable({ registeredTeams, matchesData }) {
         </ul>
       </div>
 
-      {/* <StandingsReport
-        eventMatchesData={eventMatchesData}
-        getEventMatchesData={getEventMatchesData}
-        getEventTeamsData={getEventTeamsData}
-      /> */}
-
-      {/* {filteredChallengerMatches.length > 0 && (
-        <div id="challenger-matches">
-          <div className="standings-report">
-            <h6>Challenger matches</h6>
-            <section id="challengers-reports-table">
-              <ul>
-                <li className="md-header">
-                  <span>P1</span>
-                  <span>P2</span>
-                  <span>Match Date</span>
-                  <span>Finished</span>
-                  <span>Winner Score</span>
-                  <span>P1 bonus</span>
-                  <span>P2 bonus</span>
-                  <span>Action</span>
-                </li>
-                {filteredChallengerMatches?.map((match, index) => (
-                  <ChallengerReportEntry
-                    index={index}
-                    key={match.match_id}
-                    match={match}
-                    getChallengersData={getChallengersData}
-                    getEventTeamsData={getEventTeamsData}
-                    getEventMatchesData={getEventMatchesData}
-                  />
-                ))}
-              </ul>
-            </section>
-          </div>
-        </div>
-      )} */}
-
-      {/* <div id="team-withdrawal-form">
-        <div>
-          <h6>Withdraw participant</h6>
-        </div>
-        <form>
-          <select
-            id="withdrawal"
-            name="winner_id"
-            value={selectedTeamWId}
-            onChange={(e) => setSelectedTeamWId(e.target.value)}
-            aria-label="Select the player who has withdrawn"
-          >
-            <option value="">Select participant</option>
-            {eventTeams
-              .filter((team) => !team.team_withdrawn) // Filter out teams with team_withdrawal true
-              .map((team) => (
-                <option key={team.team_id} value={team.team_id}>
-                  {`${team.player1_firstname} ${team.player1_lastname} & ${team.player2_firstname} ${team.player2_lastname}`}
-                </option>
-              ))}
-          </select>
-
-          {selectedTeamWId && (
-            <>
-              <button
-                type="submit"
-                onClick={(e) => withdrawTeam(e, selectedTeamWId)}
-                aria-label="Report Withdrawal"
-                disabled={!selectedTeamWId}
-              >
-                Complete withdrawal
-              </button>{" "}
-              <div className="undone">
-                <ExclamationTriangleIcon width={25} />
-                <span>This action cannot be undone</span>
-              </div>
-            </>
-          )}
-        </form>
-      </div> */}
+      <MatchesReports matchesData={matchesData} />
+      {/* <ChallengerMatches />
+      <WithdrawalForm /> */}
     </section>
   );
 }
