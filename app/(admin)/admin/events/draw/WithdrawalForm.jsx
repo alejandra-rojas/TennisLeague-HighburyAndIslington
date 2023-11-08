@@ -30,7 +30,7 @@ function WithdrawalForm({ registeredTeams }) {
   return (
     <div id="team-withdrawal-form">
       <div>
-        <h6>Withdraw team</h6>
+        <h6>Withdraw team from event</h6>
       </div>
       <form>
         <select

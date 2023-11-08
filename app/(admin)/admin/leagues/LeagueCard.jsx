@@ -100,6 +100,8 @@ const LeagueCard = ({
     },
   });
 
+  //console.log(challengerMatches);
+
   return (
     <li className="league-single-entry">
       {!showModal && (
@@ -158,7 +160,12 @@ const LeagueCard = ({
           isfinished={isfinished}
         />
       )}
-      <Events leagueID={id} league_name={league_name} hasStarted={hasStarted} />
+      <Events
+        leagueID={id}
+        league_name={league_name}
+        hasStarted={hasStarted}
+        challengerMatches={challengerMatches}
+      />
 
       {loadingParticipants ? (
         "Loading challengers data..."

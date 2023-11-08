@@ -23,7 +23,19 @@ export async function GET(_, { params }) {
   // Fetch all events with specific league_id
   const { data, error } = await supabase
     .from("challenger_matches")
-    .select("*")
+    .select(
+      `*,
+        team1:team1_id (
+        *,
+        player1:player1_id (firstname, lastname),
+        player2:player2_id (firstname, lastname)
+      ),
+      team2:team2_id (
+        *,
+        player1:player1_id (firstname, lastname),
+        player2:player2_id (firstname, lastname)
+      )`
+    )
     .eq("league_id", id);
 
   // Return the data or error

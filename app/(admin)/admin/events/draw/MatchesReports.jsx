@@ -2,7 +2,7 @@ import { useState } from "react";
 import MatchSingleEntry from "./MatchSingleEntry";
 
 function MatchesReports({ matchesData }) {
-  console.log(matchesData);
+  //console.log(matchesData);
 
   //Sorting matches by match data and isFinished condition
   const sortedEventMatchesData = matchesData.slice().sort((a, b) => {
@@ -20,8 +20,8 @@ function MatchesReports({ matchesData }) {
     <section id="match-reports-table">
       <ul>
         <li className="md-header">
-          <span>Player 1</span>
-          <span>Player 2</span>
+          <span>Team 1</span>
+          <span>Team 2</span>
           <p>Match Date</p>
           <span>Finished</span>
           {/*<div>P1 sets</div>

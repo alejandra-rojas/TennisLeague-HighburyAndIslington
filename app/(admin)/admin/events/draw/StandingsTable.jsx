@@ -4,7 +4,7 @@ import WithdrawalForm from "./WithdrawalForm";
 import ChallengerMatchesReports from "../../challengers/event_entries/ChallengerMatchesReports";
 
 function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
-  console.log(registeredTeams);
+  //console.log(registeredTeams);
   //console.log(matchesData);
 
   let teamStats = [];

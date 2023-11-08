@@ -9,7 +9,7 @@ function NewChallengerModal({
   setShowChallengerModal,
 }) {
   const queryClient = useQueryClient();
-  console.log(selectedTeams);
+  //console.log(selectedTeams);
 
   const [matchData, setData] = useState({
     team1_id: selectedTeams[0].team_id,
