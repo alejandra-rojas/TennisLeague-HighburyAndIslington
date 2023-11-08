@@ -6,6 +6,7 @@ import ChallengerMatchesReports from "../../challengers/event_entries/Challenger
 function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
   //console.log(registeredTeams);
   //console.log(matchesData);
+  console.log(challengerMatches);
 
   let teamStats = [];
 
@@ -21,6 +22,7 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
       mid_bonus: team.mid_bonus,
       all_bonus: team.all_bonus,
       challenger_bonus: team.challenger_bonus,
+      total_points: team.total_points,
     });
   });
 
@@ -53,11 +55,50 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
     team2Stat.sets_won += match.team2_sets;
   });
 
+  challengerMatches.forEach((match) => {
+    // Check if team1_id belongs to the event
+    let eventTeamStat = findTeamStatById(match.team1_id);
+
+    if (eventTeamStat) {
+      // It's team1 from the event, so apply team1_bonus to challenger_bonus
+      eventTeamStat.challenger_bonus += match.team1_bonus;
+    } else {
+      // If team1_id is not part of the event, check for team2_id
+      eventTeamStat = findTeamStatById(match.team2_id);
+      if (eventTeamStat) {
+        // It's team2 from the event, so apply team2_bonus to challenger_bonus
+        eventTeamStat.challenger_bonus += match.team2_bonus;
+      }
+    }
+  });
+
+  function updateTotalPoints() {
+    teamStats.forEach((teamStat) => {
+      teamStat.total_points =
+        teamStat.sets_won +
+        teamStat.challenger_bonus +
+        teamStat.all_bonus +
+        teamStat.mid_bonus;
+    });
+  }
+
+  updateTotalPoints();
   //console.log(teamStats);
 
   function calculateCombinations(n) {
     return n - 1;
   }
+  const activeTeamsCount = teamStats.filter((t) => !t.team_withdrawn).length;
+  const totalMatches = calculateCombinations(activeTeamsCount);
+
+  teamStats.forEach((teamStat) => {
+    if (!teamStat.team_withdrawn && teamStat.matches_played === totalMatches) {
+      // If a team played all their matches and hasn't withdrawn, they get the all_bonus
+      teamStat.all_bonus = 1;
+    }
+  });
+  updateTotalPoints();
+
   return (
     <section id="event-standings">
       <div className="event-table">
@@ -77,12 +118,6 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
           {teamStats
             .sort((a, b) => b.total_points - a.total_points)
             .map((team, index) => {
-              const activeTeamsCount = teamStats.filter(
-                (t) => !t.team_withdrawn
-              ).length;
-              //console.log(activeTeamsCount);
-              const totalMatches = calculateCombinations(activeTeamsCount);
-
               return (
                 <li
                   key={team.team_id}
