@@ -3,9 +3,9 @@ import MatchesReports from "./MatchesReports";
 import WithdrawalForm from "./WithdrawalForm";
 import ChallengerMatchesReports from "../../challengers/event_entries/ChallengerMatchesReports";
 
-function StandingsTable({ registeredTeams, matchesData }) {
+function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
   console.log(registeredTeams);
-  console.log(matchesData);
+  //console.log(matchesData);
 
   let teamStats = [];
 
@@ -108,7 +108,10 @@ function StandingsTable({ registeredTeams, matchesData }) {
       </div>
 
       <MatchesReports matchesData={matchesData} />
-      <ChallengerMatchesReports registeredTeams={registeredTeams} />
+      <ChallengerMatchesReports
+        registeredTeams={registeredTeams}
+        challengerMatches={challengerMatches}
+      />
       <WithdrawalForm registeredTeams={registeredTeams} />
     </section>
   );

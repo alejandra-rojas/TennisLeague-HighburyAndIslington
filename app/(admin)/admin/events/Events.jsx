@@ -8,7 +8,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import EventEntry from "./EventEntry";
 import EventModal from "./EventModal";
 
-function Events({ leagueID, hasStarted, league_name }) {
+function Events({ leagueID, hasStarted, league_name, challengerMatches }) {
   const [showEventModal, setShowEventModal] = useState(false);
   const lowercaseTitle = league_name.toLowerCase();
 
@@ -35,7 +35,11 @@ function Events({ leagueID, hasStarted, league_name }) {
             <ul>
               {data.map((event) => (
                 <li key={event.event_id}>
-                  <EventEntry leagueID={leagueID} event={event} />
+                  <EventEntry
+                    leagueID={leagueID}
+                    event={event}
+                    challengerMatches={challengerMatches}
+                  />
                 </li>
               ))}
             </ul>

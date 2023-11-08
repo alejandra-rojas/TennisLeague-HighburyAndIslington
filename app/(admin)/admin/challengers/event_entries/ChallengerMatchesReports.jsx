@@ -1,7 +1,7 @@
 import React from "react";
 import ChallengerReportEntry from "./ChallengerReportEntry";
 
-function ChallengerMatchesReports({ registeredTeams }) {
+function ChallengerMatchesReports({ registeredTeams, challengerMatches }) {
   //console.log("Participant team objects:", registeredTeams);
 
   const teamIds = registeredTeams
