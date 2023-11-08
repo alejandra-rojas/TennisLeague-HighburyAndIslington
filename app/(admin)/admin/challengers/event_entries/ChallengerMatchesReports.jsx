@@ -2,12 +2,12 @@ import React from "react";
 import ChallengerReportEntry from "./ChallengerReportEntry";
 
 function ChallengerMatchesReports({ registeredTeams }) {
-  console.log("Participant team objects:", registeredTeams);
+  //console.log("Participant team objects:", registeredTeams);
 
   const teamIds = registeredTeams
     ? registeredTeams.map((team) => team.team_id)
     : [];
-  console.log("Participant team ids:", teamIds);
+  //console.log("Participant team ids:", teamIds);
 
   /*   console.log("Challenger matches:", challengerMatchesData);
   //getting this from the league level

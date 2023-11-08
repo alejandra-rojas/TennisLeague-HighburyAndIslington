@@ -52,7 +52,9 @@ export async function POST(request, { params }) {
     .insert({
       league_id: id,
       team1_id: challenger.team1_id,
+      team1_event_id: challenger.team1_event_id,
       team2_id: challenger.team2_id,
+      team2_event_id: challenger.team2_event_id,
       isfinished: challenger.isfinished,
       match_date: challenger.match_date,
       winner_id: challenger.winner_id,
