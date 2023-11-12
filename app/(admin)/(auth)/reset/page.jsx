@@ -26,7 +26,7 @@ export default function Reset() {
       return;
     }
 
-    const { error } = await supabase.auth.api.updateUser(token, {
+    const { error } = await supabase.auth.updateUser(token, {
       password: password,
     });
 
