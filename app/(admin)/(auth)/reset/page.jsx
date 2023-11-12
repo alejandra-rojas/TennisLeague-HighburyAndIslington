@@ -19,7 +19,14 @@ export default function Reset() {
 
     const supabase = createClientComponentClient();
 
-    const { error } = await supabase.auth.updateUser({
+    const token = router.query.token;
+
+    if (!token) {
+      setError("Invalid or expired token");
+      return;
+    }
+
+    const { error } = await supabase.auth.api.updateUser(token, {
       password: password,
     });
 
