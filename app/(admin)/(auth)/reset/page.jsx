@@ -21,7 +21,6 @@ export default function Reset() {
 
     const { error } = await supabase.auth.updateUser({
       password: password,
-      options: { emailRedirectTo: `${location.origin}/api/auth/callback` },
     });
 
     if (error) {
