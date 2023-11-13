@@ -1,0 +1,29 @@
+@import "../Variables/Variables.scss";
+
+#rules {
+  width: 95vw;
+  display: flex;
+  gap: 1rem;
+  h2,
+  p {
+    text-align: center;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 auto;
+    max-width: 800px;
+    gap: $base-padding * 1.5;
+    text-align: justify;
+    li {
+      list-style: none;
+      line-height: $base-padding * 1.75;
+
+      .bold {
+        font-weight: 800;
+      }
+    }
+  }
+}
