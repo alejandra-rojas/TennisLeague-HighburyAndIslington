@@ -38,7 +38,7 @@ export default function Login() {
 
     const supabase = createClientComponentClient();
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "http://localhost:3000/",
+      redirectTo: "https://leagues-dashboard.vercel.app/",
     });
     if (error) {
       if (error.message === "Email rate limit exceeded") {
