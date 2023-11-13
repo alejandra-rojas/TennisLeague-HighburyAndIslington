@@ -23,7 +23,7 @@ export default function Signup() {
       setError(error.message);
     }
     if (!error) {
-      router.push("/verify");
+      router.push("/verify-email");
     }
   };
 

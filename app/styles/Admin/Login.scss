@@ -54,3 +54,10 @@
     }
   }
 }
+.full-centered {
+  display: flex;
+  justify-items: center;
+  gap: 0.8rem;
+  text-align: center;
+  max-width: 65vw;
+}
