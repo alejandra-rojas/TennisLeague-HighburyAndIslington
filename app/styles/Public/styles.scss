@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-items: center;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 720px;
     gap: $base-padding * 1.5;
     text-align: justify;
     li {
@@ -26,4 +26,9 @@
       }
     }
   }
+}
+
+.link {
+  color: #002fa7;
+  text-decoration: underline;
 }

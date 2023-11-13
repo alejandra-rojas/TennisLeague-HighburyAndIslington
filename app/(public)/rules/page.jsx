@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Rules() {
@@ -11,11 +12,13 @@ export default function Rules() {
       </p>
       <ul>
         <li>
+          <span className="bold">FORMAT. </span>
           Each pair plays all other pairs in their division. Each pair is
           responsible for organising their own matches, agreeing dates with
-          opponents, booking courts etc.
+          opponents, booking courts, etc.
         </li>
         <li>
+          <span className="bold">SCORING. </span>
           Best of 3 tiebreak sets. If time is short and both pairs agree, a
           championship tiebreak (first to 10, 2 points ahead) can be played
           instead of a 3rd set.
@@ -28,9 +31,15 @@ export default function Rules() {
         </li>
         <li>
           <span className="bold">MATCH REPORTS. </span>
-          Winners to email the results to HTCdoublesleagues@gmail.com and the
-          scores will be entered on this website. Please email the scores even
-          if the match is unfinished.
+          Winners to report the results via email to{" "}
+          <a href="mailto:HTCdoublesleagues@gmail.com">
+            HTCdoublesleagues@gmail.com
+          </a>{" "}
+          or using{" "}
+          <Link href={"/report-results"}>
+            <span className="link">this form</span>.{" "}
+          </Link>
+          Please report the scores even if the match is unfinished.
         </li>
         <li>
           <span className="bold">BONUS POINTS. </span>
