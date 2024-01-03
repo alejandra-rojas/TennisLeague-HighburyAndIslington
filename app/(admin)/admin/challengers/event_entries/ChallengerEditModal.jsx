@@ -4,13 +4,13 @@ import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function ChallengerEditModal({ match, setShowReportModal }) {
-  console.log(match);
+  //console.log(match);
   const queryClient = useQueryClient();
 
   const [data, setData] = useState({
     team1_id: match.team1_id,
     team2_id: match.team1_id,
-    isfinished: match.isfinished,
+    isfinished: Boolean(match.isfinished),
     match_date: match.match_date,
     winner_id: match.winner_id,
     winner_score: match.winner_score,
@@ -19,17 +19,17 @@ function ChallengerEditModal({ match, setShowReportModal }) {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    const numberValue = value === "" ? "" : parseInt(value, 10);
-
-    setData((data) => ({
-      ...data,
-      [name]: numberValue,
+    const { name, value, type, checked } = e.target;
+  
+    const inputValue = type === 'checkbox' ? checked : value;
+  
+    setData((prevData) => ({
+      ...prevData,
+      [name]: inputValue === '' ? '' : (type === 'checkbox' ? inputValue : parseInt(inputValue, 10)),
     }));
   };
 
-  console.log(data);
+  //console.log(data);
 
   //UPDATE CHALLENGER
   const { mutate: updateChallenger, isLoading: isUpdating } = useMutation({
@@ -128,7 +128,7 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                   />
                 </div>
 
-                {data.isfinished && (
+                {/* {data.isfinished && (
                   <>
                     <div className="input">
                       <label htmlFor="winner">Who won:</label>
@@ -155,7 +155,35 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                       </select>
                     </div>
                   </>
-                )}
+                )} */}
+
+                <div className="input">
+                  <label htmlFor="winner">{data.isfinished ? 'Who won?': 'Who is winning?'}</label>
+                  <select
+                    id="winner"
+                    name="winner_id"
+                    value={
+                      data.winner_id !== null ? data.winner_id : ""
+                    }
+                    onChange={handleChange}
+                  >
+                    <option value="">{data.isfinished ? 'Select the winner:': ''}</option>
+                    <option value={match.team1_id}>
+                          {match.team1.player1.firstname}{" "}
+                          {match.team1.player1.lastname} &{" "}
+                          {match.team1.player2.firstname}{" "}
+                          {match.team1.player2.lastname}
+                        </option>
+                        <option value={match.team2_id}>
+                          {match.team2.player1.firstname}{" "}
+                          {match.team2.player1.lastname} &{" "}
+                          {match.team2.player2.firstname}{" "}
+                          {match.team2.player2.lastname}
+                        </option>
+                  </select>
+                </div>
+
+
               </div>
               <div className="grouped-inputs">
                 <div className="input">
@@ -187,7 +215,7 @@ function ChallengerEditModal({ match, setShowReportModal }) {
 
                 <div className="input">
                   <label htmlFor="t2sets">{match.team2.player1.firstname} &{" "}
-                    {match.team2.player2.firstname} bonus:</label>
+                    {match.team2.player2.firstname} bonus :</label>
                   <input
                     id="t2sets"
                     type="number"

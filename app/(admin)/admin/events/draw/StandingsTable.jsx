@@ -6,7 +6,7 @@ import ChallengerMatchesReports from "../../challengers/event_entries/Challenger
 function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
   //console.log(registeredTeams);
   //console.log(matchesData);
-  console.log(challengerMatches);
+  //console.log(challengerMatches);
 
   let teamStats = [];
 
