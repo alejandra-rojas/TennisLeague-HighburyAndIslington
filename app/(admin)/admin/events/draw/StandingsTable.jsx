@@ -75,7 +75,7 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
   function updateTotalPoints() {
     teamStats.forEach((teamStat) => {
       teamStat.total_points =
-        teamStat.sets_won +
+        (teamStat.sets_won * 2) +
         teamStat.challenger_bonus +
         teamStat.all_bonus +
         teamStat.mid_bonus;
