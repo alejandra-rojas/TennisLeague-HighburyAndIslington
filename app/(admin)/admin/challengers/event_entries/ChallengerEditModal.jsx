@@ -72,13 +72,13 @@ function ChallengerEditModal({ match, setShowReportModal }) {
     } catch (error) {
       console.error(error);
     } */
-  };
+  }; 
 
   return (
     <section id="edit-challenger-modal">
       <div className="new-challenge">
         <div className="header">
-          <h4>Edit challenger match</h4>
+          <h5>Edit challenger match</h5>
           <button
             onClick={() => setShowReportModal(false)}
             aria-label="Close the edit challenger modal"
@@ -93,14 +93,14 @@ function ChallengerEditModal({ match, setShowReportModal }) {
             <div className="all-inputs">
               <div className="grouped-inputs">
                 <div className="players">
-                  <h4>
+                  <h6>
                     T1: {match.team1.player1.firstname} &{" "}
                     {match.team1.player2.firstname}
-                  </h4>
-                  <h4>
+                  </h6>
+                  <h6>
                     T2: {match.team2.player1.firstname} &{" "}
                     {match.team2.player2.firstname}
-                  </h4>
+                  </h6>
                 </div>
               </div>
 
@@ -173,7 +173,8 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                 </div>
 
                 <div className="input">
-                  <label htmlFor="t1bonus">T1 bonus points:</label>
+                  <label htmlFor="t1bonus">{match.team1.player1.firstname} &{" "}
+                    {match.team1.player2.firstname} bonus:</label>
                   <input
                     id="t1bonus"
                     type="number"
@@ -185,7 +186,8 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                 </div>
 
                 <div className="input">
-                  <label htmlFor="t2sets">T2 bonus points:</label>
+                  <label htmlFor="t2sets">{match.team2.player1.firstname} &{" "}
+                    {match.team2.player2.firstname} bonus:</label>
                   <input
                     id="t2sets"
                     type="number"
