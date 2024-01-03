@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
+import error from "../players/error";
 
 function NewChallengerModal({
   selectedTeams,
@@ -9,14 +10,15 @@ function NewChallengerModal({
   setShowChallengerModal,
 }) {
   const queryClient = useQueryClient();
-  //console.log(selectedTeams);
+  const [errorlog, setErrorLog] = useState("");
+
 
   const [matchData, setData] = useState({
     team1_id: selectedTeams[0].team_id,
     team1_event_id: selectedTeams[0].event_id,
     team2_id: selectedTeams[1].team_id,
     team2_event_id: selectedTeams[1].event_id,
-    isfinished: "",
+    isfinished: false,
     match_date: "",
     winner_id: "",
     winner_score: "",
@@ -25,14 +27,20 @@ function NewChallengerModal({
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    // const { name, value } = e.target;
 
+    // setData((matchData) => ({
+    //   ...matchData,
+    //   [name]: value,
+    // }));
+
+    const { name, value, type, checked } = e.target;
     setData((matchData) => ({
       ...matchData,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
-  //console.log(matchData);
+  console.log(matchData);
 
   //INSERT NEW CHALLENGER MATCH //INVALIDATE queryKey: ["league-challengers", id],
   const { mutate: insertChallenger, isLoading } = useMutation({
@@ -47,11 +55,22 @@ function NewChallengerModal({
     },
     onError: (error) => {
       console.log(error);
+      setErrorLog('An error has occurred. Try again')
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+  // Check if required fields are empty
+  const requiredFields = ['winner_id', 'winner_score', 'team1_bonus', 'team2_bonus'];
+  const emptyFields = requiredFields.filter(field => !matchData[field]);
+
+  if (emptyFields.length > 0) {
+    setErrorLog(`Please fill in all required fields: ${emptyFields.join(', ')}`);
+    return; // Prevent form submission
+  }
+
     insertChallenger(matchData);
   };
 
@@ -61,10 +80,10 @@ function NewChallengerModal({
         <div className="all-inputs">
           <div className="grouped-inputs participants">
             {selectedTeams.map((team, index) => (
-              <h5 className="input" key={index}>
+              <h6 className="input" key={index}>
                 T{index + 1}: {team[`player1_firstname`]} &{" "}
                 {team[`player2_firstname`]}
-              </h5>
+              </h6>
             ))}
           </div>
 
@@ -94,10 +113,10 @@ function NewChallengerModal({
               />
             </div>
 
-            {matchData.isfinished && (
-              <>
+            
+              
                 <div className="input">
-                  <label htmlFor="winner">Who won:</label>
+                  <label htmlFor="winner">{matchData.isfinished ? 'Who won?': 'Who is winning?'}</label>
                   <select
                     id="winner"
                     name="winner_id"
@@ -106,7 +125,7 @@ function NewChallengerModal({
                     }
                     onChange={handleChange}
                   >
-                    <option value="">Select a winner</option>
+                    <option value="">{matchData.isfinished ? 'Select the winner:': ''}</option>
                     {selectedTeams.map((team, index) => (
                       <option key={index} value={team.team_id}>
                         {team.player1_firstname} {team.player1_lastname} &amp;{" "}
@@ -115,8 +134,8 @@ function NewChallengerModal({
                     ))}
                   </select>
                 </div>
-              </>
-            )}
+              
+           
           </div>
           <div className="grouped-inputs">
             <div className="input">
@@ -124,7 +143,7 @@ function NewChallengerModal({
               <input
                 id="finalscore"
                 maxLength={15}
-                placeholder="ex: '7/5 2/6 6/1"
+                placeholder="ex: '7/5 2/6 6/1'"
                 name="winner_score"
                 value={
                   matchData.winner_score === 0
@@ -136,7 +155,7 @@ function NewChallengerModal({
             </div>
 
             <div className="input">
-              <label htmlFor="t1bonus">P1 bonus points:</label>
+              <label htmlFor="t1bonus">T1 bonus points:</label>
               <input
                 id="t1bonus"
                 maxLength={1}
@@ -148,7 +167,7 @@ function NewChallengerModal({
             </div>
 
             <div className="input">
-              <label htmlFor="t2sets">P2 bonus points:</label>
+              <label htmlFor="t2sets">T2 bonus points:</label>
               <input
                 id="t2sets"
                 maxLength={1}
@@ -164,6 +183,8 @@ function NewChallengerModal({
           {isLoading ? "submiting... " : "Submit challenger match"}
         </button>
       </form>
+
+      <p className="error">{errorlog}</p>
     </div>
   );
 }
