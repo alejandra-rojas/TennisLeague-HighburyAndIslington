@@ -174,7 +174,7 @@ function AddChallengerModal({
 
               <div className="search-results">
                 {searchPerformed && filteredTeams.length === 0 && (
-                  <p>No team found</p>
+                  <p className="error">{searchString} is not registered in this league</p>
                 )}
 
                 {searchPerformed && filteredTeams.length > 0 && (
