@@ -3,26 +3,51 @@ import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-function MatchReportModal({ match, setShowMatchReportModal }) {
+function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
+  //console.log(midway_point)
   const queryClient = useQueryClient();
 
   const [data, setData] = useState({
     match_date: match.match_date,
+    byMidpoint: match.bymidpoint,
     isfinished: match.isfinished,
     winner_id: match.winner_id,
     team1_sets: match.team1_sets,
     team2_sets: match.team2_sets,
     winner_score: match.winner_score,
   });
+  //console.log(data)
 
   const handleChange = (e) => {
     //console.log("changing", e);
     const { name, value, type, checked } = e.target;
+
+    // Check if the changed field is 'match_date'
+  if (name === 'match_date') {
+    // Compare the entered date with the midway_point
+    const enteredDate = new Date(value);
+    const midwayDate = new Date(midway_point);
+
+    // Update the byMidpoint variable based on the comparison
+    const byMidpoint = enteredDate <= midwayDate;
+
     setData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value,
+      match_date: value,
+      byMidpoint: byMidpoint,
+      [name]: type === 'checkbox' ? checked : value,
     }));
+    console.log(byMidpoint)
+  } else {
+    // For other fields, update as usual
+    setData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  }
   };
+  
+
 
   //UPDATE EVENT
   const { mutate: reportMatch, isLoading: isUpdating } = useMutation({

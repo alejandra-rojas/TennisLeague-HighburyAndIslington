@@ -18,6 +18,7 @@ export async function PUT(req, { params }) {
       team1_sets: match.team1_sets,
       team2_sets: match.team2_sets,
       winner_score: match.winner_score,
+      bymidpoint: match.byMidpoint,
     })
     .eq("match_id", id);
 
@@ -29,6 +30,6 @@ export async function PUT(req, { params }) {
       },
     });
   }
-
+ 
   return NextResponse.json({ data });
 }
