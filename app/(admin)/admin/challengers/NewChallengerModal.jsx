@@ -40,7 +40,7 @@ function NewChallengerModal({
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  console.log(matchData);
+  //console.log(matchData);
 
   //INSERT NEW CHALLENGER MATCH //INVALIDATE queryKey: ["league-challengers", id],
   const { mutate: insertChallenger, isLoading } = useMutation({
