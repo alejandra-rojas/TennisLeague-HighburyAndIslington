@@ -138,6 +138,7 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
                   registeredTeams={registeredTeams}
                   challengerMatches={challengerMatches}
                   midway_point={midway_point}
+                  midmatches_needed={event.midway_matches}
                 />
               )}
             </div>

@@ -3,11 +3,12 @@ import MatchesReports from "./MatchesReports";
 import WithdrawalForm from "./WithdrawalForm";
 import ChallengerMatchesReports from "../../challengers/event_entries/ChallengerMatchesReports";
 
-function StandingsTable({ registeredTeams, matchesData, challengerMatches, midway_point }) {
+function StandingsTable({ registeredTeams, matchesData, challengerMatches, midway_point, midmatches_needed }) {
   
-  //console.log(registeredTeams);
+  console.log(registeredTeams);
   //console.log(matchesData);
   //console.log(challengerMatches);
+  //console.log(midmatches_needed)
 
   let teamStats = [];
 
@@ -20,8 +21,9 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
       matches_won: 0,
       sets_won: 0,
       team_withdrawn: team.team_withdrawn,
-      mid_bonus: team.mid_bonus,
-      all_bonus: team.all_bonus,
+      matchesByMidpoint: 0,
+      mid_bonus: 0,
+      all_bonus: 0,
       challenger_bonus: team.challenger_bonus,
       total_points: team.total_points,
     });
@@ -32,7 +34,19 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
     return teamStats.find((teamStat) => teamStat.team_id === teamId);
   }
 
-  // Iterate over the matches to count matches played and sets won
+  function updateTotalPoints() {
+    teamStats.forEach((teamStat) => {
+      teamStat.total_points =
+        (teamStat.sets_won * 2) +
+        teamStat.challenger_bonus +
+        teamStat.all_bonus +
+        teamStat.mid_bonus;
+    });
+  }
+  updateTotalPoints();
+  //console.log(teamStats);
+
+  // Iterate over the matches to count matches played, sets won and matches by midpoint
   matchesData.forEach((match) => {
     // Find the statistics for both teams involved in the match
     let team1Stat = findTeamStatById(match.team1_id);
@@ -43,6 +57,12 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
       // Increment the played matches count for both teams
       team1Stat.matches_played++;
       team2Stat.matches_played++;
+
+    // If the match is by midpoint, increment matchesByMidpoint for both teams
+    if (match.bymidpoint) {
+      team1Stat.matchesByMidpoint++;
+      team2Stat.matchesByMidpoint++;
+    }
 
       // If there is no withdrawal, increment the win count for the winner
       if (!match.withdrawal && match.winner_id != null) {
@@ -55,6 +75,15 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
     team1Stat.sets_won += match.team1_sets;
     team2Stat.sets_won += match.team2_sets;
   });
+
+  teamStats.forEach((teamStat) => {
+    if (teamStat.matchesByMidpoint >= midmatches_needed) {
+      teamStat.mid_bonus = 1;
+    } else {
+      teamStat.mid_bonus = 0;
+    }
+  });  
+  updateTotalPoints();
 
   challengerMatches.forEach((match) => {
     // Check if team1_id belongs to the event
@@ -73,17 +102,7 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
     }
   });
 
-  function updateTotalPoints() {
-    teamStats.forEach((teamStat) => {
-      teamStat.total_points =
-        (teamStat.sets_won * 2) +
-        teamStat.challenger_bonus +
-        teamStat.all_bonus +
-        teamStat.mid_bonus;
-    });
-  }
-  updateTotalPoints();
-  //console.log(teamStats);
+
 
   function calculateCombinations(n) {
     return n - 1;
