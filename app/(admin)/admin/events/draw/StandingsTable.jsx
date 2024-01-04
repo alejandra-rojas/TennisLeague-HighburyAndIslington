@@ -5,10 +5,12 @@ import ChallengerMatchesReports from "../../challengers/event_entries/Challenger
 
 function StandingsTable({ registeredTeams, matchesData, challengerMatches, midway_point, midmatches_needed }) {
   
-  console.log(registeredTeams);
+  //console.log(registeredTeams);
   //console.log(matchesData);
   //console.log(challengerMatches);
   //console.log(midmatches_needed)
+
+
 
   let teamStats = [];
 
@@ -107,7 +109,11 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
   function calculateCombinations(n) {
     return n - 1;
   }
+
+
+  const allMatchesCount = registeredTeams.length - 1;
   const activeTeamsCount = teamStats.filter((t) => !t.team_withdrawn).length;
+  //console.log(activeTeamsCount)
   const totalMatches = calculateCombinations(activeTeamsCount);
 
   teamStats.forEach((teamStat) => {
@@ -145,7 +151,7 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches, midwa
                   }`}
                 >
                   <span>{`${team.team_name}`}</span>
-                  <span>{`${team.matches_played}/${totalMatches}`}</span>
+                  <span>{`${team.matches_played}/${team.team_withdrawn ? allMatchesCount : totalMatches}`}</span>
                   <span className="hide">{team.matches_won}</span>
                   {/* <span className="hide">
                 {team.played_matches - team.team_wins}
