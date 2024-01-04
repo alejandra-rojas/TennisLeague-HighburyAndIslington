@@ -37,7 +37,7 @@ function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
       byMidpoint: byMidpoint,
       [name]: type === 'checkbox' ? checked : value,
     }));
-    console.log(byMidpoint)
+    //console.log(byMidpoint)
   } else {
     // For other fields, update as usual
     setData((prevData) => ({
@@ -184,7 +184,7 @@ function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
           </div>
 
           <div className="input">
-            <label htmlFor="t1sets">Sets won by T1:</label>
+            <label htmlFor="t1sets">Sets won by {match.team1.player1.firstname} & {match.team1.player2.firstname}:</label>
             <input
               id="t1sets"
               maxLength={1}
@@ -196,7 +196,7 @@ function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
           </div>
 
           <div className="input">
-            <label htmlFor="t2sets">Sets won by T2:</label>
+            <label htmlFor="t2sets">Sets won by {match.team2.player1.firstname} & {match.team2.player2.firstname}:</label>
             <input
               id="t2sets"
               maxLength={1}
