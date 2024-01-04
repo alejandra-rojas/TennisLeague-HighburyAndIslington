@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MatchSingleEntry from "./MatchSingleEntry";
 
-function MatchesReports({ matchesData }) {
+function MatchesReports({ matchesData, midway_point }) {
   //console.log(matchesData);
 
   //Sorting matches by match data and isFinished condition
@@ -30,7 +30,7 @@ function MatchesReports({ matchesData }) {
           <span>Action</span>
         </li>
         {sortedEventMatchesData?.map((match, index) => (
-          <MatchSingleEntry index={index} key={match.match_id} match={match} />
+          <MatchSingleEntry index={index} key={match.match_id} match={match} midway_point={midway_point} />
         ))}
       </ul>
     </section>

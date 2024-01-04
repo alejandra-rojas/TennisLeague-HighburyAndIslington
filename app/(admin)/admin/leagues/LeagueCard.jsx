@@ -163,6 +163,7 @@ const LeagueCard = ({
       <Events
         leagueID={id}
         league_name={league_name}
+        midway_point={midway_point}
         hasStarted={hasStarted}
         challengerMatches={challengerMatches}
       />

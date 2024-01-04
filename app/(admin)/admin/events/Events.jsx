@@ -8,7 +8,8 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import EventEntry from "./EventEntry";
 import EventModal from "./EventModal";
 
-function Events({ leagueID, hasStarted, league_name, challengerMatches }) {
+function Events({ leagueID, hasStarted, league_name, challengerMatches, midway_point }) {
+  
   const [showEventModal, setShowEventModal] = useState(false);
   const lowercaseTitle = league_name.toLowerCase();
 
@@ -39,6 +40,7 @@ function Events({ leagueID, hasStarted, league_name, challengerMatches }) {
                     leagueID={leagueID}
                     event={event}
                     challengerMatches={challengerMatches}
+                    midway_point={midway_point}
                   />
                 </li>
               ))}

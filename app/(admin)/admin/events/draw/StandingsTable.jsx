@@ -3,7 +3,8 @@ import MatchesReports from "./MatchesReports";
 import WithdrawalForm from "./WithdrawalForm";
 import ChallengerMatchesReports from "../../challengers/event_entries/ChallengerMatchesReports";
 
-function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
+function StandingsTable({ registeredTeams, matchesData, challengerMatches, midway_point }) {
+  
   //console.log(registeredTeams);
   //console.log(matchesData);
   //console.log(challengerMatches);
@@ -81,7 +82,6 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
         teamStat.mid_bonus;
     });
   }
-
   updateTotalPoints();
   //console.log(teamStats);
 
@@ -142,7 +142,7 @@ function StandingsTable({ registeredTeams, matchesData, challengerMatches }) {
         </ul>
       </div>
 
-      <MatchesReports matchesData={matchesData} />
+      <MatchesReports matchesData={matchesData} midway_point={midway_point} />
       <ChallengerMatchesReports
         registeredTeams={registeredTeams}
         challengerMatches={challengerMatches}

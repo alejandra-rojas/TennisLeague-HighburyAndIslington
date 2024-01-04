@@ -4,7 +4,7 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import MatchReportModal from "./MatchReportModal";
 
-function MatchSingleEntry({ index, match }) {
+function MatchSingleEntry({ index, match, midway_point }) {
   const [showMatchReportModal, setShowMatchReportModal] = useState(false);
 
   return (
@@ -43,6 +43,7 @@ function MatchSingleEntry({ index, match }) {
         <MatchReportModal
           match={match}
           setShowMatchReportModal={setShowMatchReportModal}
+          midway_point={midway_point}
         />
       )}
     </>

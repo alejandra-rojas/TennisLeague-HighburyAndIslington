@@ -11,7 +11,8 @@ import EventModal from "./EventModal";
 import EventRegistration from "./registration/EventRegistration";
 import StandingsTable from "./draw/StandingsTable";
 
-function EventEntry({ event, leagueID, challengerMatches }) {
+function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
+  
   const queryClient = useQueryClient();
   const [showEventModal, setShowEventModal] = useState(false);
   const [expandEvent, setExpandEvent] = useState(false);
@@ -136,6 +137,7 @@ function EventEntry({ event, leagueID, challengerMatches }) {
                   matchesData={matchesData}
                   registeredTeams={registeredTeams}
                   challengerMatches={challengerMatches}
+                  midway_point={midway_point}
                 />
               )}
             </div>
