@@ -1,7 +1,7 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-
+ 
 export async function DELETE(_, { params }) {
   const { id, teamID } = params;
   const cookieStore = cookies();
@@ -19,6 +19,7 @@ export async function DELETE(_, { params }) {
 export async function PUT(req, { params }) {
   const eventID = params.id;
   const teamID = params.teamID;
+  console.log(params)
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
@@ -44,6 +45,9 @@ export async function PUT(req, { params }) {
     .from("matches")
     .update({
       withdrawal: true,
+      team1_sets: 0,
+      team2_sets: 0,
+      winner_score: "withdrawn",
     })
     .eq("event_id", eventID)
     .or(`team1_id.eq.${teamID},team2_id.eq.${teamID}`);
