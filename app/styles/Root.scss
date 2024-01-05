@@ -3,8 +3,9 @@
 // Client Navbar component
 
 #web-header {
-  background-color: $color-green;
-
+  background-color: $color-darkGreen;
+  padding: 2.5rem 1.5rem;
+ 
   // Admin Navbar components
   .logout-banner-admin {
     display: flex;
@@ -38,27 +39,49 @@
   }
 
   #primary-navigation {
-    @include flex-col();
+    color: $color-cream;
+    display: grid;
     gap: 1rem;
-    color: white;
+    grid-template-columns: 320px 1fr 320px;
+    grid-auto-columns: 1fr;
+    align-content: center;
+    justify-content: center;
     align-items: center;
-    padding: 2rem 1rem 1rem;
+    justify-items: center;
+
 
     @include breakpoint-xl {
       // max-height: 7rem;
       @include flex-row();
       justify-content: space-between;
-      width: 75rem;
+
+      width: 100%;
+     max-width: 87.5rem;
       margin: 0 auto;
     }
 
     ul {
       display: flex;
-      gap: 3rem;
+      gap: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
 
       li {
         list-style: none;
       }
+    }
+
+    .header-item{
+      display: flex;
+      width: 100%;
+    }
+
+    .header-item:nth-child(2) {
+      justify-content: center;
+    }
+
+    .header-item:nth-child(3) {
+      justify-content: right;
     }
   }
 
