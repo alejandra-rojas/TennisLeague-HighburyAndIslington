@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import TanstackProvider from "./components/providers/Tanstackprovider";
+import SmoothScroll from "./components/providers/SmoothScroll";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TanstackProvider>{children}</TanstackProvider>
+        <TanstackProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </TanstackProvider>
         <Analytics />
       </body>
     </html>
