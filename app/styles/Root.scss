@@ -3,7 +3,7 @@
 // Client Navbar component
 
 #web-header {
-  background-color: $color-darkGreen;
+  //background-color: $color-darkGreen;
   padding: 2.5rem 1.5rem;
  
   // Admin Navbar components
@@ -39,7 +39,7 @@
   }
 
   #primary-navigation {
-    color: $color-cream;
+    color: $color-darkGreen;
     display: grid;
     gap: 1rem;
     grid-template-columns: 320px 1fr 320px;
@@ -139,7 +139,7 @@ main {
 
   @include breakpoint-lg {
     // width: 80rem; /* 1280px */
-    padding: 1.5rem $base-padding2X;
+    padding: 0 $base-padding2X;
   }
 }
 
