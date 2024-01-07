@@ -40,7 +40,7 @@ export default function ClientNavbar() {
             </Link>
           </div>
           <div className="header-item">
-            <span class="circle">
+            <span className="circle">
               <BallOutline />
               {/* <Ball fill="#0F2D32" /> */}
             </span>

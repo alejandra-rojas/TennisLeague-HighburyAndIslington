@@ -6,17 +6,17 @@ import "../styles/Public/styles.scss";
 export default function Home() {
   return (
     <main>
-      <div class="court">
-        <div class="div1"> </div>
-        <div class="div2"> </div>
-        <div class="div3"> </div>
-        <div class="div4"> </div>
-        <div class="div5"> </div>
-        <div class="div6"> </div>
-        <div class="div7"> </div>
-        <div class="div8"> </div>
-        <div class="div9"> </div>
-        <div class="div10"> </div>
+      <div className="court">
+        <div className="div1"> </div>
+        <div className="div2"> </div>
+        <div className="div3"> </div>
+        <div className="div4"> </div>
+        <div className="div5"> </div>
+        <div className="div6"> </div>
+        <div className="div7"> </div>
+        <div className="div8"> </div>
+        <div className="div9"> </div>
+        <div className="div10"> </div>
       </div>
       <TextRotating />
       <RotatingText />
