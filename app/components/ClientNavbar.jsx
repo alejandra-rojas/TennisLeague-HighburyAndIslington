@@ -1,6 +1,11 @@
+"use client";
 import "../styles/Root.scss";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { Ball, BallOutline } from "./Icons";
+import BallElement from "./BallElement";
+
+const myFont = localFont({ src: "../../fonts/Humane-VF.ttf" });
 
 export default function ClientNavbar() {
   return (
@@ -18,7 +23,7 @@ export default function ClientNavbar() {
                     href={"/report-results"}
                     aria-label="Go to the Home page"
                   >
-                    Report Results
+                    About
                   </Link>
                 </li>
                 <li>
@@ -36,14 +41,11 @@ export default function ClientNavbar() {
           </div>
           <div className="header-item">
             <Link href="/" aria-label="Go to the Home page">
-              <h1>Highbury Doubles</h1>
+              <h1 className={`text-4xl font-extrabold`}>Highbury Doubles</h1>
             </Link>
           </div>
           <div className="header-item">
-            <span className="circle">
-              <BallOutline />
-              {/* <Ball fill="#0F2D32" /> */}
-            </span>
+            <BallElement />
           </div>
         </div>
       </header>

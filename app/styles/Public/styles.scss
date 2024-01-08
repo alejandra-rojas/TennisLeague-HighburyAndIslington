@@ -1,71 +1,93 @@
 @import "../Variables/Variables.scss";
 
+main > div:nth-child(2) {
+  /* Selects the second div directly inside main */
+  position: absolute; /* Takes it out of normal document flow */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensures it is on top of the .court */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .court {
+  // background-image: url("../../../public/Court1.png");
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  //background-position: center;
+  background-color: $color-darkGreen;
   display: grid;
   grid-template-columns: repeat(26, 1fr);
   grid-template-rows: repeat(24, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  border: 0.25px $color-cream solid;
-  background-color: $color-darkGreen;
-  height: 650px;
-  border-radius: 2rem;
+  height: 580px;
+  border-radius: 32px;
+  position: relative;
 }
 
 .div1 {
   grid-area: 1 / 1 / 4 / 14;
-  border: 0.25px $color-cream solid;
+  border: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div2 {
   grid-area: 1 / 14 / 4 / 27;
-  border: 0.25px $color-cream solid;
+  border: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div3 {
   grid-area: 4 / 1 / 22 / 7;
-  border: 0.25px $color-cream solid;
+  border-left: 0.1px $color-cream solid;
+  border-right: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div4 {
   grid-area: 4 / 7 / 13 / 14;
-  border: 0.25px $color-cream solid;
+  border-right: 0.1px $color-cream solid;
+  border-bottom: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div5 {
   grid-area: 13 / 7 / 22 / 14;
-  border: 0.25px $color-cream solid;
+  border-right: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div6 {
   grid-area: 4 / 14 / 13 / 21;
-  border: 0.25px $color-cream solid;
+  border-bottom: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div7 {
   grid-area: 13 / 14 / 22 / 21;
-  border: 0.25px $color-cream solid;
+  opacity: 50%;
 }
 .div8 {
   grid-area: 4 / 21 / 22 / 27;
-  border: 0.25px $color-cream solid;
+  border-left: 0.1px $color-cream solid;
+  border-right: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div9 {
   grid-area: 22 / 1 / 25 / 14;
-  border: 0.25px $color-cream solid;
+  border: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 .div10 {
   grid-area: 22 / 14 / 25 / 27;
-  border: 0.25px $color-cream solid;
+  border: 0.1px $color-cream solid;
+  opacity: 50%;
 }
 
-.circle {
-  border-radius: 50%;
-  border: 1.5px $color-black solid;
-  background-color: $color-brightGreen;
-  width: 60px;
-  height: 60px;
-  padding: 0.8rem;
+.title {
+  position: relative;
 }
 
-.ball {
-  width: 100%;
-  height: 100%;
-}
+// .ball {
+//   width: 100%;
+//   height: 100%;
+// }
 
 //https://www.kirupa.com/animations/spinning_circular_text.htm
 .rotateText {
@@ -130,4 +152,9 @@
 .link {
   color: #002fa7;
   text-decoration: underline;
+}
+
+.end {
+  height: 3000px;
+  border-bottom: #002fa7 solid;
 }
