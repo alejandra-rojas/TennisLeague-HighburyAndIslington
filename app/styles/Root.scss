@@ -53,10 +53,10 @@
       // max-height: 7rem;
       @include flex-row();
       justify-content: space-between;
-
       width: 100%;
       max-width: 87.5rem;
       margin: 0 auto;
+      padding: 0 24px;
     }
 
     ul {

@@ -12,8 +12,25 @@ export default function Home() {
   //   });
 
   return (
-    <main className="">
+    <main className="main-layout-client">
       <div className="court">
+        <div className="details ">
+          <div className="text-container">
+            <div className="title">
+              Highbury Tennis Club runs a thriving doubles league for its women
+              members
+            </div>
+            <div className="subtitle">
+              The league is designed to give match practice for external LTA
+              competitions and to build confidence generally for all competitive
+              play.
+            </div>
+            <div className="buttons-container">
+              <div className="button accent">Find out more</div>
+              <div className="button">Latest results</div>
+            </div>
+          </div>
+        </div>
         <div className="div1"> </div>
         <div className="div2"> </div>
         <div className="div3"> </div>
@@ -24,17 +41,6 @@ export default function Home() {
         <div className="div8"> </div>
         <div className="div9"> </div>
         <div className="div10"> </div>
-      </div>
-      <div>
-        <div className="title">
-          Highbury Tennis Club runs a thriving doubles league for its women
-          members.
-        </div>
-        <div className="subtitle">
-          The league is designed to give match practice for external LTA
-          competitions and to build confidence generally for all competitive
-          play.
-        </div>
       </div>
 
       {/* <TextRotating /> */}

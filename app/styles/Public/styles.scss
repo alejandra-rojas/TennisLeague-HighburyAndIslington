@@ -11,18 +11,21 @@ main > div:nth-child(2) {
   justify-content: center;
 }
 
+.main-layout-client {
+  width: 100%;
+  max-width: 1432px;
+  padding: 0 24px;
+}
+
 .court {
-  // background-image: url("../../../public/Court1.png");
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  //background-position: center;
+  pointer-events: none;
   background-color: $color-darkGreen;
   display: grid;
   grid-template-columns: repeat(26, 1fr);
   grid-template-rows: repeat(24, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 580px;
+  min-height: 740px;
   border-radius: 32px;
   position: relative;
 }
@@ -30,58 +33,123 @@ main > div:nth-child(2) {
 .div1 {
   grid-area: 1 / 1 / 4 / 14;
   border: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div2 {
   grid-area: 1 / 14 / 4 / 27;
   border: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div3 {
   grid-area: 4 / 1 / 22 / 7;
   border-left: 0.1px $color-cream solid;
   border-right: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div4 {
   grid-area: 4 / 7 / 13 / 14;
   border-right: 0.1px $color-cream solid;
   border-bottom: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div5 {
   grid-area: 13 / 7 / 22 / 14;
   border-right: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div6 {
   grid-area: 4 / 14 / 13 / 21;
   border-bottom: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div7 {
   grid-area: 13 / 14 / 22 / 21;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div8 {
   grid-area: 4 / 21 / 22 / 27;
   border-left: 0.1px $color-cream solid;
   border-right: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div9 {
   grid-area: 22 / 1 / 25 / 14;
   border: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 .div10 {
   grid-area: 22 / 14 / 25 / 27;
   border: 0.1px $color-cream solid;
-  opacity: 50%;
+  opacity: 15%;
 }
 
-.title {
-  position: relative;
+.details {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  grid-row-start: 1;
+  grid-row-end: -1;
+  //height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  color: white;
+  // width: 96%;
+  // max-width: 1020px;
+  padding: 4% 2%;
+  text-align: center;
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    .title {
+      font-size: 3rem;
+      // line-height: 1.5rem;
+
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 110%;
+      padding: 0 4%;
+    }
+
+    .subtitle {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 120%;
+      padding: 0 8%;
+    }
+
+    .buttons-container {
+      display: flex;
+      padding-top: 1rem;
+
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 59px;
+        width: auto;
+        text-align: center;
+        border-radius: 13px;
+        padding: 0.75rem 1.5rem;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 180%;
+        background-color: $color-darkGreen;
+        color: white;
+      }
+
+      .accent {
+        background-color: $color-brightGreen;
+        color: $color-darkGreen;
+      }
+    }
+  }
 }
 
 // .ball {
@@ -115,7 +183,7 @@ main > div:nth-child(2) {
 
 .rotate-text {
   position: absolute;
-  transform-origin: 0 104px; // 50% of the container height and width
+  transform-origin: 0 104px; // 15% of the container height and width
   font-size: 1rem;
   line-height: 1rem;
   top: 0;
