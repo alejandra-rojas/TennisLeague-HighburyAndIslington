@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 //Components
 import LoginNavbar from "@/app/components/LoginNavbar";
 import AdminNavbar from "../../components/AdminNavbar";
-import ClientNavbar from "@/app/components/ClientNavbar";
+import AuthPrimaryNavbar from "@/app/components/AuthPrimaryNavbar";
 
 export default async function AdminLayout({ children }) {
   const supabase = createServerComponentClient({ cookies });
@@ -17,9 +17,9 @@ export default async function AdminLayout({ children }) {
 
   return (
     <>
-      <header id="web-header">
+      <header id="admin-header">
         <LoginNavbar user={data.session.user} />
-        <ClientNavbar />
+        <AuthPrimaryNavbar />
         <AdminNavbar />
       </header>
       {children}
