@@ -28,7 +28,7 @@ export default function ClientNavbar() {
             </li>
             <li>
               <Link href={"/past-leagues"} aria-label="Go to Admin page">
-                Past Leagues
+                Past Results
               </Link>
             </li>
           </ul>
@@ -36,7 +36,7 @@ export default function ClientNavbar() {
       </div>
       <div className="header-item">
         <Link href="/" aria-label="Go to the Home page">
-          <h1 className={`text-4xl font-extrabold`}>Highbury Doubles</h1>
+          <h1 className={`text-4xl font-extrabold center`}>Highbury Doubles</h1>
         </Link>
       </div>
       <div className="header-item">

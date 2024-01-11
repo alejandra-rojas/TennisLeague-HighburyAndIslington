@@ -1,11 +1,10 @@
 "use client";
-import Lenis from "@studio-freight/lenis";
-import { TextRotating } from "../components/Icons";
-import RotatingText from "../components/RotatingText";
 import "../styles/Public/styles.scss";
 import { useLenis } from "@studio-freight/react-lenis";
 import BallElement from "../components/BallElement";
 import CourtHero from "../components/CourtHero";
+import LatestResults from "../components/PublicData/LatestResults";
+import MenuBtnMobile from "../components/MenuBtnMobile";
 
 export default function Home() {
   //   const lenis = useLenis((scroll) => {
@@ -17,9 +16,9 @@ export default function Home() {
       <CourtHero />
       <div className="image-hero"></div>
 
-      <div className="end">a</div>
-      {/* <TextRotating /> */}
-      {/* <RotatingText /> */}
+      <div>Latest results</div>
+      <LatestResults />
+      <MenuBtnMobile />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 //Components
 import ClientNavbar from "@/app/components/ClientNavbar";
 import "../styles/Public/styles.scss";
+import Footer from "../components/Footer";
 
 export default async function ClientLayout({ children }) {
   return (
@@ -9,6 +10,8 @@ export default async function ClientLayout({ children }) {
         <ClientNavbar />
       </header>
       {children}
+
+      <Footer />
     </>
   );
 }
