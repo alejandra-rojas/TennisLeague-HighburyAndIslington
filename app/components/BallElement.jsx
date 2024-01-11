@@ -1,13 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import { useLenis } from "@studio-freight/react-lenis";
 import "../styles/Public/BallElement.scss";
 import gsap from "gsap";
 import { BallOutline } from "./Icons";
 
 function BallElement() {
   const svgRef = useRef(null);
-  const lenis = useLenis();
-  console.log(lenis);
 
   useEffect(() => {
     gsap.set(svgRef.current, { transformOrigin: "50% 50%" });
@@ -20,17 +17,6 @@ function BallElement() {
       ease: "linear",
     });
   }, []);
-
-  useEffect(() => {
-    if (lenis) {
-      lenis.on("scroll", () => {
-        gsap.to(svgRef.current, {
-          duration: 0.1, // Fast response to scroll change
-          rotation: `+=${lenis.velocity}`, // Rotate based on scroll velocity
-        });
-      });
-    }
-  }, [lenis]);
 
   return (
     <span className="circumference">
