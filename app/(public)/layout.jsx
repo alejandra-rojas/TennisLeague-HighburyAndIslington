@@ -7,14 +7,14 @@ import Link from "next/link";
 export default async function ClientLayout({ children }) {
   return (
     <>
-      <span className="back-clubsite">
+      <div className="back-clubsite">
         <Link
           href={"https://www.highburytennisclub.com/"}
           aria-label="Go to the Highbury Tennis Club Website"
         >
-          Go to the Highbury Tennis Club Website
+          To the Highbury Tennis Club Website
         </Link>
-      </span>
+      </div>
       <header id="web-header">
         <ClientNavbar />
       </header>
