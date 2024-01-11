@@ -58,7 +58,7 @@ export const BallOutline = ({ stroke = "#0F2D32", fill = "#0f2d32" }) => {
   );
 };
 
-export const TextRotating = () => {
+export const CSSRotation = () => {
   return (
     <svg id="rotatingText" viewBox="0 0 200 200" width="200" height="200">
       <defs>
