@@ -1,24 +1,7 @@
 @import "../Variables/Variables.scss";
 body {
-  --color-text: #a5a5a5;
-  --color-bg: #000000;
-  --color-link: #ea34a6;
-  --color-link-hover: #fff;
-  --color-font-circle: #7b7772;
-  --color-button: #ea34a6;
-  --color-text-button: #000000;
-  --color-text-circle-1: #ea34a6;
-  --color-text-circle-2: #422163;
-  --color-text-circle-3: #212044;
-  --color-text-circle-4: #292725;
   --font-circle-1: arial, serif;
   --font-weight-circle-1: 400;
-  --font-circle-2: ambroise-firmin-std, serif;
-  --font-weight-circle-2: 300;
-  --font-circle-3: modesto-condensed, serif;
-  --font-weight-circle-3: 400;
-  --font-circle-4: niagara, serif;
-  --font-weight-circle-4: 300;
 }
 
 .circumference {
@@ -65,27 +48,6 @@ body {
   fill: $color-darkGreen;
 }
 
-.circles__text--2 {
-  font-size: 120px;
-  font-family: var(--font-circle-2);
-  font-weight: var(--font-weight-circle-2);
-  fill: var(--color-text-circle-2);
-}
-
-.circles__text--3 {
-  font-size: 60px;
-  font-family: var(--font-circle-3);
-  font-weight: var(--font-weight-circle-3);
-  fill: var(--color-text-circle-3);
-}
-
-.circles__text--4 {
-  font-size: 40px;
-  font-family: var(--font-circle-4);
-  font-weight: var(--font-weight-circle-4);
-  fill: var(--color-text-circle-4);
-}
-
 img {
   cursor: pointer;
 }
@@ -98,6 +60,7 @@ img {
   width: 70px;
   height: 70px;
   padding: 0.8rem;
+  z-index: 99;
 }
 
 .ball {
@@ -106,4 +69,54 @@ img {
   left: 50%; /* Adjust as needed */
   transform: translate(-50%, -50%); /* Centers the SVG */
   /* ... other styles ... */
+}
+
+/////// CLIENT MENU
+
+.circumf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --outer-circle-diameter: 120px;
+  width: var(
+    --outer-circle-diameter
+  ); /* Set the diameter of the outer circle */
+  height: var(
+    --outer-circle-diameter
+  ); /* Same as the width to make it a circle */
+  border-radius: 50%; /* This makes the div a circle */
+  //background-color: $color-darkGreen; /* Choose a color for the circle */
+  position: relative; /* Adjust as needed based on your layout */
+  //border: solid 2px $color-darkGreen;
+}
+
+.text {
+  z-index: 99;
+  pointer-events: none;
+  //position: fixed;
+  --dim: 85%;
+  width: var(--dim);
+  height: var(--dim);
+  top: 0;
+  //   left: 35%;
+}
+
+.circles__font--1 {
+  font-size: 180px;
+  font-family: var(--font-circle-1);
+  font-weight: 100;
+  fill: $color-darkGreen;
+}
+
+.outer-circumference {
+  border-radius: 50%;
+  // border: 1.5px $color-black solid;
+  background-color: $color-brightGreen;
+  width: 90px;
+  height: 90px;
+  padding: 1.6rem;
+  position: absolute;
+  top: 42%; /* Adjust as needed */
+  left: 42%; /* Adjust as needed */
+  transform: translate(-50%, -50%); /* Centers the SVG */
 }
