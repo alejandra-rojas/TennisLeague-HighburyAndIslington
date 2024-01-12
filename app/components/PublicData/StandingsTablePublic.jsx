@@ -128,7 +128,7 @@ function StandingsTablePublic({
         <h5 className="sr-only">Event Standings</h5>
         <ul>
           <li className="md-header">
-            <span>Participant</span>
+            <span className="invisible">Participant</span>
             <span>Played</span>
             <span>Won</span>
             {/* <span>Lost</span> */}

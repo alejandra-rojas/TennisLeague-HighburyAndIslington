@@ -2,10 +2,7 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
-
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import Events from "@/app/(admin)/admin/events/Events";
-import ChallengerLeagueLevel from "@/app/(admin)/admin/challengers/ChallengerLeagueLevel";
+import "../../styles/Public/LeagueCardPublic.scss";
 import EventsPublic from "./EventsPublic";
 
 const LeagueCardPublic = ({
@@ -111,18 +108,29 @@ const LeagueCardPublic = ({
               <h3>{league_name}</h3>
             </div>
             <div className="league-dates">
-              <p>
-                {startDate.toDateString()} to {endDate.toDateString()}
-              </p>
-              <p>Midpoint: {midDate.toDateString()}</p>
+              <div>
+                {starting_date} - {end_date}
+              </div>
+
+              <p>Halfway Point: {midDate.toDateString()}</p>
             </div>
           </div>
-          <div className="league-stats">
-            {/*           <p>
-            {leagueEvents.length}{" "}
-            {leagueEvents.length === 1 ? "event" : "events"}
-          </p> */}
-          </div>
+          {!isFinished && (
+            <p
+              className="days-left"
+              /* className={
+                message ===
+                "Once all the results are entered, set the league to finished via the edit league modal."
+                  ? "text-highlight"
+                  : "days-left"
+              } */
+            >
+              {/*           {end_date < formattedTodaysDate && (
+                <ExclamationTriangleIcon width={40} />
+              )} */}
+              {daysLeft} {message}
+            </p>
+          )}
         </header>
       )}
 

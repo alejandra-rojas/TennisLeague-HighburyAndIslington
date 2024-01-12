@@ -1,0 +1,732 @@
+@import "../Variables/Variables.scss";
+
+//LEAGUE ENTRY
+#current-leagues-data {
+  > ul {
+    @include flex-col($base-padding2X);
+
+    .text-highlight {
+      @include flex-row($base-padding);
+      padding: 0.05rem;
+    }
+
+    .league-single-entry {
+      @include cardStyle;
+      background-color: white;
+      padding: 2.25rem 1rem 3.5rem;
+
+      .league-info {
+        @include flex-row(0px);
+        justify-content: space-between;
+        padding: 0 0.5rem;
+        align-items: flex-start;
+
+        //border-bottom: solid $base-border-thickness $color-grey;
+
+        .league-title {
+          @include flex-row($base-padding2X);
+          h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 98%;
+          }
+        }
+
+        .league-dates {
+          text-transform: uppercase;
+          font-size: 1rem;
+          font-weight: 600;
+          display: flex;
+          @include flex-col(5px);
+          p {
+            font-size: 0.9rem;
+            font-weight: 200;
+          }
+        }
+
+        .days-left {
+          font-size: 0.9rem;
+          border-radius: $base-border-radius;
+          font-weight: bold;
+          color: white;
+          padding: $base-padding $base-padding2X;
+          background-color: $color-darkGreen;
+        }
+
+        .league-stats {
+          width: 50%;
+          @include flex-row($base-padding);
+          justify-content: right;
+          margin-top: $base-margin;
+          padding: 0.25rem;
+          text-align: right;
+        }
+
+        @include breakpoint-md {
+          p {
+            font-size: $base-font-size;
+          }
+        }
+      }
+    }
+
+    @include breakpoint-md {
+      .league-single-entry {
+        padding: 2.25rem 2.25rem 4.5rem;
+
+        .league-info {
+          padding: 0 $base-padding;
+        }
+      }
+    }
+  }
+}
+
+//////////////
+
+#leagues-layout-header {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: $base-padding;
+  justify-content: space-between;
+  padding: $base-padding2X 0;
+
+  @include breakpoint-md {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    padding: 1rem 0 2.75rem;
+    //border-bottom: 0.1rem solid black;
+  }
+
+  h2 {
+    margin: 0 auto;
+  }
+
+  nav {
+    @include flex-row($base-font-size);
+    flex-direction: row-reverse;
+    font-size: $font-size-sm;
+    ul {
+      @include flex-row($base-padding);
+      li:not(:last-child) {
+        @include pillStyle($base-font-size, $color-green);
+
+        @include breakpoint-md {
+          font-size: 1.5rem;
+        }
+      }
+      /* Styles for the li when its child a NavLink has the "active" class */
+      li:has(a.active) {
+        background-color: $color-green;
+        color: white;
+      }
+    }
+
+    @include breakpoint-md {
+      @include flex-row($base-font-size);
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// NEW LEAGUE BTN
+.create-league {
+  /* position: fixed;
+  bottom: 3vh;
+  right: 5vw; */
+  @include flex-row(0.5rem);
+  @include pillStyleSolid($font-size-sm);
+  padding-right: $base-padding;
+  padding-left: $base-padding;
+  box-shadow: $base-box-shadow;
+}
+
+@include breakpoint-md {
+  .create-league {
+    /*  position: relative;
+    bottom: 2.5rem;
+    right: 0; */
+    @include flex-row(0.5rem);
+    @include pillStyleSolid;
+    padding-right: $base-padding;
+    padding-left: $base-padding;
+  }
+}
+
+// CURRENT LEAGUES
+#current-leagues {
+  @include flex-col($base-margin);
+
+  @include breakpoint-md {
+    @include flex-col(2rem);
+  }
+
+  #league-section-header {
+    margin: 0 auto;
+    padding: $base-padding 0;
+    p {
+      text-align: center;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    @include breakpoint-md {
+      p {
+        font-size: $base-font-size;
+      }
+    }
+  }
+}
+
+/////// NEWWWWWW
+.invisible {
+  visibility: hidden;
+}
+
+#event-entry {
+  border: solid 1px $color-darkgrey;
+  border-radius: $base-border-radius2D;
+  background-color: #f2f2f2;
+
+  > header {
+    margin: $base-padding 0.9rem;
+    @include flex-row($base-padding);
+    justify-content: space-between;
+
+    @include breakpoint-md {
+      @include flex-row;
+      justify-content: space-between;
+    }
+
+    .event-details {
+      @include flex-row($base-padding2X);
+
+      h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      button {
+        @include editUnderline;
+      }
+    }
+
+    > button {
+      @include editButton;
+      border: none;
+    }
+  }
+
+  .event-info {
+    @include flex-row(0.25rem);
+    justify-content: flex-start;
+    margin: $base-padding 0.8rem;
+
+    .tooltip {
+      position: absolute;
+      top: 100%;
+      left: 100%;
+      transform: translateY(-55%);
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 1rem;
+      border-radius: 5px;
+      width: 400px;
+    }
+
+    p {
+      font-weight: 600;
+    }
+  }
+
+  .line {
+    border-bottom: solid 1px $color-darkgrey;
+  }
+
+  #event-details {
+    margin: $base-padding 0.8rem;
+
+    #create-event-table {
+      padding-top: $base-padding;
+      h5 {
+        @include h5;
+      }
+
+      @include breakpoint-md {
+        p {
+          font-size: $base-font-size;
+        }
+      }
+    }
+
+    .participants {
+      @include flex-col(0.25rem);
+      align-items: flex-start;
+
+      @include breakpoint-md {
+        padding: 1rem;
+      }
+
+      .list {
+        ul {
+          display: flex;
+          gap: 0.25rem;
+          li {
+            display: flex;
+            gap: 2.5rem;
+
+            button {
+              color: $color-lightblue;
+              text-decoration: underline solid $base-border-thickness;
+            }
+          }
+        }
+        .even-row {
+          background-color: #f2f2f2;
+        }
+
+        .odd-row {
+          background-color: #ffffff;
+        }
+      }
+
+      button.create-table {
+        @include flex-row($base-border-radius2D);
+        @include pillStyleSolid(1.2rem, $color-olive);
+        align-self: flex-start;
+        margin-top: $base-padding;
+      }
+    }
+
+    #player-search {
+      margin-top: $base-padding2X;
+      border-radius: 2rem;
+      background-color: #e1e1de;
+      padding: 1rem;
+      @include flex-col($base-padding);
+      justify-content: left;
+
+      .search-input {
+        h5 {
+          font-weight: 400;
+          font-size: $font-size-sm;
+        }
+
+        form {
+          @include flex-col(0.25rem);
+          align-items: center;
+
+          @include breakpoint-md {
+            @include flex-row(0.3rem);
+            justify-content: left;
+          }
+
+          input {
+            border-radius: $base-border-radius-md;
+            height: $font-size-xxl;
+            font-size: $font-size-sm;
+            padding: 0 $base-padding;
+
+            @include breakpoint-md {
+              min-width: 400px;
+              font-size: $base-font-size;
+              padding: 0 $base-padding2X;
+            }
+          }
+
+          .clear-search {
+            button {
+              margin-left: $base-padding;
+              border-radius: 50%;
+              padding: 0.3rem;
+              border-color: $color-darkgrey;
+              color: $color-darkgrey;
+            }
+          }
+
+          button {
+            @include editButton($color-lightblue);
+            @include flex-row(0.25rem);
+            justify-content: left;
+            font-size: $base-font-size;
+          }
+        }
+      }
+
+      .search-results {
+        ul {
+          gap: 0;
+          li {
+            font-size: $base-font-size;
+            @include flex-row(0);
+            column-gap: 0.25rem;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            padding: 0.5rem;
+
+            @include breakpoint-md {
+              column-gap: 0.5rem;
+            }
+          }
+          .even-row {
+            //background-color: #ffffff;
+            //padding: $base-padding 0;
+          }
+
+          .odd-row {
+            background-color: #f1f1f1;
+          }
+        }
+
+        button {
+          @include editUnderline($color-lightblue);
+
+          @include breakpoint-md {
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  #event-standings {
+    @include flex-col($base-padding);
+    .event-table {
+      ul {
+        gap: 0;
+
+        li {
+          @include flex-row(0);
+          grid-template-columns: 7fr 1fr 1fr;
+          column-gap: $base-padding;
+          align-items: flex-start;
+          flex-wrap: wrap;
+        }
+
+        @include breakpoint-md {
+          li {
+            @include flex-col(0);
+            font-size: $base-font-size;
+            display: grid;
+            grid-template-columns: 7fr 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+            column-gap: $base-padding;
+            justify-items: center;
+          }
+        }
+
+        .hide {
+          display: none;
+        }
+
+        @include breakpoint-md {
+          .hide {
+            display: block;
+          }
+        }
+
+        .md-header {
+          font-weight: 600;
+          display: none;
+        }
+
+        @include breakpoint-md {
+          .md-header {
+            border-bottom: solid $base-border-thickness $color-olive;
+            display: grid;
+            grid-template-columns: 7fr 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+          }
+        }
+
+        .centered {
+          display: inline;
+          align-items: center;
+        }
+
+        li:hover {
+          background-color: $color-highlight-green;
+        }
+
+        .even-row {
+          background-color: #f2f2f2;
+        }
+
+        .odd-row {
+          background-color: #ffffff;
+        }
+
+        button {
+          margin: 0.25rem;
+          @include editButton($color-olive);
+        }
+      }
+
+      table {
+        font-size: $base-font-size;
+        table-layout: auto;
+        border-collapse: collapse;
+        border-width: $base-border-thickness;
+
+        th,
+        td {
+          padding: 5px 10px;
+          border-top-width: 0;
+          border-left-width: 0;
+        }
+
+        thead {
+          border-bottom: solid 1px $color-olive;
+        }
+
+        tbody {
+          white-space: nowrap;
+
+          .even-row {
+            background-color: #f2f2f2;
+          }
+
+          .odd-row {
+            background-color: #ffffff;
+          }
+
+          .centered {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    #match-reports-table {
+      display: grid;
+      margin: $base-padding2X 0;
+
+      ul {
+        gap: 0;
+        li {
+          @include flex-col(0);
+          grid-template-columns: 3fr 3fr 2fr 1fr 2fr 2fr;
+          column-gap: $base-padding;
+          align-items: flex-start;
+          flex-wrap: wrap;
+
+          button {
+            margin: 0.25rem;
+            @include editUnderline($color-olive);
+          }
+        }
+
+        @include breakpoint-md {
+          li {
+            display: grid;
+            grid-template-columns: 3fr 3fr 2fr 1fr 2fr 2fr;
+            column-gap: $base-padding;
+            align-items: center;
+          }
+        }
+
+        .md-header {
+          font-weight: 600;
+          display: none;
+        }
+
+        @include breakpoint-md {
+          .md-header {
+            display: grid;
+            grid-template-columns: 3fr 3fr 2fr 1fr 2fr 2fr;
+            column-gap: $base-padding;
+            align-items: center;
+          }
+        }
+
+        li:hover {
+          background-color: $color-highlight-yellow;
+        }
+
+        li.withdrawn:hover {
+          background-color: $color-grey;
+        }
+
+        .even-row {
+          background-color: #f2f2f2;
+        }
+
+        .odd-row {
+          background-color: #ffffff;
+        }
+      }
+    }
+
+    #report-modal {
+      background-color: white;
+      @include cardStyle;
+      padding: $base-padding2X;
+
+      .control {
+        @include flex-row;
+        justify-content: space-between;
+        border-bottom: solid $base-border-thickness $color-olive;
+
+        h5 {
+          font-size: $font-size-sm;
+          font-weight: bold;
+        }
+
+        > button {
+          @include flex-row(0.25rem);
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &.exit {
+            color: $color-olive;
+          }
+        }
+      }
+
+      .players {
+        margin: $base-padding 0;
+        h6 {
+          font-size: $base-font-size;
+        }
+      }
+
+      form {
+        @include flex-col($base-padding);
+        align-items: flex-start;
+        justify-content: center;
+        padding: $base-padding 0;
+
+        .grouped-inputs {
+          @include flex-col;
+        }
+
+        @include breakpoint-md {
+          .grouped-inputs {
+            @include flex-row;
+          }
+        }
+
+        .input {
+          @include flex-col(0);
+
+          label {
+            font-weight: 600;
+          }
+
+          input,
+          select {
+            border: solid $base-border-thickness $color-grey;
+            padding: $base-padding $base-padding;
+            border-radius: $base-border-radius2D;
+            width: 100%;
+          }
+        }
+
+        .checkbox {
+          @include flex-col(0.5rem);
+          margin-right: 2rem;
+
+          input[type="checkbox"] {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+
+        > button {
+          @include pillStyleSolid;
+          align-self: flex-start;
+          margin-top: $base-padding;
+        }
+      }
+    }
+
+    #challenger-matches {
+      .standings-report {
+        > h6 {
+          font-size: $font-size-sm;
+          font-weight: 600;
+          text-align: center;
+          text-transform: uppercase;
+          padding-bottom: 0.15rem;
+          border-bottom: solid $base-border-thickness $color-olive;
+        }
+
+        ul {
+          @include flex-col(0);
+
+          .md-header {
+            font-weight: 600;
+            display: none;
+          }
+
+          @include breakpoint-md {
+            .md-header {
+              display: grid;
+              grid-template-columns: 3fr 3fr 2fr 1fr 2fr 2fr 2fr 2fr;
+              column-gap: $base-padding;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+
+    #team-withdrawal-form {
+      margin-top: $base-padding;
+      border-radius: 0.25rem;
+      background-color: rgba(255, 0, 0, 0.088);
+      padding: 1rem;
+      @include flex-col(0);
+      justify-content: left;
+
+      h6 {
+        font-size: $font-size-sm;
+        color: $color-error;
+        font-weight: 600;
+        padding-left: 0.5rem;
+      }
+
+      form {
+        @include flex-col($base-padding);
+        justify-content: left;
+
+        @include breakpoint-md {
+          @include flex-row($base-padding);
+          justify-content: left;
+        }
+
+        select {
+          color: $color-error;
+          border-radius: $base-border-radius;
+          padding: $base-padding;
+        }
+
+        button {
+          @include editButton($color-error);
+          justify-content: left;
+          font-size: $font-size-sm;
+        }
+      }
+    }
+  }
+
+  .error {
+    text-align: left;
+  }
+
+  .undone {
+    font-weight: 600;
+    text-decoration: underline;
+    @include flex-row(0.25rem);
+    color: $color-error;
+  }
+
+  .withdrawn {
+    opacity: 40%;
+    color: $color-error;
+    font-style: italic;
+    text-decoration: line-through;
+    background-color: rgba(255, 0, 0, 0.088);
+  }
+}

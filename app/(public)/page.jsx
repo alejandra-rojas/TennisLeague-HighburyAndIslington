@@ -1,10 +1,8 @@
 "use client";
 import "../styles/Public/styles.scss";
 import { useLenis } from "@studio-freight/react-lenis";
-import BallElement from "../components/BallElement";
 import CourtHero from "../components/CourtHero";
 import LatestResults from "../components/PublicData/LatestResults";
-import MenuBtnMobile from "../components/MenuBtnMobile";
 
 export default function Home() {
   //   const lenis = useLenis((scroll) => {
@@ -16,9 +14,18 @@ export default function Home() {
       <CourtHero />
       <div className="image-hero"></div>
 
-      <div>Latest results</div>
-      <LatestResults />
-      <MenuBtnMobile />
+      <div className="board">
+        <div className="main-text">
+          The league is designed to give match practice for external LTA
+          competitions and to build confidence generally for all competitive
+          play.
+        </div>
+      </div>
+
+      <div className="latest-container">
+        <div className="title">Latest results</div>
+        <LatestResults />
+      </div>
     </main>
   );
 }

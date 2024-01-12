@@ -117,9 +117,8 @@
 }
 
 footer {
-  margin-top: 200px;
   padding-top: 80px;
-  padding-bottom: 200px;
+  padding-bottom: 80px;
   background-color: $color-darkGreen;
 
   .baseline {
@@ -133,5 +132,125 @@ footer {
     background-color: white;
     height: 50px;
     width: 24px;
+  }
+
+  //QUESTIONS
+  .questions {
+    color: white;
+    padding: 4rem 2rem;
+
+    h5 {
+      font-size: 30px;
+      font-weight: 800;
+      padding-bottom: 1rem;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 600;
+      width: 380px;
+    }
+  }
+}
+
+//NOTICE BOARD
+.main-text {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 110%;
+  padding: 30px 0 70px;
+  color: $color-darkGreen;
+  width: 95%;
+}
+
+@include breakpoint-md {
+  .main-text {
+    font-size: 45px;
+    line-height: 100%;
+    padding: 40px 10px 140px;
+    width: 75%;
+  }
+}
+
+@include breakpoint-xl {
+  .main-text {
+    font-size: 52px;
+    line-height: 110%;
+    width: 70%;
+  }
+}
+
+.accent-container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  margin-bottom: -22px;
+
+  .accent {
+    // border-radius: 25px;
+    background-color: $color-brightGreen;
+    border: 1px solid $color-darkGreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 12px;
+
+    .text {
+      width: fit-content;
+      text-align: center;
+      font-size: 18px;
+      line-height: 100%;
+      letter-spacing: -10%;
+      font-weight: 600;
+      color: $color-darkGreen;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+  }
+}
+
+@include breakpoint-md {
+  .accent-container {
+    margin-top: 160px;
+  }
+}
+
+.latest-container {
+  padding: 0;
+
+  .title {
+    -webkit-text-stroke: 1px $color-darkGreen;
+    color: transparent;
+    letter-spacing: -2px;
+    font-size: 90px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 80%;
+    margin-bottom: 45px;
+  }
+
+  @include breakpoint-md {
+    .title {
+      letter-spacing: -2px;
+      font-size: 110px;
+      font-weight: 800;
+      line-height: 85%;
+    }
+  }
+
+  @include breakpoint-xl {
+    .title {
+      line-height: 100%;
+    }
+  }
+}
+
+@include breakpoint-xl {
+  .latest-container {
+    padding: 0 50px;
   }
 }

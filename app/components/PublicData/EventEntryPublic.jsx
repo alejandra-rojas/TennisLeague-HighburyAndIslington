@@ -16,7 +16,7 @@ function EventEntryPublic({
 }) {
   const queryClient = useQueryClient();
   const [showEventModal, setShowEventModal] = useState(false);
-  const [expandEvent, setExpandEvent] = useState(true);
+  const [expandEvent, setExpandEvent] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleMouseEnter = () => {
@@ -69,7 +69,7 @@ function EventEntryPublic({
           <header>
             <div className="event-details">
               <h4>{event.event_name}</h4>
-              <div className="event-info">
+              {/* <div className="event-info">
                 <div
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
@@ -85,7 +85,7 @@ function EventEntryPublic({
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
             <button
               onClick={() => setExpandEvent((prevState) => !prevState)}
