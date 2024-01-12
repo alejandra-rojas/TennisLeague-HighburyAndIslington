@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import MenuBtnMobile from "./MenuBtnMobile";
 
 function Footer() {
   return (
@@ -20,12 +19,10 @@ function Footer() {
         <div className="questions">
           <h5>Any questions?</h5>
           <p>
-            Get in touch with Sarah Mulligan, <br /> Co-ordinator of the Women's
+            Get in touch with Sarah Mulligan, <br /> Co-ordinator of the Womens
             League.
           </p>
         </div>
-
-        {/* <MenuBtnMobile /> */}
       </footer>
     </>
   );
