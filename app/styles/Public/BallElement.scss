@@ -44,8 +44,14 @@ body {
 .circles__text--1 {
   font-size: 110px;
   font-family: var(--font-circle-1);
-  font-weight: var(--font-weight-circle-1);
+  font-weight: 600;
   fill: $color-darkGreen;
+}
+
+@include breakpoint-md {
+  .circles__text--1 {
+    font-weight: 400;
+  }
 }
 
 img {
