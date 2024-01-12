@@ -117,13 +117,13 @@
 }
 
 footer {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 55px;
+  padding-bottom: 55px;
   background-color: $color-darkGreen;
 
   .baseline {
     background-color: white;
-    height: 24px;
+    height: 23px;
     display: flex;
   }
 
@@ -131,13 +131,13 @@ footer {
     margin: 0 auto;
     background-color: white;
     height: 50px;
-    width: 24px;
+    width: 23px;
   }
 
   //QUESTIONS
   .questions {
     color: white;
-    padding: 4rem 2rem;
+    padding: 2rem 1rem;
 
     h5 {
       font-size: 30px;
@@ -150,6 +150,18 @@ footer {
       font-weight: 600;
       width: 380px;
     }
+  }
+}
+
+@include breakpoint-md {
+  footer {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .questions {
+    color: white;
+    padding: 4rem 2rem;
   }
 }
 
