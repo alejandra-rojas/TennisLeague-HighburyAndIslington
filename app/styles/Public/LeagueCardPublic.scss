@@ -57,7 +57,7 @@
         @include breakpoint-md {
           .days-left {
             padding: $base-padding $base-padding2X;
-            max-width: auto;
+            max-width: 100%;
           }
         }
 
