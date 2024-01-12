@@ -8,17 +8,18 @@
   grid-template-rows: repeat(24, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  min-height: 740px;
+  height: auto;
   border-radius: 32px;
   position: relative;
 
   @include breakpoint-md {
     .court {
+      min-height: 740px;
     }
   }
 
   .line {
-    opacity: 15%;
+    opacity: 10%;
   }
 
   .div1 {
@@ -75,11 +76,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   color: white;
   // width: 96%;
   // max-width: 1020px;
-  padding: 4% 2%;
+  padding: 15% 2% 20%;
   text-align: center;
 
   .text-container {
@@ -143,5 +144,12 @@
         color: $color-darkGreen;
       }
     }
+  }
+}
+
+@include breakpoint-md {
+  .details {
+    padding: 10% 6%;
+    gap: 2rem;
   }
 }

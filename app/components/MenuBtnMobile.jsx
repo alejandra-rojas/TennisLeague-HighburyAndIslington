@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { BallOutline, CSSRotation, TextRotating } from "./Icons";
 import RotatingText from "./RotatingText";
@@ -8,19 +8,24 @@ function MenuBtnMobile() {
   const svgRef = useRef(null);
   const ballRef = useRef(null);
   const lenis = useLenis();
-  console.log(lenis);
+  const [isBottom, setIsBottom] = useState(false);
 
-  /*   useEffect(() => {
-    gsap.set(svgRef.current, { transformOrigin: "50% 50%" });
+  const checkScrollBottom = () => {
+    // Check if the user has scrolled to the bottom
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setIsBottom(true);
+    } else {
+      setIsBottom(false);
+    }
+  };
 
-    // Initial rotation
-    gsap.to(svgRef.current, {
-      rotation: 360,
-      repeat: -1,
-      duration: 35,
-      ease: "linear",
-    });
-  }, []); */
+  useEffect(() => {
+    window.addEventListener("scroll", checkScrollBottom);
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollBottom);
+    };
+  }, []);
 
   useEffect(() => {
     gsap.set(svgRef.current, { transformOrigin: "50% 50%" });
@@ -28,7 +33,7 @@ function MenuBtnMobile() {
       lenis.on("scroll", () => {
         gsap.to(svgRef.current, {
           duration: 0.1, // Fast response to scroll change
-          rotation: `+=${lenis.velocity}`, // Rotate based on scroll velocity
+          rotation: `+=${lenis.velocity * 0.5}`, // Rotate based on scroll velocity
         });
       });
     }
@@ -39,14 +44,42 @@ function MenuBtnMobile() {
       lenis.on("scroll", () => {
         gsap.to(ballRef.current, {
           duration: 0.1,
-          rotation: `-=${lenis.velocity * 1.5}`,
+          rotation: `-=${lenis.velocity * 0.7}`,
         });
       });
     }
   }, [lenis]);
 
+  useEffect(() => {
+    // Define the hover animation
+    const hoverAnim = gsap.to([svgRef.current, ballRef.current], {
+      rotation: 360,
+      duration: 5,
+      ease: "linear",
+      paused: true,
+      repeat: -1, // Infinite repeat
+    });
+
+    // Function to start the animation on hover
+    const startHover = () => hoverAnim.play();
+
+    // Function to pause the animation on hover out
+    const stopHover = () => hoverAnim.pause();
+
+    // Add event listeners
+    const circumfElem = document.querySelector(".circumf");
+    circumfElem.addEventListener("mouseenter", startHover);
+    circumfElem.addEventListener("mouseleave", stopHover);
+
+    // Clean up event listeners
+    return () => {
+      circumfElem.removeEventListener("mouseenter", startHover);
+      circumfElem.removeEventListener("mouseleave", stopHover);
+    };
+  }, []);
+
   return (
-    <span className="circumf">
+    <span className={`circumf ${isBottom ? "bottom-[50px] top-auto" : ""}`}>
       <svg className="text" width="100%" height="100%" viewBox="0 0 1400 1400">
         <def>
           <path

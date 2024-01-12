@@ -1,35 +1,53 @@
 @import "../Variables/Variables.scss";
 
 .back-clubsite {
-  display: none;
+  display: inline-block;
 }
 
-@include breakpoint-md {
-  .back-clubsite {
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    font-size: 12px;
-    text-transform: uppercase;
-    padding: 10px;
-    background-color: white;
-  }
+.back-clubsite {
+  font-family: Arial, Helvetica, sans-serif;
+  // display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 10px;
+  background-color: white;
 }
 
 .main-layout-client {
   width: 100%;
   max-width: 1432px;
-  padding: 0 24px;
+  padding: 0 12px;
+}
+
+@include breakpoint-md {
+  .main-layout-client {
+    padding: 0 24px;
+  }
 }
 
 .image-hero {
   width: 90%;
-  height: 500px;
+  height: 280px;
   background-image: url(../../../public/1.png);
   background-size: cover;
   border-radius: 24px;
-  margin: -107px auto 50px;
+  margin: -50px auto 50px;
   display: flex;
   z-index: 99;
+}
+
+@include breakpoint-md {
+  .image-hero {
+    height: 300px;
+    margin: -75px auto 50px;
+  }
+}
+
+@include breakpoint-xl {
+  .image-hero {
+    height: 500px;
+    margin: -100px auto 50px;
+  }
 }
 
 //CSS ROTATION- https://www.kirupa.com/animations/spinning_circular_text.htm

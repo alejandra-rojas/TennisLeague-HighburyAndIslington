@@ -2,19 +2,51 @@
 
 // CLIENT NAVBAR COMPONENT
 #web-header {
-  padding: 1.5rem;
+  padding: 0 1.5rem;
+  color: $color-darkGreen;
 
-  #primary-navigation {
-    color: $color-darkGreen;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 320px 1fr 320px;
-    grid-auto-columns: 1fr;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
+  #client-mobile-navbar {
+    margin: 0 24px;
 
+    .circumf {
+      z-index: 1000;
+      position: fixed;
+      bottom: 150px;
+      right: -30px;
+      cursor: pointer;
+      transition: all 1s ease;
+    }
+
+    @include breakpoint-md {
+      .circumf {
+        top: 0;
+        right: 0;
+      }
+    }
+    .circumf.bottom-position {
+      /* New styles for bottom position */
+      top: auto; /* Reset top */
+      bottom: 250px; /* Position it at the bottom */
+      right: 0px; /* Adjust the right position as needed */
+    }
+  }
+
+  @include breakpoint-xl {
+    #client-mobile-navbar {
+      display: none;
+    }
+  }
+
+  #client-desktop-navigation {
+    display: none; // color: $color-darkGreen;
+    // display: grid;
+    // gap: 1rem;
+    // grid-template-columns: 320px 1fr 320px;
+    // grid-auto-columns: 1fr;
+    // align-content: center;
+    // justify-content: center;
+    // align-items: center;
+    // justify-items: center;
     @include breakpoint-xl {
       // max-height: 7rem;
       @include flex-row();
