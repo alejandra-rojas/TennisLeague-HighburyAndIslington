@@ -66,7 +66,12 @@ function EventEntryPublic({
     <>
       <section id="event-entry">
         {!showEventModal && (
-          <header>
+          <header
+            onClick={() => setExpandEvent((prevState) => !prevState)}
+            aria-expanded={expandEvent}
+            aria-controls="eventDetailsSection"
+            aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
+          >
             <div className="event-details">
               <h4>{event.event_name}</h4>
               {/* <div className="event-info">
@@ -87,18 +92,13 @@ function EventEntryPublic({
                 </div>
               </div> */}
             </div>
-            <button
-              onClick={() => setExpandEvent((prevState) => !prevState)}
-              aria-expanded={expandEvent}
-              aria-controls="eventDetailsSection"
-              aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
-            >
+            <div>
               {expandEvent ? (
                 <ArrowsPointingInIcon width={25} />
               ) : (
                 <ArrowsPointingOutIcon width={25} />
               )}
-            </button>
+            </div>
           </header>
         )}
 

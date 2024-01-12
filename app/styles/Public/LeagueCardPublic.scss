@@ -49,8 +49,16 @@
           border-radius: $base-border-radius;
           font-weight: bold;
           color: white;
-          padding: $base-padding $base-padding2X;
+          padding: $base-padding 1rem;
           background-color: $color-darkGreen;
+          max-width: 110px;
+        }
+
+        @include breakpoint-md {
+          .days-left {
+            padding: $base-padding $base-padding2X;
+            max-width: auto;
+          }
         }
 
         .league-stats {
@@ -193,6 +201,7 @@
     margin: $base-padding 0.9rem;
     @include flex-row($base-padding);
     justify-content: space-between;
+    cursor: pointer;
 
     @include breakpoint-md {
       @include flex-row;
