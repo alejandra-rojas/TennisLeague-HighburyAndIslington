@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import "../styles/Root.scss";
 import localFont from "next/font/local";
 import Link from "next/link";
@@ -10,7 +11,11 @@ const myFont = localFont({ src: "../../fonts/Humane-VF.ttf" });
 
 export default function ClientNavbar() {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.8, duration: 0.5, ease: "easeIn" }}
+    >
       <div id="client-mobile-navbar">
         <div className="header-item pt-12 pb-12 ">
           <h1 className={`text-4xl font-extrabold text-center`}>
@@ -58,6 +63,6 @@ export default function ClientNavbar() {
           <BallElement />
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }
