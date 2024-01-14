@@ -30,7 +30,7 @@ export default function Home() {
       <div className="board">
         <motion.div
           className="main-text"
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ delay: 1, duration: 0.45 }}
           viewport={{ once: true }}
