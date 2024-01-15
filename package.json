@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@studio-freight/hamo": "^0.6.28",
     "@studio-freight/react-lenis": "^0.0.40",
     "@supabase/auth-helpers-nextjs": "^0.8.1",
     "@supabase/supabase-js": "^2.38.2",
