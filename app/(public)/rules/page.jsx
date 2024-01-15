@@ -40,10 +40,10 @@ export default function Rules() {
               another time should be arranged to finish the match.
             </p>
           </div> */}
-            <div className="rule">
+            <div className="reports">
               <h5>Match Reports</h5>
               <p>
-                Winners to report the results via email to{" "}
+                Winners to report the results to{" "}
                 <a href="mailto:HTCdoublesleagues@gmail.com">
                   HTCdoublesleagues@gmail.com
                 </a>{" "}
@@ -51,6 +51,8 @@ export default function Rules() {
                 <Link href={"/report-results"}>
                   <span className="link">this form</span>.{" "}
                 </Link>
+              </p>{" "}
+              <p className="bold">
                 Please report the scores even if the match is unfinished.
               </p>
             </div>
