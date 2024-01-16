@@ -1,37 +1,73 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import React from "react";
 
 export default function Rules() {
+  const column = {
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.3,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      transition: {
+        when: "afterChildren",
+      },
+    },
+  };
+
+  const item = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 },
+  };
+
   return (
     <main id="rules">
-      <h2>RULES </h2>
-      <div>
-        <h3>
-          ​The current league runs from
-          <br /> Mon 7th August &apos;23 to Mon 29th January &apos;24 <br />
-        </h3>
-        <h4>Mid-way date: Mon 6th November &apos;23</h4>
-      </div>
+      <motion.div
+        className="header-container"
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.4, ease: "easeIn" }}
+      >
+        <h2>RULES </h2>
+        <div>
+          <h3>
+            ​The current league runs from
+            <br /> Mon 7th August &apos;23 to Mon 29th January &apos;24 <br />
+          </h3>
+          <h4>Mid-way date: Mon 6th November &apos;23</h4>
+        </div>
+      </motion.div>
 
       <div className="rules-container">
         <div className="left-rules">
-          <div className="column1">
-            <div className="rule">
+          <motion.div
+            className="column1"
+            initial="hidden"
+            animate="visible"
+            variants={column}
+          >
+            <motion.div className="rule" variants={item}>
               <h5>Format</h5>
               <p>
                 Each pair plays all other pairs in their division. Each pair is
                 responsible for organising their own matches, agreeing dates
                 with opponents, booking courts, etc.
               </p>
-            </div>
-            <div className="rule">
+            </motion.div>
+            <motion.div className="rule" variants={item}>
               <h5>Scoring</h5>
               <p>
                 Best of 3 tiebreak sets. If time is short and both pairs agree,
                 a championship tiebreak (first to 10, 2 points ahead) can be
                 played instead of a 3rd set.
               </p>
-            </div>
+            </motion.div>
             {/* <div className="rule">
             <h5>Awarded Points</h5>
             <p>
@@ -40,7 +76,7 @@ export default function Rules() {
               another time should be arranged to finish the match.
             </p>
           </div> */}
-            <div className="reports">
+            <motion.div className="reports" variants={item}>
               <h5>Match Reports</h5>
               <p>
                 Winners to report the results to{" "}
@@ -55,7 +91,7 @@ export default function Rules() {
               <p className="bold">
                 Please report the scores even if the match is unfinished.
               </p>
-            </div>
+            </motion.div>
             {/* <div className="rule">
             <h5>Bonus Points </h5>
             <p>
@@ -79,17 +115,22 @@ export default function Rules() {
               If challenged, you do not have to accept.
             </p>
           </div> */}
-          </div>
-          <div className="column2">
-            <div className="rule">
+          </motion.div>
+          <motion.div
+            className="column2"
+            initial="hidden"
+            animate="visible"
+            variants={column}
+          >
+            <motion.div className="rule" variants={item}>
               <h5>Injuries</h5>
               <p>
                 If a player is injured during play and unable to continue the
                 match, they will concede that match and the points from the
                 uncompleted set/s go to the other pair.
               </p>
-            </div>
-            <div className="rule">
+            </motion.div>
+            <motion.div className="rule" variants={item}>
               <h5>Withdrawals</h5>
               <p>
                 If a pair has to withdraw from the league, all points won in
@@ -97,8 +138,8 @@ export default function Rules() {
                 completing three (or four) matches by the mid-way date will not
                 be affected.
               </p>
-            </div>
-            <div className="rule">
+            </motion.div>
+            <motion.div className="rule" variants={item}>
               <h5>Winners</h5>
               <p>
                 If there is a tie for top place at the end, set points are worth
@@ -106,17 +147,22 @@ export default function Rules() {
                 tie, the prize goes to the pair who won the match between the
                 pairs concerned.
               </p>
-            </div>
-            <div className="rule">
+            </motion.div>
+            <motion.div className="rule" variants={item}>
               <h5>Prize</h5>
               <p>
                 The prize for the winning pair in each division is a can of
                 balls per player.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-        <div className="right-rules">
+        <motion.div
+          className="right-rules"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: "easeIn" }}
+        >
           <div className="points">
             <h5>Awarded Points</h5>
             <p className="bold">
@@ -146,7 +192,7 @@ export default function Rules() {
               If challenged, you do not have to accept.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   );
