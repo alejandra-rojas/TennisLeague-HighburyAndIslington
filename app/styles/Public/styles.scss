@@ -96,52 +96,56 @@
 //END RotatingText Component
 
 #rules {
-  // width: 75vw;
-  // max-width: 1225px;
-  display: flex;
   text-align: center;
   color: #0f2d32;
+  display: flex;
   align-items: center;
 
-  h2 {
-    text-align: center;
-    text-transform: uppercase;
-    background-color: $color-creamBlue;
-    border-radius: 90px;
-    padding: 4px 13px 2px;
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 20px;
-    display: block;
-    position: relative;
-    width: fit-content;
-  }
+  .header-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
-  h3 {
-    letter-spacing: -2px;
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 32px;
-    padding-top: 1rem;
-  }
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      background-color: $color-creamBlue;
+      border-radius: 90px;
+      padding: 4px 13px 2px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 20px;
+      display: block;
+      position: relative;
+      width: fit-content;
+    }
 
-  h4 {
-    letter-spacing: -1px;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 20px;
-    padding-top: 1rem;
-  }
-
-  @include breakpoint-md {
     h3 {
-      font-size: 37px;
-      line-height: 45px;
+      letter-spacing: -2px;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 32px;
+      padding-top: 1rem;
     }
 
     h4 {
-      font-size: 24px;
-      line-height: 35px;
+      letter-spacing: -1px;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 20px;
+      padding-top: 1rem;
+    }
+
+    @include breakpoint-md {
+      h3 {
+        font-size: 37px;
+        line-height: 45px;
+      }
+
+      h4 {
+        font-size: 24px;
+        line-height: 35px;
+      }
     }
   }
 
