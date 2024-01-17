@@ -1,29 +1,24 @@
 "use client";
 import "../styles/Public/styles.scss";
 import { motion } from "framer-motion";
-import { useLenis } from "@studio-freight/react-lenis";
 import CourtHero from "../components/CourtHero";
 import LatestResults from "../components/PublicData/LatestResults";
 
 export default function Home() {
-  //   const lenis = useLenis((scroll) => {
-  //     console.log(scroll);
-  //   });
-
   return (
     <main className="main-layout-client">
       <CourtHero />
       <motion.div
-        className="image-hero"
+        className="image-hero pointer-events-none"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.2, ease: "easeIn" }}
       >
         <motion.img
           src="/1.png"
           initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.45 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.45 }}
         ></motion.img>
       </motion.div>
 
@@ -32,7 +27,7 @@ export default function Home() {
           className="main-text"
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1, duration: 0.45 }}
+          transition={{ delay: 0.4, duration: 0.45 }}
           viewport={{ once: true }}
         >
           The league is designed to give match practice for external LTA
@@ -41,8 +36,28 @@ export default function Home() {
         </motion.div>
       </div>
 
-      <div className="latest-container">
-        <div className="title">Latest results</div>
+      <div className="latest-container" id="latest-results">
+        <div className="relative">
+          <div className="title ">Latest results</div>
+          {/* <motion.div
+            variants={{
+              hidden: { left: 0 },
+              visible: { left: "100%" },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.5, delay: 1, ease: "easeIn" }}
+            style={{
+              position: "absolute",
+              top: 6,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              background: "#0f2d32",
+              zIndex: 20,
+            }}
+          ></motion.div> */}
+        </div>
         <LatestResults />
       </div>
     </main>
