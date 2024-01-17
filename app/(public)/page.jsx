@@ -13,12 +13,14 @@ export default function Home() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.2, ease: "easeIn" }}
+        viewport={{ once: true }}
       >
         <motion.img
           src="/1.png"
           initial={{ opacity: 0, scale: 1.1 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.45 }}
+          viewport={{ once: true }}
         ></motion.img>
       </motion.div>
 
