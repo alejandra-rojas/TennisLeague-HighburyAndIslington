@@ -8,7 +8,7 @@ function SmoothScroll({ children }) {
   // });
 
   return (
-    <ReactLenis root options={{ smoothTouch: true }}>
+    <ReactLenis root options={{ smoothTouch: true, syncTouch: true }}>
       {children}
     </ReactLenis>
   );
