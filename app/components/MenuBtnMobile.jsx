@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { BallOutline, CSSRotation, TextRotating } from "./Icons";
-import RotatingText from "./RotatingText";
 import { useLenis } from "@studio-freight/react-lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function MenuBtnMobile() {
+  gsap.registerPlugin(ScrollTrigger);
   const svgRef = useRef(null);
   const ballRef = useRef(null);
   const lenis = useLenis();
