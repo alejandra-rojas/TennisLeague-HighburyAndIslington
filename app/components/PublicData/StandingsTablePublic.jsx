@@ -1,6 +1,5 @@
 import React from "react";
 import ChallengerMatchesPublic from "./ChallengerMatchesPublic";
-import MatchesReports from "@/app/(admin)/admin/events/draw/MatchesReports";
 import MatchesReportsPublic from "./MatchesReportsPublic";
 
 function StandingsTablePublic({
