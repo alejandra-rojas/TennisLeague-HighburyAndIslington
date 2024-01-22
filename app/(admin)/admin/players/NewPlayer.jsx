@@ -1,4 +1,4 @@
-import SubmitButton from "@/app/components/SubmitButton";
+import SubmitButton from "../../components/SubmitButton";
 import { createPlayer } from "./actions";
 
 function NewPlayer() {

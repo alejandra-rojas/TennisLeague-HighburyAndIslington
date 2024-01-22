@@ -3,9 +3,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 //Components
-import LoginNavbar from "@/app/components/LoginNavbar";
+import LoginNavbar from "../../components/LoginNavbar";
 import AdminNavbar from "../../components/AdminNavbar";
-import AuthPrimaryNavbar from "@/app/components/AuthPrimaryNavbar";
+import AuthPrimaryNavbar from "../../components/AuthPrimaryNavbar";
 
 export default async function AdminLayout({ children }) {
   const supabase = createServerComponentClient({ cookies });

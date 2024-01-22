@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 
 //Components
-import AuthPrimaryNavbar from "@/app/components/AuthPrimaryNavbar";
+import AuthPrimaryNavbar from "../../components/AuthPrimaryNavbar";
 
 export default async function AuthLayout({ children }) {
   const supabase = createServerComponentClient({ cookies });
