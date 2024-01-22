@@ -1,27 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
-
 import "../styles/Public/styles.scss";
 import { motion } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import LatestResults from "../components/PublicData/LatestResults";
-import { getHomepage } from "@/sanity/sanity-queries";
 
 export default function Home() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const homepageData = await getHomepage();
-      setData(homepageData);
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <main className="main-layout-client">
-      <CourtHero data={data} />
+      <CourtHero />
       <motion.div
         className="image-hero pointer-events-none"
         initial={{ opacity: 0 }}
@@ -46,7 +32,9 @@ export default function Home() {
           transition={{ delay: 0.4, duration: 0.45 }}
           viewport={{ once: true }}
         >
-          {data.callout}
+          The league is designed to give match practice for external LTA
+          competitions and to build confidence generally for all competitive
+          play.
         </motion.div>
       </div>
 
