@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@portabletext/react": "^3.0.11",
+    "@sanity/client": "^6.11.1",
+    "@sanity/image-url": "^1.0.2",
     "@studio-freight/hamo": "^0.6.28",
     "@studio-freight/react-lenis": "^0.0.40",
     "@supabase/auth-helpers-nextjs": "^0.8.1",
@@ -18,6 +21,7 @@
     "axios": "^1.6.0",
     "dotenv": "^16.3.1",
     "framer-motion": "^10.18.0",
+    "groq": "^3.25.0",
     "gsap": "^3.12.4",
     "i": "^0.3.7",
     "next": "^14.1.0",
