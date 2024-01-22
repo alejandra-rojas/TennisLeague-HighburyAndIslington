@@ -3,7 +3,7 @@ import "../styles/Public/court.scss";
 import { motion } from "framer-motion";
 import { useLenis } from "@studio-freight/react-lenis";
 
-function CourtHero({ data }) {
+function CourtHero() {
   const lenis = useLenis((scroll) => {
     //console.log(scroll);
   });
@@ -23,7 +23,8 @@ function CourtHero({ data }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5, ease: "easeIn" }}
           >
-            {data.title}
+            Highbury Tennis Club runs a thriving doubles league for its women
+            members
           </motion.div>
           <motion.div
             className="subtitle"
@@ -31,7 +32,8 @@ function CourtHero({ data }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
-            {data.subtitle}
+            There are two club leagues a year with four divisions spanning all
+            abilities.
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
