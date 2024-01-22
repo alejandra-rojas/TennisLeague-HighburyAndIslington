@@ -5,7 +5,7 @@ import "../styles/Public/styles.scss";
 import { motion } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import LatestResults from "../components/PublicData/LatestResults";
-import { getHomepage } from "@/sanity/sanity-queries";
+import { getHomepage } from "../../sanity/sanity-queries";
 
 export default function Home() {
   const [data, setData] = useState([]);

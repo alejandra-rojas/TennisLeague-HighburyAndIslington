@@ -1,8 +1,7 @@
 "use client";
 import { useRect } from "@studio-freight/hamo";
 import { useRef, useState, useEffect } from "react";
-import { getHomepage } from "@/sanity/sanity-queries";
-
+import { getHomepage } from "../../sanity/sanity-queries";
 function Footer() {
   const ref = useRef();
   const [rectRef, rect] = useRect();

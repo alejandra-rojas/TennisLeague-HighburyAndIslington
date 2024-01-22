@@ -1,5 +1,5 @@
 //Components
-import ClientNavbar from "@/app/components/ClientNavbar";
+import ClientNavbar from "../components/ClientNavbar";
 import "../styles/Public/styles.scss";
 import Footer from "../components/Footer";
 import Link from "next/link";
