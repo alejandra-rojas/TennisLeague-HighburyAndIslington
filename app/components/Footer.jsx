@@ -1,20 +1,29 @@
 "use client";
 import { useRect } from "@studio-freight/hamo";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { getHomepage } from "@/sanity/sanity-queries";
 
 function Footer() {
   const ref = useRef();
   const [rectRef, rect] = useRect();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const homepageData = await getHomepage();
+      setData(homepageData);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <div ref={rectRef} className="footer">
         <div className="accent-container ">
           <div className="accent">
-            <div className="text">
-              The next league will run from Mon 7th Aug to Mon 29th Jan 2024.
-              Join in!
-            </div>
+            <div className="text">{data.next_league}</div>
           </div>
         </div>
         <footer>
