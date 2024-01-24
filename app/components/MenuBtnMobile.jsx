@@ -34,7 +34,7 @@ function MenuBtnMobile() {
       scrollTrigger: {
         trigger: wrapRef.current,
         scrub: 1,
-        start: "top top",
+        start: "top top+=900",
         end: "+=10000",
       },
     });
