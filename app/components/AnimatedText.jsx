@@ -2,14 +2,14 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const defaultAnimations = {
-  hidden: { y: 50 },
+  hidden: { y: 100 },
   visible: { y: 0 },
   //visible: { opacity: 1, y: 0, transition: { duration: 1 } },
 };
 
-function AnimatedText({ text, className, once }) {
+function AnimatedText({ text, className }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.8 });
+  const isInView = useInView(ref, { amount: 0.8, once: true });
   return (
     <p className={className}>
       <span className="sr-only">{text}</span>
@@ -21,7 +21,7 @@ function AnimatedText({ text, className, once }) {
         aria-hidden
       >
         {text.split(" ").map((word, index) => (
-          <span key={index} className="inline-block">
+          <span key={index} className="overflow-hidden inline-block">
             {word.split("").map((char, index) => (
               <motion.span
                 key={index}

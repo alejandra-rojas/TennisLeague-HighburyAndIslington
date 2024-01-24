@@ -33,9 +33,9 @@ export default function Home() {
         <motion.img
           src="/1.png"
           initial={{ opacity: 0, scale: 1.1 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1, amount: 0.8 }}
           transition={{ delay: 0.4, duration: 0.45 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
         ></motion.img>
       </motion.div>
 
@@ -45,7 +45,7 @@ export default function Home() {
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.45 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
         >
           {data.callout}
         </motion.div>
@@ -54,7 +54,7 @@ export default function Home() {
       <div className="latest-container" id="latest-results">
         <div className="relative">
           <div>
-            <AnimatedText text="Latest Results" className="title" once />
+            <AnimatedText text="Latest Results" className="title" />
           </div>
           {/* <motion.div
             variants={{
