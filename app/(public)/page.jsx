@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import LatestResults from "../components/PublicData/LatestResults";
 import { getHomepage } from "../../sanity/sanity-queries";
+import AnimatedText from "../components/AnimatedText";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -52,7 +53,9 @@ export default function Home() {
 
       <div className="latest-container" id="latest-results">
         <div className="relative">
-          <div className="title ">Latest results</div>
+          <div>
+            <AnimatedText text="Latest Results" className="title" once />
+          </div>
           {/* <motion.div
             variants={{
               hidden: { left: 0 },
