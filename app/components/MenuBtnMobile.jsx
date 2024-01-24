@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useLenis } from "@studio-freight/react-lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function MenuBtnMobile() {
   gsap.registerPlugin(ScrollTrigger);
+  const wrapRef = useRef(null);
   const svgRef = useRef(null);
   const ballRef = useRef(null);
-  const lenis = useLenis();
+
   const [isBottom, setIsBottom] = useState(false);
 
   const checkScrollBottom = () => {
@@ -28,58 +28,62 @@ function MenuBtnMobile() {
   }, []);
 
   useEffect(() => {
-    gsap.set(svgRef.current, { transformOrigin: "50% 50%" });
-    if (lenis) {
-      lenis.on("scroll", () => {
-        gsap.to(svgRef.current, {
-          duration: 0.1, // Fast response to scroll change
-          rotation: `+=${lenis.velocity * 0.5}`, // Rotate based on scroll velocity
-        });
-      });
-    }
-  }, [lenis]);
+    gsap.set([svgRef.current, ballRef.current], { transformOrigin: "50% 50%" });
 
-  useEffect(() => {
-    if (lenis) {
-      lenis.on("scroll", () => {
-        gsap.to(ballRef.current, {
-          duration: 0.1,
-          rotation: `-=${lenis.velocity * 0.7}`,
-        });
-      });
-    }
-  }, [lenis]);
+    const rotation = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapRef.current,
+        scrub: 1,
+        start: "top top",
+        end: "+=10000",
+      },
+    });
 
-  useEffect(() => {
-    // Define the hover animation
+    rotation
+      .to(svgRef.current, {
+        rotation: 360 * 5,
+        duration: 0.1,
+        ease: "linear",
+      })
+      .to(
+        ballRef.current,
+        { rotation: -360 * 5, duration: 0.1, ease: "linear" },
+        "<"
+      );
+
+    return () => {
+      rotation.kill();
+    };
+  }, []);
+
+  /*   useEffect(() => {
     const hoverAnim = gsap.to([svgRef.current, ballRef.current], {
       rotation: 360,
-      duration: 5,
+      duration: 4,
       ease: "linear",
+      scrub: 1,
       paused: true,
       repeat: -1, // Infinite repeat
     });
 
-    // Function to start the animation on hover
     const startHover = () => hoverAnim.play();
-
-    // Function to pause the animation on hover out
     const stopHover = () => hoverAnim.pause();
 
-    // Add event listeners
     const circumfElem = document.querySelector(".circumf");
     circumfElem.addEventListener("mouseenter", startHover);
     circumfElem.addEventListener("mouseleave", stopHover);
 
-    // Clean up event listeners
     return () => {
       circumfElem.removeEventListener("mouseenter", startHover);
       circumfElem.removeEventListener("mouseleave", stopHover);
     };
-  }, []);
+  }, []); */
 
   return (
-    <span className={`circumf ${isBottom ? "bottom-[50px] top-auto" : ""}`}>
+    <span
+      ref={wrapRef}
+      className={`circumf ${isBottom ? "bottom-[50px] top-auto" : ""}`}
+    >
       <svg className="text" width="100%" height="100%" viewBox="0 0 1400 1400">
         <def>
           <path
