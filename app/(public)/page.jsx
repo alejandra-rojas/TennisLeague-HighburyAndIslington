@@ -1,20 +1,18 @@
 "use client";
 import "../styles/Public/styles.scss";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 
 import { motion, useInView } from "framer-motion";
 import CourtHero from "../components/CourtHero";
+import ImageHero from "../components/ImageHero";
 import LatestResults from "../components/PublicData/LatestResults";
 import { getHomepage } from "../../sanity/sanity-queries";
 import AnimatedText from "../components/AnimatedText";
 
-const imageAnimation = {
-  hidden: { opacity: 0, scale: 1.1 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-};
-
 export default function Home() {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.65, once: true });
 
@@ -22,6 +20,7 @@ export default function Home() {
     const fetchData = async () => {
       const homepageData = await getHomepage();
       setData(homepageData);
+      setIsLoading(false);
     };
 
     fetchData();
@@ -30,21 +29,7 @@ export default function Home() {
   return (
     <main className="main-layout-client">
       <CourtHero data={data} />
-      <motion.div
-        className="image-hero pointer-events-none"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.2, ease: "easeIn" }}
-        viewport={{ once: true }}
-      >
-        <motion.img
-          ref={ref}
-          src="/1.png"
-          variants={imageAnimation}
-          animate={isInView ? "visible" : "hidden"}
-          viewport={{ once: false }}
-        ></motion.img>
-      </motion.div>
+      {isLoading ? <div></div> : <ImageHero data={data} />}
 
       <div className="board">
         <motion.div
