@@ -20,7 +20,7 @@ function AnimatedText({ text, className }) {
         transition={{ staggerChildren: 0.07 }}
         aria-hidden
       >
-        {text.split(" ").map((word, index) => (
+        {text.split(" ").map((word, index, array) => (
           <span key={index} className="overflow-hidden inline-block">
             {word.split("").map((char, index) => (
               <motion.span
@@ -31,7 +31,9 @@ function AnimatedText({ text, className }) {
                 {char}
               </motion.span>
             ))}
-            <span className="inline-block">&nbsp;</span>
+            {index !== array.length - 1 && (
+              <span className="inline-block">&nbsp;</span>
+            )}
           </span>
         ))}
       </motion.span>
