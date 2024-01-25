@@ -1,3 +1,3 @@
 export default function PastLeagues() {
-  return <div>page</div>;
+  return <div></div>;
 }
