@@ -17,11 +17,11 @@ function Footer() {
   return (
     <>
       <div className="footer">
-        <div className="accent-container ">
+        {/* <div className="accent-container ">
           <div className="accent">
             <div className="text">{data.next_league}</div>
           </div>
-        </div>
+        </div> */}
         <footer>
           <div className="baseline"></div>
           <div className="center-line"></div>

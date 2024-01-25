@@ -16,7 +16,7 @@ const imageAnimation = {
 export default function Home() {
   const [data, setData] = useState([]);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5, once: true });
+  const isInView = useInView(ref, { amount: 0.65, once: true });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,6 +83,12 @@ export default function Home() {
           ></motion.div> */}
         </div>
         <LatestResults />
+      </div>
+
+      <div className="accent-container ">
+        <div className="accent">
+          <div className="text">{data.next_league}</div>
+        </div>
       </div>
     </main>
   );
