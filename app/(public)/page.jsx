@@ -1,15 +1,22 @@
 "use client";
 import "../styles/Public/styles.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import LatestResults from "../components/PublicData/LatestResults";
 import { getHomepage } from "../../sanity/sanity-queries";
 import AnimatedText from "../components/AnimatedText";
 
+const imageAnimation = {
+  hidden: { opacity: 0, scale: 1.1 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
+
 export default function Home() {
   const [data, setData] = useState([]);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.5, once: true });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,10 +38,10 @@ export default function Home() {
         viewport={{ once: true }}
       >
         <motion.img
+          ref={ref}
           src="/1.png"
-          initial={{ opacity: 0, scale: 1.1 }}
-          whileInView={{ opacity: 1, scale: 1, amount: 0.8 }}
-          transition={{ delay: 0.4, duration: 0.45 }}
+          variants={imageAnimation}
+          animate={isInView ? "visible" : "hidden"}
           viewport={{ once: false }}
         ></motion.img>
       </motion.div>
