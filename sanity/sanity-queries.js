@@ -7,6 +7,10 @@ export async function getHomepage() {
       _createdAt,
       title,
       subtitle,
+      "image": {
+        "url": image.asset->url,
+        "alt": image.alt
+      },
       callout,
       next_league
     }[0]`);
