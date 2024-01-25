@@ -194,6 +194,11 @@ export default function Rules() {
           </div>
         </motion.div>
       </div>
+      <div className="accent-container ">
+        <div className="accent">
+          <div className="text">next league data</div>
+        </div>
+      </div>
     </main>
   );
 }

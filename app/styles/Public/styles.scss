@@ -98,6 +98,12 @@
   color: #0f2d32;
   display: flex;
   align-items: center;
+  //width: 100%;
+  //max-width: 1432px;
+  padding: 0 12px;
+  background-color: #f5f5f5;
+  margin-bottom: 370px; // this needs to be variable to screen
+  border-radius: 1.5rem;
 
   .header-container {
     display: flex;
@@ -262,6 +268,8 @@
 
   @include breakpoint-xl {
     .rules-container {
+      max-width: 1280px;
+
       margin-top: 3rem;
       text-align: left;
       display: grid;
@@ -338,10 +346,10 @@
 }
 
 .footer {
-  z-index: -1;
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: -1;
 
   footer {
     padding-top: 55px;
