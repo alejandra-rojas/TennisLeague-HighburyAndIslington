@@ -17,6 +17,15 @@
       transition: all 1s ease;
     }
 
+    .mobile-modal {
+      position: fixed;
+      z-index: 200;
+      background-color: $color-brightGreen;
+      height: 80px;
+      width: 80px;
+      overflow: hidden;
+    }
+
     @include breakpoint-md {
       .circumf {
         top: 0;
