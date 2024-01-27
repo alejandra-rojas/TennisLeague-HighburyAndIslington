@@ -206,7 +206,7 @@ const variants = {
     top: "0px",
     right: "0px",
     borderRadius: "0",
-    transition: { duration: 1.25, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 1.25, ease: [0.33, 1, 0.68, 1] },
   },
   closed: {
     width: "80px",
@@ -214,6 +214,6 @@ const variants = {
     top: "20px",
     right: "20px",
     borderRadius: "50px",
-    transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
 };

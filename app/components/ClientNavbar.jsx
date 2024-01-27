@@ -15,6 +15,7 @@ export default function ClientNavbar() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.8, duration: 0.5, ease: "easeIn" }}
+      viewport={{ once: true }}
     >
       <div id="client-mobile-navbar">
         <div className="header-item pt-12 pb-12 ">
