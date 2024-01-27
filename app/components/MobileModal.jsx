@@ -1,10 +1,32 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import { AnimatePresence, motion as m } from "framer-motion";
+import Link from "next/link";
 
-const menuItems = [
-  { title: "About", slug: "past-leagues" },
-  { title: "Rules", slug: "rules" },
-  { title: "Past Results", slug: "past-leagues" },
+const menu = [
+  {
+    title: "Homepage",
+    slug: "/",
+    description: "Back to the beginning",
+    images: ["contact1.jpg", "contact2.jpg"],
+  },
+  {
+    title: "About",
+    slug: "past-leagues",
+    description: "More about the league",
+    images: ["contact1.jpg", "contact2.jpg"],
+  },
+  {
+    title: "Rules",
+    slug: "rules",
+    description: "The rules of the game",
+    images: ["contact1.jpg", "contact2.jpg"],
+  },
+  {
+    title: "Results",
+    slug: "past-leagues",
+    description: "Previous results",
+    images: ["contact1.jpg", "contact2.jpg"],
+  },
 ];
 
 const animation = {
@@ -24,8 +46,8 @@ function MobileModal({ handleClose }) {
       >
         close
       </m.button>
-      <div className="navigation ">
-        {menuItems.map((menuItem, index) => (
+      <nav className="menu">
+        {menu.map((menuItem, index) => (
           <m.div
             variants={animation}
             animate="enter"
@@ -33,12 +55,65 @@ function MobileModal({ handleClose }) {
             initial="initial"
             custom={index}
             key={index}
-            className="menu-item"
+            className="menu__item"
           >
-            <a href={menuItem.slug}>{menuItem.title}</a>
+            <Link
+              href={menuItem.slug}
+              onClick={handleClose}
+              aria-label={`Go to the ${menuItem.title} page`}
+              className="menu__item-link"
+            >
+              {menuItem.title}
+            </Link>
+            <div class="marquee">
+              <div class="marquee__inner-wrap">
+                <div class="marquee__inner" aria-hidden="true">
+                  <span>1</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>2</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>3</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>4</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>1</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>2</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>3</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                  <span>4</span>
+                  <div
+                    class="marquee__img"
+                    style={{ backgroundImage: `url('/1.png')` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
           </m.div>
         ))}
-      </div>
+      </nav>
     </div>
   );
 }
