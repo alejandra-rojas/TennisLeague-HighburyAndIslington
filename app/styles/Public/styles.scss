@@ -508,27 +508,3 @@
     padding: 0 50px;
   }
 }
-
-///
-/// MOBILE MODAL
-///
-///
-.modal-wrapper {
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  .navigation {
-    font-size: 50px;
-    line-height: 100%;
-    font-weight: 700;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-}

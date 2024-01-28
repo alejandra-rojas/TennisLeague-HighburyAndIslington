@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion as m } from "framer-motion";
 import Link from "next/link";
+import MenuItem from "../components/MenuItem";
+import "../styles/Public/ModalMenu.scss";
+import Image from "next/image";
 
 const menu = [
   {
@@ -37,7 +40,7 @@ const animation = {
 
 function MobileModal({ handleClose }) {
   return (
-    <div className="modal-wrapper">
+    <div className="menu">
       <m.button
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -46,9 +49,17 @@ function MobileModal({ handleClose }) {
       >
         close
       </m.button>
-      <nav className="menu">
-        {menu.map((menuItem, index) => (
-          <m.div
+      <nav className="menu--body">
+        {menu.map((menuItem, index) => {
+          return <MenuItem data={menuItem} index={index} key={index} />;
+        })}
+      </nav>
+    </div>
+  );
+}
+
+export default MobileModal;
+/*        <m.div
             variants={animation}
             animate="enter"
             exit="exit"
@@ -65,57 +76,4 @@ function MobileModal({ handleClose }) {
             >
               {menuItem.title}
             </Link>
-            <div class="marquee">
-              <div class="marquee__inner-wrap">
-                <div class="marquee__inner" aria-hidden="true">
-                  <span>1</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>2</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>3</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>4</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>1</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>2</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>3</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                  <span>4</span>
-                  <div
-                    class="marquee__img"
-                    style={{ backgroundImage: `url('/1.png')` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </m.div>
-        ))}
-      </nav>
-    </div>
-  );
-}
-
-export default MobileModal;
+          </m.div> */

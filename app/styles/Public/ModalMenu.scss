@@ -1,0 +1,123 @@
+///
+/// MOBILE MODAL
+///
+
+.menu {
+  position: fixed;
+  display: flex;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .menu--body {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+
+    .el {
+      border-top: 1px solid black;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      perspective: 80vw;
+      transform-origin: top;
+      &:last-of-type {
+        border-bottom: 1px solid black;
+      }
+      &:hover {
+        .outer {
+          .container {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    a,
+    p {
+      font-size: 8vw;
+      letter-spacing: -3px;
+      text-transform: uppercase;
+      line-height: 100%;
+      font-weight: 700;
+      margin: 0px;
+    }
+
+    .outer {
+      display: flex;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      will-change: top;
+      .inner {
+        background-color: black;
+        position: absolute;
+        white-space: nowrap;
+        height: 100%;
+        top: 100%;
+        display: flex;
+        will-change: top;
+        .container {
+          display: flex;
+          align-items: center;
+          animation: slider 12s linear infinite;
+          transition: opacity 0.3s;
+          position: relative;
+
+          opacity: 0;
+
+          &:nth-of-type(2) {
+            transition-delay: -4s;
+          }
+          &:nth-of-type(3) {
+            transition-delay: -6s;
+          }
+          .imageContainer {
+            height: 6vw;
+            width: 16vw;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3vw;
+            margin-left: 1vw;
+            margin-right: 1vw;
+            display: flex;
+            svg {
+              object-fit: cover;
+            }
+          }
+          p {
+            color: white;
+          }
+        }
+      }
+      /* .background {
+        //   background-color: #d3fd50;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 100%;
+      } */
+    }
+  }
+}
+
+@keyframes slider {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
