@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/Public/court.scss";
 import { motion } from "framer-motion";
 import { useLenis } from "@studio-freight/react-lenis";
+import Link from "next/link";
 
 function CourtHero({ data }) {
   const lenis = useLenis((scroll) => {
@@ -39,7 +40,10 @@ function CourtHero({ data }) {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="buttons-container"
           >
-            <div className="button accent">Find out more</div>
+            <Link href={"/rules"}>
+              <div className="button accent">Rules</div>
+            </Link>
+
             <button
               className="button"
               onClick={() => lenis.scrollTo("#latest-results", { lerp: 0.04 })}

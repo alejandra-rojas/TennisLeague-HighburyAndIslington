@@ -9,25 +9,20 @@ const menu = [
   {
     title: "Homepage",
     slug: "/",
-    description: "Back to the beginning",
+    description: "Back to ",
     images: ["contact1.jpg", "contact2.jpg"],
   },
-  {
-    title: "About",
-    slug: "past-leagues",
-    description: "More about the league",
-    images: ["contact1.jpg", "contact2.jpg"],
-  },
+
   {
     title: "Rules",
     slug: "rules",
-    description: "The rules of the game",
+    description: "Rules ",
     images: ["contact1.jpg", "contact2.jpg"],
   },
   {
     title: "Results",
     slug: "past-leagues",
-    description: "Previous results",
+    description: "Previous ",
     images: ["contact1.jpg", "contact2.jpg"],
   },
 ];

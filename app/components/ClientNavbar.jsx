@@ -36,11 +36,6 @@ export default function ClientNavbar() {
             </h2>
             <ul>
               <li>
-                <Link href={"/report-results"} aria-label="Go to the Home page">
-                  About
-                </Link>
-              </li>
-              <li>
                 <Link href={"/rules"} aria-label="Go to About page">
                   Rules
                 </Link>
