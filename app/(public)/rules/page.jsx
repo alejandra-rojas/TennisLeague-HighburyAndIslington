@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import React from "react";
+import NextLeagueCallout from "../../components/NextLeagueCallout";
 
 export default function Rules() {
   const column = {
@@ -191,11 +192,7 @@ export default function Rules() {
           </div>
         </motion.div>
       </div>
-      <div className="accent-container ">
-        <div className="accent">
-          <div className="text">next league data</div>
-        </div>
-      </div>
+      <NextLeagueCallout />
     </main>
   );
 }

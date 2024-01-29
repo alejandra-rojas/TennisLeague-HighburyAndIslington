@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import ImageHero from "../components/ImageHero";
 import LatestResults from "../components/PublicData/LatestResults";
+import NextLeagueCallout from "../components/NextLeagueCallout";
 import { getHomepage } from "../../sanity/sanity-queries";
 import AnimatedText from "../components/AnimatedText";
 
@@ -69,12 +70,7 @@ export default function Home() {
         </div>
         <LatestResults />
       </div>
-
-      <div className="accent-container ">
-        <div className="accent">
-          <div className="text">{data.next_league}</div>
-        </div>
-      </div>
+      <NextLeagueCallout />
     </main>
   );
 }
