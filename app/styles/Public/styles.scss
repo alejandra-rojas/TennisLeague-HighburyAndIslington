@@ -270,8 +270,7 @@
   @include breakpoint-xl {
     .rules-container {
       max-width: 1280px;
-
-      margin-top: 3rem;
+      margin: 3rem 2.5rem 0;
       text-align: left;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
