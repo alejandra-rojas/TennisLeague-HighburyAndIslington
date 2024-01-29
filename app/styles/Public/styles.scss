@@ -170,14 +170,16 @@
     }
 
     .reports {
-      border-radius: 2rem;
-      padding: 3rem 3rem 4rem 2rem;
-      background-color: white;
-      width: 100%;
+      transform: translateX(-16px);
+      border-radius: 2.5rem;
+      padding: 2.5rem 2rem;
+      background-color: $color-lightgreen;
+      width: 99%;
       display: flex;
       flex-direction: column;
       gap: 1.6rem;
       color: $color-accentDark;
+      margin: 1rem 0;
 
       h5 {
         font-size: 36px;
@@ -313,14 +315,22 @@
       }
 
       .reports {
-        border-radius: 4rem;
-        padding: 3.2rem 2.5rem;
-        background-color: white;
-        width: 100%;
+        border-radius: 3rem;
+        padding: 4rem 2rem;
+        width: 95%;
         display: flex;
         flex-direction: column;
         gap: 1.6rem;
-        color: $color-accentDark;
+
+        a {
+          text-decoration: underline;
+        }
+
+        a:hover {
+          background-color: $color-darkGreen;
+          color: white;
+          transition: all 0.3s ease;
+        }
       }
 
       .right-rules {
@@ -384,6 +394,14 @@
         font-size: 20px;
         font-weight: 600;
         width: 380px;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+
+      a:hover {
+        color: $color-brightGreen;
       }
     }
   }

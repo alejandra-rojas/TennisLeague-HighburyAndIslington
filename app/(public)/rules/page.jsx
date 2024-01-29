@@ -77,16 +77,13 @@ export default function Rules() {
             </p>
           </div> */}
             <motion.div className="reports" variants={item}>
-              <h5>Match Reports</h5>
+              <h5>Match Reporting</h5>
               <p>
                 Winners to report the results to{" "}
                 <a href="mailto:HTCdoublesleagues@gmail.com">
                   HTCdoublesleagues@gmail.com
                 </a>{" "}
-                or using{" "}
-                <Link href={"/report-results"}>
-                  <span className="link">this form</span>.{" "}
-                </Link>
+                and the scores will be entered on this website.
               </p>{" "}
               <p className="bold">
                 Please report the scores even if the match is unfinished.

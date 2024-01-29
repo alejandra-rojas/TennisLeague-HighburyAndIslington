@@ -29,8 +29,10 @@ function Footer() {
           <div className="questions">
             <h5>Any questions?</h5>
             <p>
-              Get in touch with Sarah Mulligan, <br /> Co-ordinator of the
-              Womens League.
+              <a href="mailto:ladiesdoublesleague@gmail.com" target="_blank">
+                Get in touch
+              </a>{" "}
+              with Sarah Mulligan, <br /> Co-ordinator of the Womens League.
             </p>
           </div>
         </footer>
