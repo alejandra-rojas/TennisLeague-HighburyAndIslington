@@ -58,8 +58,7 @@ const LeagueCardPublic = ({
     message = "Today is the last day to complete a match";
   } else {
     // No days left, either league hasn't started or has already ended
-    message =
-      "Once all the results are entered, set the league to finished via the edit league modal.";
+    message = "The last day to play has passed";
   }
 
   //GET ALL TEAMS PARTICIPATING IN THIS LEAGUE
