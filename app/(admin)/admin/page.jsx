@@ -5,48 +5,18 @@ import { useState, Suspense } from "react";
 import Loading from "./loading";
 import Leagues from "./leagues/Leagues";
 import LeagueModal from "./leagues/LeagueModal";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import SecondaryAdminNav from "../../components/admin/SecondaryAdminNav";
 
 export default function Admin() {
+  const pathname = usePathname();
   const [showModal, setShowModal] = useState(false);
+  const isActive = (href) => pathname === href;
 
   return (
     <main>
-      <section id="leagues-layout-header">
-        <a href="#leaguescontent" className="sr-only">
-          Skip to leagues section content
-        </a>
-        <section id="admin-secondary-navigation-leagues">
-          <nav aria-labelledby="admin-secondary-navigation-leagues-label">
-            <div
-              id="admin-secondary-navigation-leagues-label"
-              className="sr-only"
-            >
-              Navigation for Leagues Section
-            </div>
-            <ul>
-              <li>
-                <a to={"ongoing"} aria-label="Go to ongoing leagues page">
-                  Current
-                </a>
-              </li>
-              <li>
-                <a to={"finished"} aria-label="Go to finished leagues page">
-                  Finished
-                </a>
-              </li>
-
-              <li>
-                <a onClick={() => setShowModal(true)} className="create-league">
-                  <PlusCircleIcon width={35} />
-                  <span>
-                    New <span className="">league</span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </section>
-      </section>
+      <SecondaryAdminNav setShowModal={setShowModal} />
 
       {showModal && <LeagueModal mode={"create"} setShowModal={setShowModal} />}
 
