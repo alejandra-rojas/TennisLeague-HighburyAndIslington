@@ -12,7 +12,6 @@ import EventRegistration from "./registration/EventRegistration";
 import StandingsTable from "./draw/StandingsTable";
 
 function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
-  
   const queryClient = useQueryClient();
   const [showEventModal, setShowEventModal] = useState(false);
   const [expandEvent, setExpandEvent] = useState(false);
@@ -65,7 +64,7 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
     <>
       <section id="event-entry">
         {!showEventModal && (
-          <header>
+          <header onClick={() => setExpandEvent((prevState) => !prevState)}>
             <div className="event-details">
               <h4>{event.event_name}</h4>
               <button
@@ -75,12 +74,7 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
                 Edit event
               </button>
             </div>
-            <button
-              onClick={() => setExpandEvent((prevState) => !prevState)}
-              aria-expanded={expandEvent}
-              aria-controls="eventDetailsSection"
-              aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
-            >
+            <button>
               {expandEvent ? (
                 <ArrowsPointingInIcon width={25} />
               ) : (
