@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import ChallengerMatchesPublic from "./ChallengerMatchesPublic";
 import MatchesReportsPublic from "./MatchesReportsPublic";
 
@@ -13,6 +13,7 @@ function StandingsTablePublic({
   //console.log(matchesData);
   //console.log(challengerMatches);
   //console.log(midmatches_needed)
+  const [showMatchesDetails, setShowMatchesDetails] = useState(false);
 
   let teamStats = [];
 
@@ -168,14 +169,27 @@ function StandingsTablePublic({
         </ul>
       </div>
 
-      <MatchesReportsPublic
-        matchesData={matchesData}
-        midway_point={midway_point}
-      />
-      <ChallengerMatchesPublic
-        registeredTeams={registeredTeams}
-        challengerMatches={challengerMatches}
-      />
+      <div
+        className="individualMatches-btn"
+        onClick={() => setShowMatchesDetails(!showMatchesDetails)}
+      >
+        {!showMatchesDetails
+          ? "click to expand individual match results"
+          : "close individual match results"}
+      </div>
+
+      {showMatchesDetails && (
+        <>
+          <MatchesReportsPublic
+            matchesData={matchesData}
+            midway_point={midway_point}
+          />
+          <ChallengerMatchesPublic
+            registeredTeams={registeredTeams}
+            challengerMatches={challengerMatches}
+          />
+        </>
+      )}
     </section>
   );
 }
