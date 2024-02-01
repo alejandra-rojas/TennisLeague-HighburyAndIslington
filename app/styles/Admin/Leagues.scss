@@ -19,29 +19,33 @@
     margin: 0 auto;
   }
 
-  nav {
-    @include flex-row($base-font-size);
-    flex-direction: row-reverse;
-    font-size: $font-size-sm;
-    ul {
-      @include flex-row($base-padding);
-      li:not(:last-child) {
-        @include pillStyle($base-font-size, $color-green);
+  #admin-secondary-navigation-leagues {
+    nav {
+      @include flex-row($base-font-size);
+      flex-direction: row-reverse;
+      font-size: $font-size-sm;
+      ul {
+        @include flex-row($base-padding);
+        li:nth-child(1),
+        li:nth-child(2) {
+          @include pillStyle($base-font-size, $color-green);
 
-        @include breakpoint-md {
-          font-size: 1.5rem;
+          @include breakpoint-md {
+            font-size: 1.2rem;
+            padding: 0.7rem 1rem;
+          }
+        }
+
+        .active {
+          background-color: $color-brightGreen !important;
+          pointer-events: none;
         }
       }
-      /* Styles for the li when its child a NavLink has the "active" class */
-      li:has(a.active) {
-        background-color: $color-green;
-        color: white;
-      }
-    }
 
-    @include breakpoint-md {
-      @include flex-row($base-font-size);
-      font-size: 1.5rem;
+      @include breakpoint-md {
+        @include flex-row($base-font-size);
+        font-size: 1.5rem;
+      }
     }
   }
 }
