@@ -24,13 +24,14 @@ const LatestResults = () => {
     ?.filter((league) => !league.isfinished)
     .sort((a, b) => new Date(a.starting_date) - new Date(b.starting_date));
 
+  //console.log(data);
   return (
     <>
       <section id="current-leagues">
         <section id="current-leagues-data">
           {/* <div>{JSON.stringify(data, null, 2)}</div>*/}
           <ul>
-            {unfinishedLeagues.map((league) => (
+            {data.map((league) => (
               <LeagueCardPublic key={league.id} {...league} />
             ))}
           </ul>

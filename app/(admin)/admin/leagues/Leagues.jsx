@@ -37,7 +37,7 @@ const Leagues = () => {
         <section id="current-leagues-data">
           {/* <div>{JSON.stringify(data, null, 2)}</div>*/}
           <ul>
-            {unfinishedLeagues.map((league) => (
+            {data.map((league) => (
               <LeagueCard key={league.id} {...league} />
             ))}
           </ul>
