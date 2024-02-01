@@ -24,7 +24,7 @@ h1 {
     justify-content: space-between;
     //   width: 75rem;
     width: 100%;
-    max-width: 87.5rem;
+    //max-width: 87.5rem;
     margin: 0 auto;
     padding: 0.8rem 24px 2rem;
   }
@@ -92,22 +92,33 @@ h1 {
     }
 
     ul {
-      @include flex-row($base-padding);
+      @include flex-row(0);
 
       li {
         font-size: $base-font-size;
         color: white;
+        opacity: 75%;
         padding: 0.4rem 0.8rem;
         border-top-left-radius: $base-font-size;
         border-top-right-radius: $base-font-size;
+        transition: background-color 0.5s ease;
 
         @include breakpoint-md {
           font-size: 1.5rem;
           padding: 0.5rem 1.65rem 0.25rem;
         }
         &:hover {
-          background-color: $color-darkgreen;
+          background-color: $color-brightGreen;
+          color: $color-darkGreen;
         }
+      }
+
+      .active {
+        opacity: 100%;
+        background-color: whitesmoke;
+        color: $color-darkGreen;
+        transition: all 1s inline;
+        pointer-events: none;
       }
     }
 

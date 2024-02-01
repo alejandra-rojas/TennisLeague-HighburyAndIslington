@@ -5,13 +5,13 @@
   flex-direction: column-reverse;
   gap: $base-padding;
   justify-content: space-between;
-  padding: $base-padding2X 0;
+  padding: 0 0 1.5rem;
 
   @include breakpoint-md {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
-    padding: 1rem 0 2.75rem;
+    padding: 2.5rem 0;
     //border-bottom: 0.1rem solid black;
   }
 
