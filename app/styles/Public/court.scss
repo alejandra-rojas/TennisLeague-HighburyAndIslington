@@ -116,6 +116,7 @@
     .buttons-container {
       display: flex;
       padding-top: 1rem;
+      gap: 0.5rem;
 
       .button {
         display: flex;
@@ -131,10 +132,23 @@
         line-height: 100%;
         background-color: $color-darkGreen;
         color: white;
+        transition: all 0.35s linear;
+      }
+
+      .button:hover {
+        color: $color-brightGreen;
+        transition: all 0.5s linear;
       }
 
       .accent {
         background-color: $color-brightGreen;
+        color: $color-darkGreen;
+      }
+
+      .accent:hover {
+        background-color: white;
+        transition: all 0.35s linear;
+        border-radius: 30px;
         color: $color-darkGreen;
       }
     }
