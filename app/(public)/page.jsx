@@ -4,7 +4,7 @@ import { getHomepage } from "../../sanity/sanity-queries";
 import { useEffect, useState, useRef, Suspense } from "react";
 import { motion } from "framer-motion";
 import CourtHero from "../components/public/CourtHero";
-import ImageHero from "../components/ImageHero";
+import ImageHero from "../components/public/ImageHero";
 import LatestResults from "../components/PublicData/LatestResults";
 import NextLeagueCallout from "../components/public/NextLeagueCallout";
 import AnimatedText from "../components/public/AnimatedText";
