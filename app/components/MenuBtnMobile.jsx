@@ -217,3 +217,24 @@ const variants = {
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
 };
+
+{
+  /* <motion.div
+            variants={{
+              hidden: { left: 0 },
+              visible: { left: "100%" },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            transition={{ duration: 0.5, delay: 1, ease: "easeIn" }}
+            style={{
+              position: "absolute",
+              top: 6,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              background: "#0f2d32",
+              zIndex: 20,
+            }}
+          ></motion.div> */
+}
