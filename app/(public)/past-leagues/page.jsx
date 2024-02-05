@@ -1,4 +1,4 @@
-import NextLeagueCallout from "../../components/NextLeagueCallout";
+import NextLeagueCallout from "../../components/public/NextLeagueCallout";
 
 export default function PastLeagues() {
   return (

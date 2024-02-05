@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import ImageHero from "../components/ImageHero";
 import LatestResults from "../components/PublicData/LatestResults";
-import NextLeagueCallout from "../components/NextLeagueCallout";
+import NextLeagueCallout from "../components/public/NextLeagueCallout";
 import AnimatedText from "../components/AnimatedText";
 
 export default function Home() {

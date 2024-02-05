@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import React from "react";
-import NextLeagueCallout from "../../components/NextLeagueCallout";
+import NextLeagueCallout from "../../components/public/NextLeagueCallout";
 
 export default function Rules() {
   const column = {
