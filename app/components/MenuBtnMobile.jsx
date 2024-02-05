@@ -1,10 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
+import { useWindowSize } from "@studio-freight/hamo";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
 import MobileModal from "../components/MobileModal";
 
 function MenuBtnMobile() {
+  /*   const size = useWindowSize();
+  const [isMobile, setIsMobile] = useState(null);
+
+  useEffect(() => {
+    setIsMobile(size.width <= 720);
+  }, [size.width]);
+ */
   gsap.registerPlugin(ScrollTrigger);
   const wrapRef = useRef(null);
   const svgRef = useRef(null);
@@ -201,19 +209,11 @@ export default MenuBtnMobile;
 // Modal Background animation
 const variants = {
   open: {
-    width: "100vw",
-    height: "100vh",
-    top: "0px",
-    right: "0px",
-    borderRadius: "0",
-    transition: { duration: 1.25, ease: [0.33, 1, 0.68, 1] },
+    y: 0,
+    transition: { duration: 0.75, ease: [0.33, 1, 0.68, 1] },
   },
   closed: {
-    width: "80px",
-    height: "80px",
-    top: "20px",
-    right: "20px",
-    borderRadius: "50px",
+    y: "-100%",
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
 };

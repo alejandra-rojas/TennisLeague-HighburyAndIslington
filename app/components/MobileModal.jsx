@@ -29,7 +29,7 @@ const menu = [
 
 const animation = {
   initial: { opacity: 0 },
-  enter: (index) => ({ opacity: 1, transition: { delay: 0.5 + index * 0.5 } }),
+  enter: (index) => ({ opacity: 1, transition: { delay: 0.75 + index * 0.5 } }),
   exit: { opacity: 0, duration: 0.75 },
 };
 
@@ -44,11 +44,11 @@ function MobileModal({ handleClose }) {
       >
         close
       </m.button>
-      <nav className="menu--body">
+      {/*  <nav className="menu--body">
         {menu.map((menuItem, index) => {
           return <MenuItem data={menuItem} index={index} key={index} />;
         })}
-      </nav>
+      </nav> */}
     </div>
   );
 }

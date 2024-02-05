@@ -78,14 +78,11 @@ function MenuItem({ data, index }) {
             {[...Array(2)].map((_, index) => {
               return (
                 <div key={index} className="container">
-                  {/* <div className="imageContainer">
-                  <BallOutline />
-                </div> */}
                   <p>{description}</p>
                   <div className="imageContainer">
                     <BallOutline />
                   </div>
-                  {/*  <p>{description}</p> */}
+                  <p>{description}</p>
                 </div>
               );
             })}
