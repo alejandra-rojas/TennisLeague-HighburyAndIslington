@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { getHomepage } from "../../sanity/sanity-queries";
+import { getHomepage } from "../../../sanity/sanity-queries";
 
 function NextLeagueCallout() {
   const [data, setData] = useState([]);

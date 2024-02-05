@@ -184,21 +184,24 @@ function MenuBtnMobile() {
       </span>
 
       <AnimatePresence>
-        <motion.div
-          className="mobile-modal"
-          variants={variants}
-          animate={menuIsActive ? "open" : "closed"}
-          initial="closed"
-        >
-          {menuIsActive && (
+        {menuIsActive && (
+          <motion.div
+            key="mobile-modal"
+            className="mobile-modal"
+            variants={variants}
+            initial="closed"
+            animate="open"
+            exit="exit"
+          >
             <MobileModal
+              menuIsActive={menuIsActive}
               handleClose={() => {
                 setMenuIsActive(false);
                 resetOpacity();
               }}
             />
-          )}
-        </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </>
   );
@@ -210,11 +213,15 @@ export default MenuBtnMobile;
 const variants = {
   open: {
     y: 0,
-    transition: { duration: 0.75, ease: [0.33, 1, 0.68, 1] },
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
   },
   closed: {
     y: "-100%",
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+  },
+  exit: {
+    y: "100%",
+    transition: { duration: 0.55, ease: [0.55, 0, 1, 0.45] },
   },
 };
 
