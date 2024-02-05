@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Public/court.scss";
+import "../../styles/Public/court.scss";
 import { motion } from "framer-motion";
 import { useLenis } from "@studio-freight/react-lenis";
 import Link from "next/link";

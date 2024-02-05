@@ -3,11 +3,11 @@ import "../styles/Public/styles.scss";
 import { getHomepage } from "../../sanity/sanity-queries";
 import { useEffect, useState, useRef, Suspense } from "react";
 import { motion } from "framer-motion";
-import CourtHero from "../components/CourtHero";
+import CourtHero from "../components/public/CourtHero";
 import ImageHero from "../components/ImageHero";
 import LatestResults from "../components/PublicData/LatestResults";
 import NextLeagueCallout from "../components/public/NextLeagueCallout";
-import AnimatedText from "../components/AnimatedText";
+import AnimatedText from "../components/public/AnimatedText";
 
 export default function Home() {
   const [data, setData] = useState([]);
