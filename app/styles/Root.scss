@@ -15,7 +15,7 @@
       grid-column-gap: 0px;
       grid-row-gap: 0px;
       align-items: center;
-      nav {
+      .navbar {
         grid-area: 1 / 1 / 2 / 2;
         display: none;
       }
@@ -30,7 +30,7 @@
 
     @include breakpoint-xl {
       .navbar-wrapper {
-        nav {
+        .navbar {
           display: flex;
           flex-direction: column;
 
@@ -61,7 +61,7 @@
       transition: all 1s ease;
     }
 
-    .mobile-modal {
+    .menu-modal--wrapper {
       position: fixed;
       z-index: 200;
       background-color: $color-brightGreen;

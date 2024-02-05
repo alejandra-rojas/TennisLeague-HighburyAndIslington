@@ -18,7 +18,11 @@ export default function ClientNavbar() {
     >
       <div id="client-navbar">
         <div className="navbar-wrapper pt-12 pb-12 ">
-          <nav role="navigation" aria-labelledby="primary-navigation">
+          <nav
+            className="navbar"
+            role="navigation"
+            aria-labelledby="primary-navigation"
+          >
             <h2 id="primary-site-navigation" className="sr-only">
               Home Site Navigation
             </h2>

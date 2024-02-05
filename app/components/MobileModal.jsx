@@ -40,7 +40,7 @@ export const item = {
 
 function MobileModal({ handleClose }) {
   return (
-    <div className="menu">
+    <div className="menu--modal">
       <m.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

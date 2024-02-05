@@ -187,7 +187,7 @@ function MenuBtnMobile() {
         {menuIsActive && (
           <motion.div
             key="mobile-modal"
-            className="mobile-modal"
+            className="menu-modal--wrapper"
             variants={variants}
             initial="closed"
             animate="open"
