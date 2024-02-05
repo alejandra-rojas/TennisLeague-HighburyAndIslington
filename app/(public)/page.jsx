@@ -14,9 +14,6 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.65, once: true });
-
   useEffect(() => {
     const fetchData = async () => {
       const homepageData = await getHomepage();
@@ -38,7 +35,6 @@ export default function Home() {
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.45 }}
-          viewport={{ once: false }}
         >
           {data.callout}
         </motion.div>
