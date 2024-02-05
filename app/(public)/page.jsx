@@ -1,13 +1,12 @@
 "use client";
 import "../styles/Public/styles.scss";
+import { getHomepage } from "../../sanity/sanity-queries";
 import { useEffect, useState, useRef, Suspense } from "react";
-
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import CourtHero from "../components/CourtHero";
 import ImageHero from "../components/ImageHero";
 import LatestResults from "../components/PublicData/LatestResults";
 import NextLeagueCallout from "../components/NextLeagueCallout";
-import { getHomepage } from "../../sanity/sanity-queries";
 import AnimatedText from "../components/AnimatedText";
 
 export default function Home() {
@@ -27,6 +26,7 @@ export default function Home() {
   return (
     <main className="main-layout-client">
       <CourtHero data={data} />
+
       {isLoading ? <div></div> : <ImageHero data={data} />}
 
       <div className="board">
@@ -35,6 +35,7 @@ export default function Home() {
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.45 }}
+          viewport={{ once: true }}
         >
           {data.callout}
         </motion.div>
