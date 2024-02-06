@@ -69,17 +69,6 @@
       transition: all 1s ease;
     }
 
-    .menu-modal--wrapper {
-      position: fixed;
-      z-index: 200;
-      background-color: $color-brightGreen;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-    }
-
     @include breakpoint-md {
       .circumf {
         top: 0;

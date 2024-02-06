@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
-import { useWindowSize } from "@studio-freight/hamo";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
 import MenuModal from "./public/MenuModal";
@@ -167,22 +166,13 @@ function MenuButton() {
 
       <AnimatePresence>
         {menuIsActive && (
-          <motion.div
-            key="mobile-modal"
-            className="menu-modal--wrapper"
-            variants={variants}
-            initial="closed"
-            animate="open"
-            exit="exit"
-          >
-            <MenuModal
-              menuIsActive={menuIsActive}
-              handleClose={() => {
-                setMenuIsActive(false);
-                resetOpacity();
-              }}
-            />
-          </motion.div>
+          <MenuModal
+            menuIsActive={menuIsActive}
+            handleClose={() => {
+              setMenuIsActive(false);
+              resetOpacity();
+            }}
+          />
         )}
       </AnimatePresence>
     </>
@@ -190,22 +180,6 @@ function MenuButton() {
 }
 
 export default MenuButton;
-
-// Modal Background animation
-const variants = {
-  open: {
-    y: 0,
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-  },
-  closed: {
-    y: "-100%",
-    transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
-  },
-  exit: {
-    y: "100%",
-    transition: { duration: 0.55, ease: [0.55, 0, 1, 0.45] },
-  },
-};
 
 {
   /* <motion.div
