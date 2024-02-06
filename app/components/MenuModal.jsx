@@ -38,7 +38,7 @@ export const item = {
   show: { y: "0%", transition: { duration: 0.3 } },
 };
 
-function MobileModal({ handleClose }) {
+function MenuModal({ handleClose }) {
   return (
     <div className="menu--modal">
       <m.button
@@ -77,4 +77,4 @@ function MobileModal({ handleClose }) {
   );
 }
 
-export default MobileModal;
+export default MenuModal;

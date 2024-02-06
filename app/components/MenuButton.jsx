@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useWindowSize } from "@studio-freight/hamo";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
-import MobileModal from "./MobileModal";
+import MenuModal from "./MenuModal";
 
 function MenuButton() {
   /*   const size = useWindowSize();
@@ -193,7 +193,7 @@ function MenuButton() {
             animate="open"
             exit="exit"
           >
-            <MobileModal
+            <MenuModal
               menuIsActive={menuIsActive}
               handleClose={() => {
                 setMenuIsActive(false);
