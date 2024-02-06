@@ -5,74 +5,133 @@ import "../../styles/Public/ModalMenu.scss";
 
 function MenuModal({ handleClose }) {
   return (
-    <m.div
-      key="menu-modal"
-      className="menu-modal--wrapper"
-      variants={backgroundAnimation}
-      initial="closed"
-      animate="open"
-      exit="exit"
-    >
-      <div className="menu--modal">
-        <m.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.25, duration: 0.45 }}
-          onClick={handleClose}
-        >
-          close
-        </m.button>
-        <m.nav
-          key="menu-body"
-          className="menu--body"
-          variants={navContainer}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-        >
-          <div className="overflow-hidden">
-            <m.a key="menu-item" variants={navItem}>
-              Menu
-            </m.a>
-          </div>
+    <>
+      <m.div
+        key="colored-background"
+        className="dark-background"
+        variants={darkcolorAnim}
+        initial="closed"
+        animate="open"
+        exit="exit"
+      ></m.div>
 
-          {menu.map((menuItem, index) => {
-            return (
-              <div
-                key={index}
-                className="modalMenu-link overflow-hidden"
-                onClick={handleClose}
-              >
-                <Link href={`${menuItem.slug}`}>
-                  <m.div key="menu-item" variants={navItem}>
-                    {menuItem.title}
-                  </m.div>
-                </Link>
-              </div>
-            );
-          })}
-        </m.nav>
+      <m.div
+        key="colored-background-two"
+        className="light-background"
+        variants={lightcolorAnim}
+        initial="closed"
+        animate="open"
+        exit="exit"
+      ></m.div>
+
+      <m.div
+        key="colored-background-two"
+        className="final-background"
+        variants={backgroundAnim}
+        initial="closed"
+        animate="open"
+        exit="exit"
+      ></m.div>
+
+      <div key="menu-modal" className="menu-modal--wrapper">
+        <div className="menu--modal">
+          <m.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.25, duration: 0.45 }}
+            onClick={handleClose}
+          >
+            close
+          </m.button>
+          <m.nav
+            key="menu-body"
+            className="menu--body"
+            variants={navContainer}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            <div key="menu-item-0" className="modalMenu-link overflow-hidden">
+              <m.a variants={navItem}>Menu</m.a>
+            </div>
+
+            {menu.map((menuItem, index) => {
+              return (
+                <div
+                  key={index}
+                  className="modalMenu-link overflow-hidden"
+                  onClick={handleClose}
+                >
+                  <Link href={`${menuItem.slug}`}>
+                    <m.div variants={navItem}>{menuItem.title}</m.div>
+                  </Link>
+                </div>
+              );
+            })}
+          </m.nav>
+        </div>
       </div>
-    </m.div>
+    </>
   );
 }
 
 export default MenuModal;
 
-const backgroundAnimation = {
+const darkcolorAnim = {
   open: {
     y: 0,
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.2, ease: [0.12, 0, 0.39, 0] },
   },
   closed: {
     y: "-100%",
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
   exit: {
-    y: "100%",
+    y: "-100%",
     transition: {
-      when: "afterChildren",
-      delay: 2,
+      delay: 1,
+      duration: 0.55,
+      ease: [0.55, 0, 1, 0.45],
+    },
+  },
+};
+
+const lightcolorAnim = {
+  open: {
+    y: 0,
+    transition: {
+      duration: 1.15,
+      delay: 0.15,
+      ease: [0.32, 0, 0.67, 0],
+    },
+  },
+  closed: {
+    y: "-100%",
+    transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+  },
+  exit: {
+    y: "-100%",
+    transition: {
+      delay: 0.75,
+      duration: 0.55,
+      ease: [0.55, 0, 1, 0.45],
+    },
+  },
+};
+
+const backgroundAnim = {
+  open: {
+    y: 0,
+    transition: { duration: 0.7, delay: 1.6, ease: [0.12, 0, 0.39, 0] },
+  },
+  closed: {
+    y: "-100%",
+    transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+  },
+  exit: {
+    y: "-100%",
+    transition: {
+      delay: 0.5,
       duration: 0.55,
       ease: [0.55, 0, 1, 0.45],
     },
@@ -84,23 +143,32 @@ export const navContainer = {
   show: {
     opacity: 1,
     transition: {
-      delayChildren: 0.5,
+      when: "beforeChildren",
+      delayChildren: 2.4,
       staggerChildren: 0.3,
+      staggerDirection: 1,
     },
   },
   exit: {
+    opacity: 0,
     transition: {
       when: "afterChildren",
       delayChildren: 0.1,
       staggerChildren: 0.1,
+      staggerDirection: -1,
     },
   },
 };
 
 export const navItem = {
   hidden: { y: "100%" },
-  show: { opacity: 1, y: "0%", transition: { duration: 0.3 } },
-  exit: { y: "100%", opacity: 0 },
+  show: {
+    y: "0%",
+    transition: {
+      ease: [0.55, 0, 1, 0.45],
+    },
+  },
+  exit: { y: "100%" },
 };
 
 const menu = [

@@ -3,54 +3,96 @@
 /// MOBILE MODAL
 ///
 
-.menu--modal {
+.dark-background {
   position: fixed;
-  display: flex;
-  z-index: 10;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  justify-content: space-between;
+  z-index: 197;
+  background-color: $color-darkGreen;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
 
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+.light-background {
+  position: fixed;
+  z-index: 198;
+  background-color: $color-brightGreen;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+.final-background {
+  position: fixed;
+  z-index: 199;
+  background-color: $color-grey;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
 
-  .menu--body {
-    // position: absolute;
-    // left: 50%;
-    // top: 50%;
-    // transform: translateX(-50%) translateY(-50%);
-    // width: 100%;
+.menu-modal--wrapper {
+  position: fixed;
+  z-index: 200;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  top: 0;
+  left: 0;
 
-    .modalMenu-link {
-      display: flex;
-      cursor: pointer;
-      perspective: 80vw;
-      transform-origin: top;
+  .menu--modal {
+    position: fixed;
+    display: flex;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+
+    button {
+      position: absolute;
+      top: 0;
+      right: 0;
     }
-  }
 
-  a,
-  p {
-    font-size: 15vw;
-    letter-spacing: -5px;
-    text-transform: uppercase;
-    font-weight: 800;
-    margin: 0px;
-    line-height: 95%;
-    -webkit-text-stroke: 0.75px $color-darkGreen;
-    color: transparent;
-    letter-spacing: -2px;
-    transition: all 0.25s ease;
-    display: inline-block;
-    overflow: hidden;
+    .menu--body {
+      // position: absolute;
+      // left: 50%;
+      // top: 50%;
+      // transform: translateX(-50%) translateY(-50%);
+      // width: 100%;
 
-    a:hover,
-    p:hover {
-      color: $color-darkGreen;
+      .modalMenu-link {
+        cursor: pointer;
+        display: inline-block;
+        // perspective: 80vw;
+        // transform-origin: top;
+      }
+    }
+
+    a,
+    p {
+      font-size: 15vw;
+      letter-spacing: -5px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin: 0px;
+      line-height: 95%;
+      -webkit-text-stroke: 0.75px $color-darkGreen;
+      color: transparent;
+      letter-spacing: -2px;
+      transition: all 0.25s ease;
+      display: inline-block;
+      overflow: hidden;
+
+      a:hover,
+      p:hover {
+        color: $color-darkGreen;
+      }
     }
   }
 }
