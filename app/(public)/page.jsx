@@ -23,11 +23,19 @@ export default function Home() {
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <main className="main-layout-client">
       <CourtHero data={data} />
 
-      {isLoading ? <div></div> : <ImageHero data={data} />}
+      <ImageHero data={data} />
 
       <div className="board">
         <motion.div
