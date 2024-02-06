@@ -5,6 +5,7 @@ import { useEffect, useState, useRef, Suspense } from "react";
 import { motion } from "framer-motion";
 import CourtHero from "../components/public/CourtHero";
 import ImageHero from "../components/public/ImageHero";
+import TextCallout from "../components/public/TextCallout";
 import LatestResults from "../components/PublicData/LatestResults";
 import NextLeagueCallout from "../components/public/NextLeagueCallout";
 import AnimatedText from "../components/public/AnimatedText";
@@ -37,17 +38,7 @@ export default function Home() {
 
       <ImageHero data={data} />
 
-      <div className="board">
-        <motion.div
-          className="main-text"
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.45 }}
-          viewport={{ once: true }}
-        >
-          {data.callout}
-        </motion.div>
-      </div>
+      <TextCallout data={data} />
 
       <div className="latest-container" id="latest-results">
         <div className="relative">
