@@ -1,18 +1,14 @@
-"use client";
-import { useRef, useState, useEffect } from "react";
-import { getHomepage } from "../../sanity/sanity-queries";
-
 function Footer() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const homepageData = await getHomepage();
-      setData(homepageData);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const homepageData = await getHomepage();
+  //     setData(homepageData);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <>
