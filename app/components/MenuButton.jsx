@@ -6,13 +6,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import MenuModal from "./public/MenuModal";
 
 function MenuButton() {
-  /*   const size = useWindowSize();
-  const [isMobile, setIsMobile] = useState(null);
-
-  useEffect(() => {
-    setIsMobile(size.width <= 720);
-  }, [size.width]);
- */
   gsap.registerPlugin(ScrollTrigger);
   const wrapRef = useRef(null);
   const svgRef = useRef(null);
@@ -96,17 +89,6 @@ function MenuButton() {
     };
   }, []);
 
-  // Open modal background
-  useEffect(() => {
-    if (menuIsActive) {
-      //document.body.style.position = "fixed";
-      // document.body.style.paddingRight = "15px";
-    } else {
-      //document.body.style.position = "unset";
-      //document.body.style.paddingRight = "0px";
-    }
-  }, [menuIsActive]);
-
   return (
     <>
       <span
@@ -114,7 +96,7 @@ function MenuButton() {
         className={`circumf ${isBottom ? "bottom-[50px] top-auto" : ""}`}
         onClick={() => {
           setMenuIsActive(true);
-          setOpacity(0); // Set opacity to 0 on click
+          setOpacity(0);
         }}
         style={{
           opacity: opacity,
