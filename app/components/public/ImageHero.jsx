@@ -2,13 +2,13 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const imageAnimation = {
-  hidden: { opacity: 0, scale: 1.1 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, scale: 1.2 },
+  visible: { opacity: 1, scale: 1, transition: { delay: 0.2, duration: 0.5 } },
 };
 
 function ImageHero({ data }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.25, once: true });
+  const isInView = useInView(ref, { amount: 0.3, once: true });
 
   return (
     <motion.div
