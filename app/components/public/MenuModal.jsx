@@ -1,6 +1,6 @@
 import { AnimatePresence, motion as m } from "framer-motion";
 import Link from "next/link";
-import "../styles/Public/ModalMenu.scss";
+import "../../styles/Public/ModalMenu.scss";
 
 const menu = [
   {

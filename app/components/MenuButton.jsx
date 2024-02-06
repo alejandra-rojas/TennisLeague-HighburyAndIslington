@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useWindowSize } from "@studio-freight/hamo";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
-import MenuModal from "./MenuModal";
+import MenuModal from "./public/MenuModal";
 
 function MenuButton() {
   /*   const size = useWindowSize();
