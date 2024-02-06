@@ -1,5 +1,5 @@
 "use client";
-import { AnimatePresence, motion as m } from "framer-motion";
+import { motion as m } from "framer-motion";
 import Link from "next/link";
 import "../../styles/Public/ModalMenu.scss";
 
@@ -8,7 +8,7 @@ function MenuModal({ handleClose }) {
     <m.div
       key="menu-modal"
       className="menu-modal--wrapper"
-      variants={variants}
+      variants={backgroundAnimation}
       initial="closed"
       animate="open"
       exit="exit"
@@ -23,13 +23,17 @@ function MenuModal({ handleClose }) {
           close
         </m.button>
         <m.nav
+          key="menu-body"
           className="menu--body"
-          variants={container}
+          variants={navContainer}
           initial="hidden"
           animate="show"
+          exit="exit"
         >
           <div className="overflow-hidden">
-            <m.a variants={item}>Menu</m.a>
+            <m.a key="menu-item" variants={navItem}>
+              Menu
+            </m.a>
           </div>
 
           {menu.map((menuItem, index) => {
@@ -40,7 +44,9 @@ function MenuModal({ handleClose }) {
                 onClick={handleClose}
               >
                 <Link href={`${menuItem.slug}`}>
-                  <m.div variants={item}>{menuItem.title}</m.div>
+                  <m.div key="menu-item" variants={navItem}>
+                    {menuItem.title}
+                  </m.div>
                 </Link>
               </div>
             );
@@ -53,23 +59,7 @@ function MenuModal({ handleClose }) {
 
 export default MenuModal;
 
-export const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.5,
-      staggerChildren: 0.3,
-    },
-  },
-};
-
-export const item = {
-  hidden: { y: "100%" },
-  show: { y: "0%", transition: { duration: 0.3 } },
-};
-
-const variants = {
+const backgroundAnimation = {
   open: {
     y: 0,
     transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
@@ -80,8 +70,37 @@ const variants = {
   },
   exit: {
     y: "100%",
-    transition: { duration: 0.55, ease: [0.55, 0, 1, 0.45] },
+    transition: {
+      when: "afterChildren",
+      delay: 2,
+      duration: 0.55,
+      ease: [0.55, 0, 1, 0.45],
+    },
   },
+};
+
+export const navContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.5,
+      staggerChildren: 0.3,
+    },
+  },
+  exit: {
+    transition: {
+      when: "afterChildren",
+      delayChildren: 0.1,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+export const navItem = {
+  hidden: { y: "100%" },
+  show: { opacity: 1, y: "0%", transition: { duration: 0.3 } },
+  exit: { y: "100%", opacity: 0 },
 };
 
 const menu = [
