@@ -3,9 +3,9 @@ import gsap from "gsap";
 import { useWindowSize } from "@studio-freight/hamo";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
-import MobileModal from "../components/MobileModal";
+import MobileModal from "./MobileModal";
 
-function MenuBtnMobile() {
+function MenuButton() {
   /*   const size = useWindowSize();
   const [isMobile, setIsMobile] = useState(null);
 
@@ -207,7 +207,7 @@ function MenuBtnMobile() {
   );
 }
 
-export default MenuBtnMobile;
+export default MenuButton;
 
 // Modal Background animation
 const variants = {

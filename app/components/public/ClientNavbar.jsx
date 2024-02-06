@@ -4,7 +4,7 @@ import "../../styles/Root.scss";
 import localFont from "next/font/local";
 import Link from "next/link";
 import BallElement from "./BallElement";
-import MenuBtnMobile from "../MenuBtnMobile";
+import MenuButton from "../MenuButton";
 
 const myFont = localFont({ src: "../../../fonts/Humane-VF.ttf" });
 
@@ -45,7 +45,7 @@ export default function ClientNavbar() {
             </Link>
           </h1>
 
-          <MenuBtnMobile />
+          <MenuButton />
         </div>
       </div>
     </motion.div>
