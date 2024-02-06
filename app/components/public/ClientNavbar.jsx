@@ -39,7 +39,7 @@ export default function ClientNavbar() {
               </li>
             </ul>
           </nav>
-          <h1 className={`H1 text-4xl font-extrabold text-center`}>
+          <h1 className={`H1 font-extrabold text-center`}>
             <Link href="/" aria-label="Go to the Home page">
               Highbury Doubles Leagues
             </Link>

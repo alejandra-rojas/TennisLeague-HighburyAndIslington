@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import "../../styles/Public/court.scss";
 import { motion } from "framer-motion";
