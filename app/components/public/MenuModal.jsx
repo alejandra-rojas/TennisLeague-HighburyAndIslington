@@ -8,8 +8,8 @@ function MenuModal({ handleClose }) {
     <>
       <m.div
         key="colored-background"
-        className="dark-background"
-        variants={darkcolorAnim}
+        className="third-layer__darkcolor"
+        variants={thirdLayer}
         initial="closed"
         animate="open"
         exit="exit"
@@ -17,8 +17,8 @@ function MenuModal({ handleClose }) {
 
       <m.div
         key="colored-background-two"
-        className="light-background"
-        variants={lightcolorAnim}
+        className="second-layer__lightcolor"
+        variants={secondLayer}
         initial="closed"
         animate="open"
         exit="exit"
@@ -26,8 +26,8 @@ function MenuModal({ handleClose }) {
 
       <m.div
         key="colored-background-two"
-        className="final-background"
-        variants={backgroundAnim}
+        className="first-layer__background"
+        variants={firstLayer}
         initial="closed"
         animate="open"
         exit="exit"
@@ -77,7 +77,7 @@ function MenuModal({ handleClose }) {
 
 export default MenuModal;
 
-const darkcolorAnim = {
+const thirdLayer = {
   open: {
     y: 0,
     transition: { duration: 1.2, ease: [0.12, 0, 0.39, 0] },
@@ -96,7 +96,7 @@ const darkcolorAnim = {
   },
 };
 
-const lightcolorAnim = {
+const secondLayer = {
   open: {
     y: 0,
     transition: {
@@ -119,7 +119,7 @@ const lightcolorAnim = {
   },
 };
 
-const backgroundAnim = {
+const firstLayer = {
   open: {
     y: 0,
     transition: { duration: 0.7, delay: 1.6, ease: [0.12, 0, 0.39, 0] },

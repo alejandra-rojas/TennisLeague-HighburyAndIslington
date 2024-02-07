@@ -3,7 +3,7 @@
 /// MOBILE MODAL
 ///
 
-.dark-background {
+.third-layer__darkcolor {
   position: fixed;
   z-index: 197;
   background-color: $color-darkGreen;
@@ -14,7 +14,7 @@
   left: 0;
 }
 
-.light-background {
+.second-layer__lightcolor {
   position: fixed;
   z-index: 198;
   background-color: $color-brightGreen;
@@ -24,7 +24,7 @@
   top: 0;
   left: 0;
 }
-.final-background {
+.first-layer__background {
   position: fixed;
   z-index: 199;
   background-color: $color-grey;
