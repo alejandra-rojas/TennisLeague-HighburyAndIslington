@@ -14,7 +14,9 @@ function MenuButton() {
   const [opacity, setOpacity] = useState(1);
 
   const resetOpacity = () => {
-    setOpacity(1);
+    setTimeout(() => {
+      setOpacity(1);
+    }, 1200);
   };
 
   // Check if the user has scrolled to the bottom

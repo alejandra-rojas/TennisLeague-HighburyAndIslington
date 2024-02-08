@@ -2,6 +2,14 @@
 import { motion as m } from "framer-motion";
 import Link from "next/link";
 import "../../styles/Public/ModalMenu.scss";
+import { Barlow_Semi_Condensed } from "next/font/google";
+import { X } from "../Icons";
+
+const barlow = Barlow_Semi_Condensed({
+  subsets: ["latin"],
+  weight: ["200", "400", "500", "600", "700", "900"],
+  variable: "--font-barlow",
+});
 
 function MenuModal({ handleClose }) {
   return (
@@ -34,14 +42,15 @@ function MenuModal({ handleClose }) {
       ></m.div>
 
       <div key="menu-modal" className="menu-modal--wrapper">
-        <div className="menu--modal">
+        <div className={`menu--modal ${barlow.variable}`}>
           <m.button
+            className="close--modal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.25, duration: 0.45 }}
             onClick={handleClose}
           >
-            close
+            <X />
           </m.button>
           <m.nav
             key="menu-body"
@@ -80,7 +89,7 @@ export default MenuModal;
 const thirdLayer = {
   open: {
     y: 0,
-    transition: { duration: 1.2, ease: [0.12, 0, 0.39, 0] },
+    transition: { duration: 1, ease: [0.12, 0, 0.39, 0] },
   },
   closed: {
     y: "-100%",
@@ -100,7 +109,7 @@ const secondLayer = {
   open: {
     y: 0,
     transition: {
-      duration: 1.15,
+      duration: 0.95,
       delay: 0.15,
       ease: [0.32, 0, 0.67, 0],
     },
@@ -122,7 +131,7 @@ const secondLayer = {
 const firstLayer = {
   open: {
     y: 0,
-    transition: { duration: 0.7, delay: 1.6, ease: [0.12, 0, 0.39, 0] },
+    transition: { duration: 0.6, delay: 1.3, ease: [0.3, 0, 0.75, 0] },
   },
   closed: {
     y: "-100%",
@@ -144,8 +153,8 @@ export const navContainer = {
     opacity: 1,
     transition: {
       when: "beforeChildren",
-      delayChildren: 2.4,
-      staggerChildren: 0.3,
+      delayChildren: 1.25,
+      staggerChildren: 0.2,
       staggerDirection: 1,
     },
   },
@@ -165,7 +174,7 @@ export const navItem = {
   show: {
     y: "0%",
     transition: {
-      ease: [0.55, 0, 1, 0.45],
+      ease: [0.37, 0, 0.63, 1],
     },
   },
   exit: { y: "100%" },
