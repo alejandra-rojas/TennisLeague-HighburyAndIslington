@@ -47,10 +47,13 @@ function MenuModal({ handleClose }) {
             className="close--modal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.25, duration: 0.45 }}
+            transition={{
+              delay: 1.25,
+              duration: 0.45,
+            }}
             onClick={handleClose}
           >
-            <X />
+            <span>close</span>
           </m.button>
           <m.nav
             key="menu-body"
@@ -79,6 +82,17 @@ function MenuModal({ handleClose }) {
             })}
           </m.nav>
         </div>
+        <m.div
+          className="line"
+          variants={line}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+        >
+          <div key={"serve-line"} className="overflow-hidden">
+            <m.div variants={serveLine} className="serve-line"></m.div>
+          </div>
+        </m.div>
       </div>
     </>
   );
@@ -174,10 +188,42 @@ export const navItem = {
   show: {
     y: "0%",
     transition: {
-      ease: [0.37, 0, 0.63, 1],
+      ease: [0.3, 0, 0.75, 0],
     },
   },
   exit: { y: "100%" },
+};
+
+export const line = {
+  hidden: { y: "-100%" },
+  show: {
+    y: "0%",
+    transition: {
+      delay: 1.8,
+      duration: 0.6,
+      ease: [0.37, 0, 0.63, 1],
+      when: "beforeChildren",
+      delayChildren: 0.25,
+    },
+  },
+  exit: {
+    y: "-100%",
+    transition: {
+      when: "afterChildren",
+      ease: [0.37, 0, 0.63, 1],
+    },
+  },
+};
+export const serveLine = {
+  hidden: { clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" },
+  show: {
+    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+    transition: {
+      duration: 0.3,
+      ease: [0.37, 0, 0.63, 1],
+    },
+  },
+  exit: { clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" },
 };
 
 const menu = [

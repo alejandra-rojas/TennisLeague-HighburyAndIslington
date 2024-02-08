@@ -57,6 +57,13 @@
       position: absolute;
       top: 3vw;
       right: 3vw;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      text-transform: uppercase;
+      font-family: var(--font-barlow);
+      color: $color-darkGreen;
+      font-weight: 600;
 
       svg {
         height: 3vw;
@@ -97,11 +104,11 @@
         font-size: 11vw;
         line-height: 81%;
         a {
-          color: $color-accentDark;
+          color: $color-darkGreen;
         }
 
         a:hover {
-          color: $color-accentDark;
+          color: $color-darkGreen;
         }
       }
 
@@ -123,6 +130,26 @@
           color: $color-darkGreen;
         }
       }
+    }
+  }
+  .line {
+    height: 100%;
+    width: 4vw;
+    background-color: $color-darkGreen;
+    opacity: 90%;
+    position: fixed;
+    top: 0;
+    left: 9vw;
+
+    .serve-line {
+      overflow: hidden;
+      height: 3.8vw;
+      width: 4.5vw;
+      background-color: $color-darkGreen;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(1.8vw) translateY(-50%);
     }
   }
 }
