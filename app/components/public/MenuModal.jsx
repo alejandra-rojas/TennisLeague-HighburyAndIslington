@@ -154,8 +154,8 @@ const firstLayer = {
   exit: {
     y: "-100%",
     transition: {
-      delay: 0.5,
-      duration: 0.55,
+      delay: 0.55,
+      duration: 0.4,
       ease: [0.55, 0, 1, 0.45],
     },
   },
@@ -167,7 +167,7 @@ export const navContainer = {
     opacity: 1,
     transition: {
       when: "beforeChildren",
-      delayChildren: 1.25,
+      delayChildren: 1.2,
       staggerChildren: 0.2,
       staggerDirection: 1,
     },
@@ -199,11 +199,11 @@ export const line = {
   show: {
     y: "0%",
     transition: {
-      delay: 1.8,
-      duration: 0.6,
+      delay: 1.7,
+      duration: 0.35,
       ease: [0.37, 0, 0.63, 1],
       when: "beforeChildren",
-      delayChildren: 0.25,
+      delayChildren: 0,
     },
   },
   exit: {
