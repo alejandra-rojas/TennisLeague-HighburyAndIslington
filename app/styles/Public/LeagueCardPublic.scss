@@ -265,7 +265,7 @@
   }
 
   #event-details {
-    margin: $base-padding 0.8rem;
+    margin: $base-padding 0.4rem;
 
     #create-event-table {
       padding-top: $base-padding;
@@ -410,28 +410,61 @@
     }
   }
 
+  @include breakpoint-md {
+    #event-details {
+      margin: $base-padding 0.8rem;
+    }
+  }
+
   #event-standings {
     @include flex-col(1.75rem);
     .event-table {
       ul {
         gap: 0;
+        font-family: var(--font-barlowSemi);
+        text-align: center;
+
+        .table-header {
+          //display: none;
+          background-color: $color-darkGreen;
+          color: white;
+          font-family: var(--font-barlow);
+          margin-bottom: 0.5rem;
+          text-transform: uppercase;
+          font-weight: 700;
+          display: grid;
+          grid-template-columns: 7fr 1fr 1fr 1fr 1fr;
+        }
+
+        @include breakpoint-md {
+          .table-header {
+            display: grid;
+            grid-template-columns: 7fr 1fr 1fr 1fr 1fr 1fr;
+          }
+        }
 
         li {
-          @include flex-row(0);
-          grid-template-columns: 7fr 1fr 1fr;
+          display: grid;
+          grid-template-columns: 7fr 1fr 1fr 1fr 1fr;
           column-gap: $base-padding;
-          align-items: flex-start;
-          flex-wrap: wrap;
+          span {
+            text-align: center;
+          }
+        }
+
+        // li span:not(:first-child):nth-child(2) {
+        //   text-align: center;
+        // }
+
+        .results span:nth-child(-n + 2) {
+          text-align: left;
         }
 
         @include breakpoint-md {
           li {
-            @include flex-col(0);
             font-size: $base-font-size;
-            display: grid;
-            grid-template-columns: 7fr 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+            grid-template-columns: 7fr 1fr 1fr 1fr 1fr 1fr;
             column-gap: $base-padding;
-            justify-items: center;
           }
         }
 
@@ -445,26 +478,12 @@
           }
         }
 
-        .md-header {
-          font-weight: 600;
-          display: none;
-          margin-bottom: 0.7rem;
-        }
+        // .centered {
+        //   display: inline;
+        //   align-items: center;
+        // }
 
-        @include breakpoint-md {
-          .md-header {
-            //border-bottom: solid $base-border-thickness $color-olive;
-            display: grid;
-            grid-template-columns: 7fr 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
-          }
-        }
-
-        .centered {
-          display: inline;
-          align-items: center;
-        }
-
-        li:hover {
+        li:not(:first-child):hover {
           background-color: $color-highlight-green;
         }
 
@@ -479,40 +498,6 @@
         button {
           margin: 0.25rem;
           @include editButton($color-olive);
-        }
-      }
-
-      table {
-        font-size: $base-font-size;
-        table-layout: auto;
-        border-collapse: collapse;
-        border-width: $base-border-thickness;
-
-        th,
-        td {
-          padding: 5px 10px;
-          border-top-width: 0;
-          border-left-width: 0;
-        }
-
-        thead {
-          border-bottom: solid 1px $color-olive;
-        }
-
-        tbody {
-          white-space: nowrap;
-
-          .even-row {
-            background-color: #f2f2f2;
-          }
-
-          .odd-row {
-            background-color: #ffffff;
-          }
-
-          .centered {
-            text-align: center;
-          }
         }
       }
     }

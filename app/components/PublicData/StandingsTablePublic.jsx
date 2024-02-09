@@ -1,14 +1,20 @@
 import { useState } from "react";
 import ChallengerMatchesPublic from "./ChallengerMatchesPublic";
 import MatchesReportsPublic from "./MatchesReportsPublic";
-import { Barlow_Condensed, Barlow_Semi_Condensed } from "next/font/google";
+import {
+  Barlow_Condensed,
+  Barlow_Semi_Condensed,
+  Roboto_Condensed,
+  Sofia_Sans_Semi_Condensed,
+  Sofia_Sans_Condensed,
+} from "next/font/google";
 
 const barlow = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["200", "400", "500", "600", "700", "900"],
   variable: "--font-barlow",
 });
-const barlowSemi = Barlow_Semi_Condensed({
+const barlowSemi = Roboto_Condensed({
   subsets: ["latin"],
   weight: ["200", "400", "500", "600", "700", "900"],
   variable: "--font-barlowSemi",
@@ -29,11 +35,26 @@ function StandingsTablePublic({
 
   let teamStats = [];
 
+  const generateMobileName = (fullName) => {
+    const names = fullName.split(" ");
+    const firstName = names[0];
+    const lastNameInitial = names
+      .slice(1)
+      .map((name) => name.charAt(0))
+      .join("");
+    return `${firstName} ${lastNameInitial}`;
+  };
+
   // Initialize the array with the registered teams
   registeredTeams.forEach((team) => {
     teamStats.push({
       team_id: team.team_id,
       team_name: team.player1name + " & " + team.player2name,
+      team_mobile_name:
+        generateMobileName(team.player1name) +
+        " & " +
+        generateMobileName(team.player2name),
+
       matches_played: 0,
       matches_won: 0,
       sets_won: 0,
@@ -46,6 +67,7 @@ function StandingsTablePublic({
     });
   });
 
+  console.log(teamStats);
   // Helper function to find a team in teamStats by team_id
   function findTeamStatById(teamId) {
     return teamStats.find((teamStat) => teamStat.team_id === teamId);
@@ -144,16 +166,17 @@ function StandingsTablePublic({
       <div className="event-table">
         <h5 className="sr-only">Event Standings</h5>
         <ul>
-          <li className="md-header">
+          <li className="table-header">
             <span className="invisible">Participant</span>
-            <span>Played</span>
-            <span>Won</span>
-            {/* <span>Lost</span> */}
+            <span className="md:hidden">P</span>
+            <span className="hidden md:inline">Played</span>
+
+            <span className="hide">Won</span>
             <span>Sets</span>
-            <span>MidB</span>
-            <span>AllB</span>
-            <span>ChB</span>
-            <span>Total</span>
+            <span className="md:hidden">BNS</span>
+            <span className="hidden md:inline">Bonus</span>
+            <span className="md:hidden">PTS</span>
+            <span className="hidden md:inline">Total</span>
           </li>
           {teamStats
             .sort((a, b) => b.total_points - a.total_points)
@@ -161,22 +184,26 @@ function StandingsTablePublic({
               return (
                 <li
                   key={team.team_id}
-                  className={`${team.team_withdrawn ? "withdrawn" : ""} ${
-                    index % 2 === 0 ? "even-row" : "odd-row"
-                  }`}
+                  className={`results ${
+                    team.team_withdrawn ? "withdrawn" : ""
+                  } ${index % 2 === 0 ? "even-row" : "odd-row"}`}
                 >
-                  <span>{`${team.team_name}`}</span>
+                  <span className="md:hidden">
+                    {`${team.team_mobile_name}`}
+                  </span>
+                  <span className="hidden md:inline md:pl-2">
+                    {`${team.team_name}`}
+                  </span>
                   <span>{`${team.matches_played}/${
                     team.team_withdrawn ? allMatchesCount : totalMatches
                   }`}</span>
                   <span className="hide">{team.matches_won}</span>
-                  {/* <span className="hide">
-                {team.played_matches - team.team_wins}
-              </span> */}
-                  <span className="hide">{team.sets_won}</span>
-                  <span className="hide">{team.mid_bonus}</span>
-                  <span className="hide">{team.all_bonus}</span>
-                  <span className="hide">{team.challenger_bonus}</span>
+                  <span>{team.sets_won}</span>
+                  {/* <span className="hide">{team.mid_bonus}</span>
+                  <span className="hide">{team.all_bonus}</span> */}
+                  <span>
+                    {team.mid_bonus + team.all_bonus + team.challenger_bonus}
+                  </span>
                   <span>{team.total_points}</span>
                 </li>
               );
