@@ -1,6 +1,18 @@
 import { useState } from "react";
 import ChallengerMatchesPublic from "./ChallengerMatchesPublic";
 import MatchesReportsPublic from "./MatchesReportsPublic";
+import { Barlow_Condensed, Barlow_Semi_Condensed } from "next/font/google";
+
+const barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["200", "400", "500", "600", "700", "900"],
+  variable: "--font-barlow",
+});
+const barlowSemi = Barlow_Semi_Condensed({
+  subsets: ["latin"],
+  weight: ["200", "400", "500", "600", "700", "900"],
+  variable: "--font-barlowSemi",
+});
 
 function StandingsTablePublic({
   registeredTeams,
@@ -125,7 +137,10 @@ function StandingsTablePublic({
   updateTotalPoints();
 
   return (
-    <section id="event-standings">
+    <section
+      id="event-standings"
+      className={`${barlow.variable} ${barlowSemi.variable}`}
+    >
       <div className="event-table">
         <h5 className="sr-only">Event Standings</h5>
         <ul>
@@ -138,7 +153,7 @@ function StandingsTablePublic({
             <span>MidB</span>
             <span>AllB</span>
             <span>ChB</span>
-            <span>Total Points</span>
+            <span>Total</span>
           </li>
           {teamStats
             .sort((a, b) => b.total_points - a.total_points)

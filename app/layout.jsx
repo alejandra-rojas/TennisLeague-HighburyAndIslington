@@ -1,5 +1,10 @@
 import { Analytics } from "@vercel/analytics/react";
-import { Inter, Noto_Sans, Open_Sans } from "next/font/google";
+import {
+  Inter,
+  Noto_Sans,
+  Open_Sans,
+  Barlow_Semi_Condensed,
+} from "next/font/google";
 import "./globals.scss";
 import TanstackProvider from "./components/providers/Tanstackprovider";
 import SmoothScroll from "./components/providers/SmoothScroll";
@@ -15,6 +20,12 @@ const noto = Noto_Sans({
 const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-opensans",
+});
+
+const barlow = Barlow_Semi_Condensed({
+  subsets: ["latin"],
+  weight: ["200", "400", "500", "600", "700", "900"],
+  variable: "--font-barlow",
 });
 
 export const metadata = {
