@@ -1,8 +1,7 @@
-import { useState } from "react";
 import MatchSingleEntryPublic from "./MatchSingleEntryPublic";
 
 function MatchesReportsPublic({ matchesData, midway_point }) {
-  console.log(matchesData);
+  //console.log(matchesData);
 
   //Sorting matches by match data and isFinished condition
   const sortedEventMatchesData = matchesData
@@ -24,13 +23,14 @@ function MatchesReportsPublic({ matchesData, midway_point }) {
       <ul>
         <li className="md-header">
           <span>Team 1</span>
+          <span>VS</span>
           <span>Team 2</span>
-          <p>Match Date</p>
-          <span>Finished</span>
+
           {/*<div>P1 sets</div>
           <div>P2 sets</div> */}
-          <span>Winner Score</span>
-          {/* <span>Action</span> */}
+          <span>Score</span>
+          <span>F</span>
+          <span>BH</span>
         </li>
         {sortedEventMatchesData?.map((match, index) => (
           <MatchSingleEntryPublic

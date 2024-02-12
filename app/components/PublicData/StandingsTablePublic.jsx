@@ -215,13 +215,11 @@ function StandingsTablePublic({
         className="individualMatches-btn"
         onClick={() => setShowMatchesDetails(!showMatchesDetails)}
       >
-        {!showMatchesDetails
-          ? "click to expand individual match results"
-          : "close individual match results"}
+        {!showMatchesDetails ? "view match results" : "close match results"}
       </div>
 
       {showMatchesDetails && (
-        <>
+        <div className="individual-matches">
           <MatchesReportsPublic
             matchesData={matchesData}
             midway_point={midway_point}
@@ -230,7 +228,7 @@ function StandingsTablePublic({
             registeredTeams={registeredTeams}
             challengerMatches={challengerMatches}
           />
-        </>
+        </div>
       )}
     </section>
   );

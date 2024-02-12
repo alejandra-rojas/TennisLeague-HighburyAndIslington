@@ -1,4 +1,3 @@
-import React from "react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -8,8 +7,8 @@ function ChallengerMatchesPublic({ registeredTeams, challengerMatches }) {
   const teamIds = registeredTeams
     ? registeredTeams.map((team) => team.team_id)
     : [];
-  //console.log("Event participant team ids:", teamIds);
-  //console.log("Challenger matches:", challengerMatches);
+  // console.log("Event participant team ids:", teamIds);
+  // console.log("Challenger matches:", challengerMatches);
 
   let filteredChallengerMatches = challengerMatches.filter((match) =>
     teamIds.some((id) => id === match.team1_id || id === match.team2_id)
@@ -20,17 +19,19 @@ function ChallengerMatchesPublic({ registeredTeams, challengerMatches }) {
       {filteredChallengerMatches.length > 0 && (
         <div id="challenger-matches">
           <div className="standings-report">
-            <h6>Challenger matches</h6>
+            {/* <h6>Challenger matches</h6> */}
             <section id="challengers-reports-table">
               <ul>
                 <li className="md-header">
-                  <span>T1</span>
+                  <span>CHALLENGER MATCHES</span>
+                  <span>vs</span>
                   <span>T2</span>
-                  <span>Match Date</span>
-                  <span>Finished</span>
-                  <span>Winner Score</span>
-                  <span>T1 bonus</span>
-                  <span>T2 bonus</span>
+                  {/* <span>Match Date</span> */}
+                  <span>Score</span>
+                  <span>F</span>
+
+                  <span>T1B</span>
+                  <span>T2B</span>
                 </li>
                 {filteredChallengerMatches?.map((match, index) => (
                   <>
@@ -44,36 +45,35 @@ function ChallengerMatchesPublic({ registeredTeams, challengerMatches }) {
                       }`}
                     >
                       <div
-                        className={
+                        className={`${
                           match.winner_id === match.team1_id ? "font-bold" : ""
-                        }
+                        } ${teamIds.includes(match.team1_id) ? "" : "italic"}`}
                       >
                         {match.team1.player1.firstname} &{" "}
                         {match.team1.player2.firstname}
                       </div>
+                      <div>vs</div>
                       <div
-                        className={
+                        className={`${
                           match.winner_id === match.team2_id ? "font-bold" : ""
-                        }
+                        } ${teamIds.includes(match.team2_id) ? "" : "italic"}`}
                       >
                         {match.team2.player1.firstname} &{" "}
                         {match.team2.player2.firstname}
                       </div>
 
-                      <div>
+                      {/* <div>
                         {match.match_date === null ? "" : match.match_date}
-                      </div>
-                      <div>
-                        {match.isfinished ? <CheckIcon width={20} /> : ""}
-                        {!match.isfinished && match.match_date && (
-                          <XMarkIcon width={20} />
-                        )}
-                      </div>
+                      </div> */}
 
                       <div>
                         {match.winner_score.trim() === "1"
                           ? ""
                           : match.winner_score}
+                      </div>
+                      <div>
+                        {match.isfinished ? <CheckIcon width={20} /> : ""}
+                        {!match.isfinished && match.match_date && "U"}
                       </div>
 
                       <div>{match.team1_bonus}</div>
