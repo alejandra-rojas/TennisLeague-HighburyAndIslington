@@ -6,7 +6,7 @@
 
   .event-container {
     ul {
-      @include flex-col(0.5rem);
+      @include flex-col(0.75rem);
     }
   }
 }
@@ -207,6 +207,7 @@
   border: solid 1px $color-darkgrey;
   border-radius: $base-border-radius2D;
   background-color: #f2f2f2;
+  overflow: hidden;
 
   > header {
     margin: $base-padding 0.9rem;
@@ -278,7 +279,7 @@
           background-color: $color-darkGreen;
           color: white;
           font-family: var(--font-barlow);
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
           text-transform: uppercase;
           font-weight: 700;
           display: grid;
@@ -299,6 +300,10 @@
           span {
             text-align: center;
           }
+        }
+
+        li:nth-child(2) {
+          background-color: $color-brightGreen;
         }
 
         .results span:nth-child(-n + 2) {
@@ -324,7 +329,7 @@
         }
 
         li:not(:first-child):hover {
-          background-color: $color-highlight-green;
+          background-color: $color-cream;
           cursor: default;
         }
 
@@ -350,8 +355,9 @@
       cursor: pointer;
       text-transform: uppercase;
       background-color: rgba(198, 246, 213, 0.5);
-      padding: 0.5rem 0;
+      padding: 0.75rem 0;
       color: $color-darkGreen;
+      font-weight: 600;
     }
 
     .individual-matches {
@@ -390,7 +396,7 @@
           background-color: $color-darkGreen;
           color: white;
           font-family: var(--font-barlow);
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
           text-transform: uppercase;
           font-weight: 700;
           line-height: 100%;
@@ -409,7 +415,7 @@
         }
 
         li:not(:first-child):hover {
-          background-color: $color-highlight-green;
+          background-color: $color-cream;
           cursor: default;
         }
 
@@ -450,7 +456,7 @@
           }
 
           li:not(:first-child):hover {
-            background-color: $color-highlight-green;
+            background-color: $color-cream;
             cursor: default;
           }
 
@@ -470,7 +476,7 @@
             background-color: $color-darkGreen;
             color: white;
             font-family: var(--font-barlow);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             text-transform: uppercase;
             font-weight: 700;
             column-gap: 0.25rem;
@@ -496,7 +502,7 @@
   @include breakpoint-md {
     #event-standings {
       .event-table {
-        margin: $base-padding 0.8rem;
+        margin: 1rem 0.8rem 1.25rem;
       }
     }
   }

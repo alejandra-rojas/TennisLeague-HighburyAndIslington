@@ -211,13 +211,6 @@ function StandingsTablePublic({
         </ul>
       </div>
 
-      <div
-        className="individualMatches-btn"
-        onClick={() => setShowMatchesDetails(!showMatchesDetails)}
-      >
-        {!showMatchesDetails ? "view match results" : "close match results"}
-      </div>
-
       {showMatchesDetails && (
         <div className="individual-matches">
           <MatchesReportsPublic
@@ -230,6 +223,15 @@ function StandingsTablePublic({
           />
         </div>
       )}
+
+      <div
+        className="individualMatches-btn"
+        onClick={() => setShowMatchesDetails(!showMatchesDetails)}
+      >
+        {!showMatchesDetails
+          ? "view individual match results"
+          : "close individual match results"}
+      </div>
     </section>
   );
 }
