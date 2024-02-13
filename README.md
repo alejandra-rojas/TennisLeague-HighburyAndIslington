@@ -10,7 +10,7 @@ The project originated from the need of the Highbury and Islington Tennis Club t
 - **Score Updates:** Effortlessly update match scores in real-time, keeping everything in sync with the public frontend.
 - **User-Friendly Interface:** Intuitive and responsive design for a smooth and user-friendly experience.
 
-**Technology Stack:**
+**Tech Stack:**
 - **Frontend:** Developed with Next.js, making use of Zustand for state management, and GSAP/Framer Motion for dynamic animations.
 - **CMS:** Sanity for content management of the frontend data.
 - **Styling:** SCSS.
