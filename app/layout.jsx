@@ -1,4 +1,4 @@
-import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
   Inter,
   Noto_Sans,
@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
         <TanstackProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </TanstackProvider>
-        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
