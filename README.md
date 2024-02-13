@@ -12,7 +12,7 @@ The project originated from the need of the Highbury and Islington Tennis Club t
 
 **Technology Stack:**
 - **Frontend:** Developed with Next.js, making use of Zustand for state management, and GSAP/Framer Motion for dynamic animations.
-- **CMS:** Utilizes Sanity for content management of the frontend data.
+- **CMS:** Sanity for content management of the frontend data.
 - **Styling:** SCSS.
 - **Backend:** Powered by React Query, Supabase.js and Supabase Authentication, providing robust server-side functionality.
 - **Database:** Supabase Postgrase integration to deploy the database for free on Vercel.
