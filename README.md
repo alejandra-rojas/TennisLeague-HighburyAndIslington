@@ -1,6 +1,6 @@
 # Tennis League Manager WebApp
 
-User-friendly web application designed to streamline the creation, organization, and management of the club tennis leagues, while presenting the results to the public through a modern and responsive website. The backend admin tool simplifies the entire league management process, from setting up a league to adding players and effortlessly updating scores that keep in sync with the public frontend. 
+User-friendly web application designed that streamlines the creation, organization, and management of a tennis club internal leagues, while presenting the results to the public through a modern and responsive frontend. The backend admin tool simplifies the entire league management process, from setting up a league to adding players and effortlessly updating scores that keep in sync with the public frontend. 
 
 The project originated from the need of the Highbury and Islington Tennis Club to simplify the management of their leagues, which involved maintaining the league data manually on an Excel spreadsheet. With every score report, there would be a manual update followed by a screenshot upload to the existing website to display the updated scores. This webapp greatly improves the workflow, making league management more efficient and accessible.
 
