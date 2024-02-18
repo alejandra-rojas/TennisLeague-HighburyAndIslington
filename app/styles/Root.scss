@@ -180,6 +180,69 @@ main {
   }
 }
 
+.fourofour {
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-darkGreen;
+  padding: 0;
+  overflow: hidden;
+
+  .container {
+    height: 100%;
+    width: 100%;
+    margin: 10% 0 0 0;
+    border-top: 15vw solid white;
+    padding: 0.5rem 0 0 0;
+    h2 {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      font-size: 8rem;
+      line-height: 100%;
+      color: $color-brightGreen;
+    }
+
+    p {
+      font-family: var(--font-barlow);
+      font-weight: 600;
+      color: white;
+      padding-left: 5%;
+      font-size: 2rem;
+      line-height: 100%;
+    }
+
+    .back {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      padding-right: 2rem;
+      padding-top: 3rem;
+      text-decoration: underline;
+    }
+  }
+
+  @include breakpoint-md {
+    .container {
+      margin: 0 0 0 5%;
+      padding: 0 0 0 1rem;
+      border-top: 0;
+      border-left: 8vw solid white;
+
+      h2 {
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+        font-size: 18rem;
+        color: $color-brightGreen;
+      }
+
+      p {
+        padding: 0 0 0 2rem;
+        font-size: 2.8rem;
+      }
+    }
+  }
+}
+
 .loading {
   text-align: center;
 }
