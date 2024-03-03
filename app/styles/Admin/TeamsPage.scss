@@ -1,6 +1,8 @@
 @import "../Variables/Variables.scss";
 
 #teams-page {
+  padding: 2rem;
+
   header {
     display: grid;
     grid-template-columns: [first-column] 75% [second-column] 25%;
