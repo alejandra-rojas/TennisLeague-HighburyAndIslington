@@ -7,7 +7,8 @@ body {
 }
 
 h1 {
-  font-size: 1.1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 #auth-navigation {
@@ -37,6 +38,11 @@ h1 {
 
     li {
       list-style: none;
+      transition: all 0.5s ease;
+    }
+
+    li:hover {
+      color: $color-brightGreen;
     }
   }
 }
