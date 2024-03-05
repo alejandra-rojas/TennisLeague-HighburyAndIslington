@@ -29,8 +29,8 @@ const barlow = Barlow_Semi_Condensed({
 });
 
 export const metadata = {
-  title: "Highbury Fields Tennis Leagues",
-  description: "Competitive Tennis Leagues at Highbury Fields Tennis Club ",
+  title: "Highbury Tennis Club Leagues",
+  description: "Highbury Tennis Club Doubles Leagues",
 };
 
 export default function RootLayout({ children }) {
