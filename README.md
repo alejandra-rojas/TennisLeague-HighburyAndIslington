@@ -4,16 +4,22 @@ User-friendly web application designed to streamline the creation, organization,
 
 The project originated from the need of the Highbury and Islington Tennis Club to simplify the management of their leagues, which involved maintaining the league data manually on an Excel spreadsheet. With every score report, there would be a manual update followed by a screenshot upload to the existing website to display the updated scores. This webapp greatly improves the workflow, making league management more efficient and accessible.
 
-**Key Features:**
+## Tech Stack:
+- **Frontend:** Developed with Next.js, making use of Zustand for state management. GSAP/Framer Motion for dynamic animations and SCSS for styling.
+- **CMS:** Sanity for content management of the frontend data.
+- **Database:** Employing Supabase with Postgres integration, allowing for cost-effective deployment on Vercel.
+- **RESTful API:** Supabase.js and React Query for a RESTful API implementation, providing seamless communication between the frontend and the database.
+
+## Key Features:
 - **League Creation:** Easily set up and customize tennis league with various divisions in a few clicks.
 - **Player Management:** Seamlessly add and organize players and doubles teams, ensuring an up-to-date and accurate roster.
 - **Score Updates:** Effortlessly update match scores in real-time, keeping everything in sync with the public frontend.
 - **User-Friendly Interface:** Intuitive and responsive design for a smooth and user-friendly experience.
 
-**Tech Stack:**
-- **Frontend:** Developed with Next.js, making use of Zustand for state management, and GSAP/Framer Motion for dynamic animations.
-- **CMS:** Sanity for content management of the frontend data.
-- **Styling:** SCSS.
-- **Backend:** Powered by React Query, Supabase.js and Supabase Authentication, providing robust server-side functionality.
-- **Database:** Supabase Postgrase integration to deploy the database for free on Vercel.
+## Updating match scores via the Admin dashboard
+https://github.com/alejandra-rojas/leagues-dashboard/assets/113424427/eba09782-8642-45a4-8468-522d12777aa7
+> [View video in YouTube](https://youtu.be/LttM9l2eTSU)
 
+</br>
+
+**Deployed Website:** [https://leagues-dashboard.vercel.app/](https://leagues-dashboard.vercel.app/)
