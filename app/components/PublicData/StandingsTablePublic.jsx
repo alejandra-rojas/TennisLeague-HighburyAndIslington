@@ -28,7 +28,7 @@ function StandingsTablePublic({
   midmatches_needed,
 }) {
   //console.log(registeredTeams);
-  //console.log(matchesData);
+  console.log("Matches data", matchesData);
   //console.log(challengerMatches);
   //console.log(midmatches_needed)
   const [showMatchesDetails, setShowMatchesDetails] = useState(false);
@@ -67,7 +67,7 @@ function StandingsTablePublic({
     });
   });
 
-  console.log(teamStats);
+  //console.log(teamStats);
   // Helper function to find a team in teamStats by team_id
   function findTeamStatById(teamId) {
     return teamStats.find((teamStat) => teamStat.team_id === teamId);
@@ -224,14 +224,16 @@ function StandingsTablePublic({
         </div>
       )}
 
-      <div
-        className="individualMatches-btn"
-        onClick={() => setShowMatchesDetails(!showMatchesDetails)}
-      >
-        {!showMatchesDetails
-          ? "view individual match results"
-          : "close individual match results"}
-      </div>
+      {matchesData.some((match) => match.match_date !== null) && (
+        <div
+          className="individualMatches-btn"
+          onClick={() => setShowMatchesDetails(!showMatchesDetails)}
+        >
+          {!showMatchesDetails
+            ? "view individual match results"
+            : "close individual match results"}
+        </div>
+      )}
     </section>
   );
 }
