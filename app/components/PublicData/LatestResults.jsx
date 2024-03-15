@@ -25,15 +25,19 @@ const LatestResults = () => {
   //   .sort((a, b) => new Date(a.starting_date) - new Date(b.starting_date));
 
   //console.log(data);
+  //Latest league only
+  const league = data[data.length - 1];
+
   return (
     <>
       <section id="current-leagues">
         <section id="current-leagues-data">
           {/* <div>{JSON.stringify(data, null, 2)}</div>*/}
           <ul>
-            {data.map((league) => (
+            {/* {latestLeague.map((league) => (
               <LeagueCardPublic key={league.id} {...league} />
-            ))}
+            ))} */}
+            <LeagueCardPublic key={league.id} {...league} />
           </ul>
         </section>
       </section>
