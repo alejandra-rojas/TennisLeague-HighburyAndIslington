@@ -28,7 +28,7 @@ function StandingsTablePublic({
   midmatches_needed,
 }) {
   //console.log(registeredTeams);
-  console.log("Matches data", matchesData);
+  //console.log("Matches data", matchesData);
   //console.log(challengerMatches);
   //console.log(midmatches_needed)
   const [showMatchesDetails, setShowMatchesDetails] = useState(false);
@@ -181,12 +181,16 @@ function StandingsTablePublic({
           {teamStats
             .sort((a, b) => b.total_points - a.total_points)
             .map((team, index) => {
+              const runnerUp = index === 0 && team.total_points !== 0;
+
               return (
                 <li
                   key={team.team_id}
                   className={`results ${
                     team.team_withdrawn ? "withdrawn" : ""
-                  } ${index % 2 === 0 ? "even-row" : "odd-row"}`}
+                  } ${index % 2 === 0 ? "even-row" : "odd-row"} ${
+                    runnerUp ? "runnerUp" : ""
+                  }`}
                 >
                   <span className="md:hidden">
                     {`${team.team_mobile_name}`}

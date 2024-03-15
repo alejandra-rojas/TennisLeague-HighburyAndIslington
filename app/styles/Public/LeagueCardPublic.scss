@@ -302,8 +302,12 @@
           }
         }
 
-        li:nth-child(2) {
-          background-color: $color-brightGreen;
+        //  li:nth-child(2) {
+        //   background-color: $color-brightGreen;
+        //  }
+
+        .runnerUp {
+          background-color: $color-brightGreen !important;
         }
 
         .results span:nth-child(-n + 2) {
