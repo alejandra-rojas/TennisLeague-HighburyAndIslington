@@ -21,8 +21,7 @@ function EventsPublic({
     queryFn: async () => {
       const { data } = await axios.get(`/api/leagues/${leagueID}/events`);
       //console.log(data);
-
-      return data.data;
+      return data.data.sort((a, b) => a.event_name.localeCompare(b.event_name));
     },
   });
 
