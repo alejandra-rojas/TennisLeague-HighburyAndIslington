@@ -10,8 +10,9 @@ const Leagues = () => {
     queryFn: async () => {
       const { data } = await axios.get("/api/leagues");
       //console.log(data);
+      const reversedArray = data.data.reverse();
 
-      return data.data;
+      return reversedArray;
     },
   });
 

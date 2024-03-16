@@ -8,8 +8,13 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import EventEntry from "./EventEntry";
 import EventModal from "./EventModal";
 
-function Events({ leagueID, hasStarted, league_name, challengerMatches, midway_point }) {
-  
+function Events({
+  leagueID,
+  hasStarted,
+  league_name,
+  challengerMatches,
+  midway_point,
+}) {
   const [showEventModal, setShowEventModal] = useState(false);
   const lowercaseTitle = league_name.toLowerCase();
 
@@ -20,7 +25,7 @@ function Events({ leagueID, hasStarted, league_name, challengerMatches, midway_p
       const { data } = await axios.get(`/api/leagues/${leagueID}/events`);
       //console.log(data);
 
-      return data.data;
+      return data.data.sort((a, b) => a.event_name.localeCompare(b.event_name));
     },
   });
 
