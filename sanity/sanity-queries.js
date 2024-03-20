@@ -15,3 +15,12 @@ export async function getHomepage() {
       next_league
     }[0]`);
 }
+
+export async function getRules() {
+  return createClient(client).fetch(groq`*[_type == "rules"]{
+      _id,
+      _createdAt,
+      Current,
+      Midway
+    }[0]`);
+}
