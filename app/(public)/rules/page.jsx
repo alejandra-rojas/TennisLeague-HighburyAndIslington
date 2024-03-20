@@ -1,10 +1,23 @@
 "use client";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import React from "react";
+import { useState, useEffect } from "react";
 import NextLeagueCallout from "../../components/public/NextLeagueCallout";
+import { getRules } from "../../../sanity/sanity-queries";
 
 export default function Rules() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const rulespageData = await getRules();
+      setData(rulespageData);
+    };
+
+    fetchData();
+  }, []);
+
+  //console.log(data);
+
   const column = {
     visible: {
       opacity: 1,
@@ -39,9 +52,9 @@ export default function Rules() {
         <div>
           <h3>
             ​The current league runs from
-            <br /> Mon 7th August &apos;23 to Mon 29th January &apos;24 <br />
+            <br /> {data.Current} <br />
           </h3>
-          <h4>Mid-way date: Mon 6th November &apos;23</h4>
+          <h4>Mid-way date: {data.Midway}</h4>
         </div>
       </motion.div>
 
