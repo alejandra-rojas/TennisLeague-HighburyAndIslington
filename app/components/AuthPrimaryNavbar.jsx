@@ -18,8 +18,8 @@ function AuthPrimaryNavbar() {
             </h2>
             <ul>
               <li>
-                <Link href={"/"} aria-label="Go to the Home page">
-                  Back to the home page
+                <Link href={"/studio"} aria-label="Go to the CMS studio">
+                  Access to the studio
                 </Link>
               </li>
             </ul>
