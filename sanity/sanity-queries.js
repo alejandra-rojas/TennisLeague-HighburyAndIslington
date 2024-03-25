@@ -21,6 +21,15 @@ export async function getRules() {
       _id,
       _createdAt,
       Current,
-      Midway
+      Midway,
+      format,
+      scoring,
+      injuries,
+      withdrawals,
+      winners,
+      prize,
+      points,
+      bonusPoints,
+      challengers
     }[0]`);
 }
