@@ -68,19 +68,11 @@ export default function Rules() {
           >
             <motion.div className="rule" variants={item}>
               <h5>Format</h5>
-              <p>
-                Each pair plays all other pairs in their division. Each pair is
-                responsible for organising their own matches, agreeing dates
-                with opponents, booking courts, etc.
-              </p>
+              <p>{data.format}</p>
             </motion.div>
             <motion.div className="rule" variants={item}>
               <h5>Scoring</h5>
-              <p>
-                Best of 3 tiebreak sets. If time is short and both pairs agree,
-                a championship tiebreak (first to 10, 2 points ahead) can be
-                played instead of a 3rd set.
-              </p>
+              <p>{data.scoring}</p>
             </motion.div>
             {/* <div className="rule">
             <h5>Awarded Points</h5>
@@ -135,36 +127,19 @@ export default function Rules() {
           >
             <motion.div className="rule" variants={item}>
               <h5>Injuries</h5>
-              <p>
-                If a player is injured during play and unable to continue the
-                match, they will concede that match and the points from the
-                uncompleted set/s go to the other pair.
-              </p>
+              <p>{data.injuries}</p>
             </motion.div>
             <motion.div className="rule" variants={item}>
               <h5>Withdrawals</h5>
-              <p>
-                If a pair has to withdraw from the league, all points won in
-                matches against that pair will be deducted. Points awarded for
-                completing three (or four) matches by the mid-way date will not
-                be affected.
-              </p>
+              <p>{data.withdrawals}</p>
             </motion.div>
             <motion.div className="rule" variants={item}>
               <h5>Winners</h5>
-              <p>
-                If there is a tie for top place at the end, set points are worth
-                more than points earned for playing matches. If there is still a
-                tie, the prize goes to the pair who won the match between the
-                pairs concerned.
-              </p>
+              <p>{data.winners}</p>
             </motion.div>
             <motion.div className="rule" variants={item}>
               <h5>Prize</h5>
-              <p>
-                The prize for the winning pair in each division is a can of
-                balls per player.
-              </p>
+              <p>{data.prize}</p>
             </motion.div>
           </motion.div>
         </div>
@@ -176,32 +151,15 @@ export default function Rules() {
         >
           <div className="points">
             <h5>Awarded Points</h5>
-            <p className="bold">
-              Two points per set & only completed sets count. If a match is
-              unfinished, if possible, arrange another time to finish the match.
-            </p>
+            <p className="bold">{data.points}</p>
           </div>
           <div className="extra-points">
             <h6>Bonus Points </h6>
-            <p className="secondary">
-              An extra point is awarded if three matches (four matches for
-              Division 3 or 4) against pairs in your division are completed by
-              the mid-way date.
-              <br /> Another point is awarded if you complete all matches in
-              your division by the end date. Only completed matches count.
-            </p>
+            <p className="secondary">{data.bonusPoints}</p>
           </div>
           <div className="extra-points">
             <h6>Challenger Matches </h6>
-            <p className="secondary">
-              It is possible to gain extra points by challenging pairs in the
-              Division above to a match. Pairs in Division 1 can challenge pairs
-              in Division 2. A point will be awarded to both the challengers and
-              the challenged if a match goes ahead AND IS COMPLETED. The points
-              won for sets will be 2 points per set for the pair in the lower
-              division and 1 point per set for the pair in the higher division.
-              If challenged, you do not have to accept.
-            </p>
+            <p className="secondary">{data.challengers}</p>
           </div>
         </motion.div>
       </div>
