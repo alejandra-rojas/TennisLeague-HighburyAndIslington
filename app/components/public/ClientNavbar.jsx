@@ -28,13 +28,21 @@ export default function ClientNavbar() {
             </h2>
             <ul>
               <li>
-                <Link href={"/rules"} aria-label="Go to About page">
+                <Link href={"/rules"} aria-label="Go to Rules page">
                   Rules
                 </Link>
               </li>
               <li>
-                <Link href={"/past-leagues"} aria-label="Go to Admin page">
+                <Link
+                  href={"/past-leagues"}
+                  aria-label="Go to Past Results page"
+                >
                   Past Results
+                </Link>
+              </li>
+              <li>
+                <Link href={"/admin"} aria-label="Go to Admin page">
+                  Admin
                 </Link>
               </li>
             </ul>
