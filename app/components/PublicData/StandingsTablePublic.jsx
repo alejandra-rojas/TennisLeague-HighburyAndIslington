@@ -158,6 +158,8 @@ function StandingsTablePublic({
   });
   updateTotalPoints();
 
+  console.log(teamStats);
+
   return (
     <section
       id="event-standings"
@@ -181,7 +183,10 @@ function StandingsTablePublic({
           {teamStats
             .sort((a, b) => b.total_points - a.total_points)
             .map((team, index) => {
-              const runnerUp = index === 0 && team.total_points !== 0;
+              const highestPoints = teamStats[0].total_points;
+              //console.log("League highest points", highestPoints);
+              const isTopTeam = team.total_points === highestPoints;
+              const runnerUp = isTopTeam && team.total_points !== 0;
 
               return (
                 <li
