@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import error from "../players/error";
@@ -12,8 +12,7 @@ function NewChallengerModal({
   const queryClient = useQueryClient();
   const [errorlog, setErrorLog] = useState("");
 
-
-  const [matchData, setData] = useState({
+  const [matchData, setMatchData] = useState({
     team1_id: selectedTeams[0].team_id,
     team1_event_id: selectedTeams[0].event_id,
     team2_id: selectedTeams[1].team_id,
@@ -26,21 +25,30 @@ function NewChallengerModal({
     team2_bonus: "",
   });
 
+  const [isMatchFinished, setIsMatchFinished] = useState(false);
+
+  useEffect(() => {
+    if (matchData.isfinished) {
+      setIsMatchFinished(true);
+      // If match is finished, ensure winner_id is selected
+      if (!matchData.winner_id) {
+        setErrorLog("Please select the winner.");
+      } else {
+        setErrorLog("");
+      }
+    } else {
+      setIsMatchFinished(false);
+      setErrorLog("");
+    }
+  }, [matchData]);
+
   const handleChange = (e) => {
-    // const { name, value } = e.target;
-
-    // setData((matchData) => ({
-    //   ...matchData,
-    //   [name]: value,
-    // }));
-
     const { name, value, type, checked } = e.target;
-    setData((matchData) => ({
+    setMatchData((matchData) => ({
       ...matchData,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  //console.log(matchData);
 
   //INSERT NEW CHALLENGER MATCH //INVALIDATE queryKey: ["league-challengers", id],
   const { mutate: insertChallenger, isLoading } = useMutation({
@@ -55,22 +63,40 @@ function NewChallengerModal({
     },
     onError: (error) => {
       console.log(error);
-      setErrorLog('An error has occurred. Try again')
+      setErrorLog("An error has occurred. Try again");
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Check if required fields are empty
+    const requiredFields = [
+      "match_date",
+      "team1_bonus",
+      "team2_bonus",
+      "winner_score",
+    ];
+    if (isMatchFinished) {
+      requiredFields.push("winner_id");
+    }
+    const emptyFields = requiredFields.filter((field) => !matchData[field]);
+    if (emptyFields.length > 0) {
+      setErrorLog(
+        `Please fill in all required fields: ${emptyFields.join(", ")}`
+      );
+      return; // Prevent form submission
+    }
 
-  // Check if required fields are empty
-  const requiredFields = ['winner_id', 'winner_score', 'team1_bonus', 'team2_bonus'];
-  const emptyFields = requiredFields.filter(field => !matchData[field]);
+    // If winner_id is empty string, set it to null
+    if (matchData.winner_id === "") {
+      setMatchData((prevData) => ({
+        ...prevData,
+        winner_id: null,
+      }));
+    }
 
-  if (emptyFields.length > 0) {
-    setErrorLog(`Please fill in all required fields: ${emptyFields.join(', ')}`);
-    return; // Prevent form submission
-  }
-
+    // If all required fields are filled, proceed with submission
+    console.log(matchData);
     insertChallenger(matchData);
   };
 
@@ -113,29 +139,27 @@ function NewChallengerModal({
               />
             </div>
 
-            
-              
-                <div className="input">
-                  <label htmlFor="winner">{matchData.isfinished ? 'Who won?': 'Who is winning?'}</label>
-                  <select
-                    id="winner"
-                    name="winner_id"
-                    value={
-                      matchData.winner_id !== null ? matchData.winner_id : ""
-                    }
-                    onChange={handleChange}
-                  >
-                    <option value="">{matchData.isfinished ? 'Select the winner:': ''}</option>
-                    {selectedTeams.map((team, index) => (
-                      <option key={index} value={team.team_id}>
-                        {team.player1_firstname} {team.player1_lastname} &amp;{" "}
-                        {team.player2_firstname} {team.player2_lastname}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              
-           
+            <div className="input">
+              <label htmlFor="winner">
+                {matchData.isfinished ? "Who won?" : "Who is winning?"}
+              </label>
+              <select
+                id="winner"
+                name="winner_id"
+                value={matchData.winner_id !== "" ? matchData.winner_id : ""}
+                onChange={handleChange}
+              >
+                <option value="">
+                  {matchData.isfinished ? "Select the winner:" : ""}
+                </option>
+                {selectedTeams.map((team, index) => (
+                  <option key={index} value={team.team_id}>
+                    {team.player1_firstname} {team.player1_lastname} &amp;{" "}
+                    {team.player2_firstname} {team.player2_lastname}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className="grouped-inputs">
             <div className="input">
