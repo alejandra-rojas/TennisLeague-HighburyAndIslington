@@ -1,7 +1,7 @@
 # Tennis League Manager WebApp
 
 <h4 align="left">
-  <a href="https://leagues-dashboard.vercel.app">Highbury Fields tennis league</a> |
+ <span>Deployed website:</span> <a href="https://leagues-dashboard.vercel.app">Highbury Fields tennis league</a> 
 </h4>
 
 User-friendly web application designed to streamline the creation, organization, and management of the internal competitions of a tennis club, while presenting the results to the public through a modern and responsive website. The admin tool simplifies the entire league management process, from setting up a league to adding players and effortlessly updating scores that keep in sync with the public frontend. 
