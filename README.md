@@ -26,5 +26,6 @@ https://github.com/alejandra-rojas/leagues-dashboard/assets/113424427/eba09782-8
 > [View video in YouTube](https://youtu.be/LttM9l2eTSU)
 
 </br>
-
-**Deployed Website:** [https://leagues-dashboard.vercel.app/](https://leagues-dashboard.vercel.app/)
+<h4 align="left">
+ <span>Deployed website:</span> <a href="https://leagues-dashboard.vercel.app">Highbury Fields tennis league</a> 
+</h4>
