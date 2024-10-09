@@ -1,5 +1,10 @@
 # Tennis League Manager WebApp
 
+<h4 align="left">
+ <span>Deployed website:</span> <a href="https://leagues-dashboard.vercel.app">Highbury Fields tennis league</a> 
+</h4>
+
+<br />
 User-friendly web application designed to streamline the creation, organization, and management of the internal competitions of a tennis club, while presenting the results to the public through a modern and responsive website. The admin tool simplifies the entire league management process, from setting up a league to adding players and effortlessly updating scores that keep in sync with the public frontend. 
 
 The project originated from the need of the Highbury and Islington Tennis Club to simplify the management of their leagues, which involved maintaining the league data manually on an Excel spreadsheet. With every score report, there would be a manual update followed by a screenshot upload to the existing website to display the updated scores. This webapp greatly improves the workflow, making league management more efficient and accessible.
@@ -21,5 +26,6 @@ https://github.com/alejandra-rojas/leagues-dashboard/assets/113424427/eba09782-8
 > [View video in YouTube](https://youtu.be/LttM9l2eTSU)
 
 </br>
-
-**Deployed Website:** [https://leagues-dashboard.vercel.app/](https://leagues-dashboard.vercel.app/)
+<h4 align="left">
+ <span>Deployed website:</span> <a href="https://leagues-dashboard.vercel.app">Highbury Fields tennis league</a> 
+</h4>
