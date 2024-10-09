@@ -36,6 +36,7 @@
 
         .league-title {
           @include flex-row($base-padding2X);
+          justify-content: left;
           h3 {
             font-size: 1.8rem;
             font-weight: 800;
