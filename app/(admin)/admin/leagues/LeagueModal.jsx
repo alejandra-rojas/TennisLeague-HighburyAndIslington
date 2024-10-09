@@ -145,78 +145,58 @@ function LeagueModal({
             {mode === "edit" ? "Edit League" : "Create League"}
           </legend>
 
-          {mode === "edit" && (
-            <>
-              <div className="input">
-                <label htmlFor="leagueName">League name:</label>
-                <input
-                  id="leagueName"
-                  required
-                  aria-required="true"
-                  maxLength={30}
-                  placeholder="Women Doubles"
-                  name="league_name"
-                  value={data.league_name}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="input">
-                <label htmlFor="startDate">Start date:</label>
-                <input
-                  id="startDate"
-                  required
-                  aria-required="true"
-                  type="date"
-                  name="starting_date"
-                  value={data.starting_date}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="input">
-                <label htmlFor="midPoint">Midway point:</label>
-                <input
-                  id="midPoint"
-                  name="midway_point"
-                  required
-                  type="date"
-                  value={data.midway_point}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="input">
-                <label htmlFor="endDate">End date:</label>
-                <input
-                  id="endDate"
-                  name="end_date"
-                  required
-                  aria-required="true"
-                  type="date"
-                  value={data.end_date}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                />
-              </div>
-            </>
-          )}
-
-          {/* {mode === "edit" && today >= new Date(end_date) && (
-            <div className="checkbox">
-              <label htmlFor="isFinished" id="isFinishedDescription">
-                Check the box if all the results have been entered
-              </label>
-              <input
-                id="isFinished"
-                type="checkbox"
-                name="isfinished"
-                checked={data.isfinished}
-                onChange={handleChange}
-                aria-describedby="isFinishedDescription"
-              />
-            </div>
-          )} */}
+          <div className="input">
+            <label htmlFor="leagueName">League name:</label>
+            <input
+              id="leagueName"
+              required
+              aria-required="true"
+              maxLength={30}
+              placeholder="Women Doubles"
+              name="league_name"
+              value={data.league_name}
+              onChange={handleChange}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="startDate">Start date:</label>
+            <input
+              id="startDate"
+              required
+              aria-required="true"
+              type="date"
+              name="starting_date"
+              value={data.starting_date}
+              onChange={handleChange}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="midPoint">Midway point:</label>
+            <input
+              id="midPoint"
+              name="midway_point"
+              required
+              type="date"
+              value={data.midway_point}
+              onChange={handleChange}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="endDate">End date:</label>
+            <input
+              id="endDate"
+              name="end_date"
+              required
+              aria-required="true"
+              type="date"
+              value={data.end_date}
+              onChange={handleChange}
+              disabled={isLoading}
+            />
+          </div>
 
           {!error && (
             <button
