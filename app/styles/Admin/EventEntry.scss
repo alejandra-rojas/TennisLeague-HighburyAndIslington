@@ -112,8 +112,12 @@
   > button {
     @include pillStyleSolid($font-size-sm, #336dff);
     align-self: flex-start;
-
     flex-basis: 0;
+
+    &.ongoing {
+      @include pillStyle($font-size-sm, #7a8190);
+      align-self: flex-start;
+    }
   }
 }
 

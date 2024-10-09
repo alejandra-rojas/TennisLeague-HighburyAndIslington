@@ -60,16 +60,15 @@ function Events({
             leagueID={leagueID}
           />
         )}
-        {!hasStarted && (
-          <button
-            onClick={() => setShowEventModal(true)}
-            aria-label="Opel Modal to add an event to this league"
-            className="add-event"
-          >
-            <PlusCircleIcon width={30} />
-            Add event to {lowercaseTitle}
-          </button>
-        )}
+
+        <button
+          onClick={() => setShowEventModal(true)}
+          aria-label="Opel Modal to add an event to this league"
+          className={hasStarted ? "ongoing" : ""}
+        >
+          <PlusCircleIcon width={30} />
+          Add event to {lowercaseTitle}
+        </button>
       </section>
     </>
   );
