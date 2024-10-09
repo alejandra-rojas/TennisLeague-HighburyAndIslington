@@ -54,10 +54,8 @@ const LeagueCardPublic = ({
 
     message = daysLeft === 1 ? "day left of play" : "days left of play";
   } else if (end_date === formattedTodaysDate) {
-    // Last day to play
     message = "Today is the last day to complete a match";
   } else {
-    // No days left, either league hasn't started or has already ended
     message = "The league has ended";
   }
 
@@ -81,8 +79,6 @@ const LeagueCardPublic = ({
     },
   });
 
-  //console.log(leagueParticipants);
-
   //GET ALL CHALLENGER MATCHES FOR THIS LEAGUE
   const {
     data: challengerMatches,
@@ -95,8 +91,6 @@ const LeagueCardPublic = ({
       return data.data;
     },
   });
-
-  //console.log(challengerMatches);
 
   return (
     <li className="league-single-entry">
@@ -115,18 +109,7 @@ const LeagueCardPublic = ({
             </div>
           </div>
           {!isFinished && (
-            <p
-              className="days-left"
-              /* className={
-                message ===
-                "Once all the results are entered, set the league to finished via the edit league modal."
-                  ? "text-highlight"
-                  : "days-left"
-              } */
-            >
-              {/*           {end_date < formattedTodaysDate && (
-                <ExclamationTriangleIcon width={40} />
-              )} */}
+            <p className="days-left">
               {daysLeft} {message}
             </p>
           )}
