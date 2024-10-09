@@ -57,22 +57,12 @@ const LeagueCard = ({
 
     message = daysLeft === 1 ? "day left of play" : "days left of play";
   } else if (end_date === formattedTodaysDate) {
-    // Last day to play
     message = "Today is the last day to complete a match";
   } else {
-    // No days left, either league hasn't started or has already ended
-    message =
-      "Once all the results are entered, set the league to finished via the edit league modal.";
+    message = "The league has finished";
   }
 
   //GET ALL TEAMS PARTICIPATING IN THIS LEAGUE
-  /*   console.log("Participant team objects:", registeredTeams);
-
-  const teamIds = registeredTeams
-    ? registeredTeams.map((team) => team.team_id)
-    : [];
-  console.log("Participant team ids:", teamIds); */
-
   const {
     data: leagueParticipants,
     isLoading: loadingParticipants,
@@ -84,8 +74,6 @@ const LeagueCard = ({
       return data.data;
     },
   });
-
-  //console.log(leagueParticipants);
 
   //GET ALL CHALLENGER MATCHES FOR THIS LEAGUE
   const {
@@ -99,8 +87,6 @@ const LeagueCard = ({
       return data.data;
     },
   });
-
-  //console.log(challengerMatches);
 
   return (
     <li className="league-single-entry">
@@ -124,23 +110,14 @@ const LeagueCard = ({
             </div>
           </div>
           <div className="league-stats">
-            {/*           <p>
-            {leagueEvents.length}{" "}
-            {leagueEvents.length === 1 ? "event" : "events"}
-          </p> */}
-
             {!isFinished && (
               <p
                 className={
-                  message ===
-                  "Once all the results are entered, set the league to finished via the edit league modal."
+                  message === "The league has finished..."
                     ? "text-highlight"
                     : "days-left"
                 }
               >
-                {end_date < formattedTodaysDate && (
-                  <ExclamationTriangleIcon width={40} />
-                )}
                 {daysLeft} {message}
               </p>
             )}
