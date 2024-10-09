@@ -145,7 +145,7 @@ function LeagueModal({
             {mode === "edit" ? "Edit League" : "Create League"}
           </legend>
 
-          {!(mode === "edit" && today >= new Date(end_date)) && (
+          {mode === "edit" && (
             <>
               <div className="input">
                 <label htmlFor="leagueName">League name:</label>
@@ -202,7 +202,7 @@ function LeagueModal({
             </>
           )}
 
-          {mode === "edit" && today >= new Date(end_date) && (
+          {/* {mode === "edit" && today >= new Date(end_date) && (
             <div className="checkbox">
               <label htmlFor="isFinished" id="isFinishedDescription">
                 Check the box if all the results have been entered
@@ -216,7 +216,7 @@ function LeagueModal({
                 aria-describedby="isFinishedDescription"
               />
             </div>
-          )}
+          )} */}
 
           {!error && (
             <button
@@ -248,7 +248,7 @@ function LeagueModal({
         )}
       </div>
 
-      {mode === "edit" && today <= new Date(end_date) && (
+      {mode === "edit" && (
         <button
           onClick={() => deleteLeague()}
           aria-label="Delete League from databse"
