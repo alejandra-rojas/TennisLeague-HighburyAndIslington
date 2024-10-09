@@ -528,3 +528,21 @@
     background-color: rgba(255, 0, 0, 0.15) !important;
   }
 }
+
+.join {
+  color: $color-darkGreen;
+  padding: 2rem 0 1rem;
+
+  p {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: gray;
+  }
+}

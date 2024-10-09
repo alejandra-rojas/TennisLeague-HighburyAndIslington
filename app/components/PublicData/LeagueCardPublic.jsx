@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import "../../styles/Public/LeagueCardPublic.scss";
@@ -15,7 +14,6 @@ const LeagueCardPublic = ({
 }) => {
   const queryClient = useQueryClient();
 
-  const [showModal, setShowModal] = useState(false);
   const isFinished = isfinished;
   const startDate = new Date(starting_date);
   const endDate = new Date(end_date);
@@ -94,27 +92,34 @@ const LeagueCardPublic = ({
 
   return (
     <li className="league-single-entry">
-      {!showModal && (
-        <header className="league-info">
-          <div>
-            <div className="league-title">
-              <h3>{league_name}</h3>
-            </div>
-            <div className="league-dates">
-              <div>
-                {starting_date} - {end_date}
-              </div>
-
-              <p>Halfway Point: {midDate.toDateString()}</p>
-            </div>
+      <header className="league-info">
+        <div>
+          <div className="league-title">
+            <h3>{league_name}</h3>
           </div>
-          {!isFinished && (
-            <p className="days-left">
-              {daysLeft} {message}
-            </p>
-          )}
-        </header>
-      )}
+          <div className="league-dates">
+            <div>
+              {starting_date} - {end_date}
+            </div>
+
+            <p>Halfway Point: {midDate.toDateString()}</p>
+          </div>
+        </div>
+        {!isFinished && (
+          <p className="days-left">
+            {daysLeft} {message}
+          </p>
+        )}
+      </header>
+
+      {/* <div className="join">
+        <p>
+          <a href="mailto:ladiesdoublesleague@gmail.com" target="_blank">
+            Get in touch
+          </a>{" "}
+          with Sarah Mulligan to join.
+        </p>
+      </div> */}
 
       <EventsPublic
         leagueID={id}
