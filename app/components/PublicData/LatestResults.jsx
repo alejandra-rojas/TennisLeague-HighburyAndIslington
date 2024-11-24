@@ -14,31 +14,43 @@ const LatestResults = () => {
     },
   });
 
-  if (isLoading) return <div>Loading leagues...</div>;
-  if (isError) return <div>There was an error, try again. </div>;
-
   const today = new Date();
 
-  // NEEDS TO BE TUNED IN
-  // const unfinishedLeagues = data
-  //   ?.filter((league) => !league.isfinished)
-  //   .sort((a, b) => new Date(a.starting_date) - new Date(b.starting_date));
+  // Filter leagues based on active criteria
+  const activeLeagues = data?.filter((league) => {
+    const startDate = new Date(`${league.starting_date}T00:00:00Z`);
+    const endDate = new Date(`${league.end_date}T00:00:00Z`);
 
-  //console.log(data);
-  //Latest league only
-  const league = data[data.length - 1];
+    // Calculate the active range
+    const activeStartDate = new Date(startDate);
+    activeStartDate.setDate(activeStartDate.getDate() - 1); // 1 day before start
+
+    const activeEndDate = new Date(endDate);
+    activeEndDate.setDate(activeEndDate.getDate() + 10); // 10 days after end
+
+    // Check if today is within the active range
+    return today >= activeStartDate && today <= activeEndDate;
+  });
+
+  // Sort active leagues by starting_date
+  const sortedActiveLeagues = activeLeagues?.sort(
+    (a, b) =>
+      new Date(`${a.starting_date}T00:00:00Z`) -
+      new Date(`${b.starting_date}T00:00:00Z`)
+  );
 
   return (
     <>
       <section id="current-leagues">
         <section id="current-leagues-data">
-          {/* <div>{JSON.stringify(data, null, 2)}</div>*/}
           <ul>
-            {/* {latestLeague.map((league) => (
+            {sortedActiveLeagues?.map((league) => (
               <LeagueCardPublic key={league.id} {...league} />
-            ))} */}
-            <LeagueCardPublic key={league.id} {...league} />
+            ))}
           </ul>
+          {sortedActiveLeagues?.length === 0 && (
+            <div>No active leagues currently.</div>
+          )}
         </section>
       </section>
     </>
