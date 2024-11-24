@@ -37,7 +37,7 @@ export default function ClientNavbar() {
                   href={"/past-leagues"}
                   aria-label="Go to Past Results page"
                 >
-                  Past Results
+                  Results
                 </Link>
               </li>
               <li>

@@ -353,6 +353,39 @@
   text-decoration: underline;
 }
 
+//RESULTS OAGE
+#results {
+  color: #0f2d32;
+  display: flex;
+  gap: 2rem;
+  //width: 100%;
+  //max-width: 1432px;
+  padding: 0 12px;
+  background-color: #f5f5f5;
+  margin-bottom: 370px; // this needs to be variable to screen
+  border-radius: 1.5rem;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      background-color: $color-creamBlue;
+      border-radius: 90px;
+      padding: 4px 13px 2px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 20px;
+      display: block;
+      position: relative;
+      width: fit-content;
+    }
+  }
+}
+
 .footer {
   position: fixed;
   bottom: 0;
