@@ -151,7 +151,7 @@ function StandingsTablePublic({
   const totalMatches = calculateCombinations(activeTeamsCount);
 
   teamStats.forEach((teamStat) => {
-    if (!teamStat.team_withdrawn && teamStat.matches_played === totalMatches) {
+    if (!teamStat.team_withdrawn && teamStat.matches_played >= totalMatches) {
       // If a team played all their matches and hasn't withdrawn, they get the all_bonus
       teamStat.all_bonus = 1;
     }
