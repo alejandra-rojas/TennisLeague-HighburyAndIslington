@@ -26,7 +26,7 @@ const LatestResults = () => {
     activeStartDate.setDate(activeStartDate.getDate() - 1); // 1 day before start
 
     const activeEndDate = new Date(endDate);
-    activeEndDate.setDate(activeEndDate.getDate() + 10); // 10 days after end
+    activeEndDate.setDate(activeEndDate.getDate() + 30); // 30 days after end
 
     // Check if today is within the active range
     return today >= activeStartDate && today <= activeEndDate;
