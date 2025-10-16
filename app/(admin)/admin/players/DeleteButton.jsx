@@ -3,6 +3,7 @@ import { startTransition, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { TiDelete } from "react-icons/ti";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import { useTransition } from "react";
 import { deletePlayer } from "./actions";
 
@@ -13,19 +14,20 @@ export default function DeleteButton({ id }) {
 
   const handleClick = async () => {
     setIsLoading(true);
-    //console.log("deleting id", id);
+
     const res = await fetch(`${baseUrl}/api/players/${id}`, {
       method: "DELETE",
     });
     const json = await res.json();
 
     if (json.error) {
-      console.log(json.error);
+      toast.error(
+        json.message || "An error occurred while deleting the player."
+      );
       setIsLoading(false);
-    }
-    if (!json.error) {
+    } else {
+      toast.success("Player deleted succesfully");
       router.refresh();
-      // router.push("/admin");
     }
   };
 
@@ -46,24 +48,3 @@ export default function DeleteButton({ id }) {
     </button>
   );
 }
-
-/* export default function DeleteButton({ id }) {
-  const [isPending, startTransition] = useTransition(false);
-
-  return (
-    <button onClick={() => startTransition(() => deletePlayer(id))}>
-      {isPending && (
-        <>
-          <TiDelete />
-          Deleting...
-        </>
-      )}
-      {!isPending && (
-        <>
-          <TiDelete />
-          Delete Ticket
-        </>
-      )}
-    </button>
-  );
-} */
