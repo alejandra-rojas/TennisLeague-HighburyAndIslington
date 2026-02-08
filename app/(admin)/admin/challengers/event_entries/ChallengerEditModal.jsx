@@ -18,14 +18,21 @@ function ChallengerEditModal({ match, setShowReportModal }) {
     team2_bonus: parseInt(match.team2_bonus, 10),
   });
 
+  const numericFields = ["team1_bonus", "team2_bonus", "winner_id"];
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-  
-    const inputValue = type === 'checkbox' ? checked : value;
-  
+
     setData((prevData) => ({
       ...prevData,
-      [name]: inputValue === '' ? '' : (type === 'checkbox' ? inputValue : parseInt(inputValue, 10)),
+      [name]:
+        type === "checkbox"
+          ? checked
+          : numericFields.includes(name)
+          ? value === ""
+            ? ""
+            : parseInt(value, 10)
+          : value,
     }));
   };
 
@@ -72,7 +79,7 @@ function ChallengerEditModal({ match, setShowReportModal }) {
     } catch (error) {
       console.error(error);
     } */
-  }; 
+  };
 
   return (
     <section id="edit-challenger-modal">
@@ -158,32 +165,32 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                 )} */}
 
                 <div className="input">
-                  <label htmlFor="winner">{data.isfinished ? 'Who won?': 'Who is winning?'}</label>
+                  <label htmlFor="winner">
+                    {data.isfinished ? "Who won?" : "Who is winning?"}
+                  </label>
                   <select
                     id="winner"
                     name="winner_id"
-                    value={
-                      data.winner_id !== null ? data.winner_id : ""
-                    }
+                    value={data.winner_id !== null ? data.winner_id : ""}
                     onChange={handleChange}
                   >
-                    <option value="">{data.isfinished ? 'Select the winner:': ''}</option>
+                    <option value="">
+                      {data.isfinished ? "Select the winner:" : ""}
+                    </option>
                     <option value={match.team1_id}>
-                          {match.team1.player1.firstname}{" "}
-                          {match.team1.player1.lastname} &{" "}
-                          {match.team1.player2.firstname}{" "}
-                          {match.team1.player2.lastname}
-                        </option>
-                        <option value={match.team2_id}>
-                          {match.team2.player1.firstname}{" "}
-                          {match.team2.player1.lastname} &{" "}
-                          {match.team2.player2.firstname}{" "}
-                          {match.team2.player2.lastname}
-                        </option>
+                      {match.team1.player1.firstname}{" "}
+                      {match.team1.player1.lastname} &{" "}
+                      {match.team1.player2.firstname}{" "}
+                      {match.team1.player2.lastname}
+                    </option>
+                    <option value={match.team2_id}>
+                      {match.team2.player1.firstname}{" "}
+                      {match.team2.player1.lastname} &{" "}
+                      {match.team2.player2.firstname}{" "}
+                      {match.team2.player2.lastname}
+                    </option>
                   </select>
                 </div>
-
-
               </div>
               <div className="grouped-inputs">
                 <div className="input">
@@ -193,16 +200,16 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                     maxLength={15}
                     placeholder="ex: '7/5 2/6 6/1"
                     name="winner_score"
-                    value={
-                      data.winner_score === 0 ? "missing" : data.winner_score
-                    }
+                    value={data.winner_score || ""}
                     onChange={handleChange}
                   />
                 </div>
 
                 <div className="input">
-                  <label htmlFor="t1bonus">{match.team1.player1.firstname} &{" "}
-                    {match.team1.player2.firstname} bonus:</label>
+                  <label htmlFor="t1bonus">
+                    {match.team1.player1.firstname} &{" "}
+                    {match.team1.player2.firstname} bonus:
+                  </label>
                   <input
                     id="t1bonus"
                     type="number"
@@ -214,8 +221,10 @@ function ChallengerEditModal({ match, setShowReportModal }) {
                 </div>
 
                 <div className="input">
-                  <label htmlFor="t2sets">{match.team2.player1.firstname} &{" "}
-                    {match.team2.player2.firstname} bonus :</label>
+                  <label htmlFor="t2sets">
+                    {match.team2.player1.firstname} &{" "}
+                    {match.team2.player2.firstname} bonus :
+                  </label>
                   <input
                     id="t2sets"
                     type="number"
