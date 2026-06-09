@@ -66,7 +66,7 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
   };
 
   const clearSearchResults = () => {
-    // setTeams([]);
+    setFilteredPlayers([]);
     setSearchString("");
     setSearchPerformed(false);
   };
@@ -209,6 +209,7 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
             <div className="clear-search">
               {searchPerformed && players.length >= 1 && (
                 <button
+                  type="button"
                   onClick={clearSearchResults}
                   aria-label="Clear search results"
                 >
