@@ -28,7 +28,9 @@ export default function CreatePlayer({ setShowPlayerModal }) {
     const json = await res.json();
 
     if (json.error) {
-      console.log(error.message);
+      console.log(json.error);
+      setIsLoading(false);
+      return;
     }
     if (json.data) {
       router.refresh();
@@ -55,8 +57,9 @@ export default function CreatePlayer({ setShowPlayerModal }) {
       </div>
       <form className="form-create-player" onSubmit={handleSubmit}>
         <div className="input">
-          <label>First name:</label>
+          <label htmlFor="create-player-first-name">First name:</label>
           <input
+            id="create-player-first-name"
             required
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
@@ -65,9 +68,11 @@ export default function CreatePlayer({ setShowPlayerModal }) {
         </div>
 
         <div className="input">
-          <label>Last name:</label>
+          <label htmlFor="create-player-last-name">Last name:</label>
           <input
+            id="create-player-last-name"
             required
+            type="text"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
           />
