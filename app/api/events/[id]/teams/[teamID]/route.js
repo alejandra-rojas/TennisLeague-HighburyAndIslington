@@ -53,7 +53,7 @@ export async function PUT(req, { params }) {
     .or(`team1_id.eq.${teamID},team2_id.eq.${teamID}`);
 
   if (matchesError) {
-    return new NextResponse(JSON.stringify({ error }), {
+    return new NextResponse(JSON.stringify({ error: matchesError }), {
       status: 500,
       headers: {
         "Content-Type": "application/json",
