@@ -5,14 +5,13 @@ import { TiDelete } from "react-icons/ti";
 import { useRouter } from "next/navigation";
 
 export default function DeleteButton({ id }) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleClick = async () => {
     setIsLoading(true);
     console.log("deleting id", id);
-    const res = await fetch(`${baseUrl}/api/teams/${id}`, {
+    const res = await fetch(`/api/teams/${id}`, {
       method: "DELETE",
     });
     const json = await res.json();

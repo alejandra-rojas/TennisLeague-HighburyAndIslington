@@ -26,7 +26,6 @@ describe("EditPlayerModal", () => {
   beforeEach(() => {
     global.fetch = vi.fn();
     mockRefresh.mockReset();
-    process.env.NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000";
   });
 
   it("submits updated player details and closes the modal on success", async () => {
@@ -61,7 +60,7 @@ describe("EditPlayerModal", () => {
     });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:3000/api/players/9",
+      "/api/players/9",
       expect.objectContaining({
         method: "PUT",
         headers: { "Content-Type": "application/json" },

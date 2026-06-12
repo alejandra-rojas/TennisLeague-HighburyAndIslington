@@ -8,21 +8,20 @@ import { useTransition } from "react";
 import { deletePlayer } from "./actions";
 
 export default function DeleteButton({ id }) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleClick = async () => {
     setIsLoading(true);
 
-    const res = await fetch(`${baseUrl}/api/players/${id}`, {
+    const res = await fetch(`/api/players/${id}`, {
       method: "DELETE",
     });
     const json = await res.json();
 
     if (json.error) {
       toast.error(
-        json.message || "An error occurred while deleting the player."
+        json.error.message || "An error occurred while deleting the player."
       );
       setIsLoading(false);
     } else {

@@ -45,17 +45,19 @@ describe("app/api/teams/route", () => {
     const response = await GET();
 
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual([
-      {
-        team_id: 1,
-        player1_id: 10,
-        player2_id: 11,
-        player1_firstname: "Ada",
-        player1_lastname: "Lovelace",
-        player2_firstname: "Grace",
-        player2_lastname: "Hopper",
-      },
-    ]);
+    expect(await response.json()).toEqual({
+      data: [
+        {
+          team_id: 1,
+          player1_id: 10,
+          player2_id: 11,
+          player1_firstname: "Ada",
+          player1_lastname: "Lovelace",
+          player2_firstname: "Grace",
+          player2_lastname: "Hopper",
+        },
+      ],
+    });
   });
 
   it("returns a 500 response when the team GET request fails", async () => {
@@ -74,7 +76,7 @@ describe("app/api/teams/route", () => {
 
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({
-      error: "Failed to fetch teams",
+      error: { message: "Failed to fetch teams" },
     });
   });
 

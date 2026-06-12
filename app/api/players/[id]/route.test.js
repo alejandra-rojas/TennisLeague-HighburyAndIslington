@@ -40,7 +40,7 @@ describe("app/api/players/[id]/route", () => {
     expect(supabase.from).toHaveBeenCalledWith("players");
     expect(mockEq).toHaveBeenCalledWith("id", 9);
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ success: true });
+    expect(await response.json()).toEqual({ data: { success: true } });
   });
 
   it("maps a foreign key delete error to a 400 response", async () => {
@@ -61,9 +61,11 @@ describe("app/api/players/[id]/route", () => {
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({
-      message:
-        "Cannot delete player. They are still referenced in one or more matches.",
-      code: "23503",
+      error: {
+        message:
+          "Cannot delete player. They are still referenced in one or more matches.",
+        code: "23503",
+      },
     });
   });
 
@@ -85,8 +87,10 @@ describe("app/api/players/[id]/route", () => {
 
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({
-      message: "An error occurred while deleting the player.",
-      code: "50000",
+      error: {
+        message: "An error occurred while deleting the player.",
+        code: "50000",
+      },
     });
   });
 

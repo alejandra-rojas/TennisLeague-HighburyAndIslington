@@ -23,12 +23,12 @@ export async function GET() {
   `);
 
   if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      {
+        status: 500,
+      }
+    );
   }
 
   const formattedData = data.map((team) => ({
@@ -41,11 +41,7 @@ export async function GET() {
     player2_lastname: team.player2.lastname,
   }));
 
-  return new NextResponse(JSON.stringify(formattedData), {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return NextResponse.json({ data: formattedData });
 }
 
 export async function POST(request) {

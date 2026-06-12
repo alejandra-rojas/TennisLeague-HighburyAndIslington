@@ -15,9 +15,11 @@ export async function DELETE(_, { params }) {
     if (error.code === "23503") {
       return NextResponse.json(
         {
-          message:
-            "Cannot delete player. They are still referenced in one or more matches.",
-          code: error.code,
+          error: {
+            message:
+              "Cannot delete player. They are still referenced in one or more matches.",
+            code: error.code,
+          },
         },
         { status: 400 }
       );
@@ -26,14 +28,16 @@ export async function DELETE(_, { params }) {
     // Other types of errors
     return NextResponse.json(
       {
-        message: "An error occurred while deleting the player.",
-        code: error.code,
+        error: {
+          message: "An error occurred while deleting the player.",
+          code: error.code,
+        },
       },
       { status: 500 }
     );
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ data: { success: true } });
 }
 
 export async function PUT(req, { params }) {

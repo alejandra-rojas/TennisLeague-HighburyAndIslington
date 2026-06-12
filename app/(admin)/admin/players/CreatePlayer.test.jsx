@@ -20,7 +20,6 @@ describe("CreatePlayer", () => {
     global.fetch = vi.fn();
     mockRefresh.mockReset();
     mockPush.mockReset();
-    process.env.NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000";
   });
 
   it("submits a new player and refreshes the admin page", async () => {
@@ -43,7 +42,7 @@ describe("CreatePlayer", () => {
     });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:3000/api/players",
+      "/api/players",
       expect.objectContaining({
         method: "POST",
         headers: { "Content-Type": "application/json" },

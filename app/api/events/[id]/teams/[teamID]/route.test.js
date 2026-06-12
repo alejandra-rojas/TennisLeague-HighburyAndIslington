@@ -43,7 +43,7 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
     expect(supabase.from).toHaveBeenCalledWith("event_teams");
     expect(firstEq).toHaveBeenCalledWith("event_id", 4);
     expect(secondEq).toHaveBeenCalledWith("team_id", 12);
-    expect(await response.json()).toEqual({ error: null });
+    expect(await response.json()).toEqual({ data: { success: true } });
   });
 
   it("withdraws a team and marks related matches as withdrawn", async () => {

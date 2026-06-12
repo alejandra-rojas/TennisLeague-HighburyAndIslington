@@ -55,7 +55,6 @@ describe("SearchComponent", () => {
     mockSelect.mockReset();
     mockCreateClientComponentClient.mockClear();
     mockSelect.mockResolvedValue({ data: players });
-    process.env.NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000";
     vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
@@ -153,7 +152,7 @@ describe("SearchComponent", () => {
     });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:3000/api/teams",
+      "/api/teams",
       expect.objectContaining({
         method: "POST",
         headers: {

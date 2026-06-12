@@ -39,6 +39,6 @@ describe("app/api/teams/[id]/route", () => {
 
     expect(supabase.from).toHaveBeenCalledWith("teams");
     expect(mockEq).toHaveBeenCalledWith("team_id", 12);
-    expect(await response.json()).toEqual({ error: null });
+    expect(await response.json()).toEqual({ data: { success: true } });
   });
 });

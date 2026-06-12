@@ -12,7 +12,18 @@ export async function DELETE(_, { params }) {
   //insert data
   const { error } = await supabase.from("events").delete().eq("event_id", id);
 
-  return NextResponse.json({ error });
+  if (error) {
+    return NextResponse.json(
+      {
+        error: {
+          message: error.message || "An error occurred while deleting the event.",
+        },
+      },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ data: { success: true } });
 }
 
 export async function PUT(req, { params }) {

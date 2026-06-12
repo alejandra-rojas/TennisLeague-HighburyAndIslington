@@ -24,7 +24,7 @@ function PlayerSearch({ registeredTeams, event }) {
     "all-teams",
     async () => {
       const response = await axios.get("/api/teams");
-      return response.data; // This should be the array of teams
+      return response.data.data;
     }
     /* {
       onSuccess: (data) => {

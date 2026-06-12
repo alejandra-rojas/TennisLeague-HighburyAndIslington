@@ -38,7 +38,7 @@ describe("app/api/events/[id]/route", () => {
 
     expect(supabase.from).toHaveBeenCalledWith("events");
     expect(mockEq).toHaveBeenCalledWith("event_id", 5);
-    expect(await response.json()).toEqual({ error: null });
+    expect(await response.json()).toEqual({ data: { success: true } });
   });
 
   it("updates an event with the expected payload", async () => {

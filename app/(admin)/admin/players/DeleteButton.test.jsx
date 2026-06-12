@@ -28,7 +28,6 @@ describe("DeleteButton", () => {
     mockRefresh.mockReset();
     mockToastSuccess.mockReset();
     mockToastError.mockReset();
-    process.env.NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000";
   });
 
   it("deletes the player and refreshes the page on success", async () => {
@@ -49,7 +48,7 @@ describe("DeleteButton", () => {
     });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      "http://localhost:3000/api/players/7",
+      "/api/players/7",
       expect.objectContaining({
         method: "DELETE",
       })
@@ -66,8 +65,9 @@ describe("DeleteButton", () => {
 
     global.fetch.mockResolvedValue({
       json: async () => ({
-        error: true,
-        message: "Cannot delete player.",
+        error: {
+          message: "Cannot delete player.",
+        },
       }),
     });
 
