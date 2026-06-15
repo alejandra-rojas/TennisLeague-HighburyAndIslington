@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-import error from "../players/error";
 
 function NewChallengerModal({
   selectedTeams,
@@ -63,7 +62,12 @@ function NewChallengerModal({
     },
     onError: (error) => {
       console.log(error);
-      setErrorLog("An error has occurred. Try again");
+      const apiError = error.response?.data?.error;
+      setErrorLog(
+        typeof apiError === "string"
+          ? apiError
+          : apiError?.message || "An error has occurred. Try again"
+      );
     },
   });
 

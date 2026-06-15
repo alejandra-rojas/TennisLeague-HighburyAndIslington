@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { TrashIcon } from "@heroicons/react/24/outline";
 import NewChallengerModal from "./NewChallengerModal";
+import { areTeamsInSameDivision } from "../../../challengers/challengerRules";
 
 function AddChallengerModal({
   leagueID,
@@ -51,8 +51,17 @@ function AddChallengerModal({
     const playerExists = selectedTeams.some(
       (selectedTeam) => selectedTeam.team_id === team.team_id
     );
+    const sameDivisionSelection =
+      selectedTeams.length === 1 &&
+      areTeamsInSameDivision(selectedTeams[0], team);
 
-    if (!playerExists && selectedTeams.length < 2) {
+    if (sameDivisionSelection) {
+      setError("Challenger matches must be between different divisions");
+      setTimeout(() => {
+        setError("");
+      }, 9000);
+      console.log("Challenger matches must be between different divisions.");
+    } else if (!playerExists && selectedTeams.length < 2) {
       setSelectedTeams([...selectedTeams, team]);
     } else if (selectedTeams.length === 2) {
       setError("A match can only have two teams");

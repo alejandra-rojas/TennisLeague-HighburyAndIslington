@@ -1,6 +1,7 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { isSameDivisionChallengerMatch } from "../../../../challengers/challengerRules";
 
 export async function GET(_, { params }) {
   //console.log("Received params:", params);
@@ -55,6 +56,20 @@ export async function GET(_, { params }) {
 export async function POST(request, { params }) {
   const { id } = params;
   const { challenger } = await request.json();
+
+  if (isSameDivisionChallengerMatch(challenger)) {
+    return new NextResponse(
+      JSON.stringify({
+        error: "Challenger matches must be between different divisions",
+      }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
