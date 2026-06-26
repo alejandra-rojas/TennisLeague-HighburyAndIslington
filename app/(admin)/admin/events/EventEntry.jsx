@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
 import { ArrowsPointingInIcon } from "@heroicons/react/24/outline";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
@@ -12,7 +12,6 @@ import EventRegistration from "./registration/EventRegistration";
 import StandingsTable from "./draw/StandingsTable";
 
 function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
-  const queryClient = useQueryClient();
   const [showEventModal, setShowEventModal] = useState(false);
   const [expandEvent, setExpandEvent] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -23,6 +22,17 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
 
   const handleMouseLeave = () => {
     setShowTooltip(false);
+  };
+
+  const toggleExpandEvent = () => {
+    setExpandEvent((prevState) => !prevState);
+  };
+
+  const handleHeaderKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleExpandEvent();
+    }
   };
 
   //GET EVENT PARTICIPANT TEAMS DATA
@@ -52,11 +62,11 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
     },
   });
 
-  if (matchesLoading) {
+  if (matchesLoading || teamsLoading) {
     return <div>Loading...</div>;
   }
 
-  if (matchesError) {
+  if (matchesError || teamsError) {
     return <div>There was an error, try again.</div>;
   }
 
@@ -64,23 +74,35 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
     <>
       <section id="event-entry">
         {!showEventModal && (
-          <header onClick={() => setExpandEvent((prevState) => !prevState)}>
+          <header
+            onClick={toggleExpandEvent}
+            onKeyDown={handleHeaderKeyDown}
+            aria-expanded={expandEvent}
+            aria-controls={`event-details-${event.event_id}`}
+            aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
+            role="button"
+            tabIndex={0}
+          >
             <div className="event-details">
               <h4>{event.event_name}</h4>
               <button
-                onClick={() => setShowEventModal(true)}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowEventModal(true);
+                }}
                 aria-label="Open modal to edit this event"
               >
                 Edit event
               </button>
             </div>
-            <button>
+            <div>
               {expandEvent ? (
                 <ArrowsPointingInIcon width={25} />
               ) : (
                 <ArrowsPointingOutIcon width={25} />
               )}
-            </button>
+            </div>
           </header>
         )}
 
@@ -119,7 +141,7 @@ function EventEntry({ event, leagueID, challengerMatches, midway_point }) {
             )}
             <div className="line"></div>
 
-            <div id="event-details">
+            <div id={`event-details-${event.event_id}`}>
               {matchesData.length === 0 && (
                 <EventRegistration
                   event={event.event_id}

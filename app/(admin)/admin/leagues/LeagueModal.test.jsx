@@ -75,4 +75,90 @@ describe("LeagueModal", () => {
       expect(invalidateQueriesSpy).toHaveBeenCalledWith(["leagues"]);
     });
   });
+
+  it("updates a league with a direct payload in edit mode", async () => {
+    const user = userEvent.setup();
+    const queryClient = new QueryClient();
+    const invalidateQueriesSpy = vi
+      .spyOn(queryClient, "invalidateQueries")
+      .mockResolvedValue();
+    const setShowModal = vi.fn();
+
+    mockAxiosPut.mockResolvedValue({ data: { data: { league_id: 8 } } });
+
+    renderWithQueryClient(
+      <LeagueModal
+        mode="edit"
+        id={8}
+        league_name="Autumn League"
+        starting_date="2026-09-01"
+        midway_point="2026-10-01"
+        end_date="2026-11-01"
+        isfinished={false}
+        setShowModal={setShowModal}
+      />,
+      queryClient
+    );
+
+    await user.clear(screen.getByLabelText("League name:"));
+    await user.type(screen.getByLabelText("League name:"), "Winter League");
+    await user.click(screen.getByRole("button", { name: "Update League" }));
+
+    await waitFor(() => {
+      expect(axios.put).toHaveBeenCalledTimes(1);
+    });
+
+    expect(axios.put).toHaveBeenCalledWith("/api/leagues/8", {
+      league_name: "Winter League",
+      starting_date: "2026-09-01",
+      midway_point: "2026-10-01",
+      end_date: "2026-11-01",
+      isfinished: false,
+    });
+
+    await waitFor(() => {
+      expect(setShowModal).toHaveBeenCalledWith(false);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["leagues"]);
+    });
+  });
+
+  it("deletes a league in edit mode", async () => {
+    const user = userEvent.setup();
+    const queryClient = new QueryClient();
+    const invalidateQueriesSpy = vi
+      .spyOn(queryClient, "invalidateQueries")
+      .mockResolvedValue();
+    const setShowModal = vi.fn();
+
+    mockAxiosDelete.mockResolvedValue({ data: { data: { league_id: 8 } } });
+
+    renderWithQueryClient(
+      <LeagueModal
+        mode="edit"
+        id={8}
+        league_name="Autumn League"
+        starting_date="2026-09-01"
+        midway_point="2026-10-01"
+        end_date="2026-11-01"
+        isfinished={false}
+        setShowModal={setShowModal}
+      />,
+      queryClient
+    );
+
+    await user.click(
+      screen.getByRole("button", { name: "Delete League from databse" })
+    );
+
+    await waitFor(() => {
+      expect(axios.delete).toHaveBeenCalledTimes(1);
+    });
+
+    expect(axios.delete).toHaveBeenCalledWith("/api/leagues/8");
+
+    await waitFor(() => {
+      expect(setShowModal).toHaveBeenCalledWith(false);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["leagues"]);
+    });
+  });
 });
