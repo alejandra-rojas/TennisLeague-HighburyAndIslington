@@ -6,7 +6,11 @@ import axios from "axios";
 function WithdrawalForm({ registeredTeams }) {
   const queryClient = useQueryClient();
   const [selectedTeamId, setSelectedTeamId] = useState("");
-  const event = registeredTeams[0].event_id;
+  const event = registeredTeams[0]?.event_id;
+
+  if (!event) {
+    return null;
+  }
 
   //UPDATE EVENT
   const { mutate: withdrawTeam, isLoading: isWithdrawing } = useMutation({

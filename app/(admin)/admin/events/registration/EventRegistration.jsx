@@ -1,13 +1,11 @@
 "use client";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import ParticipantList from "./ParticipantList";
 import PlayerSearch from "./PlayerSearch";
 import { SparklesIcon } from "@heroicons/react/24/solid";
-import { useStore } from "../../../../store/createStore";
 
 function EventRegistration({ event, registeredTeams }) {
-  // const { drawParticipants } = useStore();
   const queryClient = useQueryClient();
 
   //CREATE DRAW
@@ -35,7 +33,6 @@ function EventRegistration({ event, registeredTeams }) {
         });
       }
     }
-    console.log(matchCombinations);
     createDraw({ matches: matchCombinations });
   };
 

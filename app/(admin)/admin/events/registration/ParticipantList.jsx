@@ -1,8 +1,6 @@
 "use client";
-import { useStore } from "../../../../store/createStore";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
-import React, { useEffect } from "react";
 
 function ParticipantList({ event, registeredTeams }) {
   const queryClient = useQueryClient();
@@ -25,29 +23,6 @@ function ParticipantList({ event, registeredTeams }) {
   const handleRemoveTeam = (teamId) => {
     removeTeam(teamId);
   };
-
-  /*  const { drawParticipants, lastAction, removeTeam, resetLastAction } =
-    useStore();
-
-  const handleRemoveTeam = (teamId) => {
-    removeTeam(teamId);
-  };
-
-  useEffect(() => {
-    let timeoutId;
-
-    if (lastAction === "duplicate") {
-      timeoutId = setTimeout(() => {
-        resetLastAction();
-      }, 5000);
-    }
-
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [lastAction, resetLastAction]); */
   return (
     <>
       <div className="list">
@@ -63,7 +38,7 @@ function ParticipantList({ event, registeredTeams }) {
                 <span> & {team.player2name}</span>
               </p>
               <button
-                aria-label={`Remove team ${team.player1name} ${team.player1lastname} & ${team.player2name} ${team.player2lastname} from event`}
+                aria-label={`Remove team ${team.player1name} & ${team.player2name} from event`}
                 onClick={() => handleRemoveTeam(team.team_id)}
                 disabled={deleteLoading}
               >
@@ -73,9 +48,6 @@ function ParticipantList({ event, registeredTeams }) {
           ))}
         </ul>
       </div>
-      {/*  {lastAction === "duplicate" && (
-        <p className="error">The selected team has already been added.</p>
-      )} */}
     </>
   );
 }
