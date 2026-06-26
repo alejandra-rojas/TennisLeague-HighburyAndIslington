@@ -55,7 +55,13 @@ function AddChallengerModal({
       selectedTeams.length === 1 &&
       areTeamsInSameDivision(selectedTeams[0], team);
 
-    if (sameDivisionSelection) {
+    if (playerExists) {
+      setError("This team is already selected");
+      setTimeout(() => {
+        setError("");
+      }, 9000);
+      console.log("This team is already selected.");
+    } else if (sameDivisionSelection) {
       setError("Challenger matches must be between different divisions");
       setTimeout(() => {
         setError("");
@@ -69,12 +75,6 @@ function AddChallengerModal({
         setError("");
       }, 9000);
       console.log("You can't add more than two teams.");
-    } else if (playerExists) {
-      setError("This team is already selected");
-      setTimeout(() => {
-        setError("");
-      }, 9000);
-      console.log("This team is already selected.");
     }
   };
   //console.log(selectedTeams);
@@ -172,6 +172,7 @@ function AddChallengerModal({
                 <div className="clear-search">
                   {searchPerformed && filteredTeams.length >= 1 && (
                     <button
+                      type="button"
                       onClick={clearSearchResults}
                       aria-label="Clear search results"
                     >

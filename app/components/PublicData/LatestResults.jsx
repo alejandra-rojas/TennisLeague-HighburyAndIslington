@@ -16,6 +16,14 @@ const LatestResults = () => {
 
   const today = new Date();
 
+  if (isLoading) {
+    return <div>Loading current leagues...</div>;
+  }
+
+  if (isError) {
+    return <div>There was an error, try again.</div>;
+  }
+
   // Filter leagues based on active criteria
   const activeLeagues = data?.filter((league) => {
     const startDate = new Date(`${league.starting_date}T00:00:00Z`);

@@ -27,6 +27,17 @@ function EventEntryPublic({
     setShowTooltip(false);
   };
 
+  const toggleExpandEvent = () => {
+    setExpandEvent((prevState) => !prevState);
+  };
+
+  const handleHeaderKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleExpandEvent();
+    }
+  };
+
   //GET EVENT PARTICIPANT TEAMS DATA
   const {
     data: registeredTeams,
@@ -67,10 +78,13 @@ function EventEntryPublic({
       <section id="event-entry">
         {!showEventModal && (
           <header
-            onClick={() => setExpandEvent((prevState) => !prevState)}
+            onClick={toggleExpandEvent}
+            onKeyDown={handleHeaderKeyDown}
             aria-expanded={expandEvent}
             aria-controls="eventDetailsSection"
             aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
+            role="button"
+            tabIndex={0}
           >
             <div className="event-details">
               <h4>{event.event_name}</h4>
