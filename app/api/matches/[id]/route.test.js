@@ -20,7 +20,6 @@ describe("app/api/matches/[id]/route", () => {
     mockCookies.mockReset();
     mockCreateRouteHandlerClient.mockReset();
     mockCookies.mockReturnValue("cookie-store");
-    vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
   it("updates a match with the expected payload", async () => {
@@ -44,15 +43,13 @@ describe("app/api/matches/[id]/route", () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          match: {
-            match_date: "2026-06-20",
-            isfinished: true,
-            winner_id: 2,
-            team1_sets: 0,
-            team2_sets: 2,
-            winner_score: "6/4 6/4",
-            byMidpoint: false,
-          },
+          match_date: "2026-06-20",
+          isfinished: true,
+          winner_id: 2,
+          team1_sets: 0,
+          team2_sets: 2,
+          winner_score: "6/4 6/4",
+          byMidpoint: false,
         }),
       }),
       { params: { id: 7 } }
@@ -92,10 +89,8 @@ describe("app/api/matches/[id]/route", () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          match: {
-            match_date: "2026-06-20",
-            byMidpoint: false,
-          },
+          match_date: "2026-06-20",
+          byMidpoint: false,
         }),
       }),
       { params: { id: 7 } }

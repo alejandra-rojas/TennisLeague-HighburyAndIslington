@@ -4,8 +4,7 @@ import { cookies } from "next/headers";
 
 export async function PUT(req, { params }) {
   const id = params.id;
-  const { match } = await req.json();
-  console.log(match);
+  const match = await req.json();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
@@ -23,13 +22,11 @@ export async function PUT(req, { params }) {
     .eq("match_id", id);
 
   if (error) {
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
- 
+
   return NextResponse.json({ data });
 }

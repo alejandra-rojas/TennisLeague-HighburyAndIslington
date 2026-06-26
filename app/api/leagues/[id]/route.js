@@ -4,20 +4,29 @@ import { cookies } from "next/headers";
 
 export async function DELETE(_, { params }) {
   const id = params.id;
-  //get supabase instance
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
-  //insert data
   const { error } = await supabase.from("leagues").delete().eq("id", id);
 
-  return NextResponse.json({ error });
+  if (error) {
+    return NextResponse.json(
+      {
+        error: {
+          message:
+            error.message || "An error occurred while deleting the league.",
+        },
+      },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ data: { success: true } });
 }
 
 export async function PUT(req, { params }) {
   const id = params.id;
-  const { league } = await req.json();
-  //console.log(league);
+  const league = await req.json();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
@@ -33,12 +42,10 @@ export async function PUT(req, { params }) {
     .eq("id", id);
 
   if (error) {
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ data });

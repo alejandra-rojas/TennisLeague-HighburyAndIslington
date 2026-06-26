@@ -114,15 +114,13 @@ describe("MatchReportModal", () => {
     });
 
     expect(axios.put).toHaveBeenCalledWith("/api/matches/15", {
-      match: expect.objectContaining({
-        match_date: "2026-06-20",
-        byMidpoint: false,
-        isfinished: true,
-        winner_id: "2",
-        team1_sets: "0",
-        team2_sets: "2",
-        winner_score: "6/4 6/4",
-      }),
+      match_date: "2026-06-20",
+      byMidpoint: false,
+      isfinished: true,
+      winner_id: "2",
+      team1_sets: "0",
+      team2_sets: "2",
+      winner_score: "6/4 6/4",
     });
 
     await waitFor(() => {

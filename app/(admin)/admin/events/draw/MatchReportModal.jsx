@@ -4,7 +4,6 @@ import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
-  //console.log(midway_point)
   const queryClient = useQueryClient();
 
   const [data, setData] = useState({
@@ -16,43 +15,31 @@ function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
     team2_sets: match.team2_sets,
     winner_score: match.winner_score,
   });
-  //console.log(data)
-
   const handleChange = (e) => {
-    //console.log("changing", e);
     const { name, value, type, checked } = e.target;
 
-    // Check if the changed field is 'match_date'
-  if (name === 'match_date') {
-    // Compare the entered date with the midway_point
-    const enteredDate = new Date(value);
-    const midwayDate = new Date(midway_point);
+    if (name === "match_date") {
+      const enteredDate = new Date(value);
+      const midwayDate = new Date(midway_point);
+      const byMidpoint = enteredDate <= midwayDate;
 
-    // Update the byMidpoint variable based on the comparison
-    const byMidpoint = enteredDate <= midwayDate;
+      setData((prevData) => ({
+        ...prevData,
+        match_date: value,
+        byMidpoint,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+      return;
+    }
 
     setData((prevData) => ({
       ...prevData,
-      match_date: value,
-      byMidpoint: byMidpoint,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
-    //console.log(byMidpoint)
-  } else {
-    // For other fields, update as usual
-    setData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  }
   };
-  
 
-
-  //UPDATE EVENT
   const { mutate: reportMatch, isLoading: isUpdating } = useMutation({
-    mutationFn: async () =>
-      await axios.put(`/api/matches/${match.match_id}`, { match: data }),
+    mutationFn: async () => await axios.put(`/api/matches/${match.match_id}`, data),
 
     onSuccess: () => {
       setShowMatchReportModal(false);
@@ -67,29 +54,6 @@ function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
     e.preventDefault();
     reportMatch();
   };
-
-  //UPDATE DATA
-  /*       const updateMatchData = async (e) => {
-        e.preventDefault();
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_SERVERURL}/matches/${match.match_id}`,
-            {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            }
-          );
-          if (response.status === 200) {
-            console.log("Event was edited!");
-            setShowMatchReportModal(false);
-            getEventMatchesData();
-            getEventTeamsData();
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }; */
 
   return (
     <section id="report-modal">

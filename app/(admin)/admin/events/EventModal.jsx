@@ -34,7 +34,7 @@ function EventModal({
   //CREATE EVENT
   const { mutate: submitEvent, isLoading } = useMutation({
     mutationFn: async () =>
-      await axios.post(`/api/leagues/${leagueID}/events`, { event: data }),
+      await axios.post(`/api/leagues/${leagueID}/events`, data),
 
     onSuccess: () => {
       setShowEventModal(false);
@@ -47,8 +47,7 @@ function EventModal({
 
   //UPDATE EVENT
   const { mutate: updateEvent, isLoading: isUpdating } = useMutation({
-    mutationFn: async () =>
-      await axios.put(`/api/events/${event_id}`, { event: data }),
+    mutationFn: async () => await axios.put(`/api/events/${event_id}`, data),
 
     onSuccess: () => {
       setShowEventModal(false);

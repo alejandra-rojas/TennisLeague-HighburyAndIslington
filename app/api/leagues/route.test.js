@@ -15,51 +15,58 @@ vi.mock("@supabase/auth-helpers-nextjs", () => ({
 
 import { GET, POST } from "./route";
 
-describe("app/api/leagues/[id]/events/route", () => {
+describe("app/api/leagues/route", () => {
   beforeEach(() => {
     mockCookies.mockReset();
     mockCreateRouteHandlerClient.mockReset();
     mockCookies.mockReturnValue("cookie-store");
-    vi.spyOn(console, "log").mockImplementation(() => {});
-    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
-  it("returns 400 when the league id is missing", async () => {
-    const response = await GET(null, { params: {} });
-
-    expect(response.status).toBe(400);
-    expect(await response.json()).toEqual({
-      error: { message: "Missing or invalid league id" },
-    });
-  });
-
-  it("returns events for a league", async () => {
-    const mockEq = vi.fn().mockResolvedValue({
-      data: [{ event_id: 1, league_id: 3, event_name: "Round 1" }],
+  it("returns leagues", async () => {
+    const mockSelect = vi.fn().mockResolvedValue({
+      data: [{ id: 1, league_name: "Summer League" }],
       error: null,
     });
     const supabase = {
       from: vi.fn(() => ({
-        select: vi.fn(() => ({
-          eq: mockEq,
-        })),
+        select: mockSelect,
       })),
     };
 
     mockCreateRouteHandlerClient.mockReturnValue(supabase);
 
-    const response = await GET(null, { params: { id: 3 } });
+    const response = await GET();
 
-    expect(supabase.from).toHaveBeenCalledWith("events");
-    expect(mockEq).toHaveBeenCalledWith("league_id", 3);
+    expect(supabase.from).toHaveBeenCalledWith("leagues");
+    expect(mockSelect).toHaveBeenCalledWith("*");
     expect(await response.json()).toEqual({
-      data: [{ event_id: 1, league_id: 3, event_name: "Round 1" }],
+      data: [{ id: 1, league_name: "Summer League" }],
     });
   });
 
-  it("creates an event for a league", async () => {
+  it("returns a 500 response when loading leagues fails", async () => {
+    const supabase = {
+      from: vi.fn(() => ({
+        select: vi.fn().mockResolvedValue({
+          data: null,
+          error: { message: "Fetch failed" },
+        }),
+      })),
+    };
+
+    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+
+    const response = await GET();
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: { message: "Fetch failed" },
+    });
+  });
+
+  it("creates a league from a direct payload", async () => {
     const mockSingle = vi.fn().mockResolvedValue({
-      data: { event_id: 7, league_id: 3, event_name: "Round 2" },
+      data: { id: 7, league_name: "Autumn League" },
       error: null,
     });
     const mockSelect = vi.fn(() => ({
@@ -77,28 +84,30 @@ describe("app/api/leagues/[id]/events/route", () => {
     mockCreateRouteHandlerClient.mockReturnValue(supabase);
 
     const response = await POST(
-      new Request("http://localhost/api/leagues/3/events", {
+      new Request("http://localhost/api/leagues", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          event_name: "Round 2",
-          midway_matches: 3,
+          league_name: "Autumn League",
+          starting_date: "2026-09-01",
+          midway_point: "2026-10-01",
+          end_date: "2026-11-01",
         }),
-      }),
-      { params: { id: 3 } }
+      })
     );
 
     expect(mockInsert).toHaveBeenCalledWith({
-      league_id: 3,
-      event_name: "Round 2",
-      midway_matches: 3,
+      league_name: "Autumn League",
+      starting_date: "2026-09-01",
+      midway_point: "2026-10-01",
+      end_date: "2026-11-01",
     });
     expect(await response.json()).toEqual({
-      data: { event_id: 7, league_id: 3, event_name: "Round 2" },
+      data: { id: 7, league_name: "Autumn League" },
     });
   });
 
-  it("returns a 500 response when event creation fails", async () => {
+  it("returns a 500 response when league creation fails", async () => {
     const mockSingle = vi.fn().mockResolvedValue({
       data: null,
       error: { message: "Insert failed" },
@@ -116,15 +125,16 @@ describe("app/api/leagues/[id]/events/route", () => {
     mockCreateRouteHandlerClient.mockReturnValue(supabase);
 
     const response = await POST(
-      new Request("http://localhost/api/leagues/3/events", {
+      new Request("http://localhost/api/leagues", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          event_name: "Round 2",
-          midway_matches: 3,
+          league_name: "Autumn League",
+          starting_date: "2026-09-01",
+          midway_point: "2026-10-01",
+          end_date: "2026-11-01",
         }),
-      }),
-      { params: { id: 3 } }
+      })
     );
 
     expect(response.status).toBe(500);

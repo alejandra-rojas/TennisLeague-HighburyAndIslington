@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useMutation, useQueryClient } from "react-query";
@@ -18,48 +17,38 @@ function LeagueModal({
   isfinished,
 }) {
   const queryClient = useQueryClient();
-  //CREATE LEAGUE
   const { mutate: submitLeague, isLoading } = useMutation({
-    mutationFn: async () => await axios.post("/api/leagues", { league: data }),
+    mutationFn: async () => await axios.post("/api/leagues", data),
 
     onSuccess: () => {
-      //toast.success(`League created succesfully`);
       setShowModal(false);
       queryClient.invalidateQueries(["leagues"]);
     },
     onError: (error) => {
-      //toast.error("something went wrong");
       console.log(error);
     },
   });
 
-  //UPDATE LEAGUE
   const { mutate: updateLeague, isLoading: updateLoading } = useMutation({
-    mutationFn: async () =>
-      await axios.put(`/api/leagues/${id}`, { league: data }),
+    mutationFn: async () => await axios.put(`/api/leagues/${id}`, data),
 
     onSuccess: () => {
-      //toast.success(`League deleted succesfully`);
       setShowModal(false);
       queryClient.invalidateQueries(["leagues"]);
     },
     onError: (error) => {
-      //toast.error("something went wrong");
       console.log(error);
     },
   });
 
-  //DELETE LEAGUE
   const { mutate: deleteLeague, isLoading: deleteLoading } = useMutation({
     mutationFn: async () => await axios.delete(`/api/leagues/${id}`),
 
     onSuccess: () => {
-      //toast.success(`League deleted succesfully`);
       setShowModal(false);
       queryClient.invalidateQueries(["leagues"]);
     },
     onError: (error) => {
-      //toast.error("something went wrong");
       console.log(error);
     },
   });
@@ -119,6 +108,17 @@ function LeagueModal({
 
       return newData;
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (editMode) {
+      updateLeague();
+      return;
+    }
+
+    submitLeague();
   };
 
   return (
@@ -201,8 +201,7 @@ function LeagueModal({
           {!error && (
             <button
               type="submit"
-              onClick={editMode ? updateLeague : submitLeague}
-              //onClick={() => submitLeague()}
+              onClick={handleSubmit}
               aria-label={editMode ? "Update League" : "Create new league"}
               disabled={
                 !isFormValid ||
