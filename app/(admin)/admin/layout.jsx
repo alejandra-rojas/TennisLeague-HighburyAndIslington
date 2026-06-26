@@ -1,5 +1,4 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@/supabase/server";
 import { redirect } from "next/navigation";
 
 //Components
@@ -8,17 +7,19 @@ import AdminNavbar from "../../components/AdminNavbar";
 import AuthPrimaryNavbar from "../../components/AuthPrimaryNavbar";
 
 export default async function AdminLayout({ children }) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!data.session) {
+  if (!user) {
     redirect("/login");
   }
 
   return (
     <>
       <header id="admin-header">
-        <LoginNavbar user={data.session.user} />
+        <LoginNavbar user={user} />
         <AuthPrimaryNavbar />
         <AdminNavbar />
       </header>

@@ -9,7 +9,6 @@ const nextConfig = {
         port: "",
       },
     ],
-    domains: ["localhost", "cdn.sanity.io"],
   },
 };
 

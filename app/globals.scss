@@ -1,4 +1,4 @@
-@import "./styles/Variables/Variables.scss";
+@use "./styles/Variables/Variables.scss" as *;
 
 @tailwind base;
 @tailwind components;

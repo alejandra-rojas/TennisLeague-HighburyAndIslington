@@ -1,9 +1,8 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
 export async function GET(_, { params }) {
-  const { id } = params;
+  const { id } = await params;
 
   if (!id) {
     return NextResponse.json(
@@ -11,8 +10,7 @@ export async function GET(_, { params }) {
       { status: 400 }
     );
   }
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("event_teams")
@@ -52,11 +50,10 @@ export async function GET(_, { params }) {
 }
 
 export async function POST(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   const { team_id } = await request.json();
 
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("event_teams")
@@ -76,3 +73,4 @@ export async function POST(request, { params }) {
 
   return NextResponse.json({ data });
 }
+

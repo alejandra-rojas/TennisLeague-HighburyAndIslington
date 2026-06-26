@@ -1,16 +1,22 @@
 import React, { useRef, useEffect } from "react";
-import { useLenis } from "@studio-freight/react-lenis";
+import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import { BallOutline } from "./Icons";
 
 function RotatingText() {
   const textRef = useRef(null);
   const circleText = "Highbury Fields - Doubles Leagues ";
-  //   const lenis = useLenis((scroll) => {
-  //     const speed = scroll.velocity;
-  //   });
-  const lenis = useLenis();
-  console.log(lenis);
+
+  useLenis((lenis) => {
+    if (!textRef.current) {
+      return;
+    }
+
+    gsap.to(textRef.current, {
+      duration: 0.1,
+      rotation: `+=${lenis.velocity}`,
+    });
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -22,19 +28,6 @@ function RotatingText() {
       });
     }
   }, []);
-
-  useEffect(() => {
-    // Listen to scroll updates from Lenis
-    if (lenis) {
-      lenis.on("scroll", ({ scroll }) => {
-        // Adjust the GSAP animation based on scroll velocity
-        gsap.to(textRef.current, {
-          duration: 0.1, // Fast response to scroll change
-          rotation: `+=${lenis.velocity}`, // Rotate based on scroll velocity
-        });
-      });
-    }
-  }, [lenis]);
 
   return (
     <div className="flex items-center justify-center py-10">

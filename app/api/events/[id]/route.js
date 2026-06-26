@@ -1,11 +1,9 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
 export async function DELETE(_, { params }) {
-  const id = params.id;
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const { id } = await params;
+  const supabase = await createClient();
 
   const { error } = await supabase.from("events").delete().eq("event_id", id);
 
@@ -24,10 +22,9 @@ export async function DELETE(_, { params }) {
 }
 
 export async function PUT(req, { params }) {
-  const id = params.id;
+  const { id } = await params;
   const event = await req.json();
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("events")
@@ -46,3 +43,4 @@ export async function PUT(req, { params }) {
 
   return NextResponse.json({ data });
 }
+

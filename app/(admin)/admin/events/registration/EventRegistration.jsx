@@ -1,5 +1,5 @@
 "use client";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import ParticipantList from "./ParticipantList";
 import PlayerSearch from "./PlayerSearch";
@@ -9,11 +9,11 @@ function EventRegistration({ event, registeredTeams }) {
   const queryClient = useQueryClient();
 
   //CREATE DRAW
-  const { mutate: createDraw, isLoading } = useMutation({
+  const { mutate: createDraw, isPending: isLoading } = useMutation({
     mutationFn: (matches) => axios.post(`/api/matches`, matches),
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["event-draw", event]);
+      queryClient.invalidateQueries({ queryKey: ["event-draw", event] });
     },
     onError: (error) => {
       console.log(error);

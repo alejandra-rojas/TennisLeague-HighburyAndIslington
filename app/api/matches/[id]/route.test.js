@@ -1,25 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockCookies, mockCreateRouteHandlerClient } = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
+const { mockCreateServerClient } = vi.hoisted(() => ({
+  mockCreateServerClient: vi.fn(),
 }));
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { PUT } from "./route";
 
 describe("app/api/matches/[id]/route", () => {
   beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
+    mockCreateServerClient.mockReset();
   });
 
   it("updates a match with the expected payload", async () => {
@@ -36,7 +29,7 @@ describe("app/api/matches/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(
       new Request("http://localhost/api/matches/7", {
@@ -82,7 +75,7 @@ describe("app/api/matches/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(
       new Request("http://localhost/api/matches/7", {
@@ -102,3 +95,5 @@ describe("app/api/matches/[id]/route", () => {
     });
   });
 });
+
+

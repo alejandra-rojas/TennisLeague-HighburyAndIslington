@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@use "../Variables/Variables.scss" as *;
 
 #league-challengers {
   padding-top: 2rem;

@@ -1,25 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockCookies, mockCreateRouteHandlerClient } = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
+const { mockCreateServerClient } = vi.hoisted(() => ({
+  mockCreateServerClient: vi.fn(),
 }));
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { DELETE, PUT } from "./route";
 
 describe("app/api/events/[id]/teams/[teamID]/route", () => {
   beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
+    mockCreateServerClient.mockReset();
   });
 
   it("removes a team from an event", async () => {
@@ -35,7 +28,7 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await DELETE(null, { params: { id: 4, teamID: 12 } });
 
@@ -78,7 +71,7 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
       }),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(null, { params: { id: 4, teamID: 12 } });
 
@@ -110,7 +103,7 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(null, { params: { id: 4, teamID: 12 } });
 
@@ -153,7 +146,7 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
       }),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(null, { params: { id: 4, teamID: 12 } });
 
@@ -163,3 +156,5 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
     });
   });
 });
+
+

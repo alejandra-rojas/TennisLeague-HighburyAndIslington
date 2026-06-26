@@ -1,12 +1,7 @@
 "use client";
-import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
+import { ReactLenis } from "lenis/react";
 
 function SmoothScroll({ children }) {
-  // const lenis = useLenis(({ scroll }) => {
-  //   // called every scroll
-  //   console.log("lenis", lenis.velocity);
-  // });
-
   return (
     <ReactLenis root options={{ smoothTouch: true, syncTouch: true }}>
       {children}

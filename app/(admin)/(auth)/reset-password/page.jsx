@@ -1,6 +1,6 @@
 "use client";
 import "../../../styles/Admin/Login.scss";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -28,7 +28,7 @@ export default function Reset() {
       return;
     }
 
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
 
     const { data, error } = await supabase.auth.updateUser({
       password: newPassword,
@@ -78,3 +78,4 @@ export default function Reset() {
     </main>
   );
 }
+

@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import EventEntryPublic from "./EventEntryPublic";
@@ -79,7 +79,7 @@ describe("EventEntryPublic", () => {
       expect(axios.get).toHaveBeenCalledWith("/api/events/4/matches");
     });
 
-    await user.click(screen.getByRole("button", { name: "Expand Teams" }));
+    await user.click(await screen.findByRole("button", { name: "Expand Teams" }));
 
     expect(await screen.findByTestId("standings-table")).toHaveTextContent(
       "standings:1:1"

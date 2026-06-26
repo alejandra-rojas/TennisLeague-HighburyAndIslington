@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import WithdrawalForm from "./WithdrawalForm";
@@ -86,11 +86,12 @@ describe("WithdrawalForm", () => {
     expect(axios.put).toHaveBeenCalledWith("/api/events/4/teams/12");
 
     await waitFor(() => {
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["event-draw", 4]);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith([
-        "event-participants",
-        4,
-      ]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["event-draw", 4],
+      });
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["event-participants", 4],
+      });
     });
   });
 

@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@use "../Variables/Variables.scss" as *;
 
 #primary-navigation {
   background-color: $color-green;

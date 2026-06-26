@@ -1,12 +1,10 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
 export async function PUT(request, { params }) {
-  const id = params.id;
+  const { id } = await params;
   const challenger = await request.json();
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("challenger_matches")
@@ -29,3 +27,4 @@ export async function PUT(request, { params }) {
 
   return NextResponse.json({ data });
 }
+

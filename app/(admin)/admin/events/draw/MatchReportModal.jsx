@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -38,12 +38,14 @@ function MatchReportModal({ match, setShowMatchReportModal, midway_point }) {
     }));
   };
 
-  const { mutate: reportMatch, isLoading: isUpdating } = useMutation({
+  const { mutate: reportMatch, isPending: isUpdating } = useMutation({
     mutationFn: async () => await axios.put(`/api/matches/${match.match_id}`, data),
 
     onSuccess: () => {
       setShowMatchReportModal(false);
-      queryClient.invalidateQueries(["event-draw", match.event_id]);
+      queryClient.invalidateQueries({
+        queryKey: ["event-draw", match.event_id],
+      });
     },
     onError: (error) => {
       console.log(error);

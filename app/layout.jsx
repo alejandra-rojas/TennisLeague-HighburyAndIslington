@@ -5,6 +5,7 @@ import {
   Open_Sans,
   Barlow_Semi_Condensed,
 } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.scss";
 import TanstackProvider from "./components/providers/Tanstackprovider";
 import SmoothScroll from "./components/providers/SmoothScroll";

@@ -1,6 +1,6 @@
 "use client";
 import "../../../styles/Admin/Login.scss";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -36,7 +36,7 @@ export default function Login() {
       return;
     }
 
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: "https://leagues-dashboard.vercel.app/",
     });
@@ -80,3 +80,4 @@ export default function Login() {
     </main>
   );
 }
+

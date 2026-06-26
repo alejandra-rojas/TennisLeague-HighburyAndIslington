@@ -1,26 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockCookies, mockCreateRouteHandlerClient } = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
+const { mockCreateServerClient } = vi.hoisted(() => ({
+  mockCreateServerClient: vi.fn(),
 }));
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { GET, POST } from "./route";
 
 describe("app/api/leagues/[id]/challengers/route", () => {
-  beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
-    vi.spyOn(console, "error").mockImplementation(() => {});
+  beforeEach(() => {    mockCreateServerClient.mockReset();    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   it("returns 400 when the league id is missing", async () => {
@@ -45,7 +36,7 @@ describe("app/api/leagues/[id]/challengers/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await GET(null, { params: { id: 2 } });
 
@@ -72,7 +63,7 @@ describe("app/api/leagues/[id]/challengers/route", () => {
     );
 
     expect(response.status).toBe(400);
-    expect(mockCreateRouteHandlerClient).not.toHaveBeenCalled();
+    expect(mockCreateServerClient).not.toHaveBeenCalled();
     expect(await response.json()).toEqual({
       error: {
         message: "Challenger matches must be between different divisions",
@@ -97,7 +88,7 @@ describe("app/api/leagues/[id]/challengers/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const challenger = {
       team1_id: 11,
@@ -154,7 +145,7 @@ describe("app/api/leagues/[id]/challengers/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await POST(
       new Request("http://localhost/api/leagues/2/challengers", {
@@ -176,3 +167,5 @@ describe("app/api/leagues/[id]/challengers/route", () => {
     });
   });
 });
+
+

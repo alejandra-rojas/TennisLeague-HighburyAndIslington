@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -38,13 +38,15 @@ function ChallengerEditModal({ match, setShowReportModal }) {
     }));
   };
 
-  const { mutate: updateChallenger, isLoading: isUpdating } = useMutation({
+  const { mutate: updateChallenger, isPending: isUpdating } = useMutation({
     mutationFn: async (challenger) =>
       await axios.put(`/api/challengers/${match.match_id}`, challenger),
 
     onSuccess: () => {
       setShowReportModal(false);
-      queryClient.invalidateQueries(["league-challengers", match.league_id]);
+      queryClient.invalidateQueries({
+        queryKey: ["league-challengers", match.league_id],
+      });
     },
     onError: (error) => {
       console.log(error);

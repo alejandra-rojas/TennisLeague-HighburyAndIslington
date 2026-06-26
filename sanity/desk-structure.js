@@ -11,8 +11,4 @@ export const structure = (S) =>
         .title("Rules page")
         .id("rules")
         .child(S.document().schemaType("rules").documentId("rules")),
-      //   ...S.documentTypeListItems().filter(
-      //     (item) =>
-      //       ["project"].includes(item.getId()) || ["page"].includes(item.getId())
-      //   ),
     ]);

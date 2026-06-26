@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import NewChallengerModal from "./NewChallengerModal";
@@ -94,10 +94,9 @@ describe("NewChallengerModal", () => {
 
     await waitFor(() => {
       expect(setShowChallengerModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith([
-        "league-challengers",
-        3,
-      ]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["league-challengers", 3],
+      });
     });
   });
 });
