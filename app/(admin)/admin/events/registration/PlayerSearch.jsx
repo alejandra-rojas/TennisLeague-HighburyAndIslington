@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import axios from "axios";
-//import { useStore } from "../../../store/createStore";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
@@ -12,34 +15,17 @@ function PlayerSearch({ registeredTeams, event }) {
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [filteredTeams, setFilteredTeams] = useState([]);
   const [error, setError] = useState("");
-  //   const { drawParticipants, addTeam } = useStore();
-  //   console.log(drawParticipants);
 
-  //GET TEAMS DATA ONCE TO BE USED IN SEARCH
   const {
     data: allTeamsData,
     isLoading,
-    isError,
-  } = useQuery(
-    "all-teams",
-    async () => {
+  } = useQuery({
+    queryKey: ["all-teams"],
+    queryFn: async () => {
       const response = await axios.get("/api/teams");
       return response.data.data;
-    }
-    /* {
-      onSuccess: (data) => {
-        // Log the data here
-        console.log("Data fetched successfully:", data);
-      },
-      onError: (err) => {
-        // Handle error here
-        console.error("Error fetching data:", err);
-      },
-    } */
-  );
-
-  //   console.log(registeredTeams);
-  //   console.log(allTeamsData);
+    },
+  });
 
   const onSubmitSearchForm = (e) => {
     e.preventDefault();
@@ -48,13 +34,10 @@ function PlayerSearch({ registeredTeams, event }) {
   };
 
   const handleSearch = () => {
-    // Ensure that teams data is available
     if (isLoading || !allTeamsData) {
-      console.log("Data is loading or not available");
       return;
     }
 
-    // Filter the teams data based on the search string
     const results = allTeamsData.filter((team) => {
       const searchLower = searchString.toLowerCase();
       return (
@@ -65,25 +48,23 @@ function PlayerSearch({ registeredTeams, event }) {
       );
     });
 
-    // Update the filteredTeams state with the search results
     setFilteredTeams(results);
   };
 
   const clearSearchResults = () => {
     setSearchString("");
     setSearchPerformed(false);
-    setFilteredTeams([]); // Clear the filtered results
+    setFilteredTeams([]);
   };
 
-  //ADD TEAM TO EVENT
-  const { mutate: addTeam, isLoading: addingTeam } = useMutation({
+  const { mutate: addTeam } = useMutation({
     mutationFn: async (team_id) =>
       await axios.post(`/api/events/${event}/teams`, {
         team_id,
       }),
 
     onSuccess: () => {
-      queryClient.invalidateQueries(["event-participants", event]);
+      queryClient.invalidateQueries({ queryKey: ["event-participants", event] });
     },
     onError: (error) => {
       console.log(error);
@@ -96,7 +77,6 @@ function PlayerSearch({ registeredTeams, event }) {
     );
 
     if (isTeamAlreadyAdded) {
-      //console.log(`Team has already been added to the event.`);
       setError(`Selected team has already been added to the event.`);
 
       setTimeout(() => {
@@ -107,19 +87,6 @@ function PlayerSearch({ registeredTeams, event }) {
       addTeam(team);
     }
   };
-
-  //ADD TEAM TO ZUDSTAND STATE
-  /*   const handleAddTeam = (team) => {
-    const addingTeam = {
-      team_id: team.team_id,
-      player1name: team.player1_firstname,
-      player1lastname: team.player1_lastname,
-      player2name: team.player2_firstname,
-      player2lastname: team.player2_lastname,
-    };
-
-    addTeam(addingTeam);
-  }; */
 
   return (
     <>
@@ -178,7 +145,6 @@ function PlayerSearch({ registeredTeams, event }) {
 
                     <button
                       onClick={() => handleAddTeam(team.team_id)}
-                      //onClick={() => handleAddTeam(team)}
                       aria-label={`Add team ${team.player1_firstname} ${team.player1_lastname} & ${team.player2_firstname} ${team.player2_lastname} to event`}
                     >
                       Add team to event

@@ -1,18 +1,18 @@
 "use client";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 function ParticipantList({ event, registeredTeams }) {
   const queryClient = useQueryClient();
 
   //REMOVE TEAM FROM EVENT PARTICIPANT LIST
-  const { mutate: removeTeam, isLoading: deleteLoading } = useMutation({
+  const { mutate: removeTeam, isPending: deleteLoading } = useMutation({
     mutationFn: async (teamId) =>
       await axios.delete(`/api/events/${event}/teams/${teamId}`),
 
     onSuccess: () => {
       //toast.success(`League deleted succesfully`);
-      queryClient.invalidateQueries(["event-participants", event]);
+      queryClient.invalidateQueries({ queryKey: ["event-participants", event] });
     },
     onError: (error) => {
       //toast.error("something went wrong");

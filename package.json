@@ -11,7 +11,8 @@
     "test:watch": "vitest"
   },
   "overrides": {
-    "motion-dom": "12.42.0"
+    "motion-dom": "12.42.0",
+    "@rolldown/plugin-babel": "0.1.8"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -32,18 +33,19 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.6.0",
-    "react-query": "^3.39.3",
     "react-toastify": "^11.1.0",
     "sanity": "^3.99.0",
     "sass": "^1.101.0",
-    "zustand": "^5.0.14"
+    "zustand": "^5.0.14",
+    "@tanstack/react-query": "^5.101.1"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.101.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@vitejs/plugin-react": "^6.0.2",
+    "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.2",
     "eslint": "^8",
     "eslint-config-next": "^15.5.19",

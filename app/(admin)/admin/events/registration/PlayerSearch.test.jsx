@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import PlayerSearch from "./PlayerSearch";
@@ -66,7 +66,7 @@ describe("PlayerSearch", () => {
     });
 
     await user.type(
-      screen.getByPlaceholderText("Search by participant's name:"),
+      await screen.findByPlaceholderText("Search by participant's name:"),
       "Ada"
     );
     await user.click(screen.getByRole("button", { name: "Submit search" }));
@@ -85,10 +85,9 @@ describe("PlayerSearch", () => {
     });
 
     await waitFor(() => {
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith([
-        "event-participants",
-        4,
-      ]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["event-participants", 4],
+      });
     });
   });
 
@@ -120,7 +119,7 @@ describe("PlayerSearch", () => {
     });
 
     await user.type(
-      screen.getByPlaceholderText("Search by participant's name:"),
+      await screen.findByPlaceholderText("Search by participant's name:"),
       "Ada"
     );
     await user.click(screen.getByRole("button", { name: "Submit search" }));

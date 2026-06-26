@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import LeagueCardPublic from "./LeagueCardPublic";
@@ -84,7 +84,7 @@ describe("LeagueCardPublic", () => {
       expect(axios.get).toHaveBeenCalledWith("/api/leagues/4/challengers");
     });
 
-    expect(screen.getByText("Summer League")).toBeInTheDocument();
+    expect(await screen.findByText("Summer League")).toBeInTheDocument();
     expect(
       screen.getByText("Today is the last day to complete a match")
     ).toBeInTheDocument();

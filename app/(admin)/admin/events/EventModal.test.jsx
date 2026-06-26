@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import EventModal from "./EventModal";
@@ -75,7 +75,9 @@ describe("EventModal", () => {
 
     await waitFor(() => {
       expect(setShowEventModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["events", 7]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["events", 7],
+      });
     });
   });
 
@@ -124,7 +126,9 @@ describe("EventModal", () => {
 
     await waitFor(() => {
       expect(setShowEventModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["events", 7]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["events", 7],
+      });
     });
   });
 
@@ -163,7 +167,9 @@ describe("EventModal", () => {
 
     await waitFor(() => {
       expect(setShowEventModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["events", 7]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["events", 7],
+      });
     });
   });
 });

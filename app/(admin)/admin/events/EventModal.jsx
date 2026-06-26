@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
@@ -32,13 +32,13 @@ function EventModal({
   };
 
   //CREATE EVENT
-  const { mutate: submitEvent, isLoading } = useMutation({
+  const { mutate: submitEvent, isPending: isLoading } = useMutation({
     mutationFn: async () =>
       await axios.post(`/api/leagues/${leagueID}/events`, data),
 
     onSuccess: () => {
       setShowEventModal(false);
-      queryClient.invalidateQueries(["events", leagueID]);
+      queryClient.invalidateQueries({ queryKey: ["events", leagueID] });
     },
     onError: (error) => {
       console.log(error);
@@ -46,12 +46,12 @@ function EventModal({
   });
 
   //UPDATE EVENT
-  const { mutate: updateEvent, isLoading: isUpdating } = useMutation({
+  const { mutate: updateEvent, isPending: isUpdating } = useMutation({
     mutationFn: async () => await axios.put(`/api/events/${event_id}`, data),
 
     onSuccess: () => {
       setShowEventModal(false);
-      queryClient.invalidateQueries(["events", leagueID]);
+      queryClient.invalidateQueries({ queryKey: ["events", leagueID] });
     },
     onError: (error) => {
       console.log(error);
@@ -59,12 +59,12 @@ function EventModal({
   });
 
   //DELETE EVENT
-  const { mutate: deleteEvent, isLoading: isDeleting } = useMutation({
+  const { mutate: deleteEvent, isPending: isDeleting } = useMutation({
     mutationFn: async () => await axios.delete(`/api/events/${event_id}`),
 
     onSuccess: () => {
       setShowEventModal(false);
-      queryClient.invalidateQueries(["events", leagueID]);
+      queryClient.invalidateQueries({ queryKey: ["events", leagueID] });
     },
     onError: (error) => {
       console.log(error);

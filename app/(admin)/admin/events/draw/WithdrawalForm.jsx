@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 function WithdrawalForm({ registeredTeams }) {
@@ -9,7 +9,7 @@ function WithdrawalForm({ registeredTeams }) {
   const event = registeredTeams[0]?.event_id;
 
   //UPDATE EVENT
-  const { mutate: withdrawTeam, isLoading: isWithdrawing } = useMutation({
+  const { mutate: withdrawTeam, isPending: isWithdrawing } = useMutation({
     mutationFn: async (teamId) => {
       if (!event) {
         throw new Error("Missing event id for withdrawal");
@@ -20,8 +20,8 @@ function WithdrawalForm({ registeredTeams }) {
 
     onSuccess: () => {
       setSelectedTeamId("");
-      queryClient.invalidateQueries(["event-draw", event]);
-      queryClient.invalidateQueries(["event-participants", event]);
+      queryClient.invalidateQueries({ queryKey: ["event-draw", event] });
+      queryClient.invalidateQueries({ queryKey: ["event-participants", event] });
     },
     onError: (error) => {
       console.log(error);

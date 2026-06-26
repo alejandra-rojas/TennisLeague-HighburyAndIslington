@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 function NewChallengerModal({
@@ -57,13 +57,15 @@ function NewChallengerModal({
     }));
   };
 
-  const { mutate: insertChallenger, isLoading } = useMutation({
+  const { mutate: insertChallenger, isPending: isLoading } = useMutation({
     mutationFn: async (challenger) =>
       await axios.post(`/api/leagues/${leagueID}/challengers`, challenger),
 
     onSuccess: () => {
       setShowChallengerModal(false);
-      queryClient.invalidateQueries(["league-challengers", leagueID]);
+      queryClient.invalidateQueries({
+        queryKey: ["league-challengers", leagueID],
+      });
     },
     onError: (error) => {
       console.log(error);

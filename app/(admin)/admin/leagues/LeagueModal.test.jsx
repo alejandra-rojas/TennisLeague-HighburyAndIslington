@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import axios from "axios";
 import LeagueModal from "./LeagueModal";
@@ -72,7 +72,9 @@ describe("LeagueModal", () => {
 
     await waitFor(() => {
       expect(setShowModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["leagues"]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["leagues"],
+      });
     });
   });
 
@@ -118,7 +120,9 @@ describe("LeagueModal", () => {
 
     await waitFor(() => {
       expect(setShowModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["leagues"]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["leagues"],
+      });
     });
   });
 
@@ -158,7 +162,9 @@ describe("LeagueModal", () => {
 
     await waitFor(() => {
       expect(setShowModal).toHaveBeenCalledWith(false);
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith(["leagues"]);
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ["leagues"],
+      });
     });
   });
 });

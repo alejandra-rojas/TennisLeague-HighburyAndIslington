@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function LeagueModal({
   mode,
@@ -17,36 +17,36 @@ function LeagueModal({
   isfinished,
 }) {
   const queryClient = useQueryClient();
-  const { mutate: submitLeague, isLoading } = useMutation({
+  const { mutate: submitLeague, isPending: isLoading } = useMutation({
     mutationFn: async () => await axios.post("/api/leagues", data),
 
     onSuccess: () => {
       setShowModal(false);
-      queryClient.invalidateQueries(["leagues"]);
+      queryClient.invalidateQueries({ queryKey: ["leagues"] });
     },
     onError: (error) => {
       console.log(error);
     },
   });
 
-  const { mutate: updateLeague, isLoading: updateLoading } = useMutation({
+  const { mutate: updateLeague, isPending: updateLoading } = useMutation({
     mutationFn: async () => await axios.put(`/api/leagues/${id}`, data),
 
     onSuccess: () => {
       setShowModal(false);
-      queryClient.invalidateQueries(["leagues"]);
+      queryClient.invalidateQueries({ queryKey: ["leagues"] });
     },
     onError: (error) => {
       console.log(error);
     },
   });
 
-  const { mutate: deleteLeague, isLoading: deleteLoading } = useMutation({
+  const { mutate: deleteLeague, isPending: deleteLoading } = useMutation({
     mutationFn: async () => await axios.delete(`/api/leagues/${id}`),
 
     onSuccess: () => {
       setShowModal(false);
-      queryClient.invalidateQueries(["leagues"]);
+      queryClient.invalidateQueries({ queryKey: ["leagues"] });
     },
     onError: (error) => {
       console.log(error);
