@@ -8,14 +8,15 @@ function WithdrawalForm({ registeredTeams }) {
   const [selectedTeamId, setSelectedTeamId] = useState("");
   const event = registeredTeams[0]?.event_id;
 
-  if (!event) {
-    return null;
-  }
-
   //UPDATE EVENT
   const { mutate: withdrawTeam, isLoading: isWithdrawing } = useMutation({
-    mutationFn: async () =>
-      await axios.put(`/api/events/${event}/teams/${selectedTeamId}`),
+    mutationFn: async (teamId) => {
+      if (!event) {
+        throw new Error("Missing event id for withdrawal");
+      }
+
+      return await axios.put(`/api/events/${event}/teams/${teamId}`);
+    },
 
     onSuccess: () => {
       setSelectedTeamId("");
@@ -27,7 +28,11 @@ function WithdrawalForm({ registeredTeams }) {
     },
   });
 
-  const handleWithdrawal = (e, selectedTeamId) => {
+  if (!event) {
+    return null;
+  }
+
+  const handleWithdrawal = (e) => {
     e.preventDefault();
     withdrawTeam(selectedTeamId);
   };
@@ -58,7 +63,7 @@ function WithdrawalForm({ registeredTeams }) {
           <>
             <button
               type="submit"
-              onClick={(e) => handleWithdrawal(e, selectedTeamId)}
+              onClick={handleWithdrawal}
               aria-label="Report Withdrawal"
               disabled={!selectedTeamId || isWithdrawing}
             >

@@ -37,11 +37,9 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
   }, []); */
 
   //Get request using createClientComponentClient
-  const supabase = createClientComponentClient();
-  console.log(players);
-
   useEffect(() => {
     const getData = async () => {
+      const supabase = createClientComponentClient();
       const { data } = await supabase.from("players").select();
       setPlayers(data);
     };
@@ -93,7 +91,6 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
       console.log("This player is already selected.");
     }
   };
-  console.log(selectedPlayers);
 
   // Remove player from team
   const removePlayer = (playerToRemove) => {
