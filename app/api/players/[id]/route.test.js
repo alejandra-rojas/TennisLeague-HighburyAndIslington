@@ -130,7 +130,39 @@ describe("app/api/players/[id]/route", () => {
     expect(mockEq).toHaveBeenCalledWith("id", 9);
     expect(await response.json()).toEqual({
       data: [{ id: 9, firstname: "Grace", lastname: "Hopper" }],
-      error: null,
+    });
+  });
+
+  it("returns a 500 response when the player update fails", async () => {
+    const mockEq = vi.fn().mockResolvedValue({
+      data: null,
+      error: { message: "Update failed" },
+    });
+    const supabase = {
+      from: vi.fn(() => ({
+        update: vi.fn(() => ({
+          eq: mockEq,
+        })),
+      })),
+    };
+
+    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+
+    const response = await PUT(
+      new Request("http://localhost/api/players/9", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstname: "Grace",
+          lastname: "Hopper",
+        }),
+      }),
+      { params: { id: 9 } }
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: { message: "Update failed" },
     });
   });
 });

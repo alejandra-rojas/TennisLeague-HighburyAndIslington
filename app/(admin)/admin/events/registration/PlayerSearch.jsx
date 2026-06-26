@@ -77,9 +77,9 @@ function PlayerSearch({ registeredTeams, event }) {
 
   //ADD TEAM TO EVENT
   const { mutate: addTeam, isLoading: addingTeam } = useMutation({
-    mutationFn: async (team) =>
+    mutationFn: async (team_id) =>
       await axios.post(`/api/events/${event}/teams`, {
-        team,
+        team_id,
       }),
 
     onSuccess: () => {
@@ -148,6 +148,7 @@ function PlayerSearch({ registeredTeams, event }) {
               <div className="clear-search">
                 {searchPerformed && (
                   <button
+                    type="button"
                     onClick={clearSearchResults}
                     aria-label="Clear search results"
                   >

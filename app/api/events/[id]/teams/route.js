@@ -3,18 +3,12 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 export async function GET(_, { params }) {
-  //console.log("Received params:", params);
   const { id } = params;
 
   if (!id) {
-    return new NextResponse(
-      JSON.stringify({ error: "Missing or invalid id" }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    return NextResponse.json(
+      { error: { message: "Missing or invalid id" } },
+      { status: 400 }
     );
   }
   const cookieStore = cookies();
@@ -34,15 +28,11 @@ export async function GET(_, { params }) {
     )
     .eq("event_id", id);
 
-  // Return the data or error
   if (error) {
-    console.error("Error fetching events:", error);
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
 
   const formattedData = data.map((entry) => {
@@ -63,9 +53,7 @@ export async function GET(_, { params }) {
 
 export async function POST(request, { params }) {
   const { id } = params;
-  //console.log(id);
-  const { team } = await request.json();
-  //console.log(team);
+  const { team_id } = await request.json();
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
@@ -74,19 +62,17 @@ export async function POST(request, { params }) {
     .from("event_teams")
     .insert({
       event_id: id,
-      team_id: team,
+      team_id,
     })
     .select()
     .single();
 
   if (error) {
-    console.error("Error fetching events:", error);
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
-  return NextResponse.json({ data, error });
+
+  return NextResponse.json({ data });
 }

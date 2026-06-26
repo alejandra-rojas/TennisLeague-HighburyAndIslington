@@ -7,11 +7,9 @@ export async function DELETE(_, { params }) {
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
-  // Try to delete the player
   const { error } = await supabase.from("players").delete().eq("id", id);
 
   if (error) {
-    // Check for foreign key constraint violation
     if (error.code === "23503") {
       return NextResponse.json(
         {
@@ -25,7 +23,6 @@ export async function DELETE(_, { params }) {
       );
     }
 
-    // Other types of errors
     return NextResponse.json(
       {
         error: {
@@ -52,5 +49,12 @@ export async function PUT(req, { params }) {
     .update({ firstname: player.firstname, lastname: player.lastname })
     .eq("id", id);
 
-  return NextResponse.json({ data, error });
+  if (error) {
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ data });
 }

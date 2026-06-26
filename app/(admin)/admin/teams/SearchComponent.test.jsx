@@ -178,7 +178,7 @@ describe("SearchComponent", () => {
 
     global.fetch.mockResolvedValue({
       json: async () => ({
-        error: { details: "This team already exists." },
+        error: { message: "This team already exists." },
       }),
     });
 

@@ -117,7 +117,47 @@ describe("app/api/teams/route", () => {
     });
     expect(await response.json()).toEqual({
       data: { team_id: 4, player1_id: 10, player2_id: 11 },
-      error: null,
+    });
+  });
+
+  it("returns a 500 response with a normalized message when team creation fails", async () => {
+    const mockSingle = vi.fn().mockResolvedValue({
+      data: null,
+      error: {
+        message: "duplicate key value violates unique constraint",
+        details: "This team already exists.",
+        code: "23505",
+      },
+    });
+    const supabase = {
+      from: vi.fn(() => ({
+        insert: vi.fn(() => ({
+          select: vi.fn(() => ({
+            single: mockSingle,
+          })),
+        })),
+      })),
+    };
+
+    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+
+    const response = await POST(
+      new Request("http://localhost/api/teams", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          player1_id: 10,
+          player2_id: 11,
+        }),
+      })
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: {
+        message: "This team already exists.",
+        code: "23505",
+      },
     });
   });
 });

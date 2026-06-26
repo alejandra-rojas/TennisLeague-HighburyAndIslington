@@ -28,7 +28,7 @@ describe("app/api/events/[id]/teams/route", () => {
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({
-      error: "Missing or invalid id",
+      error: { message: "Missing or invalid id" },
     });
   });
 
@@ -97,7 +97,7 @@ describe("app/api/events/[id]/teams/route", () => {
       new Request("http://localhost/api/events/4/teams", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ team: 12 }),
+        body: JSON.stringify({ team_id: 12 }),
       }),
       { params: { id: 4 } }
     );
@@ -108,7 +108,6 @@ describe("app/api/events/[id]/teams/route", () => {
     });
     expect(await response.json()).toEqual({
       data: { event_id: 4, team_id: 12 },
-      error: null,
     });
   });
 
@@ -133,7 +132,7 @@ describe("app/api/events/[id]/teams/route", () => {
       new Request("http://localhost/api/events/4/teams", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ team: 12 }),
+        body: JSON.stringify({ team_id: 12 }),
       }),
       { params: { id: 4 } }
     );

@@ -129,8 +129,7 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
     const json = await res.json();
 
     if (json.error) {
-      //console.log(json.error.details);
-      setError(json.error.details);
+      setError(json.error.message || json.error.details);
       setIsLoading(false);
       setTimeout(() => {
         setError("");

@@ -60,7 +60,40 @@ describe("app/api/players/route", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
       data: { id: 1, firstname: "Ada", lastname: "Lovelace" },
-      error: null,
+    });
+  });
+
+  it("returns a 500 response when player creation fails", async () => {
+    const mockSingle = vi.fn().mockResolvedValue({
+      data: null,
+      error: { message: "Insert failed" },
+    });
+    const supabase = {
+      from: vi.fn(() => ({
+        insert: vi.fn(() => ({
+          select: vi.fn(() => ({
+            single: mockSingle,
+          })),
+        })),
+      })),
+    };
+
+    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+
+    const response = await POST(
+      new Request("http://localhost/api/players", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstname: "Ada",
+          lastname: "Lovelace",
+        }),
+      })
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: { message: "Insert failed" },
     });
   });
 
