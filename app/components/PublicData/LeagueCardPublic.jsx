@@ -1,5 +1,5 @@
 "use client";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
 import "../../styles/Public/LeagueCardPublic.scss";
 import EventsPublic from "./EventsPublic";
@@ -12,8 +12,6 @@ const LeagueCardPublic = ({
   end_date,
   isfinished,
 }) => {
-  const queryClient = useQueryClient();
-
   const isFinished = isfinished;
   const startDate = new Date(starting_date);
   const endDate = new Date(end_date);
@@ -57,26 +55,6 @@ const LeagueCardPublic = ({
     message = "The league has ended";
   }
 
-  //GET ALL TEAMS PARTICIPATING IN THIS LEAGUE
-  /*   console.log("Participant team objects:", registeredTeams);
-
-  const teamIds = registeredTeams
-    ? registeredTeams.map((team) => team.team_id)
-    : [];
-  console.log("Participant team ids:", teamIds); */
-
-  const {
-    data: leagueParticipants,
-    isLoading: loadingParticipants,
-    isError: participantsError,
-  } = useQuery({
-    queryKey: ["league-participantTeams", id],
-    queryFn: async () => {
-      const { data } = await axios.get(`/api/leagues/${id}/teams`);
-      return data.data;
-    },
-  });
-
   //GET ALL CHALLENGER MATCHES FOR THIS LEAGUE
   const {
     data: challengerMatches,
@@ -89,6 +67,14 @@ const LeagueCardPublic = ({
       return data.data;
     },
   });
+
+  if (loadingChallengers) {
+    return <li className="league-single-entry">Loading league data...</li>;
+  }
+
+  if (challengersError) {
+    return <li className="league-single-entry">There was an error, try again.</li>;
+  }
 
   return (
     <li className="league-single-entry">

@@ -33,6 +33,10 @@ function StandingsTablePublic({
   //console.log(midmatches_needed)
   const [showMatchesDetails, setShowMatchesDetails] = useState(false);
 
+  const toggleMatchDetails = () => {
+    setShowMatchesDetails((prevState) => !prevState);
+  };
+
   let teamStats = [];
 
   const generateMobileName = (fullName) => {
@@ -158,8 +162,6 @@ function StandingsTablePublic({
   });
   updateTotalPoints();
 
-  console.log(teamStats);
-
   return (
     <section
       id="event-standings"
@@ -234,14 +236,15 @@ function StandingsTablePublic({
       )}
 
       {matchesData.some((match) => match.match_date !== null) && (
-        <div
+        <button
+          type="button"
           className="individualMatches-btn"
-          onClick={() => setShowMatchesDetails(!showMatchesDetails)}
+          onClick={toggleMatchDetails}
         >
           {!showMatchesDetails
             ? "view individual match results"
             : "close individual match results"}
-        </div>
+        </button>
       )}
     </section>
   );
