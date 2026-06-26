@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
 import { ArrowsPointingInIcon } from "@heroicons/react/24/outline";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
-
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import StandingsTablePublic from "./StandingsTablePublic";
 
 function EventEntryPublic({
@@ -14,18 +12,7 @@ function EventEntryPublic({
   challengerMatches,
   midway_point,
 }) {
-  const queryClient = useQueryClient();
-  const [showEventModal, setShowEventModal] = useState(false);
   const [expandEvent, setExpandEvent] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-
-  const handleMouseEnter = () => {
-    setShowTooltip(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowTooltip(false);
-  };
 
   const toggleExpandEvent = () => {
     setExpandEvent((prevState) => !prevState);
@@ -65,62 +52,43 @@ function EventEntryPublic({
     },
   });
 
-  if (matchesLoading) {
+  if (matchesLoading || teamsLoading) {
     return <div>Loading...</div>;
   }
 
-  if (matchesError) {
+  if (matchesError || teamsError) {
     return <div>There was an error, try again.</div>;
   }
 
   return (
     <>
       <section id="event-entry">
-        {!showEventModal && (
-          <header
-            onClick={toggleExpandEvent}
-            onKeyDown={handleHeaderKeyDown}
-            aria-expanded={expandEvent}
-            aria-controls="eventDetailsSection"
-            aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
-            role="button"
-            tabIndex={0}
-          >
-            <div className="event-details">
-              <h4>{event.event_name}</h4>
-              {/* <div className="event-info">
-                <div
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  style={{ position: "relative", display: "inline-block" }}
-                >
-                  <InformationCircleIcon width={25} />
-                  {showTooltip && (
-                    <div className="tooltip">
-                      <p>
-                        {event.midway_matches} matches to be completed before
-                        the midpoint to get bonus points
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div> */}
-            </div>
-            <div>
-              {expandEvent ? (
-                <ArrowsPointingInIcon width={25} />
-              ) : (
-                <ArrowsPointingOutIcon width={25} />
-              )}
-            </div>
-          </header>
-        )}
+        <header
+          onClick={toggleExpandEvent}
+          onKeyDown={handleHeaderKeyDown}
+          aria-expanded={expandEvent}
+          aria-controls={`event-details-${event.event_id}`}
+          aria-label={expandEvent ? "Collapse Teams" : "Expand Teams"}
+          role="button"
+          tabIndex={0}
+        >
+          <div className="event-details">
+            <h4>{event.event_name}</h4>
+          </div>
+          <div>
+            {expandEvent ? (
+              <ArrowsPointingInIcon width={25} />
+            ) : (
+              <ArrowsPointingOutIcon width={25} />
+            )}
+          </div>
+        </header>
 
         {expandEvent && (
           <>
             <div className="line"></div>
 
-            <div id="event-details">
+            <div id={`event-details-${event.event_id}`}>
               {matchesData.length !== 0 && (
                 <StandingsTablePublic
                   matchesData={matchesData}

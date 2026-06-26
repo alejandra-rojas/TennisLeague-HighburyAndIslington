@@ -118,4 +118,60 @@ describe("EventEntryPublic", () => {
 
     expect(screen.queryByTestId("standings-table")).not.toBeInTheDocument();
   });
+
+  it("keeps the loading state visible until team data resolves", async () => {
+    mockAxiosGet.mockImplementation((url) => {
+      if (url === "/api/events/4/teams") {
+        return new Promise(() => {});
+      }
+
+      return Promise.resolve({
+        data: {
+          data: [],
+        },
+      });
+    });
+
+    renderWithQueryClient(
+      <EventEntryPublic
+        event={{ event_id: 4, event_name: "Division A", midway_matches: 3 }}
+        leagueID={1}
+        challengerMatches={[]}
+        midway_point="2026-06-20"
+      />
+    );
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith("/api/events/4/teams");
+      expect(axios.get).toHaveBeenCalledWith("/api/events/4/matches");
+      expect(screen.getByText("Loading...")).toBeInTheDocument();
+    });
+  });
+
+  it("shows an error state when the team query fails", async () => {
+    mockAxiosGet.mockImplementation((url) => {
+      if (url === "/api/events/4/teams") {
+        return Promise.reject(new Error("team request failed"));
+      }
+
+      return Promise.resolve({
+        data: {
+          data: [],
+        },
+      });
+    });
+
+    renderWithQueryClient(
+      <EventEntryPublic
+        event={{ event_id: 4, event_name: "Division A", midway_matches: 3 }}
+        leagueID={1}
+        challengerMatches={[]}
+        midway_point="2026-06-20"
+      />
+    );
+
+    expect(
+      await screen.findByText("There was an error, try again.")
+    ).toBeInTheDocument();
+  });
 });
