@@ -1,25 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockCookies, mockCreateRouteHandlerClient } = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
+const { mockCreateServerClient } = vi.hoisted(() => ({
+  mockCreateServerClient: vi.fn(),
 }));
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { DELETE, PUT } from "./route";
 
 describe("app/api/players/[id]/route", () => {
   beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
+    mockCreateServerClient.mockReset();
   });
 
   it("deletes a player successfully", async () => {
@@ -33,7 +26,7 @@ describe("app/api/players/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await DELETE(null, { params: { id: 9 } });
 
@@ -55,7 +48,7 @@ describe("app/api/players/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await DELETE(null, { params: { id: 9 } });
 
@@ -81,7 +74,7 @@ describe("app/api/players/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await DELETE(null, { params: { id: 9 } });
 
@@ -108,7 +101,7 @@ describe("app/api/players/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(
       new Request("http://localhost/api/players/9", {
@@ -146,7 +139,7 @@ describe("app/api/players/[id]/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await PUT(
       new Request("http://localhost/api/players/9", {
@@ -166,3 +159,5 @@ describe("app/api/players/[id]/route", () => {
     });
   });
 });
+
+

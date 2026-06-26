@@ -1,6 +1,5 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { isSameDivisionChallengerMatch } from "../../../../challengers/challengerRules";
 
 export async function GET(_, { params }) {
@@ -12,8 +11,7 @@ export async function GET(_, { params }) {
       { status: 400 }
     );
   }
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("challenger_matches")
@@ -57,8 +55,7 @@ export async function POST(request, { params }) {
     );
   }
 
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("challenger_matches")
@@ -87,3 +84,4 @@ export async function POST(request, { params }) {
 
   return NextResponse.json({ data });
 }
+

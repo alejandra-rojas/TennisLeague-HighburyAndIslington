@@ -8,7 +8,7 @@ const {
   mockPush,
   mockFrom,
   mockSelect,
-  mockCreateClientComponentClient,
+  mockCreateClient,
 } = vi.hoisted(() => {
   const mockRefresh = vi.fn();
   const mockPush = vi.fn();
@@ -16,7 +16,7 @@ const {
   const mockFrom = vi.fn(() => ({
     select: mockSelect,
   }));
-  const mockCreateClientComponentClient = vi.fn(() => ({
+  const mockCreateClient = vi.fn(() => ({
     from: mockFrom,
   }));
 
@@ -25,7 +25,7 @@ const {
     mockPush,
     mockFrom,
     mockSelect,
-    mockCreateClientComponentClient,
+    mockCreateClient,
   };
 });
 
@@ -36,8 +36,8 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createClientComponentClient: mockCreateClientComponentClient,
+vi.mock("@/supabase/client", () => ({
+  createClient: mockCreateClient,
 }));
 
 describe("SearchComponent", () => {
@@ -53,7 +53,7 @@ describe("SearchComponent", () => {
     mockPush.mockReset();
     mockFrom.mockClear();
     mockSelect.mockReset();
-    mockCreateClientComponentClient.mockClear();
+    mockCreateClient.mockClear();
     mockSelect.mockResolvedValue({ data: players });
     vi.spyOn(console, "log").mockImplementation(() => {});
   });

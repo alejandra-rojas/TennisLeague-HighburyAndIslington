@@ -1,25 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockCookies, mockCreateRouteHandlerClient } = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
+const { mockCreateServerClient } = vi.hoisted(() => ({
+  mockCreateServerClient: vi.fn(),
 }));
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { GET, POST } from "./route";
 
 describe("app/api/players/route", () => {
   beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
+    mockCreateServerClient.mockReset();
   });
 
   it("creates a player with the request body payload", async () => {
@@ -39,7 +32,7 @@ describe("app/api/players/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await POST(
       new Request("http://localhost/api/players", {
@@ -78,7 +71,7 @@ describe("app/api/players/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await POST(
       new Request("http://localhost/api/players", {
@@ -107,7 +100,7 @@ describe("app/api/players/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await GET();
 
@@ -127,7 +120,7 @@ describe("app/api/players/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await GET();
 
@@ -137,3 +130,5 @@ describe("app/api/players/route", () => {
     });
   });
 });
+
+

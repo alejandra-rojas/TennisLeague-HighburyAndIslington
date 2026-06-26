@@ -1,9 +1,8 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@/supabase/server";
 import EditButton from "./EditButton";
 
 async function getPlayers() {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = await createClient();
 
   const { data, error } = await supabase.from("players").select();
 
@@ -36,3 +35,4 @@ export default async function PlayerList() {
     </ul>
   );
 }
+

@@ -19,7 +19,7 @@
     "@sanity/vision": "^3.25.0",
     "@studio-freight/hamo": "^0.6.28",
     "@studio-freight/react-lenis": "^0.0.40",
-    "@supabase/auth-helpers-nextjs": "^0.8.1",
+    "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.108.2",
     "@vercel/speed-insights": "^1.0.9",
     "axios": "^1.18.1",

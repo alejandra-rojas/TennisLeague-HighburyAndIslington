@@ -1,26 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockCookies, mockCreateRouteHandlerClient } = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
+const { mockCreateServerClient } = vi.hoisted(() => ({
+  mockCreateServerClient: vi.fn(),
 }));
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { GET, POST } from "./route";
 
 describe("app/api/events/[id]/teams/route", () => {
-  beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
-    vi.spyOn(console, "error").mockImplementation(() => {});
+  beforeEach(() => {    mockCreateServerClient.mockReset();    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   it("returns 400 when the event id is missing", async () => {
@@ -54,7 +45,7 @@ describe("app/api/events/[id]/teams/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await GET(null, { params: { id: 4 } });
 
@@ -91,7 +82,7 @@ describe("app/api/events/[id]/teams/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await POST(
       new Request("http://localhost/api/events/4/teams", {
@@ -126,7 +117,7 @@ describe("app/api/events/[id]/teams/route", () => {
       })),
     };
 
-    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+    mockCreateServerClient.mockReturnValue(supabase);
 
     const response = await POST(
       new Request("http://localhost/api/events/4/teams", {
@@ -143,3 +134,5 @@ describe("app/api/events/[id]/teams/route", () => {
     });
   });
 });
+
+

@@ -1,6 +1,5 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
 export async function GET(_, { params }) {
   const { id } = params;
@@ -11,8 +10,7 @@ export async function GET(_, { params }) {
       { status: 400 }
     );
   }
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("events")
@@ -33,8 +31,7 @@ export async function POST(req, { params }) {
   const { id } = params;
   const event = await req.json();
 
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("events")
@@ -55,3 +52,4 @@ export async function POST(req, { params }) {
 
   return NextResponse.json({ data });
 }
+

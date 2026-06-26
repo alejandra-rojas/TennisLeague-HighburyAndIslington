@@ -1,6 +1,6 @@
 "use client";
 import "../../../styles/Admin/Login.scss";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/client";
 import { useState } from "react";
 
 //Components
@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault();
     setError("");
 
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -38,3 +38,4 @@ export default function Login() {
     </main>
   );
 }
+

@@ -1,5 +1,5 @@
 "use client";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -36,10 +36,10 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
     fetchPlayers();
   }, []); */
 
-  //Get request using createClientComponentClient
+  //Get request using createClient
   useEffect(() => {
     const getData = async () => {
-      const supabase = createClientComponentClient();
+      const supabase = createClient();
       const { data } = await supabase.from("players").select();
       setPlayers(data);
     };
@@ -250,3 +250,4 @@ export default function SearchComponent({ setShowCreateTeamModal }) {
     </div>
   );
 }
+

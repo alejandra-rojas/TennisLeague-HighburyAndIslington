@@ -1,13 +1,11 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request) {
   const player = await request.json();
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("players")
@@ -28,8 +26,7 @@ export async function POST(request) {
 }
 
 export async function GET() {
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const supabase = await createClient();
 
   const { data, error } = await supabase.from("players").select("*");
 
@@ -42,3 +39,4 @@ export async function GET() {
 
   return NextResponse.json({ data });
 }
+

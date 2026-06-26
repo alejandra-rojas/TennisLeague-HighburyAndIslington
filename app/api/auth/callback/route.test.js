@@ -1,35 +1,26 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const {
-  mockCookies,
-  mockCreateRouteHandlerClient,
-  mockExchangeCodeForSession,
-} = vi.hoisted(() => ({
-  mockCookies: vi.fn(),
-  mockCreateRouteHandlerClient: vi.fn(),
-  mockExchangeCodeForSession: vi.fn(),
-}));
+const { mockCreateServerClient, mockExchangeCodeForSession } = vi.hoisted(
+  () => ({
+    mockCreateServerClient: vi.fn(),
+    mockExchangeCodeForSession: vi.fn(),
+  })
+);
 
-vi.mock("next/headers", () => ({
-  cookies: mockCookies,
-}));
-
-vi.mock("@supabase/auth-helpers-nextjs", () => ({
-  createRouteHandlerClient: mockCreateRouteHandlerClient,
+vi.mock("@/supabase/server", () => ({
+  createClient: mockCreateServerClient,
 }));
 
 import { GET } from "./route";
 
 describe("app/api/auth/callback/route", () => {
   beforeEach(() => {
-    mockCookies.mockReset();
-    mockCreateRouteHandlerClient.mockReset();
+    mockCreateServerClient.mockReset();
     mockExchangeCodeForSession.mockReset();
-    mockCookies.mockReturnValue("cookie-store");
   });
 
   it("exchanges the auth code and redirects to the app origin", async () => {
-    mockCreateRouteHandlerClient.mockReturnValue({
+    mockCreateServerClient.mockReturnValue({
       auth: {
         exchangeCodeForSession: mockExchangeCodeForSession.mockResolvedValue({}),
       },
@@ -39,9 +30,7 @@ describe("app/api/auth/callback/route", () => {
       new Request("http://localhost/api/auth/callback?code=auth-code")
     );
 
-    expect(mockCreateRouteHandlerClient).toHaveBeenCalledWith({
-      cookies: mockCookies,
-    });
+    expect(mockCreateServerClient).toHaveBeenCalledTimes(1);
     expect(mockExchangeCodeForSession).toHaveBeenCalledWith("auth-code");
 
     const location = new URL(response.headers.get("location"));
@@ -54,7 +43,7 @@ describe("app/api/auth/callback/route", () => {
   it("redirects even when no auth code is present", async () => {
     const response = await GET(new Request("http://localhost/api/auth/callback"));
 
-    expect(mockCreateRouteHandlerClient).not.toHaveBeenCalled();
+    expect(mockCreateServerClient).not.toHaveBeenCalled();
 
     const location = new URL(response.headers.get("location"));
 
