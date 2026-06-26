@@ -60,7 +60,7 @@ function WithdrawalForm({ registeredTeams }) {
               type="submit"
               onClick={(e) => handleWithdrawal(e, selectedTeamId)}
               aria-label="Report Withdrawal"
-              disabled={!selectedTeamId}
+              disabled={!selectedTeamId || isWithdrawing}
             >
               {isWithdrawing ? "Withdrawing..." : "Complete withdrawal"}
             </button>{" "}

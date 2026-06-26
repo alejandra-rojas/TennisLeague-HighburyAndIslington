@@ -73,4 +73,56 @@ describe("ParticipantList", () => {
       ]);
     });
   });
+
+  it("disables team removal while the request is pending and recovers after failure", async () => {
+    const user = userEvent.setup();
+    const queryClient = new QueryClient();
+    const invalidateQueriesSpy = vi
+      .spyOn(queryClient, "invalidateQueries")
+      .mockResolvedValue();
+
+    let rejectRequest;
+    mockAxiosDelete.mockImplementation(
+      () =>
+        new Promise((_, reject) => {
+          rejectRequest = reject;
+        })
+    );
+
+    renderWithQueryClient(
+      <ParticipantList
+        event={4}
+        registeredTeams={[
+          {
+            team_id: 12,
+            player1name: "Ada Lovelace",
+            player2name: "Grace Hopper",
+          },
+          {
+            team_id: 13,
+            player1name: "Alan Turing",
+            player2name: "Joan Clarke",
+          },
+        ]}
+      />,
+      queryClient
+    );
+
+    const removeButtons = screen.getAllByRole("button", { name: /Remove team/ });
+
+    await user.click(removeButtons[0]);
+
+    await waitFor(() => {
+      expect(axios.delete).toHaveBeenCalledTimes(1);
+      removeButtons.forEach((button) => expect(button).toBeDisabled());
+    });
+
+    rejectRequest(new Error("Delete failed"));
+
+    await waitFor(() => {
+      removeButtons.forEach((button) => expect(button).not.toBeDisabled());
+    });
+
+    expect(invalidateQueriesSpy).not.toHaveBeenCalled();
+  });
 });

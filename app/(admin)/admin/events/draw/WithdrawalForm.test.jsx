@@ -103,4 +103,64 @@ describe("WithdrawalForm", () => {
       screen.queryByRole("heading", { name: "Withdraw team from event" })
     ).not.toBeInTheDocument();
   });
+
+  it("shows the withdrawing state and keeps the selected team after a failed withdrawal", async () => {
+    const user = userEvent.setup();
+    const queryClient = new QueryClient();
+    const invalidateQueriesSpy = vi
+      .spyOn(queryClient, "invalidateQueries")
+      .mockResolvedValue();
+
+    let rejectRequest;
+    mockAxiosPut.mockImplementation(
+      () =>
+        new Promise((_, reject) => {
+          rejectRequest = reject;
+        })
+    );
+
+    renderWithQueryClient(
+      <WithdrawalForm
+        registeredTeams={[
+          {
+            event_id: 4,
+            team_id: 12,
+            player1name: "Ada Lovelace",
+            player2name: "Grace Hopper",
+            team_withdrawn: false,
+          },
+        ]}
+      />,
+      queryClient
+    );
+
+    await user.selectOptions(
+      screen.getByLabelText("Select the player who has withdrawn"),
+      "12"
+    );
+
+    const submitButton = screen.getByRole("button", {
+      name: "Report Withdrawal",
+    });
+
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(axios.put).toHaveBeenCalledTimes(1);
+      expect(submitButton).toHaveTextContent("Withdrawing...");
+      expect(submitButton).toBeDisabled();
+    });
+
+    rejectRequest(new Error("Withdraw failed"));
+
+    await waitFor(() => {
+      expect(submitButton).toHaveTextContent("Complete withdrawal");
+      expect(submitButton).not.toBeDisabled();
+      expect(
+        screen.getByLabelText("Select the player who has withdrawn")
+      ).toHaveValue("12");
+    });
+
+    expect(invalidateQueriesSpy).not.toHaveBeenCalled();
+  });
 });

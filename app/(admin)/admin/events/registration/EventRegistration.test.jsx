@@ -109,4 +109,54 @@ describe("EventRegistration", () => {
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("player-search")).toHaveTextContent("search:4");
   });
+
+  it("disables draw creation while the request is in flight and recovers after failure", async () => {
+    const user = userEvent.setup();
+    const queryClient = new QueryClient();
+    const invalidateQueriesSpy = vi
+      .spyOn(queryClient, "invalidateQueries")
+      .mockResolvedValue();
+
+    let rejectRequest;
+    mockAxiosPost.mockImplementation(
+      () =>
+        new Promise((_, reject) => {
+          rejectRequest = reject;
+        })
+    );
+
+    renderWithQueryClient(
+      <EventRegistration
+        event={4}
+        registeredTeams={[
+          { team_id: 11 },
+          { team_id: 12 },
+          { team_id: 13 },
+          { team_id: 14 },
+        ]}
+      />,
+      queryClient
+    );
+
+    const createButton = screen.getByRole("button", {
+      name: "Create matches table",
+    });
+
+    await user.click(createButton);
+
+    await waitFor(() => {
+      expect(axios.post).toHaveBeenCalledTimes(1);
+      expect(createButton).toBeDisabled();
+      expect(createButton).toHaveTextContent("Creating standings table...");
+    });
+
+    rejectRequest(new Error("Create draw failed"));
+
+    await waitFor(() => {
+      expect(createButton).not.toBeDisabled();
+      expect(createButton).toHaveTextContent("Create standings table");
+    });
+
+    expect(invalidateQueriesSpy).not.toHaveBeenCalled();
+  });
 });

@@ -50,12 +50,14 @@ function EventRegistration({ event, registeredTeams }) {
 
         {registeredTeams.length >= 4 && (
           <button
+            type="button"
             onClick={handleGenerateDraw}
             aria-label={`Create matches table`}
             className="create-table"
+            disabled={isLoading}
           >
             <SparklesIcon width={20} />
-            Create standings table
+            {isLoading ? "Creating standings table..." : "Create standings table"}
           </button>
         )}
       </div>
