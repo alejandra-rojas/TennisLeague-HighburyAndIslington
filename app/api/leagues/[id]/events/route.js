@@ -2,7 +2,7 @@ import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET(_, { params }) {
-  const { id } = params;
+  const { id } = await params;
 
   if (!id) {
     return NextResponse.json(
@@ -28,7 +28,7 @@ export async function GET(_, { params }) {
 }
 
 export async function POST(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
   const event = await req.json();
 
   const supabase = await createClient();

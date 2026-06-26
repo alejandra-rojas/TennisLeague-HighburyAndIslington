@@ -2,7 +2,7 @@ import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function DELETE(_, { params }) {
-  const id = params.id;
+  const { id } = await params;
   //get supabase instance
   const supabase = await createClient();
 

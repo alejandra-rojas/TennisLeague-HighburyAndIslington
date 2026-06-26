@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { isSameDivisionChallengerMatch } from "../../../../challengers/challengerRules";
 
 export async function GET(_, { params }) {
-  const { id } = params;
+  const { id } = await params;
 
   if (!id) {
     return NextResponse.json(
@@ -41,7 +41,7 @@ export async function GET(_, { params }) {
 }
 
 export async function POST(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
   const challenger = await request.json();
 
   if (isSameDivisionChallengerMatch(challenger)) {

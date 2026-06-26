@@ -2,7 +2,7 @@ import { createClient } from "@/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function DELETE(_, { params }) {
-  const { id, teamID } = params;
+  const { id, teamID } = await params;
   const supabase = await createClient();
 
   const { error } = await supabase
@@ -28,8 +28,7 @@ export async function DELETE(_, { params }) {
 }
 
 export async function PUT(req, { params }) {
-  const eventID = params.id;
-  const teamID = params.teamID;
+  const { id: eventID, teamID } = await params;
   const supabase = await createClient();
 
   const { data, error } = await supabase
