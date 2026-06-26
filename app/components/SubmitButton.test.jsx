@@ -11,7 +11,7 @@ vi.mock("react-dom", async () => {
 
   return {
     ...actual,
-    experimental_useFormStatus: mockUseFormStatus,
+    useFormStatus: mockUseFormStatus,
   };
 });
 

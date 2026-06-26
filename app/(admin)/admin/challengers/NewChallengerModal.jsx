@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -25,25 +25,17 @@ function NewChallengerModal({
     team2_bonus: "",
   });
 
-  const [isMatchFinished, setIsMatchFinished] = useState(false);
-
-  useEffect(() => {
-    if (matchData.isfinished) {
-      setIsMatchFinished(true);
-      // If match is finished, ensure winner_id is selected
-      if (!matchData.winner_id) {
-        setErrorLog("Please select the winner.");
-      } else {
-        setErrorLog("");
-      }
-    } else {
-      setIsMatchFinished(false);
-      setErrorLog("");
-    }
-  }, [matchData]);
+  const isMatchFinished = matchData.isfinished;
+  const validationError =
+    isMatchFinished && !matchData.winner_id ? "Please select the winner." : "";
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    if (errorlog) {
+      setErrorLog("");
+    }
+
     setMatchData((matchData) => ({
       ...matchData,
       [name]:
@@ -80,6 +72,12 @@ function NewChallengerModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (validationError) {
+      setErrorLog(validationError);
+      return;
+    }
+
     // Check if required fields are empty
     const requiredFields = [
       "match_date",
@@ -219,7 +217,7 @@ function NewChallengerModal({
         </button>
       </form>
 
-      <p className="error">{errorlog}</p>
+      <p className="error">{errorlog || validationError}</p>
     </div>
   );
 }
