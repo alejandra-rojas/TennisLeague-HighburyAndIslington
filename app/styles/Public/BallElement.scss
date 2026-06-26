@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@use "../Variables/Variables.scss" as *;
 body {
   --font-circle-1: arial, serif;
   --font-weight-circle-1: 400;

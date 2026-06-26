@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@use "../Variables/Variables.scss" as *;
 
 #leagues-layout-header {
   display: flex;

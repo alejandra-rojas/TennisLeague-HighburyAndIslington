@@ -1,4 +1,4 @@
-@import "../Variables/Variables.scss";
+@use "../Variables/Variables.scss" as *;
 
 //className="bg-gray-300 p-3 mb-2 border rounded-md"
 #events-section {
