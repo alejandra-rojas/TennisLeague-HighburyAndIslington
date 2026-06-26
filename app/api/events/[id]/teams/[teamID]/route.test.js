@@ -20,7 +20,6 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
     mockCookies.mockReset();
     mockCreateRouteHandlerClient.mockReset();
     mockCookies.mockReturnValue("cookie-store");
-    vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
   it("removes a team from an event", async () => {
@@ -88,8 +87,10 @@ describe("app/api/events/[id]/teams/[teamID]/route", () => {
     expect(matchesEq).toHaveBeenCalledWith("event_id", 4);
     expect(matchesOr).toHaveBeenCalledWith("team1_id.eq.12,team2_id.eq.12");
     expect(await response.json()).toEqual({
-      data: [{ event_id: 4, team_id: 12, team_withdrawn: true }],
-      matches: [{ match_id: 20, withdrawal: true }],
+      data: {
+        eventTeams: [{ event_id: 4, team_id: 12, team_withdrawn: true }],
+        matches: [{ match_id: 20, withdrawal: true }],
+      },
     });
   });
 

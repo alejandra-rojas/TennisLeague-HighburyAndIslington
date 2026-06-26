@@ -20,8 +20,6 @@ describe("app/api/matches/route", () => {
     mockCookies.mockReset();
     mockCreateRouteHandlerClient.mockReset();
     mockCookies.mockReturnValue("cookie-store");
-    vi.spyOn(console, "log").mockImplementation(() => {});
-    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   it("inserts generated matches and returns a 201 response", async () => {
@@ -71,6 +69,8 @@ describe("app/api/matches/route", () => {
     );
 
     expect(response.status).toBe(500);
-    expect(await response.json()).toEqual({ error: "Insert failed" });
+    expect(await response.json()).toEqual({
+      error: { message: "Insert failed" },
+    });
   });
 });

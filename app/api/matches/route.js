@@ -3,55 +3,18 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 export async function POST(request) {
-  try {
-    const { matches } = await request.json();
-    console.log("Received matches:", matches);
-    const cookieStore = cookies(request);
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
-
-    // Iterate over the matches data and insert them into the database
-    const { data, error } = await supabase.from("matches").insert(matches);
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    // Return the inserted data in the response
-    return new NextResponse(JSON.stringify({ data }), {
-      status: 201,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("Error inserting matches:", error.message);
-    // Return an error response
-    return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-}
-
-/* export async function GET() {
-  // Initialize Supabase client
+  const { matches } = await request.json();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
-  // Fetch all leagues
-  const { data, error } = await supabase.from("leagues").select("*");
+  const { data, error } = await supabase.from("matches").insert(matches);
 
-  // Return the data or error
   if (error) {
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
 
-  return NextResponse.json({ data });
-} */
+  return NextResponse.json({ data }, { status: 201 });
+}

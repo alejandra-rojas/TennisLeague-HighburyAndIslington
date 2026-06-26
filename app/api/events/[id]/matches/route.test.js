@@ -28,7 +28,7 @@ describe("app/api/events/[id]/matches/route", () => {
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({
-      error: "Missing or invalid id",
+      error: { message: "Missing or invalid id" },
     });
   });
 

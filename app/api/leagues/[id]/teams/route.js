@@ -6,21 +6,15 @@ export async function GET(_, { params }) {
   const { id } = params;
 
   if (!id) {
-    return new NextResponse(
-      JSON.stringify({ error: "Missing or invalid league id" }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    return NextResponse.json(
+      { error: { message: "Missing or invalid league id" } },
+      { status: 400 }
     );
   }
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
-  // Modify the query to perform a join with the event_teams table
   const { data, error } = await supabase
     .from("events")
     .select(
@@ -38,15 +32,11 @@ export async function GET(_, { params }) {
     )
     .eq("league_id", id);
 
-  // Return the data or error
   if (error) {
-    console.error("Error fetching events:", error);
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
 
   const uniqueTeams = new Set();
@@ -71,5 +61,3 @@ export async function GET(_, { params }) {
 
   return NextResponse.json({ data: teamsData });
 }
-
-// ` event_teams!inner(team_id)       `;
