@@ -4,24 +4,17 @@ import { cookies } from "next/headers";
 import { isSameDivisionChallengerMatch } from "../../../../challengers/challengerRules";
 
 export async function GET(_, { params }) {
-  //console.log("Received params:", params);
   const { id } = params;
 
   if (!id) {
-    return new NextResponse(
-      JSON.stringify({ error: "Missing or invalid league id" }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    return NextResponse.json(
+      { error: { message: "Missing or invalid league id" } },
+      { status: 400 }
     );
   }
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
 
-  // Fetch all events with specific league_id
   const { data, error } = await supabase
     .from("challenger_matches")
     .select(
@@ -39,15 +32,11 @@ export async function GET(_, { params }) {
     )
     .eq("league_id", id);
 
-  // Return the data or error
   if (error) {
-    console.error("Error fetching events:", error);
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ data });
@@ -55,19 +44,16 @@ export async function GET(_, { params }) {
 
 export async function POST(request, { params }) {
   const { id } = params;
-  const { challenger } = await request.json();
+  const challenger = await request.json();
 
   if (isSameDivisionChallengerMatch(challenger)) {
-    return new NextResponse(
-      JSON.stringify({
-        error: "Challenger matches must be between different divisions",
-      }),
+    return NextResponse.json(
       {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
+        error: {
+          message: "Challenger matches must be between different divisions",
         },
-      }
+      },
+      { status: 400 }
     );
   }
 
@@ -93,13 +79,11 @@ export async function POST(request, { params }) {
     .single();
 
   if (error) {
-    console.error("Error fetching events:", error);
-    return new NextResponse(JSON.stringify({ error }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return NextResponse.json(
+      { error: { message: error.message } },
+      { status: 500 }
+    );
   }
-  return NextResponse.json({ data, error });
+
+  return NextResponse.json({ data });
 }

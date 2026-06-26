@@ -4,21 +4,23 @@ import axios from "axios";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function ChallengerEditModal({ match, setShowReportModal }) {
-  //console.log(match);
   const queryClient = useQueryClient();
+  const numericFields = ["team1_bonus", "team2_bonus", "winner_id"];
+  const toOptionalNumber = (value) =>
+    value === null || value === undefined || value === ""
+      ? ""
+      : parseInt(value, 10);
 
   const [data, setData] = useState({
     team1_id: match.team1_id,
-    team2_id: match.team1_id,
+    team2_id: match.team2_id,
     isfinished: Boolean(match.isfinished),
     match_date: match.match_date,
     winner_id: match.winner_id,
     winner_score: match.winner_score,
-    team1_bonus: parseInt(match.team1_bonus, 10),
-    team2_bonus: parseInt(match.team2_bonus, 10),
+    team1_bonus: toOptionalNumber(match.team1_bonus),
+    team2_bonus: toOptionalNumber(match.team2_bonus),
   });
-
-  const numericFields = ["team1_bonus", "team2_bonus", "winner_id"];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,12 +38,9 @@ function ChallengerEditModal({ match, setShowReportModal }) {
     }));
   };
 
-  //console.log(data);
-
-  //UPDATE CHALLENGER
   const { mutate: updateChallenger, isLoading: isUpdating } = useMutation({
-    mutationFn: async () =>
-      await axios.put(`/api/challengers/${match.match_id}`, { data }),
+    mutationFn: async (challenger) =>
+      await axios.put(`/api/challengers/${match.match_id}`, challenger),
 
     onSuccess: () => {
       setShowReportModal(false);
@@ -54,31 +53,11 @@ function ChallengerEditModal({ match, setShowReportModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateChallenger();
-  };
 
-  const editChallengerData = async (e) => {
-    e.preventDefault();
-    /* try {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/challengers/${match.match_id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
-      if (response.status === 200) {
-        console.log("Event was edited!");
-        setShowMatchReportModal(false);
-        getChallengersData();
-        toast.success(`Challenger match has been edited`);
-        getEventMatchesData();
-        getEventTeamsData();
-      }
-    } catch (error) {
-      console.error(error);
-    } */
+    updateChallenger({
+      ...data,
+      winner_id: data.winner_id === "" ? null : data.winner_id,
+    });
   };
 
   return (
@@ -240,8 +219,9 @@ function ChallengerEditModal({ match, setShowReportModal }) {
               type="submit"
               onClick={handleSubmit}
               aria-label="Update Match data"
+              disabled={isUpdating}
             >
-              Edit challenger
+              {isUpdating ? "Editing challenger..." : "Edit challenger"}
             </button>
           </form>
         </div>

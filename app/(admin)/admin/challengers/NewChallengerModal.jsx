@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
 function NewChallengerModal({
@@ -10,6 +10,7 @@ function NewChallengerModal({
 }) {
   const queryClient = useQueryClient();
   const [errorlog, setErrorLog] = useState("");
+  const numericFields = ["team1_bonus", "team2_bonus", "winner_id"];
 
   const [matchData, setMatchData] = useState({
     team1_id: selectedTeams[0].team_id,
@@ -45,16 +46,20 @@ function NewChallengerModal({
     const { name, value, type, checked } = e.target;
     setMatchData((matchData) => ({
       ...matchData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : numericFields.includes(name)
+          ? value === ""
+            ? ""
+            : parseInt(value, 10)
+          : value,
     }));
   };
 
-  //INSERT NEW CHALLENGER MATCH //INVALIDATE queryKey: ["league-challengers", id],
   const { mutate: insertChallenger, isLoading } = useMutation({
-    mutationFn: async () =>
-      await axios.post(`/api/leagues/${leagueID}/challengers`, {
-        challenger: matchData,
-      }),
+    mutationFn: async (challenger) =>
+      await axios.post(`/api/leagues/${leagueID}/challengers`, challenger),
 
     onSuccess: () => {
       setShowChallengerModal(false);
@@ -83,7 +88,12 @@ function NewChallengerModal({
     if (isMatchFinished) {
       requiredFields.push("winner_id");
     }
-    const emptyFields = requiredFields.filter((field) => !matchData[field]);
+    const emptyFields = requiredFields.filter(
+      (field) =>
+        matchData[field] === "" ||
+        matchData[field] === null ||
+        matchData[field] === undefined
+    );
     if (emptyFields.length > 0) {
       setErrorLog(
         `Please fill in all required fields: ${emptyFields.join(", ")}`
@@ -91,17 +101,12 @@ function NewChallengerModal({
       return; // Prevent form submission
     }
 
-    // If winner_id is empty string, set it to null
-    if (matchData.winner_id === "") {
-      setMatchData((prevData) => ({
-        ...prevData,
-        winner_id: null,
-      }));
-    }
+    const payload = {
+      ...matchData,
+      winner_id: matchData.winner_id === "" ? null : matchData.winner_id,
+    };
 
-    // If all required fields are filled, proceed with submission
-    console.log(matchData);
-    insertChallenger(matchData);
+    insertChallenger(payload);
   };
 
   return (
@@ -208,7 +213,7 @@ function NewChallengerModal({
           </div>
         </div>
         <button type="submit" aria-label="Update Match data">
-          {isLoading ? "submiting... " : "Submit challenger match"}
+          {isLoading ? "Submitting challenger..." : "Submit challenger match"}
         </button>
       </form>
 

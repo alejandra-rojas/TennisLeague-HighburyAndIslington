@@ -28,7 +28,7 @@ describe("app/api/leagues/[id]/challengers/route", () => {
 
     expect(response.status).toBe(400);
     expect(await response.json()).toEqual({
-      error: "Missing or invalid league id",
+      error: { message: "Missing or invalid league id" },
     });
   });
 
@@ -62,12 +62,10 @@ describe("app/api/leagues/[id]/challengers/route", () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          challenger: {
-            team1_id: 11,
-            team1_event_id: 5,
-            team2_id: 12,
-            team2_event_id: 5,
-          },
+          team1_id: 11,
+          team1_event_id: 5,
+          team2_id: 12,
+          team2_event_id: 5,
         }),
       }),
       { params: { id: 2 } }
@@ -76,7 +74,9 @@ describe("app/api/leagues/[id]/challengers/route", () => {
     expect(response.status).toBe(400);
     expect(mockCreateRouteHandlerClient).not.toHaveBeenCalled();
     expect(await response.json()).toEqual({
-      error: "Challenger matches must be between different divisions",
+      error: {
+        message: "Challenger matches must be between different divisions",
+      },
     });
   });
 
@@ -116,7 +116,7 @@ describe("app/api/leagues/[id]/challengers/route", () => {
       new Request("http://localhost/api/leagues/2/challengers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ challenger }),
+        body: JSON.stringify(challenger),
       }),
       { params: { id: 2 } }
     );
@@ -136,7 +136,43 @@ describe("app/api/leagues/[id]/challengers/route", () => {
     });
     expect(await response.json()).toEqual({
       data: { match_id: 9, league_id: 2 },
-      error: null,
+    });
+  });
+
+  it("returns a 500 response when challenger creation fails", async () => {
+    const mockSingle = vi.fn().mockResolvedValue({
+      data: null,
+      error: { message: "Insert failed" },
+    });
+    const supabase = {
+      from: vi.fn(() => ({
+        insert: vi.fn(() => ({
+          select: vi.fn(() => ({
+            single: mockSingle,
+          })),
+        })),
+      })),
+    };
+
+    mockCreateRouteHandlerClient.mockReturnValue(supabase);
+
+    const response = await POST(
+      new Request("http://localhost/api/leagues/2/challengers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          team1_id: 11,
+          team1_event_id: 5,
+          team2_id: 12,
+          team2_event_id: 6,
+        }),
+      }),
+      { params: { id: 2 } }
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: { message: "Insert failed" },
     });
   });
 });
